@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class HomeController {
     @RequestMapping("/home")
-    public String home(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
+    public String home(Model model) {
+        model.addAttribute("message", "Hello World!");
 
         return "home";
     }
