@@ -1,0 +1,11 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Nuevo evento
+        <small>Panel para la creacion de un nuevo evento.</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Eventos</a></li>
+        <li class="active">Nuevo</li>
+    </ol>
+</section>
