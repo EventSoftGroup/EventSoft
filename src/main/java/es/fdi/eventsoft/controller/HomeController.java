@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class HomeController {
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public String home(Model model) {
         model.addAttribute("message", "Hello World!");
 
