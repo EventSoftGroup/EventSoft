@@ -43,4 +43,12 @@ public class EventController {
 
         return "nuevo-mensaje";
     }
+    @RequestMapping("/timeline")
+    public String eventoTimeline(Model model) {
+        model.addAttribute("title", "EventSoft - Timeline");
+
+        return "timeline";
+    }
+
+
 }
