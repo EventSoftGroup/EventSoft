@@ -3,25 +3,15 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
-        <!-- Buscar form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Buscar...">
-                <span class="input-group-btn">
-                  <button type="submit" name="Buscar" id="Buscar-btn" class="btn btn-flat"><i class="fa fa-Buscar"></i>
-                  </button>
-                </span>
-            </div>
-        </form>
-        <!-- /.Buscar form -->
-
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">PRINCIPAL</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="/"><i class="fa fa-link"></i> <span>Inicio</span></a></li>
-            <li><a href="/eventos/nuevo"><i class="fa fa-link"></i> <span>Crear evento</span></a></li>
+            <li class="active"><a href="/"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+            <li><a href="/eventos/nuevo"><i class="fa fa-plus-circle"></i> <span>Crear evento</span></a></li>
+            <li><a href="/eventos/proveedores"><i class="fa fa-group"></i> <span>Proveedores</span></a></li>
+            <li><a href="/eventos/calendario"><i class="fa fa-calendar"></i> <span>Calendario</span></a></li>
+            <li><a href="/eventos/buzon"><i class="fa fa-envelope"></i> <span>Buzón</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
