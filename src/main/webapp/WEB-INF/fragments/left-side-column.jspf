@@ -12,6 +12,7 @@
             <li><a href="/eventos/proveedores"><i class="fa fa-group"></i> <span>Proveedores</span></a></li>
             <li><a href="/eventos/calendario"><i class="fa fa-calendar"></i> <span>Calendario</span></a></li>
             <li><a href="/eventos/buzon"><i class="fa fa-envelope"></i> <span>Buzón</span></a></li>
+            <li><a href="/eventos/notificaciones"><i class="fa fa-bell-o"></i> <span>Notificaciones</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

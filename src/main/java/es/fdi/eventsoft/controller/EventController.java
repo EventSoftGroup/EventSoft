@@ -49,6 +49,17 @@ public class EventController {
 
         return "timeline";
     }
+    @RequestMapping("/notificaciones")
+    public String eventoNotificaciones(Model model) {
+        model.addAttribute("title", "EventSoft - Notificaciones");
 
+        return "notificaciones";
+    }
+    @RequestMapping("/leer-notificacion")
+    public String eventoLeerNotificacion(Model model) {
+        model.addAttribute("title", "EventSoft - Leer-Notificación");
+
+        return "leer-notificacion";
+    }
 
 }
