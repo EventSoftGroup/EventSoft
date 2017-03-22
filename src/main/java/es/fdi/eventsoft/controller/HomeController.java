@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class HomeController {
-    @RequestMapping(value={"/","/index"})
+    @RequestMapping("index")
     public String home(Model model) {
         model.addAttribute("title", "EventSoft");
 
         return "index";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value={"/login","/"})
     public String login(Model model) {
         //model.addAttribute("title", "EventSoft");
 
