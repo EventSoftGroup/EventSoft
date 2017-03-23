@@ -1,4 +1,6 @@
 <!-- Content Header (Page header) -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <section class="content-header">
     <h1>
         Nuevo evento

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../fragments/head.jspf" %>
 <body class="hold-transition register-page">
 <div class="register-box">

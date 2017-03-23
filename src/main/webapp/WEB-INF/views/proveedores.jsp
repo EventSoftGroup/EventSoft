@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../fragments/head.jspf" %>
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -314,10 +315,10 @@
     <script src="/plugins/knob/jquery.knob.js"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="/dist/js/pages/dashboard.js"></script>
     <!-- ChartJS 1.0.1 -->
     <script src="/plugins/chartjs/Chart.min.js"></script>
+    <!-- Script for Charts of "Gastos e ingresos" y "tipos de eventos" -->
+    <script src="/dist/js/scriptChartsFer.js"></script>
 
 
 </body>

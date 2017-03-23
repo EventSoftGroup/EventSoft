@@ -1,4 +1,6 @@
 <%@ include file="../fragments/head.jspf" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

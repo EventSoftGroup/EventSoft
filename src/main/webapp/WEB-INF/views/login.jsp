@@ -1,4 +1,6 @@
 <%@ include file="../fragments/head.jspf" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">

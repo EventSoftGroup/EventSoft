@@ -14,4 +14,20 @@ public class HomeController {
 
         return "index";
     }
+
+    @RequestMapping({"/","login"})
+    public String login(Model model) {
+        model.addAttribute("title", "EventSoft");
+
+        return "login";
+    }
+
+    @RequestMapping("register")
+    public String register(Model model) {
+        model.addAttribute("title", "EventSoft");
+
+        return "register";
+    }
+
+
 }
