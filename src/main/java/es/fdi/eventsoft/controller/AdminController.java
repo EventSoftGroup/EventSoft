@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@RequestMapping("/usuarios/")
-public class UserController {
-    @RequestMapping("perfil-usuario")
+@RequestMapping("/administracion/")
+public class AdminController {
+    @RequestMapping("admin")
     public String home(Model model) {
         model.addAttribute("title", "EventSoft");
 
-        return "perfil-usuario";
+        return "admin";
     }
 }

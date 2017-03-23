@@ -8,6 +8,7 @@
         <div class="content-wrapper">
             <h1>${message}</h1>
             <h2>Bienvenido a EventSoft</h2>
+            <h2>Administración</h2>
         </div>
 
         <!-- footer -->

@@ -14,3 +14,5 @@
 <script src="/dist/js/demo.js"></script>
 <!-- iCheck -->
 <script src="/plugins/iCheck/icheck.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="/plugins/chartjs/Chart.min.js"></script>

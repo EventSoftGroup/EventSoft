@@ -14,6 +14,8 @@
             <li><a href="/eventos/buzon"><i class="fa fa-envelope"></i> <span>Buzón</span></a></li>
             <li><a href="/eventos/notificaciones"><i class="fa fa-bell-o"></i> <span>Notificaciones</span></a></li>
             <li><a href="/eventos/timeline"><i class="fa fa-line-chart"></i> <span>Seguimiento eventos</span></a></li>
+            <li><a href="/usuarios/perfil-usuario"><i class="fa fa-user"></i> <span>Perfil Usuario</span></a></li>
+            <li><a href="/administracion/admin"><i class="fa fa-institution"></i> <span>Administración</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
