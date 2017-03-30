@@ -8,12 +8,24 @@
    - Localización
    - Fecha creaion cuenta
    - Estado (Activo, baneado, desactivado)
-   - 
    - Listado de Notificaciones
    -	Listado de Mensajes
    -	Listado de Eventos
    - Lista de Tareas
+   
+### Usuario::Cliente
+   
 
+
+### Usuario::Organizador  
+   - Nombre empresa
+   - Descripción
+
+### Usuario::Proveedor
+   - Nombre empresa
+   - Descripción
+
+--------------------------------------------
 
 ### Tags
    - Nombre empresa
@@ -27,18 +39,6 @@
    - Descripción 
    - Fecha_hora
    
-### Usuario::Cliente
-   - 
-
-
-### Usuario::Organizador  
-   - Nombre empresa
-   - Descripción
-
-### Usuario::Proveedor
-   - Nombre empresa
-   - Descripción
-
 ### Admin
   - 
 
