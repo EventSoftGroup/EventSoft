@@ -1,11 +1,8 @@
 # Modelo del Domino
 
-## En proceso
+## Entidades
 
-
-### Entidades:
-
- - Usuario
+### Usuario
    - Credenciales (Mail y password)
    - Nombre y apellidos
    - Localización
@@ -15,13 +12,14 @@
    - Listado de Notificaciones
    -	Listado de Mensajes
    -	Listado de Eventos
+   - Lista de Tareas
 
 
- - Tags
+### Tags
    - Nombre empresa
    - Tag
    
- - Valoración
+### Valoración
    - ID_receptor
    - ID_emisor
    - Tipo_valoración
@@ -29,27 +27,46 @@
    - Descripción 
    - Fecha_hora
    
- - Usuario::Cliente
+### Usuario::Cliente
    - 
 
 
- - Usuario::Organizador  
+### Usuario::Organizador  
    - Nombre empresa
    - Descripción
 
- - Usuario::Proveedor
+### Usuario::Proveedor
    - Nombre empresa
    - Descripción
 
- - Admin
+### Admin
   - 
 
- - Evento
+### Tareas
+   - ID_usuario
+   - Nombre
+   - Descripción
+   - Fecha_Fin
+   - Estado
+   
+### Evento
+   - Nombre
+   - Lugar
+   - Descripcióón
+   - Tipo
+   - Fecha_hora_inicio
+   - Fecha_hora_Fin
+   - Listado de Proveedores
+   - Listado de Participantes
+   
+### Participantes
+   - Nombre
+   - Apellidos
+   - Dirección
+   - 
+   
+### Notificación
    - 
 
-
- - Notificación
-   - 
-
- - Mensaje
+### Mensaje
    - 
