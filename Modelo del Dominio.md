@@ -13,15 +13,15 @@
    -	Listado de Eventos
    - Lista de Tareas
    
-### Usuario::Cliente
+### 1. Cliente
    
 
 
-### Usuario::Organizador  
+### 2. Organizador  
    - Nombre empresa
    - Descripción
 
-### Usuario::Proveedor
+### 3. Proveedor
    - Nombre empresa
    - Descripción
 
