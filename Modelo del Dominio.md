@@ -57,7 +57,7 @@
    - Fecha_hora_inicio
    - Fecha_hora_Fin
    - Listado de Proveedores
-   - Listado de Participantes
+   - Listado de Participantes (solo texto, no es una entidad del modelo).
    
 ### Participantes
    - Nombre
