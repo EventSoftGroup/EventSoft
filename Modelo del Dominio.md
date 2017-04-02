@@ -3,70 +3,53 @@
 ## Entidades
 
 ### Usuario
-   - Credenciales (Mail y password)
-   - Nombre y apellidos
-   - Localización
-   - Fecha creaion cuenta
-   - Estado (Activo, baneado, desactivado)
-   - Listado de Notificaciones
-   -	Listado de Mensajes
-   -	Listado de Eventos
-   - Lista de Tareas
-   
-### 1. Cliente
-   
-
-
-### 2. Organizador  
-   - Nombre empresa
-   - Descripción
-
-### 3. Proveedor
-   - Nombre empresa
-   - Descripción
-
---------------------------------------------
-
-### Tags
-   - Nombre empresa
-   - Tag
-   
-### Valoración
-   - ID_receptor
-   - ID_emisor
-   - Tipo_valoración
-   - Título
-   - Descripción 
-   - Fecha_hora
-   
-### Admin
-  - 
-
-### Tareas
-   - ID_usuario
-   - Nombre
-   - Descripción
-   - Fecha_Fin
-   - Estado
+   - id (integer)
+   - email (varchar)
+   - nombre (varchar)
+   - apellidos (varchar)
+   - dirección (varchar)
+   - localidad (varchar)
+   - provincia (varchar)
+   - cod_postal (integer)
+   - roll (integer {0: admin, 1: cliente, 2: proveedor, 3: organizador)
+   - estado (varchar)
+   - listado_mensajes (mensaje)
+   - listado_valoraciones (valoración)
+   - listado_eventos (evento)
+   - listado_servicios (servicio) 
    
 ### Evento
-   - Nombre
-   - Lugar
-   - Descripcióón
-   - Tipo
-   - Fecha_hora_inicio
-   - Fecha_hora_Fin
-   - Listado de Proveedores
-   - Listado de Participantes (solo texto, no es una entidad del modelo).
-   
-### Participantes
-   - Nombre
-   - Apellidos
-   - Dirección
-   - 
-   
-### Notificación
-   - 
+   - id (integer)
+   - nombre (varchar)
+   - lugar (varchar)
+   - categoría (varchar)
+   - fecha_hora_inicio (datetime)
+   - fecha_hora_fin (datetime)
+   - listado_servicios (servicio)
+   - listado_participantes (solo texto - no es una entidad)
 
-### Mensaje
-   - 
+### Servicio
+   - id (integer)
+   - tipo (varchar)
+   - nombre (varchar)
+   - descripción (varchar)
+   - fecha_registro (datetime)
+   - estado (integer {0: activo, 1: terminado, etc})
+   
+### Mensaje/notificación 
+   - id_usuario_origen (integer)
+   - id_usuario_destino (integer)
+   - fecha_registro (datetime)
+   - id_evento (integer)
+   - asunto (varchar)
+   - mensaje (varchar)
+   - tipo (integer {0: notificacion, 1: mensaje}
+   - estado (integer {0: no_visto, 1: visto})
+   
+### Valoración
+   - id_origen (integer)
+   - id_destino (integer)
+   - fecha_registro (datetime)
+   - tipo (integer {0: evento, 1: servicio, 2: organizador})
+   - valoración (integer)
+   
