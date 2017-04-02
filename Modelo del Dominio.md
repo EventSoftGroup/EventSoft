@@ -7,14 +7,14 @@
    - email (varchar)
    - nombre (varchar)
    - apellidos (varchar)
-   - dirección (varchar)
+   - dirección (varchar)
    - localidad (varchar)
    - provincia (varchar)
    - cod_postal (integer)
    - roll (integer {0: admin, 1: cliente, 2: proveedor, 3: organizador)
    - estado (varchar)
    - listado_mensajes (mensaje)
-   - listado_valoraciones (valoración)
+   - listado_valoraciones (valoración)
    - listado_eventos (evento)
    - listado_servicios (servicio) 
    
@@ -22,7 +22,7 @@
    - id (integer)
    - nombre (varchar)
    - lugar (varchar)
-   - categoría (varchar)
+   - categoría (varchar)
    - fecha_hora_inicio (datetime)
    - fecha_hora_fin (datetime)
    - listado_servicios (servicio)
@@ -32,7 +32,7 @@
    - id (integer)
    - tipo (varchar)
    - nombre (varchar)
-   - descripción (varchar)
+   - descripción (varchar)
    - fecha_registro (datetime)
    - estado (integer {0: activo, 1: terminado, etc})
    
@@ -43,7 +43,7 @@
    - id_evento (integer)
    - asunto (varchar)
    - mensaje (varchar)
-   - tipo (integer {0: notificacion, 1: mensaje}
+   - tipo (integer {0: notificacion, 1: mensaje})
    - estado (integer {0: no_visto, 1: visto})
    
 ### Valoración
@@ -51,5 +51,5 @@
    - id_destino (integer)
    - fecha_registro (datetime)
    - tipo (integer {0: evento, 1: servicio, 2: organizador})
-   - valoración (integer)
+   - valoración (integer)
    
