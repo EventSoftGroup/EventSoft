@@ -47,7 +47,7 @@
    - estado (integer {0: no_visto, 1: visto})
    
 ### Valoración
-   - id_origen (integer)
+   - id_origen (integer)
    - id_destino (integer)
    - fecha_registro (datetime)
    - tipo (integer {0: evento, 1: servicio, 2: organizador})
