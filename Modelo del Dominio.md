@@ -1,5 +1,7 @@
 # Modelo del Domino
 
+![Modelo de dominio](https://github.com/EventSoftGroup/EventSoft/blob/master/Modelo_de_dominio_EventoSoft.jpg)
+
 ## Entidades
 
 ### Usuario
