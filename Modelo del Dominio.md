@@ -14,7 +14,7 @@
    - provincia (varchar)
    - cod_postal (integer)
    - roll (integer {0: admin, 1: cliente, 2: proveedor, 3: organizador)
-   - estado (varchar)
+   - estado (integer {0: activo, 1: pendiente_validacin, 2: banneado, etc})
    - listado_mensajes (mensaje)
    - listado_valoraciones (valoración)
    - listado_eventos (evento)
