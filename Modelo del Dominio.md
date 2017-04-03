@@ -54,4 +54,5 @@
    - fecha_registro (datetime)
    - tipo (integer {0: evento, 1: servicio, 2: organizador})
    - valoración (integer)
+   - Texto (varchar)
    
