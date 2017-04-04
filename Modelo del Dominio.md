@@ -37,6 +37,7 @@
    - descripción (varchar)
    - fecha_registro (datetime)
    - estado (integer {0: activo, 1: terminado, etc})
+   - listado_eventos (evento)
    
 ### Mensaje/notificación 
    - id_usuario_origen (integer)
