@@ -1,4 +1,4 @@
-package es.fdi.eventsoft.controller;
+package es.fdi.eventsoft.presentacion.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
