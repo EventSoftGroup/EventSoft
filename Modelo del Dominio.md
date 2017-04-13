@@ -14,7 +14,7 @@
    - provincia (varchar)
    - cod_postal (integer)
    - teléfono (integer)
-   - estado (integer {0: activo, 1: pendiente_validación, 2: banneado, etc})
+   - estado (integer {0: activo, 1: pendiente_validación, 2: banneado, etc})
    - listado_mensajes (mensaje)
    
 ### 1- Cliente
