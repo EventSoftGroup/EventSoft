@@ -8,7 +8,7 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <p class="login-box-msg">Introduce email y contraseña</p>
 
     <form action="./index" method="post">
       <div class="form-group has-feedback">
@@ -16,7 +16,7 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
+        <input type="password" class="form-control" placeholder="Contraseña">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -29,7 +29,7 @@
         </div>-->
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Conectar</button>
         </div>
         <!-- /.col -->
       </div>
@@ -44,8 +44,8 @@
     </div>-->
     <!-- /.social-auth-links -->
 
-    <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
+    <!--<a href="#">I forgot my password</a><br>-->
+    <a href="register.html" class="text-center">No soy usuario registado</a>
 
   </div>
   <!-- /.login-box-body -->

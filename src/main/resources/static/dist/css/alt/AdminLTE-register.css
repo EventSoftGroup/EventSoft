@@ -1,8 +1,23 @@
 .register-box-body {
-  -webkit-box-shadow: 0px 10px 60px 10px rgba(0,0,0,0.55);
-  -moz-box-shadow: 0px 10px 60px 10px rgba(0,0,0,0.55);
-  box-shadow: 0px 10px 60px 10px rgba(0,0,0,0.55);
+    -webkit-box-shadow: 0px 10px 60px 10px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: 0px 10px 60px 10px rgba(0, 0, 0, 0.55);
+    box-shadow: 0px 10px 60px 10px rgba(0, 0, 0, 0.55);
 }
-.register-logo img{
-  width: 100%;
+
+.register-logo img {
+    width: 100%;
+}
+
+.btn-primary {
+    margin: 25px 0 0 0 !important;
+}
+
+#rol {
+    cursor: pointer;
+    border-radius: 0 !important;
+}
+
+#rol option {
+    cursor: pointer;
+
 }
