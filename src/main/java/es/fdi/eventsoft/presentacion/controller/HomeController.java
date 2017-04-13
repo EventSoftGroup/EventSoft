@@ -101,7 +101,7 @@ public class HomeController {
         SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
         session.setAttribute("fecha_registro", formateador.format(ahora));
 
-        return "index";
+        return "redirect:index";
     }
 }
 
