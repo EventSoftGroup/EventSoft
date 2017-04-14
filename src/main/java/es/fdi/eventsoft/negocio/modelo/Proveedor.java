@@ -32,7 +32,7 @@ public class Proveedor extends Profesional {
 
     @Override
     public String toString() {
-        return "Proveedor{" +
+        return super.toString() + System.getProperty("line.separator") + "    Proveedor{" +
                 "servicios=" + servicios +
                 '}';
     }

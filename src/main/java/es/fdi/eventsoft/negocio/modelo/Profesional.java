@@ -43,7 +43,7 @@ public class Profesional extends Usuario {
 
     @Override
     public String toString() {
-        return "Profesional{" +
+        return super.toString() + System.getProperty("line.separator") + "    Profesional{" +
                 "empresa='" + empresa + '\'' +
                 ", cif='" + cif + '\'' +
                 '}';

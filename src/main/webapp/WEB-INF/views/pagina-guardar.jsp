@@ -2,13 +2,16 @@
 <html>
     <h2>Adding of a String into the session</h2>
 
-    <p>Guardado en sesión: ${miNombre}</p>
+    <p>Guardado en sesión:</p>
+    <p>Palabra1: ${palabra1}</p>
+    <p>Palabra2: ${palabra2}</p>
 
     <form action="guarda-nombre.html" method="post">
         <table>
             <tr>
                 <td>Que quieres recordar:</td>
-                <td><input type="text" name="nombre" /></td>
+                <td><input type="text" name="palabra1" /></td>
+                <td><input type="text" name="palabra2" /></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Guardar"/></td>

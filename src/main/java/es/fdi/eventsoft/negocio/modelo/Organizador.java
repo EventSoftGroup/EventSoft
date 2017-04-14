@@ -32,7 +32,7 @@ public class Organizador extends Profesional {
 
     @Override
     public String toString() {
-        return "Organizador{" +
+        return super.toString() + System.getProperty("line.separator") + "    Organizador{" +
                 "eventos=" + eventos +
                 '}';
     }

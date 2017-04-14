@@ -67,7 +67,8 @@ public class Cliente extends Usuario {
 
     @Override
     public String toString() {
-        return "Cliente{" +
+
+        return super.toString() + System.getProperty("line.separator") + "    Cliente{" +
                 "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", valoraciones=" + valoraciones +

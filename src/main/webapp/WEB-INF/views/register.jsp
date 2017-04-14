@@ -9,12 +9,12 @@
     <div class="register-box-body">
         <p class="login-box-msg">Rellene el formulario</p>
 
-        <form id="formulario_registro" action="${pageContext.request.contextPath}/registrar_usuario.html" method="post">
+        <form id="formulario_registro" name='formulario_registro' modelAttribute="Organizador" action="${pageContext.request.contextPath}/registrar_cliente.html" method="post">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label>Selecciona el rol</label>
-                        <select name="seleccion" id="rol" name="rol" class="form-control select2" style="width: 100%;">
+                        <select name="seleccion" id="rol" class="form-control select2" style="width: 100%;">
                             <option selected="selected" value="Cliente">Cliente</option>
                             <option value="Organizador">Organizador</option>
                             <option value="Proveedor">Proveedor</option>
@@ -78,7 +78,7 @@
             </div>
             <!-- Password -->
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Contraseña" name="password ">
+                <input type="password" class="form-control" placeholder="Contraseña" name="password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">

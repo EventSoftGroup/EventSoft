@@ -25,11 +25,25 @@ $(function () {
 
     $('#rol').on('change', function(event){
         event.preventDefault();
+
         var valor = $(this).val();
+
+        console.log("Cambiando formulario...");
+
         if (valor === "Cliente") {
             client_panel();
-        } else {
+            document.formulario_registro.action = "registrar_cliente.html";
+
+        } else if (valor === "Organizador") {
             professional_panel();
+            document.formulario_registro.action = "registrar_organizador.html";
+
+        } else if (valor === "Proveedor") {
+            professional_panel();
+            document.formulario_registro.action = "registrar_proveedor.html";
         }
+
+        console.log("nuevo form: " + document.formulario_registro.action);
+
     })
 });

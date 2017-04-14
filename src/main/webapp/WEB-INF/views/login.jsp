@@ -11,12 +11,23 @@
     <p class="login-box-msg">Introduce email y contraseña</p>
 
     <form action="./index" method="post">
-      <div class="form-group has-feedback">
+      <!-- <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email" autofocus>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
+      -->
+
+      <div class="form-group">
+        <label>Selecciona el rol</label>
+        <select name="seleccion" id="rol" class="form-control select2" style="width: 100%;">
+          <option selected="selected" value="Cliente">Cliente</option>
+          <option value="Organizador">Organizador</option>
+          <option value="Proveedor">Proveedor</option>
+          <option value="Admin">Adminstrador</option>
+        </select>
+      </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Contraseña">
+        <input type="password" class="form-control" placeholder="Contraseña" name="pass">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
