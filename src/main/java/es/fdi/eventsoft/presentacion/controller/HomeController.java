@@ -35,7 +35,7 @@ public class HomeController {
             case "Organizador": {
                 System.out.println("Logueado como Organizador");
                 session.setAttribute("rol", "organizador");
-                return "";
+                return "nuevo-evento";
             }
 
             case "Proveedor": {
@@ -152,7 +152,7 @@ public class HomeController {
         Usuario usuario = null;
 
 
-        return "redirect:index";
+        return "perfil-usuario";
     }
 
     @RequestMapping(value = "registrar_organizador", method = RequestMethod.POST)
@@ -168,7 +168,7 @@ public class HomeController {
         Usuario usuario = null;
 
 
-        return "redirect:index";
+        return "nuevo-evento";
     }
 
     @RequestMapping(value = "registrar_proveedor", method = RequestMethod.POST)
@@ -184,7 +184,7 @@ public class HomeController {
         Usuario usuario = null;
 
 
-        return "redirect:index";
+        return "proveedores";
     }
 }
 
