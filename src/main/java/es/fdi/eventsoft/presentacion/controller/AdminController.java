@@ -10,7 +10,7 @@ public class AdminController {
     @RequestMapping("admin")
     public String home(Model model) {
         model.addAttribute("title", "EventSoft");
-
+        model.addAttribute("pagina", "admin");
         return "admin";
     }
 }

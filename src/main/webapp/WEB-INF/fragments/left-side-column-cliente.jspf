@@ -1,0 +1,32 @@
+left-side-column.jspf<!-- Left side column. contains the logo and sidebar -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            <li class="header">PRINCIPAL</li>
+            <!-- Optionally, you can add icons to the links -->
+            <li
+            <c:if test="${pagina eq 'timeline'}">
+                class="active"
+            </c:if>
+            ><a href="/eventos/timeline"><i class="fa fa-line-chart"></i> <span>Mis Eventos</span></a></li>
+
+            <li
+                <c:if test="${pagina eq 'calendario'}">
+                    class="active"
+                </c:if>
+            ><a href="/eventos/calendario"><i class="fa fa-calendar"></i> <span>Calendario</span></a></li>
+            <li
+                <c:if test="${pagina eq 'buzon'}">
+                    class="active"
+                </c:if>
+            ><a href="/eventos/buzon"><i class="fa fa-envelope"></i> <span>Buzón</span></a></li>
+        </ul>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

@@ -10,25 +10,25 @@ public class EventController {
     @RequestMapping("/nuevo")
     public String nuevoEvento(Model model) {
         model.addAttribute("title", "EventSoft - Nuevo evento");
-
+        model.addAttribute("pagina", "nuevo-evento");
         return "nuevo-evento";
     }
     @RequestMapping("/calendario")
     public String eventoCalendario(Model model) {
         model.addAttribute("title", "EventSoft - Calendario");
-
+        model.addAttribute("pagina", "calendario");
         return "calendario";
     }
     @RequestMapping("/proveedores")
     public String eventoProveedores(Model model) {
         model.addAttribute("title", "EventSoft - Proveedores");
-
+        model.addAttribute("pagina", "proveedores");
         return "proveedores";
     }
     @RequestMapping("/buzon")
     public String eventoBuzon(Model model) {
         model.addAttribute("title", "EventSoft - Buzón");
-
+        model.addAttribute("pagina", "buzon");
         return "buzon";
     }
     @RequestMapping("/leer-mensaje")
@@ -46,7 +46,7 @@ public class EventController {
     @RequestMapping("/timeline")
     public String eventoTimeline(Model model) {
         model.addAttribute("title", "EventSoft - Timeline");
-
+        model.addAttribute("pagina", "timeline");
         return "timeline";
     }
     @RequestMapping("/notificaciones")

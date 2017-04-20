@@ -10,7 +10,7 @@ public class UserController {
     @RequestMapping("perfil-usuario")
     public String home(Model model) {
         model.addAttribute("title", "EventSoft");
-
+        model.addAttribute("pagina", "perfil");
         return "perfil-usuario";
     }
 }

@@ -6,7 +6,18 @@
 <div class="wrapper">
 
     <%@ include file="../fragments/header.jspf" %>
-    <%@ include file="../fragments/left-side-column.jspf" %>
+    <c:if test="${rol eq 'organizador'}">
+        <%@ include file="../fragments/left-side-column-organizador.jspf" %>
+    </c:if>
+    <c:if test="${rol eq 'proveedor'}">
+        <%@ include file="../fragments/left-side-column-proveedor.jspf" %>
+    </c:if>
+    <c:if test="${rol eq 'administrador'}">
+        <%@ include file="../fragments/left-side-column-admin.jspf" %>
+    </c:if>
+    <c:if test="${rol eq 'cliente'}">
+        <%@ include file="../fragments/left-side-column-cliente.jspf" %>
+    </c:if>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">

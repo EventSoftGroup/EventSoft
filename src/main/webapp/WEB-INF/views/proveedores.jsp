@@ -5,7 +5,18 @@
     <div class="wrapper">
 
         <%@ include file="../fragments/header.jspf" %>
-        <%@ include file="../fragments/left-side-column.jspf" %>
+        <c:if test="${rol eq 'organizador'}">
+            <%@ include file="../fragments/left-side-column-organizador.jspf" %>
+        </c:if>
+        <c:if test="${rol eq 'proveedor'}">
+            <%@ include file="../fragments/left-side-column-proveedor.jspf" %>
+        </c:if>
+        <c:if test="${rol eq 'administrador'}">
+            <%@ include file="../fragments/left-side-column-admin.jspf" %>
+        </c:if>
+        <c:if test="${rol eq 'cliente'}">
+            <%@ include file="../fragments/left-side-column-cliente.jspf" %>
+        </c:if>
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
@@ -275,7 +286,7 @@
                                         <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 52%</span></a></li>
                                     <li><a href="#">Segovia <span class="pull-right text-green"><i class="fa fa-angle-up"></i> 24%</span></a>
                                     </li>
-                                    <li><a href="#">Cataluña
+                                    <li><a href="#">Los Molinos
                                         <span class="pull-right text-yellow"><i class="fa fa-angle-left"></i> 0%</span></a></li>
                                 </ul>
                             </div>

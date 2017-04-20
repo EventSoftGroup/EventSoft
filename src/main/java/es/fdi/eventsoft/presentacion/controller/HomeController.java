@@ -35,18 +35,21 @@ public class HomeController {
             case "Organizador": {
                 System.out.println("Logueado como Organizador");
                 session.setAttribute("rol", "organizador");
+                //model.addAttribute("pagina", "nuevo-evento");
                 return "nuevo-evento";
             }
 
             case "Proveedor": {
                 System.out.println("Logueado como Proveedor");
-
+                session.setAttribute("rol", "proveedor");
+                //model.addAttribute("pagina", "proveedores");
                 return "proveedores";
             }
 
             case "Admin": {
                 System.out.println("Logueado como Adiministrador");
-                session.setAttribute("rol", "proveedor");
+                session.setAttribute("rol", "administrador");
+                //model.addAttribute("pagina", "admin");
                 return "admin";
             }
         }
