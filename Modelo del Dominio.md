@@ -75,5 +75,5 @@
    - id_Profesional_destino (integer)
    - fecha_registro (datetime)
    - valoración (integer)
-   - Texto (varchar)
+   - Text (varchar)
    
