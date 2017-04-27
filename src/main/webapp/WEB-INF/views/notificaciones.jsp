@@ -149,7 +149,7 @@
 <!-- ./wrapper -->
 <%@ include file="../fragments/plugins.jspf" %>
 <!-- iCheck -->
-<script src="/plugins/iCheck/icheck.min.js"></script>
+<!-- <script src="/plugins/iCheck/icheck.min.js"></script> -->
 <!-- Page Script -->
 <script>
     $(function () {

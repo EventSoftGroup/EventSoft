@@ -136,7 +136,8 @@
     <!-- ./wrapper -->
     <%@ include file="../fragments/plugins.jspf" %>
     <!-- iCheck -->
-    <script src="/plugins/iCheck/icheck.min.js"></script>
+    <!-- <script src="/plugins/iCheck/icheck.min.js"></script>
+
     <!-- Bootstrap WYSIHTML5 -->
     <script src="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
     <!-- Page Script -->
