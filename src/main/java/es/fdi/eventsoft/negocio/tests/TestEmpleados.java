@@ -29,7 +29,7 @@ public class TestEmpleados {
         emf = Persistence.createEntityManagerFactory("aplicacion");
         manager = emf.createEntityManager();
 
-        Empleado e = new Empleado(40L, "Teston", "Maria", new GregorianCalendar(1979,6,6).getTime());
+        Empleado e = new Empleado(70L, "Teston", "Maria", new GregorianCalendar(1979,6,6).getTime());
 
         manager.getTransaction().begin();
         manager.persist(e);

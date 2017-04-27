@@ -5,6 +5,7 @@ import es.fdi.eventsoft.negocio.modelo.Cliente;
 import es.fdi.eventsoft.negocio.modelo.Organizador;
 import es.fdi.eventsoft.negocio.modelo.Proveedor;
 import es.fdi.eventsoft.negocio.modelo.Usuario;
+import org.hibernate.annotations.SourceType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,38 +25,42 @@ public class HomeController {
     @RequestMapping("index")
     public String home(HttpSession session, @RequestParam String seleccion, @RequestParam String pass, Model model) {
         model.addAttribute("title", "EventSoft");
-
+        System.out.println(seleccion);
         switch (seleccion) {
             case "Cliente": {
                 System.out.println("Logueado como Cliente");
                 session.setAttribute("rol", "cliente");
+                model.addAttribute("pagina", "perfil-usuario");
                 return "perfil-usuario";
             }
 
             case "Organizador": {
                 System.out.println("Logueado como Organizador");
                 session.setAttribute("rol", "organizador");
-                //model.addAttribute("pagina", "nuevo-evento");
+                model.addAttribute("pagina", "nuevo-evento");
                 return "nuevo-evento";
             }
 
             case "Proveedor": {
                 System.out.println("Logueado como Proveedor");
                 session.setAttribute("rol", "proveedor");
-                //model.addAttribute("pagina", "proveedores");
+                model.addAttribute("pagina", "proveedores");
                 return "proveedores";
             }
 
             case "Admin": {
                 System.out.println("Logueado como Adiministrador");
                 session.setAttribute("rol", "administrador");
-                //model.addAttribute("pagina", "admin");
+                model.addAttribute("pagina", "admin");
                 return "admin";
+            }
+            default: {
+                return "index";
             }
         }
 
 
-        return "index";
+        //return "index";
     }
 
     @RequestMapping({"/","login"})
