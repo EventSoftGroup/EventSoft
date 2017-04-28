@@ -3,7 +3,11 @@ package es.fdi.eventsoft.negocio.tests;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import es.fdi.eventsoft.negocio.modelo.Empleado;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -39,6 +43,7 @@ public class TestEmpleados {
         imprimirTodo();
         //session.beginTransaction();
         //session.close();
+
     }
     @SuppressWarnings("unchecked")
     private static void imprimirTodo() {

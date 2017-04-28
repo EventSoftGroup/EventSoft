@@ -5,16 +5,16 @@
     <div class="wrapper">
 
         <%@ include file="../fragments/header.jspf" %>
-        <c:if test="${rol eq 'organizador'}">
+        <c:if test="${rol eq 'Organizador'}">
             <%@ include file="../fragments/left-side-column-organizador.jspf" %>
         </c:if>
-        <c:if test="${rol eq 'proveedor'}">
+        <c:if test="${rol eq 'Proveedor'}">
             <%@ include file="../fragments/left-side-column-proveedor.jspf" %>
         </c:if>
-        <c:if test="${rol eq 'administrador'}">
+        <c:if test="${rol eq 'Administrador'}">
             <%@ include file="../fragments/left-side-column-admin.jspf" %>
         </c:if>
-        <c:if test="${rol eq 'cliente'}">
+        <c:if test="${rol eq 'Cliente'}">
             <%@ include file="../fragments/left-side-column-cliente.jspf" %>
         </c:if>
         <div class="content-wrapper">

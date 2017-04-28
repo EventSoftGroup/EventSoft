@@ -9,7 +9,7 @@
     <div class="register-box-body">
         <p class="login-box-msg">Rellene el formulario</p>
 
-        <form id="formulario_registro" name='formulario_registro' modelAttribute="Organizador" action="${pageContext.request.contextPath}/registrar_cliente.html" method="post">
+        <form id="formulario_registro" name='formulario_registro' modelAttribute="Organizador" action="${pageContext.request.contextPath}/usuarios/registrar_cliente.html" method="post">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
