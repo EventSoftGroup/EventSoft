@@ -1,12 +1,13 @@
-package es.fdi.eventsoft.negocio.modelo;
+package es.fdi.eventsoft.negocio.Usuario;
 
-import es.fdi.eventsoft.negocio.modelo.enumerados.EstadosUsuario;
+import es.fdi.eventsoft.negocio.Mensaje;
+import es.fdi.eventsoft.negocio.enumerados.EstadosUsuario;
 
 import java.util.List;
 
-import static es.fdi.eventsoft.negocio.modelo.enumerados.EstadosUsuario.ACTIVO;
+import static es.fdi.eventsoft.negocio.enumerados.EstadosUsuario.ACTIVO;
 
-public class Usuario {
+public class TUsuario {
     private Long id;
     private String mail;
     private String password;
@@ -14,11 +15,11 @@ public class Usuario {
     private String localidad;
     private String provincia;
     private String telefono;
-    private int codigoPostal;
+    private String codigoPostal;
     private EstadosUsuario estado;
     private List<Mensaje> mensajes;
 
-    public Usuario() {
+    public TUsuario() {
         this.id = null;
         this.mail = "";
         this.password = "";
@@ -26,12 +27,12 @@ public class Usuario {
         this.localidad = "";
         this.provincia = "";
         this.telefono = "";
-        this.codigoPostal = 0;
+        this.codigoPostal = "";
         this.estado = ACTIVO;
         this.mensajes = null;
     }
 
-    public Usuario(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes) {
+    public TUsuario(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes) {
         this.id = id;
         this.mail = mail;
         this.password = password;
@@ -100,11 +101,11 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public int getCodigoPostal() {
+    public String getCodigoPostal() {
         return codigoPostal;
     }
 
-    public void setCodigoPostal(int codigoPostal) {
+    public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
 
@@ -126,7 +127,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" +
+        return "TUsuario{" +
                 "id=" + id +
                 ", mail='" + mail + '\'' +
                 ", password='" + password + '\'' +

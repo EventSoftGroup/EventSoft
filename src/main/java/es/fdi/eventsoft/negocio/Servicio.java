@@ -1,6 +1,6 @@
-package es.fdi.eventsoft.negocio.modelo;
+package es.fdi.eventsoft.negocio;
 
-import es.fdi.eventsoft.negocio.modelo.enumerados.TiposServicio;
+import es.fdi.eventsoft.negocio.enumerados.TiposServicio;
 
 import java.util.Date;
 

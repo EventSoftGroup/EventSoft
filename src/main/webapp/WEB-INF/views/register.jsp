@@ -109,15 +109,6 @@
 <!-- /.register-box -->
 
 <%@ include file="../fragments/plugins.jspf" %>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
-</script>
 <script src="/dist/js/register.js"></script>
 </body>
 </html>

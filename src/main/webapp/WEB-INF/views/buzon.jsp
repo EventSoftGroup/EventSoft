@@ -285,13 +285,12 @@
 <!-- ./wrapper -->
 <%@ include file="../fragments/plugins.jspf" %>
 <!-- iCheck -->
-<script src="/plugins/iCheck/icheck.min.js"></script>
 <!-- Page Script -->
 <script>
     $(function () {
         //Enable iCheck plugin for checkboxes
         //iCheck for checkbox and radio inputs
-        $('.mailbox-messages input[type="checkbox"]').iCheck({
+        /*$('.mailbox-messages input[type="checkbox"]').iCheck({
             checkboxClass: 'icheckbox_flat-blue',
             radioClass: 'iradio_flat-blue'
         });
@@ -309,7 +308,7 @@
                 $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
             }
             $(this).data("clicks", !clicks);
-        });
+        });*/
 
         //Handle starring for glyphicon and font awesome
         $(".mailbox-star").click(function (e) {

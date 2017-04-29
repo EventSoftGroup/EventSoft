@@ -1,6 +1,8 @@
-package es.fdi.eventsoft.negocio.modelo;
+package es.fdi.eventsoft.negocio;
 
-import es.fdi.eventsoft.negocio.modelo.enumerados.CategoriasEvento;
+import es.fdi.eventsoft.negocio.Usuario.TCliente;
+import es.fdi.eventsoft.negocio.Usuario.TOrganizador;
+import es.fdi.eventsoft.negocio.enumerados.CategoriasEvento;
 
 import java.util.Date;
 import java.util.List;
@@ -8,12 +10,12 @@ import java.util.List;
 public class Evento {
     private Long id;
     private String nombre;
-    private Organizador organizador;
+    private TOrganizador TOrganizador;
     private String lugar;
     private CategoriasEvento categoria;
     private Date fechaInicio;
     private Date fechaFin;
     private List<Servicio> servicios;
     private List<String> participantes;
-    private List<Cliente> clientes;
+    private List<TCliente> TClientes;
 }

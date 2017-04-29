@@ -56,7 +56,7 @@
     <!-- /.social-auth-links -->
 
     <!--<a href="#">I forgot my password</a><br>-->
-    <a href="register.html" class="text-center">No soy usuario registado</a>
+    <a href="register.html" class="text-center">No estoy registado</a>
 
   </div>
   <!-- /.login-box-body -->
@@ -64,14 +64,6 @@
 <!-- /.login-box -->
 
 <%@ include file="../fragments/plugins.jspf" %>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
+
 </body>
 </html>

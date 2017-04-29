@@ -1,4 +1,4 @@
-package es.fdi.eventsoft.negocio.modelo;
+package es.fdi.eventsoft.negocio;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

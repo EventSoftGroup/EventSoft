@@ -290,9 +290,6 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
-    <!-- Morris.js charts -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="/plugins/morris/morris.min.js"></script>
 
     <!-- Sparkline -->
     <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -318,6 +315,7 @@
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/dist/js/pages/dashboard.js"></script> -->
+
 
 </body>
 </html>

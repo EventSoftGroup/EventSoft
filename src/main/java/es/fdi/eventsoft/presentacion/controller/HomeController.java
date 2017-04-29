@@ -42,7 +42,7 @@ public class HomeController {
             }
 
             case "Proveedor": {
-                System.out.println("Logueado como Proveedor");
+                System.out.println("Logueado como TProveedor");
                 session.setAttribute("rol", "Proveedor");
                 model.addAttribute("pagina", "proveedores");
                 return "redirect:./eventos/proveedores";
@@ -63,6 +63,12 @@ public class HomeController {
     public String login(Model model) {
         model.addAttribute("title", "EventSoft");
         return "login";
+    }
+
+    @RequestMapping("register")
+    public String register(Model model) {
+        model.addAttribute("title", "EventSoft");
+        return "register";
     }
 
     @RequestMapping("sign-out")

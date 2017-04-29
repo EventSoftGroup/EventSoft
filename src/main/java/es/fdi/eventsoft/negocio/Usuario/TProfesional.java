@@ -1,25 +1,26 @@
-package es.fdi.eventsoft.negocio.modelo;
+package es.fdi.eventsoft.negocio.Usuario;
 
-import es.fdi.eventsoft.negocio.modelo.enumerados.EstadosUsuario;
+import es.fdi.eventsoft.negocio.Mensaje;
+import es.fdi.eventsoft.negocio.enumerados.EstadosUsuario;
 
 import java.util.List;
 
-public class Profesional extends Usuario {
+public class TProfesional extends TUsuario {
     private String empresa;
     private String cif;
 
-    public Profesional() {
+    public TProfesional() {
         super();
         this.empresa = "";
         this.cif = "";
     }
 
-    public Profesional(String empresa, String cif) {
+    public TProfesional(String empresa, String cif) {
         this.empresa = empresa;
         this.cif = cif;
     }
 
-    public Profesional(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String empresa, String cif) {
+    public TProfesional(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String empresa, String cif) {
         super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes);
         this.empresa = empresa;
         this.cif = cif;
@@ -43,7 +44,7 @@ public class Profesional extends Usuario {
 
     @Override
     public String toString() {
-        return super.toString() + System.getProperty("line.separator") + "    Profesional{" +
+        return super.toString() + System.getProperty("line.separator") + "    TProfesional{" +
                 "empresa='" + empresa + '\'' +
                 ", cif='" + cif + '\'' +
                 '}';

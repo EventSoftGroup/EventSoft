@@ -1,4 +1,4 @@
-package es.fdi.eventsoft.negocio.modelo.enumerados;
+package es.fdi.eventsoft.negocio.enumerados;
 
 public enum EstadosUsuario {
     ACTIVO,

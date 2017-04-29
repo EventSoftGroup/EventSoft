@@ -1,16 +1,19 @@
-package es.fdi.eventsoft.negocio.modelo;
+package es.fdi.eventsoft.negocio.Usuario;
 
-import es.fdi.eventsoft.negocio.modelo.enumerados.EstadosUsuario;
+import es.fdi.eventsoft.negocio.Evento;
+import es.fdi.eventsoft.negocio.Mensaje;
+import es.fdi.eventsoft.negocio.Valoracion;
+import es.fdi.eventsoft.negocio.enumerados.EstadosUsuario;
 
 import java.util.List;
 
-public class Cliente extends Usuario {
+public class TCliente extends TUsuario {
     private String nombre;
     private String apellidos;
     private List<Valoracion> valoraciones;
     private List<Evento> eventos;
 
-    public Cliente() {
+    public TCliente() {
         super();
         this.nombre = "";
         this.apellidos = "";
@@ -18,14 +21,14 @@ public class Cliente extends Usuario {
         this.eventos = null;
     }
 
-    public Cliente(String nombre, String apellidos, List<Valoracion> valoraciones, List<Evento> eventos) {
+    public TCliente(String nombre, String apellidos, List<Valoracion> valoraciones, List<Evento> eventos) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.valoraciones = valoraciones;
         this.eventos = eventos;
     }
 
-    public Cliente(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String nombre, String apellidos, List<Valoracion> valoraciones, List<Evento> eventos) {
+    public TCliente(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String nombre, String apellidos, List<Valoracion> valoraciones, List<Evento> eventos) {
         super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes);
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -68,7 +71,7 @@ public class Cliente extends Usuario {
     @Override
     public String toString() {
 
-        return super.toString() + System.getProperty("line.separator") + "    Cliente{" +
+        return super.toString() + System.getProperty("line.separator") + "    TCliente{" +
                 "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", valoraciones=" + valoraciones +
