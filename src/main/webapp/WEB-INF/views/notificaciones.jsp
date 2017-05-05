@@ -82,7 +82,7 @@
                                     <tr>
                                         <td><input type="checkbox"></td>
                                         <td class="mailbox-name"><a href="/eventos/leer-notificacion"><b>Completada la compra de mmpp</b></a></td>
-                                        <td class="mailbox-subject"><b>Mi servicio</b> - Hemos comprado los siguientes materiales...
+                                        <td class="mailbox-subject"><b>Mi servicioIntegracionImp</b> - Hemos comprado los siguientes materiales...
                                         </td>
                                         <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                                         <td class="mailbox-date">hace 28 mins</td>

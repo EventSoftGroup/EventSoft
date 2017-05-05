@@ -1,14 +1,8 @@
 package es.fdi.eventsoft.presentacion.Validadores;
 
-import es.fdi.eventsoft.negocio.Usuario.TCliente;
+import es.fdi.eventsoft.negocio.__Usuario.TCliente;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.executable.ExecutableValidator;
-import javax.validation.metadata.BeanDescriptor;
-import java.util.Set;
 
 /**
  * Created by Tomas on 29/04/17.

@@ -233,7 +233,7 @@
                                                     class="fa fa-thumbs-up text-green"></i></a></td>
                                             <td class="mailbox-name"><a href="/usuarios/perfil-TUsuario">Alexander Pierce</a>
                                             </td>
-                                            <td class="mailbox-subject"><b>Buen servicio</b> - Muy buena presentación...
+                                            <td class="mailbox-subject"><b>Buen servicioIntegracionImp</b> - Muy buena presentación...
                                             </td>
                                             <td class="mailbox-attachment"></td>
                                             <td class="mailbox-date">hace 5 mins</td>

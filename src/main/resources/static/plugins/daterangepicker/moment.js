@@ -2810,7 +2810,7 @@
         var data         = this._data;
         var seconds, minutes, hours, years = 0;
 
-        // The following code bubbles up values, see the tests for
+        // The following code bubbles up values, see the __tests for
         // examples of what that means.
         data.milliseconds = milliseconds % 1000;
 

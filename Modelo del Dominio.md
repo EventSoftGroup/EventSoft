@@ -36,7 +36,7 @@
 
 
 #### 3- Proveedor
-   - listado_servicios (servicio) 
+   - listado_servicios (servicioIntegracionImp) 
    - 
 
 
@@ -50,7 +50,7 @@
    - categoría (varchar)
    - fecha_hora_inicio (datetime)
    - fecha_hora_fin (datetime)
-   - listado_SERVICIOS (servicio)
+   - listado_SERVICIOS (servicioIntegracionImp)
    - listado_participantes (solo texto - no es una entidad)
    - Listado_CLIENTES
    - 

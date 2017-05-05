@@ -1,13 +1,13 @@
 package es.fdi.eventsoft.presentacion.controller;
 
-import es.fdi.eventsoft.negocio.Usuario.TCliente;
-import es.fdi.eventsoft.negocio.Usuario.TOrganizador;
-import es.fdi.eventsoft.negocio.Usuario.TProveedor;
-import es.fdi.eventsoft.negocio.Usuario.TUsuario;
+import es.fdi.eventsoft.negocio.__Usuario.TCliente;
+import es.fdi.eventsoft.negocio.__Usuario.TOrganizador;
+import es.fdi.eventsoft.negocio.__Usuario.TProveedor;
+import es.fdi.eventsoft.negocio.__Usuario.TUsuario;
 import es.fdi.eventsoft.presentacion.Validadores.ValidadorCliente;
-import es.fdi.eventsoft.presentacion.comandos.Comando;
-import es.fdi.eventsoft.presentacion.comandos.factoriaComandos.FactoriaComandos;
-import org.hibernate.boot.jaxb.SourceType;
+import es.fdi.eventsoft.negocio.Comandos.Comandos_Usuario.Comando;
+import es.fdi.eventsoft.negocio.Comandos.Factoria_Comandos.FactoriaComandos;
+import es.fdi.eventsoft.presentacion.comandos.factoriaComandos.EventoGUI;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/usuarios/")
