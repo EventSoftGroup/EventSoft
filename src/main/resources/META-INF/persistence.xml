@@ -6,7 +6,7 @@
 
     <persistence-unit name="aplicacion">
 
-        <class>es.fdi.eventsoft.negocio.Entidades.Empleado</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.Empleado</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

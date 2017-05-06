@@ -231,7 +231,7 @@
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i
                                                     class="fa fa-thumbs-up text-green"></i></a></td>
-                                            <td class="mailbox-name"><a href="/usuarios/perfil-TUsuario">Alexander Pierce</a>
+                                            <td class="mailbox-name"><a href="/usuarios/perfil-Usuario">Alexander Pierce</a>
                                             </td>
                                             <td class="mailbox-subject"><b>Buen servicioIntegracionImp</b> - Muy buena presentación...
                                             </td>
@@ -244,7 +244,7 @@
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i
                                                     class="fa fa-thumbs-up text-green"></i></a></td>
-                                            <td class="mailbox-name"><a href="/usuarios/perfil-TUsuario">Juana de Arco</a>
+                                            <td class="mailbox-name"><a href="/usuarios/perfil-Usuario">Juana de Arco</a>
                                             </td>
                                             <td class="mailbox-subject"><b>No pudo ir mejor</b> - Me enamoré
                                                 salvajemente...
@@ -260,7 +260,7 @@
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i
                                                     class="fa fa-thumbs-up text-green"></i></a></td>
-                                            <td class="mailbox-name"><a href="/usuarios/perfil-TUsuario">Paquito el
+                                            <td class="mailbox-name"><a href="/usuarios/perfil-Usuario">Paquito el
                                                 Chocolatero</a></td>
                                             <td class="mailbox-subject"><b>Diviiiinooo *.*</b> - Quiero casarme otra
                                                 vez...
@@ -276,7 +276,7 @@
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i
                                                     class="fa fa-thumbs-up text-green"></i></a></td>
-                                            <td class="mailbox-name"><a href="/usuarios/perfil-TUsuario">Java FTW</a></td>
+                                            <td class="mailbox-name"><a href="/usuarios/perfil-Usuario">Java FTW</a></td>
                                             <td class="mailbox-subject"><b>Maravilloso</b> - Quién fuera flor para estar
                                                 en tus manos...
                                             </td>
@@ -289,7 +289,7 @@
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i
                                                     class="fa fa-thumbs-down text-red"></i></a></td>
-                                            <td class="mailbox-name"><a href="/usuarios/perfil-TUsuario">SOA Arquitecture</a>
+                                            <td class="mailbox-name"><a href="/usuarios/perfil-Usuario">SOA Arquitecture</a>
                                             </td>
                                             <td class="mailbox-subject"><b>Mala calidad</b> - Las flores feisimas
                                                 todas...
@@ -303,7 +303,7 @@
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i
                                                     class="fa fa-thumbs-up text-green"></i></a></td>
-                                            <td class="mailbox-name"><a href="/usuarios/perfil-TUsuario">Aitor Tilla</a></td>
+                                            <td class="mailbox-name"><a href="/usuarios/perfil-Usuario">Aitor Tilla</a></td>
                                             <td class="mailbox-subject"><b>Fabuloso</b> - Me dan puntos por este
                                                 comentario...
                                             </td>
@@ -316,7 +316,7 @@
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i
                                                     class="fa fa-thumbs-down text-red"></i></a></td>
-                                            <td class="mailbox-name"><a href="/usuarios/perfil-TUsuario">Son Goku</a></td>
+                                            <td class="mailbox-name"><a href="/usuarios/perfil-Usuario">Son Goku</a></td>
                                             <td class="mailbox-subject"><b>Malas flores</b> - Las flores del planeta
                                                 Vegeta son mucho mejo...
                                             </td>

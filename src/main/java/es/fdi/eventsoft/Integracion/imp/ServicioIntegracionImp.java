@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.Integracion.imp;
 
-import es.fdi.eventsoft.Integracion.FachadaServicioIntegracion;
+
+import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,17 +10,17 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public class ServicioIntegracionImp<T> implements FachadaServicioIntegracion<T> {
-    protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("eventsoft");
-    protected EntityManager em;
-    private Class<T> entityClass;
+public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
 
-    public ServicioIntegracionImp() {
-        ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
-        this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
+    protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("aplicacion");
+    protected EntityManager em;
+    protected Class<T> entityClass;
+
+
+    public ServicioIntegracionImp(Class<T> t) {
+        entityClass = t;
     }
 
     public void alta(T t) {
@@ -48,6 +49,7 @@ public class ServicioIntegracionImp<T> implements FachadaServicioIntegracion<T> 
         }
     }
 
+
     public void modifica(T t) {
         em = emf.createEntityManager();
 
@@ -72,6 +74,7 @@ public class ServicioIntegracionImp<T> implements FachadaServicioIntegracion<T> 
         em = emf.createEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(entityClass);
+        //System.out.println("ServicioIntegracion: " + entityClass.toString());
         Root<T> root = cq.from(entityClass);
         CriteriaQuery<T> all = cq.select(root);
         TypedQuery<T> allQuery = em.createQuery(all);
@@ -79,6 +82,13 @@ public class ServicioIntegracionImp<T> implements FachadaServicioIntegracion<T> 
         em.close();
 
         return listado;
+    }
+
+    public Object ejecutarQuery(String query){
+        em = emf.createEntityManager();
+        Object result = em.createQuery(query).getResultList();
+        em.close();
+        return result;
     }
 
     public Long getRowCount() {
