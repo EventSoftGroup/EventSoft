@@ -1,4 +1,4 @@
-package es.fdi.eventsoft.Presentacion.Validadores;
+package es.fdi.eventsoft.Negocio.Entidades.Validadores;
 
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import org.springframework.validation.Errors;

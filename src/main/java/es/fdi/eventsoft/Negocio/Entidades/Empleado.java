@@ -1,9 +1,12 @@
 package es.fdi.eventsoft.Negocio.Entidades;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import es.fdi.eventsoft.Negocio.Entidades.Validadores.Telefono;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,21 +20,48 @@ public class Empleado implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "COD_EMPLEADO")
     private Long codigo;
 
+
     @Column(name = "APELLIDOS")
+    @Size(min=2, max=30)
     private String apellidos;
 
     @Column(name = "NOMBRE")
+    @Size(min=2, max=30)
+    @NotEmpty(message = "Escribe algo capullo!")
     private String nombre;
 
+    @Column(name = "EMAIL")
+    @NotEmpty @Email
+
+    private String email;
+
     @Column(name = "FECHA_NACIMIENTO")
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @NotNull @Past
     private Date fechaNacimiento;
+
+    @Telefono
+    private String telefono;
 
     public Empleado() {
 
+    }
+
+
+    public Empleado(Long codigo, String apellidos, String nombre, String email, Date fechaNacimiento, Integer age) {
+        this.codigo = codigo;
+        this.apellidos = apellidos;
+        this.nombre = nombre;
+        this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Empleado(Long l) {
+        this.codigo = l;
     }
 
     public Empleado(Long codigo, String apellidos, String nombre, Date fechaNacimiento) {
@@ -41,8 +71,16 @@ public class Empleado implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Empleado(long l) {
-        this.codigo = l;
+    public Empleado(String apellidos, String nombre, Date fechaNacimiento) {
+        this.apellidos = apellidos;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Long getCodigo() {
@@ -69,6 +107,14 @@ public class Empleado implements Serializable {
         this.nombre = nombre;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -77,13 +123,23 @@ public class Empleado implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     @Override
     public String toString() {
         return "Empleado{" +
                 "codigo=" + codigo +
                 ", apellidos='" + apellidos + '\'' +
                 ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
                 ", fechaNacimiento=" + fechaNacimiento +
+                ", telefono=" + telefono +
                 '}';
     }
 }

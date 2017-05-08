@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface FachadaIntegracion<T> {
 
-        static <T> FachadaIntegracion<T> getInstance(Class<T> t){
+        static <T> FachadaIntegracion<T> newInstance(Class<T> t){
                 return new ServicioIntegracionImp(t);
         }
 

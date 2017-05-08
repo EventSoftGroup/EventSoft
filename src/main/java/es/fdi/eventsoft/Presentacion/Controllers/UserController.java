@@ -5,19 +5,22 @@ import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
+import es.fdi.eventsoft.Negocio.Entidades.Empleado;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import es.fdi.eventsoft.Presentacion.Validadores.ValidadorCliente;
+import es.fdi.eventsoft.Negocio.Entidades.Validadores.ValidadorCliente;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/usuarios/")
@@ -69,7 +72,7 @@ public class UserController {
         SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
         session.setAttribute("fecha_registro", formateador.format(ahora));
 
-        Comando comando = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO);
+        Comando comando = FactoriaComandos.newInstance().crearComando(EventosNegocio.CREAR_USUARIO);
         Contexto contexto = comando.execute(Cliente);
         System.out.println("Datos recibidos: " + contexto.getDatos());
 
@@ -156,4 +159,33 @@ public class UserController {
 
         return "proveedores";
     }
+
+
+
+
+    /**********************************************************************************************************************************/
+
+    @RequestMapping(value = "/cust/save", method = RequestMethod.GET)
+    public String saveCustomerPage(Model model) {
+        model.addAttribute("empleado", new Empleado());
+
+        return "custSave";
+    }
+
+    @RequestMapping(value = "/cust/save.do", method = RequestMethod.POST)
+    public String saveCustomerAction( @Valid Empleado empleado, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            System.out.println("Empleado incorrecto!!");
+            for (ObjectError err : bindingResult.getAllErrors())
+                System.out.println(err.toString());
+            return "custSave";
+        }
+
+        model.addAttribute("empleado", empleado);
+
+
+        return "custSaveSuccess";
+    }
+
 }
