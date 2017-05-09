@@ -62,4 +62,52 @@ public class EventController {
         return "leer-notificacion";
     }
 
+
+
+    @RequestMapping("crearEvento")
+    public String crearEvento(Model model) {
+        //TODO
+
+        return null;
+    }
+
+
+
+    @RequestMapping("buscarEvento")
+    public String buscarEvento(Model model) {
+        //TODO
+
+
+        return null;
+    }
+
+
+
+    @RequestMapping("modificarEvento")
+    public String modificarEvento(Model model) {
+        //TODO
+
+
+        return null;
+    }
+
+
+
+    @RequestMapping("eliminarEvento")
+    public String eliminarEvento(Model model) {
+        //TODO
+
+
+        return null;
+    }
+
+
+    @RequestMapping("buscarEventosByUser")
+    public String buscarEventosByUser(Model model) {
+        //TODO
+
+
+        return null;
+    }
+
 }

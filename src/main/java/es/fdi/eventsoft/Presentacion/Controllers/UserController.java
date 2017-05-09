@@ -188,4 +188,44 @@ public class UserController {
         return "custSaveSuccess";
     }
 
+
+
+
+
+    @RequestMapping("crearUsuario")
+    public String crearUsuario(Model model) {
+        //TODO
+
+
+        return null;
+    }
+
+    @RequestMapping("buscarUsuario")
+    public String buscarUsuario(Model model) {
+        //TODO
+
+
+        return null;
+    }
+
+
+    @RequestMapping("modificarUsuario")
+    public String modificarUsuario(Model model) {
+        //TODO
+
+
+        return null;
+    }
+
+
+    @RequestMapping("eliminarUsuario")
+    public String eliminarUsuario(Model model) {
+        //TODO
+
+
+        return null;
+    }
+
+
+
 }

@@ -6,7 +6,7 @@ import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
 /**
- * Created by Tomas on 29/04/17.
+ * Created by Rodrigo de Miguel on 05/05/2017.
  */
 public class SAUsuarioImp implements SAUsuario{
 
@@ -38,5 +38,23 @@ public class SAUsuarioImp implements SAUsuario{
         }
 
         return retorno;
+    }
+
+    @Override
+    public Usuario buscarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public int eliminarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio {
+        //TODO
+        return 0;
+    }
+
+    @Override
+    public int modificarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio {
+        //TODO
+        return 0;
     }
 }
