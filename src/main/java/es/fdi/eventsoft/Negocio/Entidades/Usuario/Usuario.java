@@ -2,11 +2,20 @@ package es.fdi.eventsoft.Negocio.Entidades.Usuario;
 
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 import static es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario.EstadosUsuario.ACTIVO;
 
-public class Usuario {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "USUARIO")
+public class Usuario implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USUARIO_ID ")
     private Long id;
     private String mail;
     private String password;
@@ -16,6 +25,8 @@ public class Usuario {
     private String telefono;
     private String codigoPostal;
     private EstadosUsuario estado;
+
+    @OneToMany(mappedBy = "emisor", cascade = CascadeType.ALL)
     private List<Mensaje> mensajes;
 
 
@@ -144,7 +155,7 @@ public class Usuario {
                 ", telefono='" + telefono + '\'' +
                 ", codigoPostal=" + codigoPostal +
                 ", estado=" + estado +
-                ", mensajes=" + mensajes +
+                //", mensajes=" + mensajes +
                 '}';
     }
 }

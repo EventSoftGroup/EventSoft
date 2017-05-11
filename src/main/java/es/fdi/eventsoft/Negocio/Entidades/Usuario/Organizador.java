@@ -9,17 +9,17 @@ public class Organizador extends Profesional {
     private List<Evento> eventos;
 
     public Organizador() {
-        super();
+        super(valoraciones);
         this.eventos = null;
     }
 
     public Organizador(String empresa, String nif, List<Evento> eventos) {
-        super(empresa, nif);
+        super(empresa, nif, valoraciones);
         this.eventos = eventos;
     }
 
     public Organizador(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String empresa, String nif, List<Evento> eventos) {
-        super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes, empresa, nif);
+        super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes, empresa, nif, valoraciones);
         this.eventos = eventos;
     }
 

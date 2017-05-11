@@ -50,7 +50,6 @@ public class Empleado implements Serializable {
 
     }
 
-
     public Empleado(Long id, String apellidos, String nombre, String email, Date fechaNacimiento, Integer age) {
         this.id = id;
         this.apellidos = apellidos;

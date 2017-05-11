@@ -196,9 +196,6 @@ public class UserController {
     }
 
 
-
-
-
     @RequestMapping("crearUsuario")
     public String crearUsuario(Model model) {
         //TODO

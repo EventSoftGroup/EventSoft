@@ -4,35 +4,43 @@ import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.List;
 
-public class Cliente extends Usuario {
+@Entity
+@Table(name = "CLIENTE")
+public class Cliente extends Usuario implements Serializable {
     private String nombre;
     private String apellidos;
+
+    @OneToMany(mappedBy = "mi_cliente")
     private List<Valoracion> valoraciones;
-    private List<Evento> eventos;
+    //private List<Evento> eventos;
 
     public Cliente() {
         super();
         this.nombre = "";
         this.apellidos = "";
         this.valoraciones = null;
-        this.eventos = null;
+        //this.eventos = null;
     }
 
-    public Cliente(String nombre, String apellidos, List<Valoracion> valoraciones, List<Evento> eventos) {
+    public Cliente(String nombre, String apellidos, List<Valoracion> valoraciones/*, List<Evento> eventos*/) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.valoraciones = valoraciones;
-        this.eventos = eventos;
+        //this.eventos = eventos;
     }
 
-    public Cliente(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String nombre, String apellidos, List<Valoracion> valoraciones, List<Evento> eventos) {
+    public Cliente(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String nombre, String apellidos, List<Valoracion> valoraciones/*, List<Evento> eventos*/) {
         super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes);
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.valoraciones = valoraciones;
-        this.eventos = eventos;
+        //this.eventos = eventos;
     }
 
     public String getNombre() {
@@ -59,13 +67,13 @@ public class Cliente extends Usuario {
         this.valoraciones = valoraciones;
     }
 
-    public List<Evento> getEventos() {
+    /*public List<Evento> getEventos() {
         return eventos;
     }
 
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -74,7 +82,7 @@ public class Cliente extends Usuario {
                 "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
                 ", valoraciones=" + valoraciones +
-                ", eventos=" + eventos +
+                //", eventos=" + eventos +
                 '}';
     }
 }

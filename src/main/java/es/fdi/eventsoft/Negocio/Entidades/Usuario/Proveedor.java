@@ -14,12 +14,12 @@ public class Proveedor extends Profesional {
     }
 
     public Proveedor(String empresa, String nif, List<Servicio> servicios) {
-        super(empresa, nif);
+        super(empresa, nif, valoraciones);
         this.servicios = servicios;
     }
 
     public Proveedor(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String empresa, String nif, List<Servicio> servicios) {
-        super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes, empresa, nif);
+        super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes, empresa, nif, valoraciones);
         this.servicios = servicios;
     }
 

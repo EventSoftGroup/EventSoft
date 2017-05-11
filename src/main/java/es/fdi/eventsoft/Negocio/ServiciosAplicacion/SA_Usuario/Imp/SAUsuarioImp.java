@@ -1,5 +1,7 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.Imp;
 
+import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Entidades.Empleado;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
@@ -29,7 +31,10 @@ public class SAUsuarioImp implements SAUsuario{
         if (usuarioNuevo instanceof Cliente) {
             mi_cliente = (Cliente) usuarioNuevo;
 
+            FachadaIntegracion<Cliente> fachadaIntegracion = FachadaIntegracion.newInstance(Cliente.class);
+            fachadaIntegracion.alta(mi_cliente);
 
+            System.out.println("Elemenento persistido correctamente");
 
             //Realizamos las comprobaciones de los datos.
 
