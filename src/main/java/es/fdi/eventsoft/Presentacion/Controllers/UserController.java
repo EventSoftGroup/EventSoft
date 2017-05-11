@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
 
+import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
@@ -11,6 +12,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Validadores.ValidadorCliente;
+import es.fdi.eventsoft.Negocio.__tests.TestEmpleados;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.GregorianCalendar;
 
 @Controller
 @RequestMapping("/usuarios/")
@@ -173,7 +176,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/cust/save.do", method = RequestMethod.POST)
-    public String saveCustomerAction( @Valid Empleado empleado, BindingResult bindingResult, Model model) {
+    public String saveCustomerAction(@Valid Empleado empleado, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             System.out.println("Empleado incorrecto!!");
@@ -183,9 +186,13 @@ public class UserController {
         }
 
         model.addAttribute("empleado", empleado);
+        FachadaIntegracion<Empleado> fachadaIntegracion = FachadaIntegracion.newInstance(Empleado.class);
+        fachadaIntegracion.alta(empleado);
 
+        //TestEmpleados.persistirEmpleado(new Empleado("desde Controller", "prueba3", new GregorianCalendar(1979,6,6).getTime()));
 
         return "custSaveSuccess";
+
     }
 
 

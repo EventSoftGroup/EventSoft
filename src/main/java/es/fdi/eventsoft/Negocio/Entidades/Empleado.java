@@ -21,8 +21,7 @@ public class Empleado implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "COD_EMPLEADO")
-    private Long codigo;
+    private Long id;
 
 
     @Column(name = "APELLIDOS")
@@ -52,8 +51,8 @@ public class Empleado implements Serializable {
     }
 
 
-    public Empleado(Long codigo, String apellidos, String nombre, String email, Date fechaNacimiento, Integer age) {
-        this.codigo = codigo;
+    public Empleado(Long id, String apellidos, String nombre, String email, Date fechaNacimiento, Integer age) {
+        this.id = id;
         this.apellidos = apellidos;
         this.nombre = nombre;
         this.email = email;
@@ -61,11 +60,11 @@ public class Empleado implements Serializable {
     }
 
     public Empleado(Long l) {
-        this.codigo = l;
+        this.id = l;
     }
 
-    public Empleado(Long codigo, String apellidos, String nombre, Date fechaNacimiento) {
-        this.codigo = codigo;
+    public Empleado(Long id, String apellidos, String nombre, Date fechaNacimiento) {
+        this.id = id;
         this.apellidos = apellidos;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
@@ -83,12 +82,12 @@ public class Empleado implements Serializable {
         return serialVersionUID;
     }
 
-    public Long getCodigo() {
-        return codigo;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodigo(Long codigo) {
-        this.codigo = codigo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getApellidos() {
@@ -134,7 +133,7 @@ public class Empleado implements Serializable {
     @Override
     public String toString() {
         return "Empleado{" +
-                "codigo=" + codigo +
+                "id=" + id +
                 ", apellidos='" + apellidos + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
