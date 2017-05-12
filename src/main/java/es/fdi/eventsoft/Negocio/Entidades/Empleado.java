@@ -1,5 +1,6 @@
 package es.fdi.eventsoft.Negocio.Entidades;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import es.fdi.eventsoft.Negocio.Entidades.Validadores.Telefono;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -35,7 +36,6 @@ public class Empleado implements Serializable {
 
     @Column(name = "EMAIL")
     @NotEmpty @Email
-
     private String email;
 
     @Column(name = "FECHA_NACIMIENTO")
@@ -69,11 +69,17 @@ public class Empleado implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Empleado(String apellidos, String nombre, Date fechaNacimiento) {
+    public Empleado(String apellidos, String nombre, Date fechaNacimiento, String email) {
         this.apellidos = apellidos;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
+        this.email = email;
     }
+
+    public Empleado(String nombre) {
+        this.nombre = nombre;
+    }
+
 
 
 

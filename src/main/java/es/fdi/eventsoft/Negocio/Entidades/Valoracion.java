@@ -1,6 +1,5 @@
 package es.fdi.eventsoft.Negocio.Entidades;
 
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.ClavesValoracionCliProfesional;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Profesional;
 
@@ -12,14 +11,16 @@ import java.util.Date;
 @Table(name = "VALORACION")
 public class Valoracion implements Serializable {
 
-    @EmbeddedId private ClavesValoracionCliProfesional id;
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cliente cliente;
 
     @ManyToOne
-    @MapsId("idCliente")
-    private Cliente mi_cliente;
-    @ManyToOne
-    @MapsId("idProfesional")
-    private Profesional mi_profesional;
+    private Profesional profesional;
+
+
 
     private Date fechaEnvio;
     private int valoracion;
@@ -27,37 +28,26 @@ public class Valoracion implements Serializable {
 
     public Valoracion() {}
 
-    public Valoracion(ClavesValoracionCliProfesional id, Cliente mi_cliente, Profesional mi_profesional, Date fechaEnvio, int valoracion, String texto) {
-        this.id = id;
-        this.mi_cliente = mi_cliente;
-        this.mi_profesional = mi_profesional;
-        this.fechaEnvio = fechaEnvio;
+    public Valoracion(Cliente cliente, Profesional profesional, int valoracion) {
+        this.cliente = cliente;
+        this.profesional = profesional;
         this.valoracion = valoracion;
-        this.texto = texto;
     }
 
-    public ClavesValoracionCliProfesional getId() {
-        return id;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setId(ClavesValoracionCliProfesional id) {
-        this.id = id;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public Cliente getMi_cliente() {
-        return mi_cliente;
+    public Profesional getProfesional() {
+        return profesional;
     }
 
-    public void setMi_cliente(Cliente mi_cliente) {
-        this.mi_cliente = mi_cliente;
-    }
-
-    public Profesional getMi_profesional() {
-        return mi_profesional;
-    }
-
-    public void setMi_profesional(Profesional mi_profesional) {
-        this.mi_profesional = mi_profesional;
+    public void setProfesional(Profesional profesional) {
+        this.profesional = profesional;
     }
 
     public Date getFechaEnvio() {
@@ -87,12 +77,12 @@ public class Valoracion implements Serializable {
     @Override
     public String toString() {
         return "Valoracion{" +
-                "id=" + id +
-                ", mi_cliente=" + mi_cliente +
-                ", mi_profesional=" + mi_profesional +
-                ", fechaEnvio=" + fechaEnvio +
+                ", ID=" + id +
+                ", clienteID=" + cliente.getId() +
+                ", profesionalID=" + profesional.getId() +
+
                 ", valoracion=" + valoracion +
-                ", texto='" + texto + '\'' +
+
                 '}';
     }
 }

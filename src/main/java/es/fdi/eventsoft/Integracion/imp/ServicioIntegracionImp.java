@@ -32,6 +32,7 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
+            System.err.println(e.getMessage());
             throw e;
         }
     }

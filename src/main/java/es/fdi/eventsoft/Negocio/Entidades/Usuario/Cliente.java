@@ -4,44 +4,51 @@ import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "CLIENTE")
 public class Cliente extends Usuario implements Serializable {
+
+
     private String nombre;
+
     private String apellidos;
 
-    @OneToMany(mappedBy = "mi_cliente")
-    private List<Valoracion> valoraciones;
-    //private List<Evento> eventos;
 
-    public Cliente() {
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    private List<Valoracion> valoraciones_hechas;
+
+
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
+    private List<Evento> eventos_Adscritos;
+
+    public Cliente() {}
+
+    public Cliente(String nombre, String apellido) {
         super();
-        this.nombre = "";
-        this.apellidos = "";
-        this.valoraciones = null;
-        //this.eventos = null;
+        this.nombre = nombre;
+        this.apellidos = apellido;
+        this.valoraciones_hechas = null;
     }
 
-    public Cliente(String nombre, String apellidos, List<Valoracion> valoraciones/*, List<Evento> eventos*/) {
+    public Cliente(String nombre, String apellidos, List<Valoracion> valoraciones_hechas/*, List<Evento> eventos*/) {
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.valoraciones = valoraciones;
+        this.valoraciones_hechas = valoraciones_hechas;
         //this.eventos = eventos;
     }
 
-    public Cliente(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String nombre, String apellidos, List<Valoracion> valoraciones/*, List<Evento> eventos*/) {
+    public Cliente(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String nombre, String apellidos, List<Valoracion> valoraciones_hechas/*, List<Evento> eventos*/) {
         super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes);
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.valoraciones = valoraciones;
+        this.valoraciones_hechas = valoraciones_hechas;
         //this.eventos = eventos;
     }
+
 
     public String getNombre() {
         return nombre;
@@ -59,30 +66,20 @@ public class Cliente extends Usuario implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public List<Valoracion> getValoraciones() {
-        return valoraciones;
+    public List<Valoracion> getValoraciones_hechas() {
+        return valoraciones_hechas;
     }
 
-    public void setValoraciones(List<Valoracion> valoraciones) {
-        this.valoraciones = valoraciones;
+    public void setValoraciones_hechas(List<Valoracion> valoraciones_hechas) {
+        this.valoraciones_hechas = valoraciones_hechas;
     }
-
-    /*public List<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
-    }*/
 
     @Override
     public String toString() {
-
-        return super.toString() + System.getProperty("line.separator") + "    Cliente{" +
+        return "Cliente{" +
                 "nombre='" + nombre + '\'' +
                 ", apellidos='" + apellidos + '\'' +
-                ", valoraciones=" + valoraciones +
-                //", eventos=" + eventos +
-                '}';
+                ", valoraciones_hechas=" + valoraciones_hechas +
+                "} " + super.toString();
     }
 }

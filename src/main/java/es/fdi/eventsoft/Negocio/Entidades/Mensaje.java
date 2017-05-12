@@ -16,9 +16,13 @@ public class Mensaje {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMISOR_ID")
     private Usuario emisor;
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "RECEPTOR_ID")
     private Usuario receptor;
+
+
     private Date fechaEnvio;
     private String asunto;
     private String mensaje;

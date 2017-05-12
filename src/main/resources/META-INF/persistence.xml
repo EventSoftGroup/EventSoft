@@ -8,6 +8,17 @@
 
         <class>es.fdi.eventsoft.Negocio.Entidades.Empleado</class>
 
+        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Profesional</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor</class>
+
+        <class>es.fdi.eventsoft.Negocio.Entidades.Mensaje</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.Valoracion</class>
+
+
+
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://qxp814.pino.es/qxp814" />

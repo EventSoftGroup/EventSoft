@@ -37,6 +37,7 @@ public class Usuario implements Serializable {
         BANEADO
     }
 
+
     public Usuario() {
         this.id = null;
         this.mail = "";
