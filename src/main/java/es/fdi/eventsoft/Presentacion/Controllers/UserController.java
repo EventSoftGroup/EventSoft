@@ -12,6 +12,9 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Validadores.ValidadorCliente;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
+import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -80,12 +83,6 @@ public class UserController {
         return "redirect:index";
     }*/
 
-
-    /*
-        USER CONTROLLER.
-     */
-
-
     @RequestMapping(value = "registrar_cliente", method = RequestMethod.POST)
     public String registrar_Cliente(@ModelAttribute("TCliente") Cliente Cliente, HttpSession session, Model model, BindingResult result) {
 
@@ -119,11 +116,6 @@ public class UserController {
         return "perfil-usuario";
     }
 
-    /*
-        USER CONTROLLER.
-     */
-
-
     @RequestMapping(value = "registrar_organizador", method = RequestMethod.POST)
     public String registrar_Organizador(@ModelAttribute("Organizador") Organizador Organizador, HttpSession session) {
 
@@ -140,11 +132,6 @@ public class UserController {
         return "nuevo-evento";
     }
 
-    /*
-        USER CONTROLLER.
-     */
-
-
     @RequestMapping(value = "registrar_proveedor", method = RequestMethod.POST)
     public String registrar_Proveedor(@ModelAttribute("Proveedor") Proveedor TProveedor, HttpSession session) {
 
@@ -160,11 +147,6 @@ public class UserController {
 
         return "proveedores";
     }
-
-
-
-
-    /**********************************************************************************************************************************/
 
     @RequestMapping(value = "/cust/save", method = RequestMethod.GET)
     public String saveCustomerPage(Model model) {
@@ -193,7 +175,6 @@ public class UserController {
 
     }
 
-
     @RequestMapping("crearUsuario")
     public String crearUsuario(Model model) {
         //TODO
@@ -210,24 +191,26 @@ public class UserController {
         return null;
     }
 
-
-    @RequestMapping("modificarUsuario")
-    public String modificarUsuario(Model model) {
-        //TODO
-
+    @RequestMapping(value = "ver", method = RequestMethod.GET)
+    public String ver(Model model) {
+        // TODO muestra los datos del usuario seleccionado;
 
         return null;
     }
 
+    @RequestMapping(value = "modificar", method = RequestMethod.PUT)
+    public String modificar(@ModelAttribute("Usuario") Usuario usuario, Model model) {
+        FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
+        fachadaIntegracion.modifica(usuario);
 
-    @RequestMapping("eliminarUsuario")
-    public String eliminarUsuario(Model model) {
-        //TODO
-
-
-        return null;
+        return "usuario-modificado";
     }
 
+    @RequestMapping(value = "eliminar", method = RequestMethod.DELETE)
+    public String eliminar(@ModelAttribute("Usuario") Usuario usuario, Model model) throws ExcepcionNegocio {
+        SAUsuario saUsuario = FactoriaSA.getInstance().crearSAUsuarios();
+        saUsuario.eliminarUsuario(usuario);
 
-
+        return "usuario-eliminado";
+    }
 }

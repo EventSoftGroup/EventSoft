@@ -12,9 +12,9 @@ public interface SAUsuario {
 
     public Usuario buscarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
 
-    public int eliminarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
+    public void eliminarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
 
-    public int modificarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
+    public void modificarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
 
 
 }

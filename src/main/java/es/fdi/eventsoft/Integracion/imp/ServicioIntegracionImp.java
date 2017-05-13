@@ -24,7 +24,6 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
     }
 
     public void begin(){
-
         em = emf.createEntityManager();
         em.getTransaction().begin();
     }
@@ -51,7 +50,6 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
             em.getTransaction().rollback();
         }
     }
-
 
     public void modifica(T t) {
         try {

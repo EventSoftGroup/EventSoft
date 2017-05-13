@@ -17,7 +17,8 @@ import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Valoraciones.SAValoracion
  */
 public class FactoriaSAImp extends FactoriaSA {
 
-    public SAUsuario crearSAUsuario(){
+    @Override
+    public SAUsuario crearSAUsuarios(){
         return new SAUsuarioImp();
     }
 

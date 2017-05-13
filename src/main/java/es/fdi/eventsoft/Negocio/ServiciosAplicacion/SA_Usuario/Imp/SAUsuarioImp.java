@@ -51,14 +51,14 @@ public class SAUsuarioImp implements SAUsuario{
     }
 
     @Override
-    public int eliminarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio {
-        //TODO
-        return 0;
+    public void eliminarUsuario(Usuario usuario) throws ExcepcionNegocio {
+        FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
+        fachadaIntegracion.baja(usuario.getId());
     }
 
     @Override
-    public int modificarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio {
-        //TODO
-        return 0;
+    public void modificarUsuario(Usuario usuario) throws ExcepcionNegocio {
+        FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
+        fachadaIntegracion.modifica(usuario);
     }
 }

@@ -13,23 +13,21 @@ public interface FachadaIntegracion<T> {
                 return new ServicioIntegracionImp(t);
         }
 
+        void alta(T t);
 
-        public abstract void alta(T t);
+        void baja(Long id);
 
-        public abstract void baja(Long id);
+        void modifica(T t);
 
-        public abstract void modifica(T t);
+        T consulta(Long id);
 
-        public abstract T consulta(Long id);
+        List<T> listado();
 
-        public abstract List<T> listado();
+        Long getRowCount();
 
-        public abstract Long getRowCount();
+        void begin();
 
-
-        public void begin();
-
-        public void commit();
+        void commit();
 
 }
 

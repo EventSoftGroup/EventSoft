@@ -17,7 +17,7 @@ public class ComandoCrearUsuario implements Comando {
         int ID_Usuario;
         Contexto contex = null;
 
-        SAUsuario SAUsuario = FactoriaSA.getInstance().crearSAUsuario();
+        SAUsuario SAUsuario = FactoriaSA.getInstance().crearSAUsuarios();
 
         try{
             ID_Usuario = SAUsuario.crearUsuario((Usuario)datos);

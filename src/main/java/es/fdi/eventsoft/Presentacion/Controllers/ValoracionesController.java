@@ -1,9 +1,13 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
 
+import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 /**
@@ -31,14 +35,12 @@ public class ValoracionesController {
         return null;
     }
 
+    @RequestMapping(value = "eliminar", method = RequestMethod.DELETE)
+    public String eliminar(@RequestAttribute("Valoracion") Valoracion valoracion) {
+        FachadaIntegracion<Valoracion> fachadaIntegracion = FachadaIntegracion.newInstance(Valoracion.class);
+        fachadaIntegracion.baja(valoracion.getId());
 
-    @RequestMapping("eliminarValoracion")
-    public String eliminarValoracion(Model model) {
-        //TODO
-
-
-
-        return null;
+        return "valoracion-eliminada";
     }
 
     @RequestMapping("buscarValoracionesByUser")
