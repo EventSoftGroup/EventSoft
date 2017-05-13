@@ -23,13 +23,20 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
         entityClass = t;
     }
 
-    public void alta(T t) {
-        em = emf.createEntityManager();
+    public void begin(){
 
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+    }
+
+    public void commit(){
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void alta(T t) {
         try {
-            em.getTransaction().begin();
             em.merge(t);
-            em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
             System.err.println(e.getMessage());
@@ -38,13 +45,8 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
     }
 
     public void baja(Long id) {
-        em = emf.createEntityManager();
-
         try {
-            em.getTransaction().begin();
-            T t = em.find(entityClass, id);
-            em.remove(t);
-            em.getTransaction().commit();
+            em.remove(em.find(entityClass, id));
         } catch (Exception e) {
             em.getTransaction().rollback();
         }
@@ -52,27 +54,19 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
 
 
     public void modifica(T t) {
-        em = emf.createEntityManager();
-
         try {
-            em.getTransaction().begin();
             em.merge(t);
-            em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
         }
     }
 
     public T consulta(Long id) {
-        em = emf.createEntityManager();
-        T t = em.find(entityClass, id);
-        em.close();
 
-        return t;
+        return em.find(entityClass, id);
     }
 
     public List<T> listado() {
-        em = emf.createEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(entityClass);
         //System.out.println("ServicioIntegracion: " + entityClass.toString());
@@ -80,26 +74,20 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
         CriteriaQuery<T> all = cq.select(root);
         TypedQuery<T> allQuery = em.createQuery(all);
         List<T> listado = allQuery.getResultList();
-        em.close();
 
         return listado;
     }
 
     public Object ejecutarQuery(String query){
-        em = emf.createEntityManager();
-        Object result = em.createQuery(query).getResultList();
-        em.close();
-        return result;
+
+        return em.createQuery(query).getResultList();
     }
 
     public Long getRowCount() {
-        em = emf.createEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
         cq.select(cb.count(cq.from(entityClass)));
-        Long count = em.createQuery(cq).getSingleResult();
-        em.close();
 
-        return count;
+        return em.createQuery(cq).getSingleResult();
     }
 }

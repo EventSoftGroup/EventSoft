@@ -2,6 +2,7 @@ package es.fdi.eventsoft.Negocio.Entidades.Usuario;
 
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,54 +10,45 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "PROFESIONAL")
+@Table(name = "Profesionales")
 public class Profesional extends Usuario implements Serializable {
 
-
+    @NotBlank
+    @Column(nullable = false, unique = true)
     private String empresa;
 
+    @NotBlank
+    @Column(nullable = false, unique = true)
+    private String CIF;
 
-    private String cif;
-
-
-
-    @OneToMany(mappedBy = "profesional", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "profesional", fetch = FetchType.LAZY)
     private List<Valoracion> valoraciones_recibidas;
 
 
+    public Profesional() {}
 
-
-    public Profesional() {
-        super();
-        //this.valoraciones_recibidas = null;
-        this.empresa = "";
-        this.cif = "";
-    }
-
-    public Profesional(List<Valoracion> valoraciones_recibidas) {
-        super();
-        this.empresa = "";
-        this.cif = "";
-        this.valoraciones_recibidas = valoraciones_recibidas;
-    }
-
-    public Profesional(String empresa, String cif) {
-        super();
+    public Profesional(String empresa, String CIF) {
         this.empresa = empresa;
-        this.cif = cif;
+        this.CIF = CIF;
     }
-
+    
     public Profesional(String empresa, String cif, List<Valoracion> valoraciones_recibidas) {
-        super();
         this.empresa = empresa;
-        this.cif = cif;
+        this.CIF = cif;
         this.valoraciones_recibidas = valoraciones_recibidas;
     }
 
-    public Profesional(Long id, String mail, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes, String empresa, String cif, List<Valoracion> valoraciones_recibidas) {
-        super(id, mail, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes);
+    public Profesional(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, String empresa, String cif, List<Valoracion> valoraciones_recibidas) {
+        super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado);
         this.empresa = empresa;
-        this.cif = cif;
+        this.CIF = cif;
+        this.valoraciones_recibidas = valoraciones_recibidas;
+    }
+
+    public Profesional(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos, String empresa, String cif, List<Valoracion> valoraciones_recibidas) {
+        super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes_enviados, mensajes_recibidos);
+        this.empresa = empresa;
+        this.CIF = cif;
         this.valoraciones_recibidas = valoraciones_recibidas;
     }
 
@@ -68,12 +60,12 @@ public class Profesional extends Usuario implements Serializable {
         this.empresa = empresa;
     }
 
-    public String getCif() {
-        return cif;
+    public String getCIF() {
+        return CIF;
     }
 
-    public void setCif(String cif) {
-        this.cif = cif;
+    public void setCIF(String CIF) {
+        this.CIF = CIF;
     }
 
     public List<Valoracion> getValoraciones_recibidas() {
@@ -82,14 +74,5 @@ public class Profesional extends Usuario implements Serializable {
 
     public void setValoraciones_recibidas(List<Valoracion> valoraciones_recibidas) {
         this.valoraciones_recibidas = valoraciones_recibidas;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + "Profesional{" +
-                "empresa='" + empresa + '\'' +
-                ", cif='" + cif + '\'' +
-                ", valoraciones_recibidas=" + valoraciones_recibidas +
-                '}';
     }
 }

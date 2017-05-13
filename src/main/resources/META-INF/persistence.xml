@@ -6,7 +6,6 @@
 
     <persistence-unit name="aplicacion">
 
-        <class>es.fdi.eventsoft.Negocio.Entidades.Empleado</class>
 
         <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario</class>
         <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente</class>

@@ -2,36 +2,66 @@ package es.fdi.eventsoft.Negocio.Entidades;
 
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Profesional;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "VALORACION")
+@Table(name = "Valoraciones")
 public class Valoracion implements Serializable {
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @JoinColumn(nullable = false)
     private Cliente cliente;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @JoinColumn(nullable = false)
     private Profesional profesional;
 
-
-
+    @Column(name = "Fecha_Envio", nullable = false)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @NotBlank @Past
     private Date fechaEnvio;
+
+    @NotBlank @Digits(integer=1, fraction=0)
+    @Size(min=0, max=5)
+    @Column(nullable = false)
     private int valoracion;
+
+    @NotBlank
     private String texto;
+
+    @Version long version;
 
     public Valoracion() {}
 
-    public Valoracion(Cliente cliente, Profesional profesional, int valoracion) {
+
+    public Valoracion(Cliente cliente, Profesional profesional, Date fechaEnvio, int valoracion, String texto) {
         this.cliente = cliente;
         this.profesional = profesional;
+        this.fechaEnvio = fechaEnvio;
         this.valoracion = valoracion;
+        this.texto = texto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Cliente getCliente() {
@@ -72,17 +102,5 @@ public class Valoracion implements Serializable {
 
     public void setTexto(String texto) {
         this.texto = texto;
-    }
-
-    @Override
-    public String toString() {
-        return "Valoracion{" +
-                ", ID=" + id +
-                ", clienteID=" + cliente.getId() +
-                ", profesionalID=" + profesional.getId() +
-
-                ", valoracion=" + valoracion +
-
-                '}';
     }
 }

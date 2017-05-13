@@ -5,9 +5,6 @@ package es.fdi.eventsoft.Negocio.Entidades;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.MapsId;
-import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -24,10 +21,12 @@ public class EventoServicio implements Serializable {
 	@ManyToOne
 	@MapsId("idServicio")
 	private Servicio servicio;
+
+
+	@Version long version;
 	
 	
 	public EventoServicio() {}
-
 
 
 	public EventoServicio(Evento evento, Servicio servicio) {

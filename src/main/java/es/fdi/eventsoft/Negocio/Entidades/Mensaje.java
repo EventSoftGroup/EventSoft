@@ -1,48 +1,58 @@
 package es.fdi.eventsoft.Negocio.Entidades;
 
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Date;
 
 @Entity
-@Table(name = "MENSAJES")
+@Table(name = "Mensajes")
 public class Mensaje {
 
-    @Id
-    @Column(name = "MENSAJE_ID")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EMISOR_ID")
+    @JoinColumn(name = "ID_Emisor", nullable = false)
+    @NotNull
     private Usuario emisor;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RECEPTOR_ID")
+    @JoinColumn(name = "ID_Receptor", nullable = false)
+    @NotNull
     private Usuario receptor;
 
 
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @NotBlank @Past
+    @Column(nullable = false)
     private Date fechaEnvio;
+
+    @NotBlank
+    @Column(nullable = false)
     private String asunto;
+
+    @NotBlank
+    @Column(nullable = false)
     private String mensaje;
+
+    @Column(nullable = false)
     private EstadosMensaje estado;
 
+    @Version long version;
 
-    public enum EstadosMensaje {
-        LEIDO,
-        NO_LEIDO
-    }
 
-    public Mensaje() {
-        this.id = null;
-        this.emisor = null;
-        this.receptor = null;
-        this.fechaEnvio = null;
-        this.asunto = "";
-        this.mensaje = "";
-        this.estado = EstadosMensaje.NO_LEIDO;
-    }
+    public enum EstadosMensaje { LEIDO, NO_LEIDO }
+
+
+
+
+    public Mensaje() {}
 
     public Mensaje(Long id, Usuario emisor, Usuario receptor, Date fechaEnvio, String asunto, String mensaje, EstadosMensaje estado) {
         this.id = id;
@@ -108,18 +118,5 @@ public class Mensaje {
 
     public void setEstado(EstadosMensaje estado) {
         this.estado = estado;
-    }
-
-    @Override
-    public String toString() {
-        return "Mensaje{" +
-                "id=" + id +
-                ", emisor=" + emisor +
-                ", receptor=" + receptor +
-                ", fechaEnvio=" + fechaEnvio +
-                ", asunto='" + asunto + '\'' +
-                ", mensaje='" + mensaje + '\'' +
-                ", estado=" + estado +
-                '}';
     }
 }

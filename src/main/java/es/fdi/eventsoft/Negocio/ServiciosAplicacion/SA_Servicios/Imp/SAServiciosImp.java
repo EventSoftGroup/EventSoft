@@ -4,9 +4,7 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.Imp;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
 import java.util.Date;

@@ -12,7 +12,6 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Validadores.ValidadorCliente;
-import es.fdi.eventsoft.Negocio.__tests.TestEmpleados;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.GregorianCalendar;
 
 @Controller
 @RequestMapping("/usuarios/")

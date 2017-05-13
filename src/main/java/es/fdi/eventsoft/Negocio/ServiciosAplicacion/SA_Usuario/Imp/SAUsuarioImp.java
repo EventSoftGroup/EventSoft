@@ -1,7 +1,6 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.Imp;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
-import es.fdi.eventsoft.Negocio.Entidades.Empleado;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;

@@ -1,12 +1,7 @@
 package es.fdi.eventsoft.Integracion;
 
 import es.fdi.eventsoft.Integracion.imp.ServicioIntegracionImp;
-import es.fdi.eventsoft.Negocio.Entidades.Empleado;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 
 /**
@@ -30,6 +25,11 @@ public interface FachadaIntegracion<T> {
         public abstract List<T> listado();
 
         public abstract Long getRowCount();
+
+
+        public void begin();
+
+        public void commit();
 
 }
 

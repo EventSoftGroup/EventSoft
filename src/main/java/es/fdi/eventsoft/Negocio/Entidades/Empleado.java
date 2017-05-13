@@ -1,13 +1,15 @@
 package es.fdi.eventsoft.Negocio.Entidades;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import es.fdi.eventsoft.Negocio.Entidades.Validadores.Telefono;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,8 +17,7 @@ import java.util.Date;
  * Created by Tomas on 24/04/2017.
  */
 
-@Entity
-@Table(name = "EMPLEADO")
+
 public class Empleado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,22 +26,19 @@ public class Empleado implements Serializable {
     private Long id;
 
 
-    @Column(name = "APELLIDOS")
     @Size(min=2, max=30)
     private String apellidos;
 
-    @Column(name = "NOMBRE")
     @Size(min=2, max=30)
     @NotEmpty(message = "Escribe algo capullo!")
     private String nombre;
 
-    @Column(name = "EMAIL")
-    @NotEmpty @Email
+    @NotBlank
+    @Email
     private String email;
 
-    @Column(name = "FECHA_NACIMIENTO")
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    @NotNull @Past
+    @NotBlank @Past
     private Date fechaNacimiento;
 
     @Telefono
