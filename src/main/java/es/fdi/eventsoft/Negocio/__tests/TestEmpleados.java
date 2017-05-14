@@ -2,10 +2,14 @@ package es.fdi.eventsoft.Negocio.__tests;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Entidades.Empleado;
+import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -36,6 +40,30 @@ public class TestEmpleados {
 
 
         FachadaIntegracion fiCliente = FachadaIntegracion.newInstance(Cliente.class);
+        Cliente cli = new Cliente("email@ucm.es", "1234", "dir", "local"," provicnio",
+                "123456789", 28200, Usuario.EstadosUsuario.ACTIVO, "nombre", "apellidos ", null, null);
+
+        fiCliente.begin();
+
+        String otroemail = "juanito@ucm.es";
+        //Long id = (Long) ((ArrayList) fiCliente.ejecutarQuery("select id from Usuario where email='" + cli.getEmail() + "'")).get(0);
+        int id = ((ArrayList) fiCliente.ejecutarQuery("from Usuario where email='" + otroemail + "'")).size();
+
+        System.out.println("ID: " + id);
+
+
+        fiCliente.alta(cli);
+        fiCliente.commit();
+
+        System.out.println();
+
+        fiCliente.begin();
+        fiCliente.alta(new Cliente("email@ucm.es", "sdtgh", "sdgh", "sdfh"," sdh",
+                "sdghf", 28200, Usuario.EstadosUsuario.ACTIVO, "sgh", "dfrgh ", null, null));
+        fiCliente.commit();
+
+
+        /*
         FachadaIntegracion fiOrgan = FachadaIntegracion.newInstance(Organizador.class);
         //FachadaIntegracion fiOrgan = FachadaIntegracion.newInstance(Organizador.class);
         FachadaIntegracion fiVal = FachadaIntegracion.newInstance(Valoracion.class);
@@ -73,6 +101,7 @@ public class TestEmpleados {
         //fiOrgan.alta(organ1);
 
         fiVal.commit();
+        */
 //
 //
 //        fiCliente.begin();

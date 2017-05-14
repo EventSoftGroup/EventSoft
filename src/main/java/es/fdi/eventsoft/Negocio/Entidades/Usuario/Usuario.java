@@ -47,8 +47,8 @@ public class Usuario implements Serializable {
     @NotBlank @Digits(integer=5, fraction=0)
     //@Pattern(regexp = "\\d{5}")
     @Pattern(regexp = "0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}")
-    @Column(nullable = false, unique = true)
-    private String codigoPostal;
+    @Column(nullable = false)
+    private int codigoPostal;
 
     @Column(nullable = false)
     private EstadosUsuario estado;
@@ -68,7 +68,7 @@ public class Usuario implements Serializable {
 
     public Usuario() { }
 
-    public Usuario(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado) {
+    public Usuario(String email, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado) {
         this.email = email;
         this.password = password;
         this.direccion = direccion;
@@ -79,7 +79,7 @@ public class Usuario implements Serializable {
         this.estado = estado;
     }
 
-    public Usuario(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos) {
+    public Usuario(String email, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos) {
         this.email = email;
         this.password = password;
         this.direccion = direccion;
@@ -149,11 +149,11 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getCodigoPostal() {
+    public int getCodigoPostal() {
         return codigoPostal;
     }
 
-    public void setCodigoPostal(String codigoPostal) {
+    public void setCodigoPostal(int codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
 

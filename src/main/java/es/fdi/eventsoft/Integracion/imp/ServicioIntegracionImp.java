@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
@@ -23,51 +24,63 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
         entityClass = t;
     }
 
-    public void begin(){
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
-    }
 
-    public void commit(){
-        em.getTransaction().commit();
-        em.close();
-    }
-
-    public void alta(T t) {
+    /**
+     * @see FachadaIntegracion<T>{@link #alta(Object)}
+     */
+    public <T> T  alta(T t) {
         try {
-            em.merge(t);
+            return em.merge(t);
         } catch (Exception e) {
             em.getTransaction().rollback();
             System.err.println(e.getMessage());
-            throw e;
+
+            return null;
         }
     }
 
-    public void baja(Long id) {
+
+    /**
+     * @see FachadaIntegracion<T>{@link #baja(Long)}
+     */
+    public boolean baja(Long id) {
         try {
             em.remove(em.find(entityClass, id));
+            return true;
         } catch (Exception e) {
             em.getTransaction().rollback();
+            return false;
         }
     }
 
-    public void modifica(T t) {
-        try {
-            em.merge(t);
-        } catch (Exception e) {
-            em.getTransaction().rollback();
+    /**
+     * @see FachadaIntegracion<T>{@link #modifica(Object)}
+     */
+    public <T> T modifica(T t) {
+            try {
+                return em.merge(t);
+            } catch (Exception e) {
+                em.getTransaction().rollback();
+                return null;
+            }
         }
-    }
 
+
+    /**
+     * @see FachadaIntegracion<T>{@link #consulta(Long)}
+     */
     public T consulta(Long id) {
-
         return em.find(entityClass, id);
     }
 
+
+
+    /**
+     * @see FachadaIntegracion<T>{@link #listado()}
+     */
     public List<T> listado() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(entityClass);
-        //System.out.println("ServicioIntegracion: " + entityClass.toString());
         Root<T> root = cq.from(entityClass);
         CriteriaQuery<T> all = cq.select(root);
         TypedQuery<T> allQuery = em.createQuery(all);
@@ -76,16 +89,42 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
         return listado;
     }
 
-    public Object ejecutarQuery(String query){
-
+    /**
+     * @see FachadaIntegracion<T>{@link #ejecutarQuery(String)}
+     */
+    public List ejecutarQuery(String query){
         return em.createQuery(query).getResultList();
     }
 
+
+
+    /**
+     * @see FachadaIntegracion<T>{@link #getRowCount()}
+     */
     public Long getRowCount() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Long> cq = cb.createQuery(Long.class);
         cq.select(cb.count(cq.from(entityClass)));
-
         return em.createQuery(cq).getSingleResult();
     }
+
+
+    /**
+     * @see FachadaIntegracion<T>{@link #begin()}
+     */
+    public void begin(){
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+    }
+
+
+    /**
+     * @see FachadaIntegracion<T>{@link #commit()}
+     */
+    public void commit(){
+        em.getTransaction().commit();
+        em.close();
+    }
+
 }
+

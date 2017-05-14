@@ -34,12 +34,12 @@ public class Organizador extends Profesional {
         this.eventos = eventos;
     }
 
-    public Organizador(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, String empresa, String cif, List<Valoracion> valoraciones_recibidas, List<Evento> eventos) {
+    public Organizador(String email, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, String empresa, String cif, List<Valoracion> valoraciones_recibidas, List<Evento> eventos) {
         super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado, empresa, cif, valoraciones_recibidas);
         this.eventos = eventos;
     }
 
-    public Organizador(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos, String empresa, String cif, List<Valoracion> valoraciones_recibidas, List<Evento> eventos) {
+    public Organizador(String email, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos, String empresa, String cif, List<Valoracion> valoraciones_recibidas, List<Evento> eventos) {
         super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes_enviados, mensajes_recibidos, empresa, cif, valoraciones_recibidas);
         this.eventos = eventos;
     }
