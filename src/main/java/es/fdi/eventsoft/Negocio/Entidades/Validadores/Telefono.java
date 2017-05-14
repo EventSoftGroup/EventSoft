@@ -10,7 +10,6 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = TelefonoValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-@NotBlank
 public @interface Telefono {
  
      

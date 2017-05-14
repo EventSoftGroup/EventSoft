@@ -14,7 +14,7 @@ import java.util.List;
 public class Profesional extends Usuario implements Serializable {
 
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String empresa;
 
     @NotBlank
@@ -38,14 +38,14 @@ public class Profesional extends Usuario implements Serializable {
         this.valoraciones_recibidas = valoraciones_recibidas;
     }
 
-    public Profesional(String email, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, String empresa, String cif, List<Valoracion> valoraciones_recibidas) {
+    public Profesional(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, String empresa, String cif, List<Valoracion> valoraciones_recibidas) {
         super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado);
         this.empresa = empresa;
         this.CIF = cif;
         this.valoraciones_recibidas = valoraciones_recibidas;
     }
 
-    public Profesional(String email, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos, String empresa, String cif, List<Valoracion> valoraciones_recibidas) {
+    public Profesional(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos, String empresa, String cif, List<Valoracion> valoraciones_recibidas) {
         super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes_enviados, mensajes_recibidos);
         this.empresa = empresa;
         this.CIF = cif;

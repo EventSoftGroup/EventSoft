@@ -14,25 +14,11 @@ import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 public class ComandoCrearUsuario implements Comando {
 
     public Contexto execute(Object datos){
-        int ID_Usuario;
-        Contexto contex = null;
 
-        SAUsuario SAUsuario = FactoriaSA.getInstance().crearSAUsuarios();
-
-        try{
-            ID_Usuario = SAUsuario.crearUsuario((Usuario)datos);
-
-            if(ID_Usuario == -1){
-                contex = new Contexto(EventosNegocio.ERROR_CREAR_USUARIO, null);
-            } else {
-                contex = new Contexto(EventosNegocio.USUARIO_CREADO, ID_Usuario);
+            if(FactoriaSA.getInstance().crearSAUsuarios().crearUsuario((Usuario)datos)){
+                return new Contexto(EventosNegocio.USUARIO_CREADO, null);
+            }else{
+                return new Contexto(EventosNegocio.ERROR_CREAR_USUARIO, null);
             }
-        }
-        catch(ExcepcionNegocio e) {
-            contex = new Contexto(EventosNegocio.ERROR_CREAR_USUARIO, null);
-        }
-
-        return contex;
     }
-
 }

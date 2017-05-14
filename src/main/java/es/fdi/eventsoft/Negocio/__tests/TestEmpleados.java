@@ -7,6 +7,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
@@ -39,28 +40,20 @@ public class TestEmpleados {
 
 
 
-        FachadaIntegracion fiCliente = FachadaIntegracion.newInstance(Cliente.class);
-        Cliente cli = new Cliente("email@ucm.es", "1234", "dir", "local"," provicnio",
-                "123456789", 28200, Usuario.EstadosUsuario.ACTIVO, "nombre", "apellidos ", null, null);
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Cliente.class);;
+        Usuario cli = new Cliente("otroemailmas@ucm.es", "1234", "dir", "local"," provicnio",
+                "123456789", "28200", Usuario.EstadosUsuario.ACTIVO, "nombre", "apellidos ", null, null);
 
-        fiCliente.begin();
-
-        String otroemail = "juanito@ucm.es";
-        //Long id = (Long) ((ArrayList) fiCliente.ejecutarQuery("select id from Usuario where email='" + cli.getEmail() + "'")).get(0);
-        int id = ((ArrayList) fiCliente.ejecutarQuery("from Usuario where email='" + otroemail + "'")).size();
-
-        System.out.println("ID: " + id);
+        FactoriaSA.getInstance().crearSAUsuarios().crearUsuario(cli);
 
 
-        fiCliente.alta(cli);
-        fiCliente.commit();
 
         System.out.println();
 
-        fiCliente.begin();
-        fiCliente.alta(new Cliente("email@ucm.es", "sdtgh", "sdgh", "sdfh"," sdh",
-                "sdghf", 28200, Usuario.EstadosUsuario.ACTIVO, "sgh", "dfrgh ", null, null));
-        fiCliente.commit();
+        integra.begin();
+        integra.alta(new Cliente("email@ucm.es", "sdtgh", "sdgh", "sdfh"," sdh",
+                "sdghf", "28200", Usuario.EstadosUsuario.ACTIVO, "sgh", "dfrgh ", null, null));
+        integra.commit();
 
 
         /*

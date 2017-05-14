@@ -8,7 +8,7 @@ import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
  */
 public interface SAUsuario {
 
-    public int crearUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
+    boolean crearUsuario(Usuario usuarioNuevo);
 
     public Usuario buscarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
 

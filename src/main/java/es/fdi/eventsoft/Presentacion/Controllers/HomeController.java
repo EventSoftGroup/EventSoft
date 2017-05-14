@@ -65,11 +65,7 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("register")
-    public String register(Model model) {
-        model.addAttribute("title", "EventSoft");
-        return "register";
-    }
+
 
     @RequestMapping("sign-out")
     public String signOut(HttpSession session, SessionStatus status, Model model) {
@@ -78,5 +74,10 @@ public class HomeController {
         return "redirect:login";
     }
 
+
+    @RequestMapping("500")
+    public String getErrorr500(HttpSession session, SessionStatus status, Model model) {
+        return "error-500";
+    }
 }
 

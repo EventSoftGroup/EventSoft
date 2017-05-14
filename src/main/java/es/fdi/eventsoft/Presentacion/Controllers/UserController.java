@@ -1,12 +1,14 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Empleado;
+import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
@@ -15,6 +17,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Validadores.ValidadorCliente;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
+import org.hibernate.annotations.SourceType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,13 +25,101 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/usuarios/")
 public class UserController {
+
+    @RequestMapping("register")
+    public String register(Model model) {
+        model.addAttribute("title", "EventSoft");
+
+        return "registrarTipoUsuario";
+    }
+
+    @RequestMapping("tipoUsuario")
+    public String registerDatosCLiente(@RequestParam String seleccion, Model model) {
+
+        model.addAttribute("tipoUsuario", seleccion);
+        switch (seleccion){
+            case "cliente": model.addAttribute("cliente", new Cliente());
+            case "organizador": model.addAttribute("organizador", new Organizador());
+            case "proveedor": model.addAttribute("proveedor", new Proveedor());
+        }
+        return "register";
+    }
+
+    @RequestMapping(value = "registrar_cliente", method = RequestMethod.POST)
+    public String registrar_Cliente(@Valid Cliente cliente, BindingResult bindingResult, Model model, HttpSession session) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("tipoUsuario", "cliente");
+            return "register";
+        }
+        Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(cliente);
+
+        if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
+            model.addAttribute("cliente", cliente);
+            session.setAttribute("rol", "Cliente");
+            model.addAttribute("pagina", "perfil-usuario");
+            return "perfil-usuario";
+        }else {
+            model.addAttribute("pagina", "error-500");
+            return "error-500";
+        }
+
+    }
+
+    @RequestMapping(value = "registrar_organizador", method = RequestMethod.POST)
+    public String registrar_Organizador(@Valid Organizador organizador, BindingResult bindingResult, Model model, HttpSession session) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("tipoUsuario", "organizador");
+            return "register";
+        }
+
+        Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(organizador);
+
+        if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
+            model.addAttribute("organizador", organizador);
+            session.setAttribute("rol", "Organizador");
+            model.addAttribute("pagina", "nuevo-evento");
+            return "redirect:/eventos/nuevo";
+        }else {
+            model.addAttribute("pagina", "error-500");
+            return "error-500";
+        }
+
+    }
+
+
+
+    @RequestMapping(value = "registrar_proveedor", method = RequestMethod.POST)
+    public String registrar_Proveedor(@Valid Proveedor proveedor, BindingResult bindingResult, Model model, HttpSession session) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("tipoUsuario", "proveedor");
+            return "register";
+        }
+
+        Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(proveedor);
+
+        if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
+            model.addAttribute("proveedor", proveedor);
+            session.setAttribute("rol", "Proveedor");
+            model.addAttribute("pagina", "proveedores");
+            return "redirect:/eventos/proveedores";
+        }else {
+            model.addAttribute("pagina", "error-500");
+            return "error-500";
+        }
+    }
+
 
     /* =================================
            AQUÍ LOS GETS DE USUARIOS
@@ -83,70 +174,6 @@ public class UserController {
         return "redirect:index";
     }*/
 
-    @RequestMapping(value = "registrar_cliente", method = RequestMethod.POST)
-    public String registrar_Cliente(@ModelAttribute("TCliente") Cliente Cliente, HttpSession session, Model model, BindingResult result) {
-
-
-        System.out.println("Valor de nombre: " + Cliente.getNombre());
-        ValidadorCliente validadorCliente = new ValidadorCliente();
-        validadorCliente.validate(Cliente, result);
-        if (result.hasErrors()) {
-            System.out.println("Hay errores");
-
-
-        } else {
-            System.out.println("No Hay errores");
-        }
-
-        System.out.println("");
-        System.out.println("--------------- Cliente -----------------------");
-        System.out.println("-- " + Cliente.toString());
-        System.out.println("-------------------------------------------");
-        System.out.println("");
-
-        Comando comando = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO);
-        Contexto contexto = comando.execute(Cliente);
-        System.out.println("Datos recibidos: " + contexto.getDatos());
-
-
-
-        session.setAttribute("rol", "Cliente");
-        model.addAttribute("pagina", "perfil-usuario");
-
-        return "perfil-usuario";
-    }
-
-    @RequestMapping(value = "registrar_organizador", method = RequestMethod.POST)
-    public String registrar_Organizador(@ModelAttribute("Organizador") Organizador Organizador, HttpSession session) {
-
-        System.out.println("");
-        System.out.println("----------------- Organizador ---------------------");
-        System.out.println("-- " + Organizador.toString());
-        System.out.println("-------------------------------------------");
-        System.out.println("");
-
-        //Creo una nueva variable Usuario que utilizaré para guardarlo en sesión.
-        Usuario Usuario = null;
-
-
-        return "nuevo-evento";
-    }
-
-    @RequestMapping(value = "registrar_proveedor", method = RequestMethod.POST)
-    public String registrar_Proveedor(@ModelAttribute("Proveedor") Proveedor TProveedor, HttpSession session) {
-
-        System.out.println("");
-        System.out.println("-------------------- Proveedor -----------------------");
-        System.out.println("-- " + TProveedor.toString());
-        System.out.println("-------------------------------------------");
-        System.out.println("");
-
-        //Creo una nueva variable Usuario que utilizaré para guardarlo en sesión.
-        Usuario Usuario = null;
-
-
-        return "proveedores";
-    }
 
     @RequestMapping(value = "/cust/save", method = RequestMethod.GET)
     public String saveCustomerPage(Model model) {
@@ -175,13 +202,6 @@ public class UserController {
 
     }
 
-    @RequestMapping("crearUsuario")
-    public String crearUsuario(Model model) {
-        //TODO
-
-
-        return null;
-    }
 
     @RequestMapping("buscarUsuario")
     public String buscarUsuario(Model model) {

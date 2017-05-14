@@ -39,7 +39,7 @@ public class Cliente extends Usuario implements Serializable {
         this.eventos_Adscritos = eventos_Adscritos;
     }
 
-    public Cliente(String email, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, String nombre, String apellidos, List<Valoracion> valoraciones_hechas, List<Evento> eventos_Adscritos) {
+    public Cliente(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, String nombre, String apellidos, List<Valoracion> valoraciones_hechas, List<Evento> eventos_Adscritos) {
         super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado);
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -47,7 +47,7 @@ public class Cliente extends Usuario implements Serializable {
         this.eventos_Adscritos = eventos_Adscritos;
     }
 
-    public Cliente(String email, String password, String direccion, String localidad, String provincia, String telefono, int codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos, String nombre, String apellidos, List<Valoracion> valoraciones_hechas, List<Evento> eventos_Adscritos) {
+    public Cliente(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado, List<Mensaje> mensajes_enviados, List<Mensaje> mensajes_recibidos, String nombre, String apellidos, List<Valoracion> valoraciones_hechas, List<Evento> eventos_Adscritos) {
         super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes_enviados, mensajes_recibidos);
         this.nombre = nombre;
         this.apellidos = apellidos;

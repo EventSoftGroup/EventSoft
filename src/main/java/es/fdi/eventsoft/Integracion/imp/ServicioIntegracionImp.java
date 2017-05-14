@@ -122,7 +122,9 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
      * @see FachadaIntegracion<T>{@link #commit()}
      */
     public void commit(){
-        em.getTransaction().commit();
+        if(em.getTransaction().isActive()){
+            em.getTransaction().commit();
+        }
         em.close();
     }
 
