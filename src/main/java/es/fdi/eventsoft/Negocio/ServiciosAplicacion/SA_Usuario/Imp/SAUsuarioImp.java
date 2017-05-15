@@ -30,22 +30,22 @@ public class SAUsuarioImp implements SAUsuario{
             integra = FachadaIntegracion.newInstance(Organizador.class);
         }
 
-    try {
-        integra.begin();
-        //si no existe ya el correo...
-        if (!(integra.ejecutarQuery("from Usuario where email='" + usuarioNuevo.getEmail() + "'").size() > 0)) {
-            usuarioNuevo.setEstado(Usuario.EstadosUsuario.ACTIVO);
-            result = integra.alta(usuarioNuevo);
-        }else{
-            return EventosNegocio.EMAIL_YA_EXISTENTE;
+        try {
+            integra.begin();
+            //si no existe ya el correo...
+            if (!(integra.ejecutarQuery("from Usuario where email='" + usuarioNuevo.getEmail() + "'").size() > 0)) {
+                usuarioNuevo.setEstado(Usuario.EstadosUsuario.ACTIVO);
+                result = integra.alta(usuarioNuevo);
+            }else{
+                return EventosNegocio.EMAIL_YA_EXISTENTE;
+            }
+
+            integra.commit();
+
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
-
-        integra.commit();
-
-    }catch (Exception e){
-        System.err.println(e.getMessage());
-        e.printStackTrace();
-    }
 
         return (result!=null) ? USUARIO_CREADO : ERROR_CREAR_USUARIO;
     }
@@ -62,9 +62,38 @@ public class SAUsuarioImp implements SAUsuario{
     }
 
     @Override
-    public void eliminarUsuario(Usuario usuario) throws ExcepcionNegocio {
-        FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
-        fachadaIntegracion.baja(usuario.getId());
+    public boolean eliminarUsuario(Usuario usuarioEliminar) {
+
+        FachadaIntegracion integra = null;
+        boolean result = false;
+
+        if (usuarioEliminar instanceof Cliente) {
+            integra = FachadaIntegracion.newInstance(Cliente.class);
+        } else if (usuarioEliminar instanceof Proveedor) {
+            integra = FachadaIntegracion.newInstance(Proveedor.class);
+
+        } else if (usuarioEliminar instanceof Organizador) {
+            integra = FachadaIntegracion.newInstance(Organizador.class);
+        }
+
+        try {
+            integra.begin();
+            //Se elimina solo si existe el correo
+            System.out.println(integra.ejecutarQuery("from Usuario where email='" + usuarioEliminar.getEmail() + "'"));
+            /*if ((integra.ejecutarQuery("from Usuario where email='" + usuarioEliminar.getEmail() + "'").size() > 0)) {
+                integra.ejecutarQuery("from Usuario where email");
+                System.out.println("voy a eliminar");
+                result = integra.baja(1L);
+            }*/
+
+            integra.commit();
+
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println("Devuelvo el resultado: " + result);
+        return (result);
     }
 
     @Override

@@ -106,7 +106,9 @@
                                 </button>
                                 <button type="button" class="btn btn-warning" data-widget="collapse"> Modificar datos
                                 </button>
-                                <button type="button" class="btn btn-danger" data-widget="collapse"> Eliminar</button>
+                                <form method="POST" action="./eliminar">
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
                         </div>
                         <!-- /.box-body -->
                     </div>

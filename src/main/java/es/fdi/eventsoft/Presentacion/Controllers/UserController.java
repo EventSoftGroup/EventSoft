@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ELIMINAR_USUARIO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
 
 @Controller
@@ -60,6 +61,7 @@ public class UserController {
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("cliente", cliente);
+            session.setAttribute("usuario", cliente);
             session.setAttribute("rol", "Cliente");
             model.addAttribute("pagina", "perfil-usuario");
             return "perfil-usuario";
@@ -72,9 +74,7 @@ public class UserController {
             return "error-500";
 
         }
-
-
-        }
+    }
 
     @RequestMapping(value = "registrar_organizador", method = RequestMethod.POST)
     public String registrar_Organizador(@Valid Organizador organizador, BindingResult bindingResult, Model model, HttpSession session) {
@@ -88,6 +88,7 @@ public class UserController {
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("organizador", organizador);
+            session.setAttribute("usuario", organizador);
             session.setAttribute("rol", "Organizador");
             model.addAttribute("pagina", "nuevo-evento");
             return "redirect:/eventos/nuevo";
@@ -118,7 +119,9 @@ public class UserController {
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("proveedor", proveedor);
+            session.setAttribute("usuario", proveedor);
             session.setAttribute("rol", "Proveedor");
+            session.setAttribute("email", proveedor.getEmail());
             model.addAttribute("pagina", "proveedores");
             return "redirect:/eventos/proveedores";
         }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
@@ -211,12 +214,14 @@ public class UserController {
         return "usuario-modificado";
     }
 
-    @RequestMapping(value = "eliminar", method = RequestMethod.DELETE)
-    public String eliminar(@ModelAttribute("Usuario") Usuario usuario, Model model) throws ExcepcionNegocio {
-        SAUsuario saUsuario = FactoriaSA.getInstance().crearSAUsuarios();
-        saUsuario.eliminarUsuario(usuario);
+    @RequestMapping(value = "eliminar", method = RequestMethod.POST)
+    public String eliminar(Model model, HttpSession session) throws ExcepcionNegocio {
+        //SAUsuario saUsuario = FactoriaSA.getInstance().crearSAUsuarios();
+        //saUsuario.eliminarUsuario(usuario);
+        //Comprobamos que tenemos la sessión abierta y encontramos el atributo email.
+        Contexto context = FactoriaComandos.getInstance().crearComando(ELIMINAR_USUARIO).execute(session.getAttribute("usuario"));
 
-        return "usuario-eliminado";
+        return "login";
     }
 
 }

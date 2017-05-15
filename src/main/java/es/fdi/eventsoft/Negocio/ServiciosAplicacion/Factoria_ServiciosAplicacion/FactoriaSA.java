@@ -22,6 +22,8 @@ public abstract class FactoriaSA {
         return uniqueInstance;
     }
 
+    //CREAR
+
     public abstract SAUsuario crearSAUsuarios();
 
     public abstract SAValoraciones crearSAValoraciones();
@@ -31,8 +33,5 @@ public abstract class FactoriaSA {
     public abstract SAServicios crearSAServicios();
 
     public abstract SAEventos crearSAEventos();
-
-
-
 
 }

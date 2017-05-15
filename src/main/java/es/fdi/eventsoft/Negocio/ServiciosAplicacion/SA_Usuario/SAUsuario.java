@@ -13,7 +13,7 @@ public interface SAUsuario {
 
     Usuario buscarUsuarioByID(Long id);
 
-    public void eliminarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
+    public boolean eliminarUsuario(Usuario usuarioEliminar);
 
     public void modificarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
 
