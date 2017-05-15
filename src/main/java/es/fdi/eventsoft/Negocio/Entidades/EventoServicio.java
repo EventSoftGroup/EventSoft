@@ -10,6 +10,10 @@ import java.io.Serializable;
 @Entity
 public class EventoServicio implements Serializable {
 
+	/****************************
+	 ********* ATRIBUTOS ********
+	 ****************************/
+
 	private static final long serialVersionUID = 0;
 	
 	@EmbeddedId private ClavesEventoServicio id;
@@ -24,7 +28,10 @@ public class EventoServicio implements Serializable {
 
 
 	@Version long version;
-	
+
+	/****************************
+	 ******* CONSTRUCTORES ******
+	 ****************************/
 	
 	public EventoServicio() {}
 
@@ -33,6 +40,10 @@ public class EventoServicio implements Serializable {
 		this.servicio =servicio;
 		this.evento = evento;
 	}
+
+	/****************************
+	 **** GETTERS AND SETTERS ***
+	 ****************************/
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

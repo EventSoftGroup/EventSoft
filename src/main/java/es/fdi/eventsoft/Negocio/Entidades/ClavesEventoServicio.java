@@ -7,14 +7,20 @@ import java.io.Serializable;
 
 @Embeddable
 public class ClavesEventoServicio implements Serializable {
-	
+
+	/****************************
+	 ********* ATRIBUTOS ********
+	 ****************************/
+
 	private static final long serialVersionUID = 0;
-
-
 
 	private Integer idEvento;
 
 	private Integer idServicio;
+
+	/****************************
+	 ******* CONSTRUCTORES ******
+	 ****************************/
 
 	public ClavesEventoServicio() {}
 
@@ -24,6 +30,9 @@ public class ClavesEventoServicio implements Serializable {
 		this.idServicio = idServicio;
 	}
 
+	/****************************
+	 **** GETTERS AND SETTERS ***
+	 ****************************/
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

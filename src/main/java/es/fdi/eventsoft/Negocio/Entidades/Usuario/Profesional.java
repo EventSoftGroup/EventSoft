@@ -13,6 +13,10 @@ import java.util.List;
 @Table(name = "Profesionales")
 public class Profesional extends Usuario implements Serializable {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
     @NotBlank
     @Column(nullable = false)
     private String empresa;
@@ -24,6 +28,9 @@ public class Profesional extends Usuario implements Serializable {
     @OneToMany(mappedBy = "profesional", fetch = FetchType.LAZY)
     private List<Valoracion> valoraciones_recibidas;
 
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
 
     public Profesional() {}
 
@@ -51,6 +58,10 @@ public class Profesional extends Usuario implements Serializable {
         this.CIF = cif;
         this.valoraciones_recibidas = valoraciones_recibidas;
     }
+
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public String getEmpresa() {
         return empresa;

@@ -18,6 +18,9 @@ import java.util.List;
 @Table(name = "Usuarios")
 public class Usuario implements Serializable {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column()
@@ -65,6 +68,10 @@ public class Usuario implements Serializable {
 
     public enum EstadosUsuario { ACTIVO, PENDIENTE, BANEADO }
 
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
+
 
     public Usuario() { }
 
@@ -92,6 +99,9 @@ public class Usuario implements Serializable {
         this.mensajes_recibidos = mensajes_recibidos;
     }
 
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public Long getId() {
         return id;

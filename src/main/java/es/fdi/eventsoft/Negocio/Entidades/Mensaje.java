@@ -13,6 +13,10 @@ import java.util.Date;
 @Table(name = "Mensajes")
 public class Mensaje {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id private Long id;
 
@@ -46,11 +50,11 @@ public class Mensaje {
 
     @Version long version;
 
-
     public enum EstadosMensaje { LEIDO, NO_LEIDO }
 
-
-
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
 
     public Mensaje() {}
 
@@ -63,6 +67,10 @@ public class Mensaje {
         this.mensaje = mensaje;
         this.estado = estado;
     }
+
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public Long getId() {
         return id;

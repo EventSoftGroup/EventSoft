@@ -14,8 +14,16 @@ import java.util.List;
 @Table(name = "Organizadores")
 public class Organizador extends Profesional {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
     @OneToMany(mappedBy = "organizador", fetch = FetchType.LAZY)
     private List<Evento> eventos;
+
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
 
     public Organizador() {}
 
@@ -43,6 +51,10 @@ public class Organizador extends Profesional {
         super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes_enviados, mensajes_recibidos, empresa, cif, valoraciones_recibidas);
         this.eventos = eventos;
     }
+
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public List<Evento> getEventos() {
         return eventos;

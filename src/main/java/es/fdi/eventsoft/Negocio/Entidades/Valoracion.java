@@ -17,6 +17,10 @@ import java.util.Date;
 @Table(name = "Valoraciones")
 public class Valoracion implements Serializable {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
@@ -45,6 +49,10 @@ public class Valoracion implements Serializable {
 
     @Version long version;
 
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
+
     public Valoracion() {}
 
 
@@ -55,6 +63,10 @@ public class Valoracion implements Serializable {
         this.valoracion = valoracion;
         this.texto = texto;
     }
+
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public Long getId() {
         return id;
