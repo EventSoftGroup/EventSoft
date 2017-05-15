@@ -90,11 +90,7 @@
             <!-- Email -->
             <div class="form-group has-feedback">
                 <springForm:input path="email" cssClass="form-control" autofocus="true" placeholder="Email" type="email"/>
-
-
                 <springForm:errors path="email" cssClass="alert-error" />
-
-
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <!-- Password -->

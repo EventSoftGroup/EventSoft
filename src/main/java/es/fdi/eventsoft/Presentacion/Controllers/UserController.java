@@ -25,6 +25,7 @@ import javax.validation.Valid;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ELIMINAR_USUARIO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO_BY_ID;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
 
 @Controller
@@ -126,7 +127,7 @@ public class UserController {
             return "redirect:/eventos/proveedores";
         }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
             model.addAttribute("tipoUsuario", "proveedor");
-            bindingResult.rejectValue("email" , "error.cliente", "Email ya existente en el sistema");
+            bindingResult.rejectValue("email" , "error.proveedor", "Email ya existente en el sistema");
             return "register";
         }else{
             model.addAttribute("pagina", "error-500");
@@ -194,9 +195,9 @@ public class UserController {
     public @ResponseBody ResponseEntity<Usuario> buscarUsuario(@PathVariable Long id, Model model) {
 
         if(id>0) {
-            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_USUARIO).execute(id);
+            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_USUARIO_BY_ID).execute(id);
 
-            if(contex.getEvento() == BUSCAR_USUARIO){
+            if(contex.getEvento() == BUSCAR_USUARIO_BY_ID){
                 return new ResponseEntity<>((Usuario) contex.getDatos(), HttpStatus.OK);
             }else if(contex.getEvento() == ERROR_BUSCAR_USUARIO) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

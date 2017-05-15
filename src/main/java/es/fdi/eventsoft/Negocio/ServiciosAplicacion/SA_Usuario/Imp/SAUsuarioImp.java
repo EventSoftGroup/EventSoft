@@ -9,6 +9,8 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
+import java.util.List;
+
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
 /**
@@ -94,6 +96,16 @@ public class SAUsuarioImp implements SAUsuario{
         }
         System.out.println("Devuelvo el resultado: " + result);
         return (result);
+    }
+
+    public Usuario buscarUsuarioByEmail(String email) {
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Usuario.class);
+
+        integra.begin();
+        List list = integra.ejecutarQuery("from Usuario where email='" + email + "'");
+        integra.commit();
+
+        return (list.isEmpty()) ? null : (Usuario) (list.iterator().next());
     }
 
     @Override

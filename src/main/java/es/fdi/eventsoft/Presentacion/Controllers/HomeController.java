@@ -1,71 +1,94 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
 
+import es.fdi.eventsoft.Negocio.Comandos.Contexto;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
+import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.persistence.Version;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
-    @RequestMapping({"/","index"})
-    public String home(HttpSession session,
-                       @RequestParam (value = "seleccion", required = false, defaultValue = "error") String seleccion,
-                       @RequestParam (value = "pass", required = false, defaultValue = "vacia") String pass,
-                       Model model) {
+
+//    public String home(HttpSession session,
+//                       @RequestParam (value = "email", defaultValue = "") String email,
+//                       @RequestParam (value = "pass", defaultValue = "") String pass,
+//                       Model model) {
+    @RequestMapping("index")
+    public String home( @ModelAttribute("userLog") Usuario userLog, BindingResult bindingResult, Model model, HttpSession session) {
+
+
+        if(userLog.getEmail().trim().isEmpty()){
+            bindingResult.rejectValue("email" , "error.userLog", "Introduzca un Email valido");
+            return "login";
+        }else if(userLog.getPassword().trim().isEmpty()){
+            bindingResult.rejectValue("password" , "error.userLog", "Instroduzca una contraseña");
+            return "login";
+        }
+
+
+
+        Contexto contex = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(userLog.getEmail());
 
         model.addAttribute("title", "EventSoft");
 
-        //En el caso de que selección venga vacio colocamos le asignamos el valor del rol guarado en sesión.
-        if (seleccion.equalsIgnoreCase("error")){
-            seleccion = (String) session.getAttribute("rol");
-            //Si no tenemos nada en la variable sesión, le damos vacio para que vaya a login.
-            if (seleccion == null) {
-                seleccion = "";
-            }
-        }
+        if(contex.getEvento() == EventosNegocio.BUSCAR_USUARIO_BY_EMAIL) {
+            Usuario user = (Usuario) contex.getDatos();
 
-        switch (seleccion) {
-            case "Cliente": {
+            if (user.getPassword().equals(userLog.getPassword())) {
+
+                if(user instanceof Cliente) {
                 session.setAttribute("rol", "Cliente");
                 model.addAttribute("pagina", "perfil-usuario");
                 return "redirect:./usuarios/perfil-usuario";
-            }
+                }
 
-            case "Organizador": {
-                session.setAttribute("rol", "Organizador");
-                model.addAttribute("pagina", "nuevo-evento");
-                return "redirect:./eventos/nuevo";
-            }
+                if(user instanceof Organizador) {
+                    session.setAttribute("rol", "Organizador");
+                    model.addAttribute("pagina", "nuevo-evento");
+                    return "redirect:./eventos/nuevo";
+                }
 
-            case "Proveedor": {
-                System.out.println("Logueado como Proveedor");
-                session.setAttribute("rol", "Proveedor");
-                model.addAttribute("pagina", "proveedores");
-                return "redirect:./eventos/proveedores";
-            }
+                if(user instanceof Proveedor) {
+                    System.out.println("Logueado como Proveedor");
+                    session.setAttribute("rol", "Proveedor");
+                    model.addAttribute("pagina", "proveedores");
+                    return "redirect:./eventos/proveedores";
+                }
 
-            case "Admin": {
-                session.setAttribute("rol", "Administrador");
-                model.addAttribute("pagina", "admin");
-                return "admin";
+                if(user.getEmail().equals("adminIW@ucm.es")) {
+                    session.setAttribute("rol", "Administrador");
+                    model.addAttribute("pagina", "admin");
+                    return "admin";
+                }
+            }else{
+                bindingResult.rejectValue("password" , "error.userLog", "La contraseña no coincide con el email");
             }
-            default: {
-                return "login";
-            }
+        }else{
+            bindingResult.rejectValue("email" , "error.userLog", "Email no existente en el sistema");
         }
+
+        return "login";
     }
 
-    @RequestMapping("login")
+    @RequestMapping({"/","login"})
     public String login(Model model) {
         model.addAttribute("title", "EventSoft");
+        model.addAttribute("userLog",new Usuario());
         return "login";
     }
 
