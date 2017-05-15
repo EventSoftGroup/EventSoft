@@ -1,5 +1,8 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags/form"
+           prefix="springForm"%>
+
 
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -10,26 +13,30 @@
   <div class="login-box-body">
     <p class="login-box-msg">Introduce email y contraseña</p>
 
-    <form action="./index" method="post">
-      <!-- <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" autofocus>
+    <!-- <form action="./index" method="post">-->
+    <springForm:form method="POST" id="formulario_Login" name='formulario_Login'  modelAttribute='userLog' action="./index">
+     <!-- <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="Email" name="email" autofocus >
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      -->
-
-      <div class="form-group">
-        <label>Selecciona el rol</label>
-        <select name="seleccion" id="rol" class="form-control select2" style="width: 100%;">
-          <option selected="selected" value="Cliente">Cliente</option>
-          <option value="Organizador">Organizador</option>
-          <option value="Proveedor">Proveedor</option>
-          <option value="Admin">Adminstrador</option>
-        </select>
       </div>
       <div class="form-group has-feedback">
         <input type="password" class="form-control" placeholder="Contraseña" name="pass">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>-->
+      <div class="form-group has-feedback">
+        <springForm:input path="email" cssClass="form-control" autofocus="true" placeholder="Email" type="email"/>
+        <springForm:errors path="email" cssClass="alert-error" />
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
+      <!-- Password -->
+      <div class="form-group has-feedback">
+        <springForm:input path="password" cssClass="form-control" autofocus="true" placeholder="Contraseña" type="password"/>
+        <springForm:errors path="password" cssClass="alert-error" />
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+
+
+
       <div class="row">
         <!--<div class="col-xs-8">
           <div class="checkbox icheck">
@@ -44,7 +51,7 @@
         </div>
         <!-- /.col -->
       </div>
-    </form>
+    </springForm:form>
 
     <!--<div class="social-auth-links text-center">
       <p>- OR -</p>

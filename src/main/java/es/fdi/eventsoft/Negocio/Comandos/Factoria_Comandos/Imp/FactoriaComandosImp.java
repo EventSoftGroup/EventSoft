@@ -6,10 +6,7 @@ import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Eventos.*;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Mensajes.*;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Servicios.*;
-import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Usuarios.ComandoBuscarUsuario;
-import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Usuarios.ComandoCrearUsuario;
-import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Usuarios.ComandoEliminarUsuario;
-import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Usuarios.ComandoModificarUsuario;
+import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Usuarios.*;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Valoraciones.ComandoBuscarValoracion;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Valoraciones.ComandoBuscarValoracionesByUser;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Valoraciones.ComandoCrearValoracion;
@@ -34,8 +31,12 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
 
 
-            case BUSCAR_USUARIO:
-                miComando = new ComandoBuscarUsuario();
+            case BUSCAR_USUARIO_BY_ID:
+                miComando = new ComandoBuscarUsuarioByID();
+                break;
+
+            case BUSCAR_USUARIO_BY_EMAIL:
+                miComando = new ComandoBuscarUsuarioByEmail();
                 break;
 
             case ELIMINAR_USUARIO:
