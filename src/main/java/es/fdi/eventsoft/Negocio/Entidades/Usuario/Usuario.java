@@ -2,6 +2,8 @@ package es.fdi.eventsoft.Negocio.Entidades.Usuario;
 
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Validadores.Telefono;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -54,13 +56,19 @@ public class Usuario implements Serializable {
     private EstadosUsuario estado;
 
     @OneToMany(mappedBy = "emisor", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Mensaje> mensajes_enviados;
 
 
     @OneToMany(mappedBy = "receptor", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Mensaje> mensajes_recibidos;
 
     @Version private long version;
+
+    public Usuario(long l) {
+        this.id = l;
+    }
 
 
     public enum EstadosUsuario { ACTIVO, PENDIENTE, BANEADO }

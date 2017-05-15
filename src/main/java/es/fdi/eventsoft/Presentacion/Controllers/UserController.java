@@ -1,35 +1,29 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
-import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
-import es.fdi.eventsoft.Negocio.Entidades.Empleado;
-import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import es.fdi.eventsoft.Negocio.Entidades.Validadores.ValidadorCliente;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
-import org.hibernate.annotations.SourceType;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
 
 @Controller
 @RequestMapping("/usuarios/")
@@ -68,12 +62,18 @@ public class UserController {
             session.setAttribute("rol", "Cliente");
             model.addAttribute("pagina", "perfil-usuario");
             return "perfil-usuario";
-        }else {
+        }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
+            model.addAttribute("tipoUsuario", "cliente");
+            bindingResult.rejectValue("email" , "error.cliente", "Email ya existente en el sistema");
+            return "register";
+        }else{
             model.addAttribute("pagina", "error-500");
             return "error-500";
+
         }
 
-    }
+
+        }
 
     @RequestMapping(value = "registrar_organizador", method = RequestMethod.POST)
     public String registrar_Organizador(@Valid Organizador organizador, BindingResult bindingResult, Model model, HttpSession session) {
@@ -90,9 +90,14 @@ public class UserController {
             session.setAttribute("rol", "Organizador");
             model.addAttribute("pagina", "nuevo-evento");
             return "redirect:/eventos/nuevo";
-        }else {
+        }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
+            model.addAttribute("tipoUsuario", "organizador");
+            bindingResult.rejectValue("email" , "error.organizador", "Email ya existente en el sistema");
+            return "register";
+        }else{
             model.addAttribute("pagina", "error-500");
             return "error-500";
+
         }
 
     }
@@ -104,6 +109,7 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("tipoUsuario", "proveedor");
+
             return "register";
         }
 
@@ -114,9 +120,14 @@ public class UserController {
             session.setAttribute("rol", "Proveedor");
             model.addAttribute("pagina", "proveedores");
             return "redirect:/eventos/proveedores";
-        }else {
+        }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
+            model.addAttribute("tipoUsuario", "proveedor");
+            bindingResult.rejectValue("email" , "error.cliente", "Email ya existente en el sistema");
+            return "register";
+        }else{
             model.addAttribute("pagina", "error-500");
             return "error-500";
+
         }
     }
 
@@ -174,48 +185,21 @@ public class UserController {
         return "redirect:index";
     }*/
 
+    @GetMapping(value = "buscarUsuario/{id}",
+            produces = "application/json")
+    public @ResponseBody ResponseEntity<Usuario> buscarUsuario(@PathVariable Long id, Model model) {
 
-    @RequestMapping(value = "/cust/save", method = RequestMethod.GET)
-    public String saveCustomerPage(Model model) {
-        model.addAttribute("empleado", new Empleado());
+        if(id>0) {
+            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_USUARIO).execute(id);
 
-        return "custSave";
-    }
-
-    @RequestMapping(value = "/cust/save.do", method = RequestMethod.POST)
-    public String saveCustomerAction(@Valid Empleado empleado, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            System.out.println("Empleado incorrecto!!");
-            for (ObjectError err : bindingResult.getAllErrors())
-                System.out.println(err.toString());
-            return "custSave";
+            if(contex.getEvento() == BUSCAR_USUARIO){
+                return new ResponseEntity<>((Usuario) contex.getDatos(), HttpStatus.OK);
+            }else if(contex.getEvento() == ERROR_BUSCAR_USUARIO) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
         }
 
-        model.addAttribute("empleado", empleado);
-        FachadaIntegracion<Empleado> fachadaIntegracion = FachadaIntegracion.newInstance(Empleado.class);
-        fachadaIntegracion.alta(empleado);
-
-        //TestEmpleados.persistirEmpleado(new Empleado("desde Controller", "prueba3", new GregorianCalendar(1979,6,6).getTime()));
-
-        return "custSaveSuccess";
-
-    }
-
-
-    @RequestMapping("buscarUsuario")
-    public String buscarUsuario(Model model) {
-        //TODO
-
-
-        return null;
-    }
-
-    @RequestMapping(value = "ver", method = RequestMethod.GET)
-    public String ver(Model model) {
-        // TODO muestra los datos del usuario seleccionado;
-
-        return null;
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "modificar", method = RequestMethod.PUT)
@@ -233,4 +217,5 @@ public class UserController {
 
         return "usuario-eliminado";
     }
+
 }

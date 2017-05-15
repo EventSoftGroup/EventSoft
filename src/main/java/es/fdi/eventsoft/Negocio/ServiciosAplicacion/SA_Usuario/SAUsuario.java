@@ -1,5 +1,6 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario;
 
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
@@ -8,9 +9,9 @@ import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
  */
 public interface SAUsuario {
 
-    boolean crearUsuario(Usuario usuarioNuevo);
+    EventosNegocio crearUsuario(Usuario usuarioNuevo);
 
-    public Usuario buscarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
+    Usuario buscarUsuarioByID(Long id);
 
     public void eliminarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
 

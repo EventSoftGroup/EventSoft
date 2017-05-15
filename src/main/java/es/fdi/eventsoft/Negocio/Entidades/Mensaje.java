@@ -7,11 +7,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "Mensajes")
-public class Mensaje {
+public class Mensaje implements Serializable{
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id private Long id;

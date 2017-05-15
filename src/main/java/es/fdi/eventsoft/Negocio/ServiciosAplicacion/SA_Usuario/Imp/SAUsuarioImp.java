@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.Imp;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
@@ -8,12 +9,14 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
+
 /**
  * Created by Rodrigo de Miguel on 05/05/2017.
  */
 public class SAUsuarioImp implements SAUsuario{
 
-    public boolean crearUsuario(Usuario usuarioNuevo){
+    public EventosNegocio crearUsuario(Usuario usuarioNuevo){
 
         Object result = null;
         FachadaIntegracion integra = null;
@@ -33,6 +36,8 @@ public class SAUsuarioImp implements SAUsuario{
         if (!(integra.ejecutarQuery("from Usuario where email='" + usuarioNuevo.getEmail() + "'").size() > 0)) {
             usuarioNuevo.setEstado(Usuario.EstadosUsuario.ACTIVO);
             result = integra.alta(usuarioNuevo);
+        }else{
+            return EventosNegocio.EMAIL_YA_EXISTENTE;
         }
 
         integra.commit();
@@ -42,13 +47,18 @@ public class SAUsuarioImp implements SAUsuario{
         e.printStackTrace();
     }
 
-        return (result!=null) ? true : false;
+        return (result!=null) ? USUARIO_CREADO : ERROR_CREAR_USUARIO;
     }
 
     @Override
-    public Usuario buscarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public Usuario buscarUsuarioByID(Long id) {
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Usuario.class);
+
+        integra.begin();
+        Usuario user = (Usuario) integra.consulta(id);
+        integra.commit();
+
+        return user;
     }
 
     @Override
