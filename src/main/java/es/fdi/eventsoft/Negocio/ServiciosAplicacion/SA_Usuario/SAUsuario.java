@@ -13,9 +13,10 @@ public interface SAUsuario {
 
     Usuario buscarUsuarioByID(Long id);
 
-    public boolean eliminarUsuario(Usuario usuarioEliminar);
+    public Usuario buscarUsuarioByEmail(String email);
+
+    public EventosNegocio eliminarUsuario(Usuario usuarioEliminar);
 
     public void modificarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
-
 
 }

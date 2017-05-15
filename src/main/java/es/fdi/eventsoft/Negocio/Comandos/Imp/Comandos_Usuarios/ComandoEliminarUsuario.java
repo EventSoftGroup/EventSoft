@@ -13,14 +13,7 @@ public class ComandoEliminarUsuario implements Comando {
 
     public Contexto execute(Object datos){
         //TODO
-        //return new Contexto(FactoriaSA.getInstance().crearSAUsuarios().eliminarUsuario((Usuario)datos), null);
-        boolean respuesta = FactoriaSA.getInstance().crearSAUsuarios().eliminarUsuario((Usuario) datos);
-        if (respuesta) {
-            System.out.println("Elemento eliminado");
-        } else {
-            System.out.println("Error al eliminar");
-        }
-        return new Contexto(EventosNegocio.ELIMINAR_USUARIO, respuesta);
+        return new Contexto(FactoriaSA.getInstance().crearSAUsuarios().eliminarUsuario((Usuario) datos), null);
 
     }
 

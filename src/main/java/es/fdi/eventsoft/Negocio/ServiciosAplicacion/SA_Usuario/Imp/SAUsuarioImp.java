@@ -64,7 +64,7 @@ public class SAUsuarioImp implements SAUsuario{
     }
 
     @Override
-    public boolean eliminarUsuario(Usuario usuarioEliminar) {
+    public EventosNegocio eliminarUsuario(Usuario usuarioEliminar) {
 
         FachadaIntegracion integra = null;
         boolean result = false;
@@ -81,12 +81,10 @@ public class SAUsuarioImp implements SAUsuario{
         try {
             integra.begin();
             //Se elimina solo si existe el correo
-            System.out.println(integra.ejecutarQuery("from Usuario where email='" + usuarioEliminar.getEmail() + "'"));
-            /*if ((integra.ejecutarQuery("from Usuario where email='" + usuarioEliminar.getEmail() + "'").size() > 0)) {
-                integra.ejecutarQuery("from Usuario where email");
-                System.out.println("voy a eliminar");
-                result = integra.baja(1L);
-            }*/
+            Usuario aborrar = buscarUsuarioByEmail(usuarioEliminar.getEmail());
+            if (aborrar != null) {
+                result = integra.baja(aborrar.getId());
+            }
 
             integra.commit();
 
@@ -94,8 +92,7 @@ public class SAUsuarioImp implements SAUsuario{
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
-        System.out.println("Devuelvo el resultado: " + result);
-        return (result);
+        return (result == true) ? ELIMINAR_USUARIO : ERROR_ELIMINAR_USUARIO;
     }
 
     public Usuario buscarUsuarioByEmail(String email) {

@@ -5,13 +5,10 @@ import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
-import es.fdi.eventsoft.Negocio.Entidades.Empleado;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ELIMINAR_USUARIO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO_BY_ID;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
@@ -217,12 +212,14 @@ public class UserController {
 
     @RequestMapping(value = "eliminar", method = RequestMethod.POST)
     public String eliminar(Model model, HttpSession session) throws ExcepcionNegocio {
-        //SAUsuario saUsuario = FactoriaSA.getInstance().crearSAUsuarios();
-        //saUsuario.eliminarUsuario(usuario);
-        //Comprobamos que tenemos la sessión abierta y encontramos el atributo email.
         Contexto context = FactoriaComandos.getInstance().crearComando(ELIMINAR_USUARIO).execute(session.getAttribute("usuario"));
 
-        return "login";
+        if (context.getEvento() == ELIMINAR_USUARIO) {
+            return "redirect:/login";
+        } else {
+            return "redirect:./#";
+        }
+
     }
 
 }
