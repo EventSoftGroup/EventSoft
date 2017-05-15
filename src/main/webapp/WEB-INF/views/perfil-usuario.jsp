@@ -40,8 +40,8 @@
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle" src="/dist/img/user4-128x128.jpg"
                                  alt="User profile picture">
-                            <h3 class="profile-username text-center">Nina Mcintire</h3>
-                            <p class="text-muted text-center">Florista Web</p>
+                            <h3 class="profile-username text-center">${cliente.nombre} ${cliente.apellidos}</h3>
+                            <!-- <p class="text-muted text-center">Florista Web</p>-->
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
                                     <b>Eventos</b> <a class="pull-right">45</a>

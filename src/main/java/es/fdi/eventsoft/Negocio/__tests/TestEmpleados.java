@@ -8,6 +8,8 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import org.springframework.util.SerializationUtils;
+import sun.util.cldr.CLDRLocaleDataMetaInfo;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
@@ -39,21 +41,28 @@ public class TestEmpleados {
 //        fiCliente.alta(new Empleado("desde holiii", "prueba4", new GregorianCalendar(1979,6,6).getTime(), "rodri@ucm.es"));
 
 
+        Cliente cli1 = new Cliente();
+        cli1.setEmail("email1");
+        cli1.setNombre("nombre1");
 
-        FachadaIntegracion integra = FachadaIntegracion.newInstance(Cliente.class);;
-        Usuario cli = new Cliente("otroemailmas@ucm.es", "1234", "dir", "local"," provicnio",
-                "123456789", "28200", Usuario.EstadosUsuario.ACTIVO, "nombre", "apellidos ", null, null);
-
-        FactoriaSA.getInstance().crearSAUsuarios().crearUsuario(cli);
+        Cliente cli2 = new Cliente();
+        cli2.setEmail("email2");
+        cli2.setNombre("nombre2");
 
 
+        cli1 = cli2;
 
-        System.out.println();
+        cli2.setNombre("Juana");
+
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Usuario.class);
 
         integra.begin();
-        integra.alta(new Cliente("email@ucm.es", "sdtgh", "sdgh", "sdfh"," sdh",
-                "sdghf", "28200", Usuario.EstadosUsuario.ACTIVO, "sgh", "dfrgh ", null, null));
+        Usuario user = (Usuario) integra.consulta(1100L);
+
+        Usuario cli = (Cliente) integra.consulta(11L);
+
         integra.commit();
+
 
 
         /*

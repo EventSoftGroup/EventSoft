@@ -3,6 +3,8 @@ package es.fdi.eventsoft.Negocio.Entidades.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +21,7 @@ public class Organizador extends Profesional {
      ****************************/
 
     @OneToMany(mappedBy = "organizador", fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Evento> eventos;
 
     /****************************

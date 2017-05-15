@@ -15,6 +15,8 @@ public enum EventosNegocio {
     MODIFICAR_USUARIO,
     ERROR_MODIFICAR_USUARIO,
 
+    EMAIL_YA_EXISTENTE,
+
 
     //******** EVENTOS NEGOCIO VALORACIONES ************
 
@@ -86,5 +88,7 @@ public enum EventosNegocio {
     ELIMINAR_EVENTO,
     ERROR_ELIMINAR_EVENTO,
 
-    BUSCAR_EVENTOS_BY_USUARIO
+    BUSCAR_EVENTOS_BY_USUARIO;
+
+
 }

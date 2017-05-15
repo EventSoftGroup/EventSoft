@@ -3,6 +3,8 @@ package es.fdi.eventsoft.Negocio.Entidades.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -18,6 +20,7 @@ public class Proveedor extends Profesional {
      ****************************/
 
     @OneToMany(mappedBy = "proveedor")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Servicio> servicios;
 
     /****************************

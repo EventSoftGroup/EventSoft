@@ -42,7 +42,7 @@ public class Empleado implements Serializable {
     private String email;
 
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    @NotBlank @Past
+    @Past
     private Date fechaNacimiento;
 
     @Telefono

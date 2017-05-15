@@ -1,10 +1,14 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
 
+import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
@@ -79,5 +83,6 @@ public class HomeController {
     public String getErrorr500(HttpSession session, SessionStatus status, Model model) {
         return "error-500";
     }
+
 }
 

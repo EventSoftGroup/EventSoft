@@ -14,11 +14,6 @@ import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 public class ComandoCrearUsuario implements Comando {
 
     public Contexto execute(Object datos){
-
-            if(FactoriaSA.getInstance().crearSAUsuarios().crearUsuario((Usuario)datos)){
-                return new Contexto(EventosNegocio.USUARIO_CREADO, null);
-            }else{
-                return new Contexto(EventosNegocio.ERROR_CREAR_USUARIO, null);
-            }
+        return new Contexto(FactoriaSA.getInstance().crearSAUsuarios().crearUsuario((Usuario)datos), null);
     }
 }

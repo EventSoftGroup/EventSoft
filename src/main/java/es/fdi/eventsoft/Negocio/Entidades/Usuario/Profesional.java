@@ -2,6 +2,8 @@ package es.fdi.eventsoft.Negocio.Entidades.Usuario;
 
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -26,6 +28,7 @@ public class Profesional extends Usuario implements Serializable {
     private String CIF;
 
     @OneToMany(mappedBy = "profesional", fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Valoracion> valoraciones_recibidas;
 
     /****************************

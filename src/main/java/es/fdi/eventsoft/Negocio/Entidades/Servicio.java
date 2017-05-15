@@ -7,12 +7,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "Servicios")
-public class Servicio {
+public class Servicio implements Serializable{
 
     /****************************
      ********* ATRIBUTOS ********
