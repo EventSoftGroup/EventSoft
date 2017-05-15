@@ -15,9 +15,17 @@ import java.util.List;
 @Table(name = "Proveedores")
 public class Proveedor extends Profesional {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
     @OneToMany(mappedBy = "proveedor")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Servicio> servicios;
+
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
 
     public Proveedor() { }
 
@@ -45,6 +53,10 @@ public class Proveedor extends Profesional {
         super(email, password, direccion, localidad, provincia, telefono, codigoPostal, estado, mensajes_enviados, mensajes_recibidos, empresa, cif, valoraciones_recibidas);
         this.servicios = servicios;
     }
+
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public List<Servicio> getServicios() {
         return servicios;

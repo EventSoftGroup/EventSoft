@@ -15,6 +15,10 @@ import java.util.List;
 @Table(name = "Clientes")
 public class Cliente extends Usuario implements Serializable {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
     @NotBlank
     @Column(nullable = false)
     private String nombre;
@@ -32,6 +36,10 @@ public class Cliente extends Usuario implements Serializable {
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Evento> eventos_Adscritos;
+
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
 
     public Cliente() {}
 
@@ -59,6 +67,9 @@ public class Cliente extends Usuario implements Serializable {
         this.eventos_Adscritos = eventos_Adscritos;
     }
 
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public String getNombre() {
         return nombre;

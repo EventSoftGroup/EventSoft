@@ -15,6 +15,9 @@ import java.util.List;
 @Table(name = "Eventos")
 public class Evento implements Serializable {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id private Long id;
@@ -55,11 +58,13 @@ public class Evento implements Serializable {
 
     @Version long version;
 
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
 
-    public enum CategoriasEvento {    }
+    public enum CategoriasEvento {}
 
-
-    public Evento() { }
+    public Evento() {}
 
     public Evento(String nombre, Cliente cliente, Organizador organizador, CategoriasEvento categoria, String lugar, Date fechaInicio, Date fechaFin) {
         this.nombre = nombre;
@@ -81,6 +86,10 @@ public class Evento implements Serializable {
         this.fechaFin = fechaFin;
         this.eventoServicios = eventoServicios;
     }
+
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public Long getId() {
         return id;

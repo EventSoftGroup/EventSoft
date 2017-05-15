@@ -14,6 +14,10 @@ import java.util.Date;
 @Table(name = "Mensajes")
 public class Mensaje implements Serializable{
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id private Long id;
 
@@ -47,11 +51,11 @@ public class Mensaje implements Serializable{
 
     @Version long version;
 
-
     public enum EstadosMensaje { LEIDO, NO_LEIDO }
 
-
-
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
 
     public Mensaje() {}
 
@@ -64,6 +68,10 @@ public class Mensaje implements Serializable{
         this.mensaje = mensaje;
         this.estado = estado;
     }
+
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
     public Long getId() {
         return id;

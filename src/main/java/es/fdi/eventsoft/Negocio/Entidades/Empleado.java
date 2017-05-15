@@ -20,6 +20,10 @@ import java.util.Date;
 
 public class Empleado implements Serializable {
 
+    /****************************
+     ********* ATRIBUTOS ********
+     ****************************/
+
     private static final long serialVersionUID = 1L;
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -43,6 +47,10 @@ public class Empleado implements Serializable {
 
     @Telefono
     private String telefono;
+
+    /****************************
+     ******* CONSTRUCTORES ******
+     ****************************/
 
     public Empleado() {
 
@@ -79,6 +87,9 @@ public class Empleado implements Serializable {
     }
 
 
+    /****************************
+     **** GETTERS AND SETTERS ***
+     ****************************/
 
 
     public static long getSerialVersionUID() {
