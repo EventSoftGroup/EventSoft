@@ -35,44 +35,55 @@ public class MensajesController {
 
     @GetMapping("/buzon")
     public String eventoBuzon(Model model, HttpSession session) {
-
+        long time_start, time_end;
+        time_start = System.currentTimeMillis();
 
         if(!isLogin(model,session)){
             return "login";
         }else {
-
+            final Contexto[] contexMensajesEnviados = new Contexto[1];
+            final Contexto[] contexMensajesRecibidos = new Contexto[1];
             Usuario user = (Usuario) session.getAttribute("usuario");
 
-            //Buscar los mensajes enviados
-            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_MENSAJES_BY_USER).execute(new Pair<>(user, true));
+            //Threads para buscar mensajes enviados y recibidos del usuarios logueado
+            Thread hiloBusquedaEnviados = new Thread(() -> contexMensajesEnviados[0] = FactoriaComandos.getInstance().crearComando(BUSCAR_MENSAJES_BY_USER).execute(new Pair<>(user, true)));
+            Thread hiloBusquedaRecibidos = new Thread(() -> contexMensajesRecibidos[0] = FactoriaComandos.getInstance().crearComando(BUSCAR_MENSAJES_BY_USER).execute(new Pair<>(user, false)));
 
-            if (contex.getEvento() == ERROR_BUSCAR_USUARIO) {
+            hiloBusquedaEnviados.start();
+            hiloBusquedaRecibidos.start();
+
+            try {
+                hiloBusquedaEnviados.join();
+                hiloBusquedaRecibidos.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
                 return "login";
-            }else if(contex.getEvento() == BUSCAR_MENSAJES_BY_USER){
+            }
 
-                user.setMensajes_enviados((List) contex.getDatos());
+            if (contexMensajesEnviados[0].getEvento() == ERROR_BUSCAR_USUARIO) {
+                return "login";
+            } else if (contexMensajesEnviados[0].getEvento() == BUSCAR_MENSAJES_BY_USER) {
 
-                //Buscar los mensajes recibidos
-                Contexto contex2 = FactoriaComandos.getInstance().crearComando(BUSCAR_MENSAJES_BY_USER).execute(new Pair<>(user, false));
+                user.setMensajes_enviados((List) contexMensajesEnviados[0].getDatos());
 
-                if (contex2.getEvento() == ERROR_BUSCAR_USUARIO) {
+                if (contexMensajesRecibidos[0].getEvento() == ERROR_BUSCAR_USUARIO) {
                     return "login";
-                }else if(contex2.getEvento() == BUSCAR_MENSAJES_BY_USER){
+                } else if (contexMensajesRecibidos[0].getEvento() == BUSCAR_MENSAJES_BY_USER) {
 
-                    user.setMensajes_recibidos((List) contex2.getDatos());
+                    user.setMensajes_recibidos((List) contexMensajesRecibidos[0].getDatos());
 
                     session.setAttribute("usuario", user);
                     model.addAttribute("title", "EventSoft - Buzón");
                     model.addAttribute("pagina", "buzon");
 
+                    time_end = System.currentTimeMillis();
+                    System.out.println("The task has taken "+ ( time_end - time_start ) +" milliseconds");
                     return "buzon";
-
                 }
             }
+            return "login";
         }
-        return "login";
     }
-
 
     @GetMapping("/nuevo-mensaje")
     public String eventoNuevoMensaje(Model model, HttpSession session) {

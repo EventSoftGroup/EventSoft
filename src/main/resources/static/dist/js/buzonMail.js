@@ -8,10 +8,14 @@ $(function () {
 
     $('#botonBandejaEntrada').on('click', function(event){
         panel_bandeja_entrada();
+        $('#botonBandejaEntrada').addClass("active");
+        $('#botonBandejaEnviados').removeClass("active");
     })
 
 
     $('#botonBandejaEnviados').on('click', function(event){
+        $('#botonBandejaEnviados').addClass("active");
+        $('#botonBandejaEntrada').removeClass("active");
 
         panel_bandeja_enviados();
     })

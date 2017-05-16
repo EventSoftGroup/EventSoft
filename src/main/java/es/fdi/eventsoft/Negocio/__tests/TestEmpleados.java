@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.Negocio.__tests;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Empleado;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
@@ -11,6 +12,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import javafx.scene.input.Mnemonic;
+import javafx.util.Pair;
 import org.springframework.util.SerializationUtils;
 import sun.util.cldr.CLDRLocaleDataMetaInfo;
 
@@ -19,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_MENSAJES_BY_USER;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
 
 
 /**
@@ -31,39 +36,10 @@ public class TestEmpleados {
 
 
     public static void main(String[] args) {
-
-
-        //Usuario user = FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("rodri@ucm.es");
-
-        Usuario user2 = new Usuario();
-        user2.setId(7L);
-        List mensajes = FactoriaSA.getInstance().crearSAMensajes().buscarMensajesByUser(user2, true);
-
-
-        System.out.println(mensajes);
+//
 
 
 
-
-
-
-/*
-        Usuario cli = new Cliente("nombre1", "apellidos2", null, null);
-        cli.setEmail("svavadfv@ucm.es");
-        cli.setCodigoPostal("28200");
-        cli.setDireccion("dir");
-        cli.setLocalidad("local");
-        cli.setPassword("1234");
-        cli.setProvincia("prov");
-        cli.setTelefono("123456789");
-        cli.setEstado(Usuario.EstadosUsuario.ACTIVO);
-*/
-
-
-
-        /* Creamos el gestor de persistencia (EM) */
-
-        //persistirEmpleado(null);
 
     }
 

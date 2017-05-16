@@ -48,14 +48,14 @@
                         </div>
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="active"><a id="botonBandejaEntrada"><i class="fa fa-inbox"></i> Bandeja de Entrada
+                                <li class="active" id="botonBandejaEntrada"><a ><i class="fa fa-inbox"></i> Bandeja de Entrada
                                     <span class="label label-primary pull-right">
                                         <c:if test="${not empty usuario.mensajes_recibidos}">
                                             ${fn:length(usuario.mensajes_recibidos)}
                                         </c:if>
 
                                     </span></a></li>
-                                <li><a id="botonBandejaEnviados"><i class="fa fa-send-o"></i> Enviados
+                                <li id="botonBandejaEnviados"><a><i class="fa fa-send-o"></i> Enviados
                                     <span class="label label-success pull-right">
                                         <c:if test="${not empty usuario.mensajes_enviados}">
                                             ${fn:length(usuario.mensajes_enviados)}

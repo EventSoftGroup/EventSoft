@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
 
-    protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("aplicacion");
+    static protected EntityManagerFactory emf = Persistence.createEntityManagerFactory("aplicacion");
 
     @PersistenceContext(type=PersistenceContextType.EXTENDED)
     protected EntityManager em;
