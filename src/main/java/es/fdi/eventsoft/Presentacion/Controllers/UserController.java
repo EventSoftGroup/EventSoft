@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ELIMINAR_USUARIO;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO_BY_ID;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
+
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
 @Controller
 @RequestMapping("/usuarios/")
@@ -204,10 +203,13 @@ public class UserController {
 
     @RequestMapping(value = "modificar", method = RequestMethod.PUT)
     public String modificar(@ModelAttribute("Usuario") Usuario usuario, Model model) {
-        FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
-        fachadaIntegracion.modifica(usuario);
+        Contexto contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
 
-        return "usuario-modificado";
+        if (contexto.getEvento() == MODIFICAR_USUARIO) {
+            return "redirect:/index";
+        } else {
+            return "redirect:./#";
+        }
     }
 
     @RequestMapping(value = "eliminar", method = RequestMethod.POST)

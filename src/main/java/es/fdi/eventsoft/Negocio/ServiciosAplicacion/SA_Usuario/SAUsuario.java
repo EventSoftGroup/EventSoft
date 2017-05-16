@@ -17,6 +17,6 @@ public interface SAUsuario {
 
     public EventosNegocio eliminarUsuario(Usuario usuarioEliminar);
 
-    public void modificarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
+    public Boolean modificarUsuario(Usuario usuarioNuevo);
 
 }

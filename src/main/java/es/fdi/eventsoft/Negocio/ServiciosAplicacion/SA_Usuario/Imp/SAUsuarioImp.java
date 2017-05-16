@@ -106,8 +106,13 @@ public class SAUsuarioImp implements SAUsuario{
     }
 
     @Override
-    public void modificarUsuario(Usuario usuario) throws ExcepcionNegocio {
+    public Boolean modificarUsuario(Usuario usuario) {
         FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
+
+        fachadaIntegracion.begin();
         fachadaIntegracion.modifica(usuario);
+        fachadaIntegracion.commit();
+
+        return true;
     }
 }
