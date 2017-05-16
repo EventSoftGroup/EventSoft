@@ -25,24 +25,15 @@ public class EventController {
         model.addAttribute("pagina", "proveedores");
         return "proveedores";
     }
-    @RequestMapping("/buzon")
-    public String eventoBuzon(Model model) {
-        model.addAttribute("title", "EventSoft - Buzón");
-        model.addAttribute("pagina", "buzon");
-        return "buzon";
-    }
+
     @RequestMapping("/leer-mensaje")
     public String eventoLeerMensaje(Model model) {
         model.addAttribute("title", "EventSoft - Leer Mensaje");
 
         return "leer-mensaje";
     }
-    @RequestMapping("/nuevo-mensaje")
-    public String eventoNuevoMensaje(Model model) {
-        model.addAttribute("title", "EventSoft - Nuevo Mensaje");
 
-        return "nuevo-mensaje";
-    }
+
     @RequestMapping("/timeline")
     public String eventoTimeline(Model model) {
         model.addAttribute("title", "EventSoft - Timeline");

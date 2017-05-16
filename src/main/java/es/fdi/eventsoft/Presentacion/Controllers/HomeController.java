@@ -24,6 +24,24 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 
+    public static boolean isLogin(Model model, HttpSession session){
+
+        Usuario user = (Usuario) session.getAttribute("usuario");
+        if(user == null){
+            model.addAttribute("title", "EventSoft");
+            model.addAttribute("userLog", new Usuario());
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+
+
+
+
 //    public String home(HttpSession session,
 //                       @RequestParam (value = "email", defaultValue = "") String email,
 //                       @RequestParam (value = "pass", defaultValue = "") String pass,
@@ -51,6 +69,7 @@ public class HomeController {
 
             if (user.getPassword().equals(userLog.getPassword())) {
 
+                session.setAttribute("usuario", user);
                 if(user instanceof Cliente) {
                 session.setAttribute("rol", "Cliente");
                 model.addAttribute("pagina", "perfil-usuario");

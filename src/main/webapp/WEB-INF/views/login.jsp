@@ -14,7 +14,7 @@
     <p class="login-box-msg">Introduce email y contraseña</p>
 
     <!-- <form action="./index" method="post">-->
-    <springForm:form method="POST" id="formulario_Login" name='formulario_Login'  modelAttribute='userLog' action="./index">
+    <springForm:form method="POST" id="formulario_Login" name='formulario_Login'  modelAttribute='userLog' action="../index.html">
      <!-- <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email" name="email" autofocus >
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

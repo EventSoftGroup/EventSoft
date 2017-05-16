@@ -4,16 +4,19 @@ import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Empleado;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
+import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import javafx.scene.input.Mnemonic;
 import org.springframework.util.SerializationUtils;
 import sun.util.cldr.CLDRLocaleDataMetaInfo;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -30,9 +33,25 @@ public class TestEmpleados {
     public static void main(String[] args) {
 
 
+        Mensaje mensajeNuevo = new Mensaje();
+        Date fecha = new Date();
+
+        mensajeNuevo.getReceptor().setEmail("org@ucm.es");
+        mensajeNuevo.getEmisor().setId(11L);
+        mensajeNuevo.setAsunto("asuntoMensaje    ");
+        mensajeNuevo.setMensaje("super mega mensaje desde test");
+
+        Long idMensaje = FactoriaSA.getInstance().crearSAMensajes().crearMensaje(mensajeNuevo);
+
+        System.out.println(idMensaje);
+
+
+
+
+
         /* Creamos el gestor de persistencia (EM) */
 
-        persistirEmpleado(null);
+        //persistirEmpleado(null);
 
     }
 

@@ -23,7 +23,7 @@ left-side-column.jspf<!-- Left side column. contains the logo and sidebar -->
                 <c:if test="${pagina eq 'buzon'}">
                     class="active"
                 </c:if>
-            ><a href="/eventos/buzon"><i class="fa fa-envelope"></i> <span>Buzón</span></a></li>
+            ><a href="/mensajes/buzon"><i class="fa fa-envelope"></i> <span>Buzón</span></a></li>
 
         </ul>
         <!-- /.sidebar-menu -->

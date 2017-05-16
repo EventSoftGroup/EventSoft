@@ -21,20 +21,20 @@ public class Mensaje implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_Emisor", nullable = false)
     @NotNull
     private Usuario emisor;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_Receptor", nullable = false)
     @NotNull
     private Usuario receptor;
 
 
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    @NotBlank @Past
+    @Past
     @Column(nullable = false)
     private Date fechaEnvio;
 
@@ -57,7 +57,10 @@ public class Mensaje implements Serializable{
      ******* CONSTRUCTORES ******
      ****************************/
 
-    public Mensaje() {}
+    public Mensaje() {
+        emisor = new Usuario();
+        receptor = new Usuario();
+    }
 
     public Mensaje(Long id, Usuario emisor, Usuario receptor, Date fechaEnvio, String asunto, String mensaje, EstadosMensaje estado) {
         this.id = id;
@@ -127,5 +130,19 @@ public class Mensaje implements Serializable{
 
     public void setEstado(EstadosMensaje estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Mensaje{" +
+                "id=" + id +
+                ", emisor=" + emisor +
+                ", receptor=" + receptor +
+                ", fechaEnvio=" + fechaEnvio +
+                ", asunto='" + asunto + '\'' +
+                ", mensaje='" + mensaje + '\'' +
+                ", estado=" + estado +
+                ", version=" + version +
+                '}';
     }
 }

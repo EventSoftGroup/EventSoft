@@ -1,12 +1,21 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
+import com.sun.org.apache.regexp.internal.RE;
+import es.fdi.eventsoft.Negocio.Comandos.Contexto;
+import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
+import org.hibernate.service.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.CREAR_MENSAJE;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_CREAR_MENSAJE;
+import static es.fdi.eventsoft.Presentacion.Controllers.HomeController.isLogin;
+
 
 /**
  * Created by Rodrigo de Miguel on 09/05/2017.
@@ -15,19 +24,65 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/mensajes/")
 public class MensajesController {
 
-    @RequestMapping(value = "leer", method = RequestMethod.GET)
-    public String leer(@RequestAttribute("Mensaje")Mensaje mensaje, Model model) {
-        model.addAttribute("mensaje", mensaje);
 
-        return "leer-mensaje";
+
+
+    @GetMapping("/buzon")
+    public String eventoBuzon(Model model, HttpSession session) {
+
+        if(!isLogin(model, session)) {
+            return "login";
+        }else{
+            model.addAttribute("title", "EventSoft - Buzón");
+            model.addAttribute("pagina", "buzon");
+            return "buzon";
+        }
     }
 
-    @RequestMapping("crearMensaje")
-    public String crearValoracion(Model model) {
-        //TODO
+
+    @GetMapping("/nuevo-mensaje")
+    public String eventoNuevoMensaje(Model model, HttpSession session) {
+        model.addAttribute("title", "EventSoft - Nuevo Mensaje");
+
+        if(!isLogin(model,session)){
+            return "login";
+        }
+
+        return "nuevo-mensaje";
+    }
 
 
-        return null;
+    @RequestMapping(value = "/crearMensaje", method = RequestMethod.POST)
+    public String crearMensaje(HttpSession session, Model model,
+            @RequestParam(value = "email") String email, @RequestParam String asunto, @RequestParam String texto) {
+
+        if(!isLogin(model,session)){
+            return "login";
+        }else {
+
+
+            if (email.trim().isEmpty() || asunto.trim().isEmpty() || texto.trim().isEmpty()) {
+                model.addAttribute("title", "EventSoft - Nuevo Mensaje");
+                return "nuevo-mensaje";
+            }
+
+            Mensaje mensaje = new Mensaje();
+            mensaje.getEmisor().setId(((Usuario) session.getAttribute("usuario")).getId());
+            mensaje.getReceptor().setEmail(email);
+            mensaje.setAsunto(asunto);
+            mensaje.setMensaje(texto);
+
+            Contexto contex = FactoriaComandos.getInstance().crearComando(CREAR_MENSAJE).execute(mensaje);
+
+            if (contex.getEvento() == CREAR_MENSAJE) {
+                model.addAttribute("usuario");
+                return "buzon";
+
+            } else if (contex.getEvento() == ERROR_CREAR_MENSAJE) {
+                return "nuevo-mensaje";
+            }
+            return "buzon";
+        }
     }
 
     @RequestMapping("buscarMensaje")

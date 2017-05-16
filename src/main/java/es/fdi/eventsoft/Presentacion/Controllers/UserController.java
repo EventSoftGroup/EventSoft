@@ -61,6 +61,7 @@ public class UserController {
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("cliente", cliente);
             session.setAttribute("rol", "Cliente");
+            session.setAttribute("usuario", cliente);
             model.addAttribute("pagina", "perfil-usuario");
             return "perfil-usuario";
         }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
@@ -89,6 +90,7 @@ public class UserController {
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("organizador", organizador);
             session.setAttribute("rol", "Organizador");
+            session.setAttribute("usuario", organizador);
             model.addAttribute("pagina", "nuevo-evento");
             return "redirect:/eventos/nuevo";
         }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
@@ -118,6 +120,7 @@ public class UserController {
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("proveedor", proveedor);
+            session.setAttribute("usuario", proveedor);
             session.setAttribute("rol", "Proveedor");
             model.addAttribute("pagina", "proveedores");
             return "redirect:/eventos/proveedores";

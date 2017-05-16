@@ -11,12 +11,12 @@ import java.util.List;
  */
 public interface SAMensajes {
 
-    public int crearMensaje(Mensaje mensajeNuevo) throws ExcepcionNegocio;
+    Long crearMensaje(Mensaje mensajeNuevo) ;
 
-    public Mensaje buscarMensaje(Mensaje mensaje) throws ExcepcionNegocio;
+    Mensaje buscarMensaje(Mensaje mensaje) throws ExcepcionNegocio;
 
-    public int eliminarMensaje(Mensaje mensaje) throws ExcepcionNegocio;
+    int eliminarMensaje(Mensaje mensaje) throws ExcepcionNegocio;
 
-    public List<Mensaje> buscarMensajesByUser(Usuario usuario, boolean emisor) throws ExcepcionNegocio;
+    List<Mensaje> buscarMensajesByUser(Usuario usuario, boolean emisor) throws ExcepcionNegocio;
 
 }
