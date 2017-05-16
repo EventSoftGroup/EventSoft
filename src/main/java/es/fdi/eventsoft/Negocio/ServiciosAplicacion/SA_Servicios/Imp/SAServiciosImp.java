@@ -1,12 +1,14 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.Imp;
 
 
+import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
+import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 
@@ -46,9 +48,15 @@ public class SAServiciosImp implements SAServicios{
     }
 
     @Override
-    public List<Servicio> buscarServiciosByEvento(Evento evento) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public List buscarServiciosByEvento(Evento evento) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
+
+        fachadaIntegracion.begin();
+        String query = "Servicios.buscarPorEvento";
+        List servicios = fachadaIntegracion.ejecutarQuery(query);
+        fachadaIntegracion.commit();
+
+        return servicios;
     }
 
     @Override

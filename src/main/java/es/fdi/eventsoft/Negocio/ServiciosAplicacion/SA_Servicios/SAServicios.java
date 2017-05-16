@@ -23,8 +23,8 @@ public interface SAServicios {
 
     public List<Servicio> buscarServiciosByProveedor(Proveedor proveedor) throws ExcepcionNegocio;
 
-    public List<Servicio> buscarServiciosByEvento(Evento evento) throws ExcepcionNegocio;
+    public List buscarServiciosByEvento(Evento evento);
 
-    public List<Servicio> buscarServiciosEntreFechas(Date fecha_Ini, Date fecha_Fin) throws ExcepcionNegocio;
+    public List buscarServiciosEntreFechas(Date fecha_Ini, Date fecha_Fin) throws ExcepcionNegocio;
 
 }
