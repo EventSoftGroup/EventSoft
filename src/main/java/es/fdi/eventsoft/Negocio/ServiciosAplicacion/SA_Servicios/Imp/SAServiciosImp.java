@@ -9,6 +9,7 @@ import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,7 +54,9 @@ public class SAServiciosImp implements SAServicios{
 
         fachadaIntegracion.begin();
         String query = "Servicios.buscarPorEvento";
-        List servicios = fachadaIntegracion.ejecutarQuery(query);
+        List params = new ArrayList();
+        params.add(evento);
+        List servicios = fachadaIntegracion.ejecutarQuery(query, params);
         fachadaIntegracion.commit();
 
         return servicios;
