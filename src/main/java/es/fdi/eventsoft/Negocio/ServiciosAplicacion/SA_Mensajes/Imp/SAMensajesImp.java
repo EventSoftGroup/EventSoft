@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.Imp;
 
 
+import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.SAMensajes;
@@ -20,9 +21,14 @@ public class SAMensajesImp implements SAMensajes {
     }
 
     @Override
-    public Mensaje buscarMensaje(Mensaje mensaje) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public Mensaje buscarMensaje(Long id) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Mensaje.class);
+
+        fachadaIntegracion.begin();
+        Mensaje mensaje = (Mensaje) fachadaIntegracion.consulta(id);
+        fachadaIntegracion.commit();
+
+        return mensaje;
     }
 
     @Override
