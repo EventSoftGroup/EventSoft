@@ -71,7 +71,7 @@ public interface FachadaIntegracion<T> {
          * @param query Query en Lenguaje HQL
          * @return List con el resultado
          */
-        List ejecutarQuery(String query);
+        List ejecutarQuery(String query, List<String> params);
 
 
 

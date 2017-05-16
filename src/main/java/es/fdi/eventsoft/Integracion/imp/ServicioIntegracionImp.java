@@ -18,11 +18,9 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
     protected EntityManager em;
     protected Class<T> entityClass;
 
-
     public ServicioIntegracionImp(Class<T> t) {
         entityClass = t;
     }
-
 
     /**
      * @see FachadaIntegracion<T>{@link #alta(Object)}
@@ -37,7 +35,6 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
             return null;
         }
     }
-
 
     /**
      * @see FachadaIntegracion<T>{@link #baja(Long)}
@@ -64,15 +61,12 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
             }
         }
 
-
     /**
      * @see FachadaIntegracion<T>{@link #consulta(Long)}
      */
     public T consulta(Long id) {
         return em.find(entityClass, id);
     }
-
-
 
     /**
      * @see FachadaIntegracion<T>{@link #listado()}
@@ -89,13 +83,17 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
     }
 
     /**
-     * @see FachadaIntegracion<T>{@link #ejecutarQuery(String)}
+     * @see FachadaIntegracion<T>{@link #ejecutarQuery(String, List)}
      */
-    public List ejecutarQuery(String query){
-        return em.createQuery(query).getResultList();
+    public List ejecutarQuery(String query, List<String> params){
+        Query q = em.createNamedQuery(query);
+
+        for (int i=0; i < params.size(); i++) {
+            q.setParameter(i, params.get(i));
+        }
+
+        return q.getResultList();
     }
-
-
 
     /**
      * @see FachadaIntegracion<T>{@link #getRowCount()}
@@ -107,7 +105,6 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
         return em.createQuery(cq).getSingleResult();
     }
 
-
     /**
      * @see FachadaIntegracion<T>{@link #begin()}
      */
@@ -115,7 +112,6 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
         em = emf.createEntityManager();
         em.getTransaction().begin();
     }
-
 
     /**
      * @see FachadaIntegracion<T>{@link #commit()}

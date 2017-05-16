@@ -53,9 +53,14 @@ public class SAMensajesImp implements SAMensajes {
     }
 
     @Override
-    public Mensaje buscarMensaje(Mensaje mensaje) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public Mensaje buscarMensaje(Long id) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Mensaje.class);
+
+        fachadaIntegracion.begin();
+        Mensaje mensaje = (Mensaje) fachadaIntegracion.consulta(id);
+        fachadaIntegracion.commit();
+
+        return mensaje;
     }
 
     @Override

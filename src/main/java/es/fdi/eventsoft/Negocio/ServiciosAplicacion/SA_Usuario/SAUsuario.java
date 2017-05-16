@@ -13,11 +13,10 @@ public interface SAUsuario {
 
     Usuario buscarUsuarioByID(Long id);
 
-    Usuario buscarUsuarioByEmail(String email);
+    public Usuario buscarUsuarioByEmail(String email);
 
-    public void eliminarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
+    public EventosNegocio eliminarUsuario(Usuario usuarioEliminar);
 
-    public void modificarUsuario(Usuario usuarioNuevo) throws ExcepcionNegocio;
-
+    public Boolean modificarUsuario(Usuario usuarioNuevo);
 
 }

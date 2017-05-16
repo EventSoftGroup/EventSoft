@@ -5,13 +5,10 @@ import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
-import es.fdi.eventsoft.Negocio.Entidades.Empleado;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO_BY_ID;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
 @Controller
 @RequestMapping("/usuarios/")
@@ -60,6 +56,7 @@ public class UserController {
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("cliente", cliente);
+            session.setAttribute("usuario", cliente);
             session.setAttribute("rol", "Cliente");
             session.setAttribute("usuario", cliente);
             model.addAttribute("pagina", "perfil-usuario");
@@ -73,9 +70,7 @@ public class UserController {
             return "error-500";
 
         }
-
-
-        }
+    }
 
     @RequestMapping(value = "registrar_organizador", method = RequestMethod.POST)
     public String registrar_Organizador(@Valid Organizador organizador, BindingResult bindingResult, Model model, HttpSession session) {
@@ -89,6 +84,7 @@ public class UserController {
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("organizador", organizador);
+            session.setAttribute("usuario", organizador);
             session.setAttribute("rol", "Organizador");
             session.setAttribute("usuario", organizador);
             model.addAttribute("pagina", "nuevo-evento");
@@ -122,6 +118,7 @@ public class UserController {
             model.addAttribute("proveedor", proveedor);
             session.setAttribute("usuario", proveedor);
             session.setAttribute("rol", "Proveedor");
+            session.setAttribute("email", proveedor.getEmail());
             model.addAttribute("pagina", "proveedores");
             return "redirect:/eventos/proveedores";
         }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
@@ -208,18 +205,25 @@ public class UserController {
 
     @RequestMapping(value = "modificar", method = RequestMethod.PUT)
     public String modificar(@ModelAttribute("Usuario") Usuario usuario, Model model) {
-        FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
-        fachadaIntegracion.modifica(usuario);
+        Contexto contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
 
-        return "usuario-modificado";
+        if (contexto.getEvento() == MODIFICAR_USUARIO) {
+            return "redirect:/index";
+        } else {
+            return "redirect:./#";
+        }
     }
 
-    @RequestMapping(value = "eliminar", method = RequestMethod.DELETE)
-    public String eliminar(@ModelAttribute("Usuario") Usuario usuario, Model model) throws ExcepcionNegocio {
-        SAUsuario saUsuario = FactoriaSA.getInstance().crearSAUsuarios();
-        saUsuario.eliminarUsuario(usuario);
+    @RequestMapping(value = "eliminar", method = RequestMethod.POST)
+    public String eliminar(Model model, HttpSession session) throws ExcepcionNegocio {
+        Contexto context = FactoriaComandos.getInstance().crearComando(ELIMINAR_USUARIO).execute(session.getAttribute("usuario"));
 
-        return "usuario-eliminado";
+        if (context.getEvento() == ELIMINAR_USUARIO) {
+            return "redirect:/login";
+        } else {
+            return "redirect:./#";
+        }
+
     }
 
 }

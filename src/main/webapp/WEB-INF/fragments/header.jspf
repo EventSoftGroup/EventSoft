@@ -139,7 +139,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="/usuarios/perfil-Usuario" class="btn btn-default btn-flat">Perfil</a>
+                                <a href="/usuarios/perfil-usuario" class="btn btn-default btn-flat">Perfil</a>
                             </div>
                             <div class="pull-right">
                                 <a href="/sign-out" class="btn btn-default btn-flat">Salir</a>

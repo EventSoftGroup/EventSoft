@@ -1,5 +1,6 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
+<<<<<<< HEAD
 import com.sun.org.apache.regexp.internal.RE;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
@@ -16,6 +17,17 @@ import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.CREAR_MENSAJE;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_CREAR_MENSAJE;
 import static es.fdi.eventsoft.Presentacion.Controllers.HomeController.isLogin;
 
+=======
+import es.fdi.eventsoft.Negocio.Comandos.Contexto;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
+import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
+import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+>>>>>>> bcb8b06ffc6f399d332fdab62f593e7d686c2045
 
 /**
  * Created by Rodrigo de Miguel on 09/05/2017.
@@ -44,6 +56,7 @@ public class MensajesController {
     public String eventoNuevoMensaje(Model model, HttpSession session) {
         model.addAttribute("title", "EventSoft - Nuevo Mensaje");
 
+        return null;
         if(!isLogin(model,session)){
             return "login";
         }
@@ -114,5 +127,21 @@ public class MensajesController {
         //TODO
 
         return null;
+    }
+
+    @RequestMapping(value = "ver/{id}", method = RequestMethod.GET)
+    public String ver(@PathVariable("id") Long id, Model model) {
+        if (id > 0) {
+            Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_MENSAJE).execute(id);
+
+            if (contexto.getEvento() == EventosNegocio.BUSCAR_MENSAJE) {
+                model.addAttribute("mensaje", contexto.getDatos());
+                return "leer-mensaje";
+            } else {
+                return "error-500";
+            }
+        }
+
+        return "redirect:/index";
     }
 }
