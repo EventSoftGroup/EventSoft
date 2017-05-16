@@ -33,19 +33,30 @@ public class TestEmpleados {
     public static void main(String[] args) {
 
 
-        Mensaje mensajeNuevo = new Mensaje();
-        Date fecha = new Date();
+        FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("rodri@ucm.es");
 
-        mensajeNuevo.getReceptor().setEmail("org@ucm.es");
-        mensajeNuevo.getEmisor().setId(11L);
-        mensajeNuevo.setAsunto("asuntoMensaje    ");
-        mensajeNuevo.setMensaje("super mega mensaje desde test");
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Usuario.class);
 
-        Long idMensaje = FactoriaSA.getInstance().crearSAMensajes().crearMensaje(mensajeNuevo);
+/*
+        Usuario cli = new Cliente("nombre1", "apellidos2", null, null);
+        cli.setEmail("svavadfv@ucm.es");
+        cli.setCodigoPostal("28200");
+        cli.setDireccion("dir");
+        cli.setLocalidad("local");
+        cli.setPassword("1234");
+        cli.setProvincia("prov");
+        cli.setTelefono("123456789");
+        cli.setEstado(Usuario.EstadosUsuario.ACTIVO);
+*/
 
-        System.out.println(idMensaje);
+        integra.begin();
 
+        boolean bool = integra.baja(42L);
+        //cli = (Usuario) integra.alta(cli);
 
+        integra.commit();
+
+        System.out.println(bool);
 
 
 
@@ -63,7 +74,7 @@ public class TestEmpleados {
 
         //FachadaIntegracion integra = FachadaIntegracion.newInstance(Usuario.class);
 
-        FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("rodri@ucm.es");
+
 
 
         /*

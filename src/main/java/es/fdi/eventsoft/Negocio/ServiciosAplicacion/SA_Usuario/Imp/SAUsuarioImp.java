@@ -2,13 +2,11 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.Imp;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
-import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
+import javafx.util.Pair;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
@@ -23,31 +21,19 @@ public class SAUsuarioImp implements SAUsuario{
         Object result = null;
         FachadaIntegracion integra = null;
 
-        if (usuarioNuevo instanceof Cliente) {
-            integra = FachadaIntegracion.newInstance(Cliente.class);
-        } else if (usuarioNuevo instanceof Proveedor) {
-            integra = FachadaIntegracion.newInstance(Proveedor.class);
-
-        } else if (usuarioNuevo instanceof Organizador) {
-            integra = FachadaIntegracion.newInstance(Organizador.class);
-        }
-
-        try {
-            integra.begin();
             //si no existe ya el correo...
-            if (!(integra.ejecutarQuery("from Usuario where email='" + usuarioNuevo.getEmail() + "'").size() > 0)) {
+            if (buscarUsuarioByEmail(usuarioNuevo.getEmail()) != null) {
+
                 usuarioNuevo.setEstado(Usuario.EstadosUsuario.ACTIVO);
+
+                integra = FachadaIntegracion.newInstance(Usuario.class);
+                integra.begin();
                 result = integra.alta(usuarioNuevo);
+                integra.commit();
+
             }else{
                 return EventosNegocio.EMAIL_YA_EXISTENTE;
             }
-
-            integra.commit();
-
-        }catch (Exception e){
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-        }
 
         return (result!=null) ? USUARIO_CREADO : ERROR_CREAR_USUARIO;
     }
@@ -69,24 +55,19 @@ public class SAUsuarioImp implements SAUsuario{
         FachadaIntegracion integra = null;
         boolean result = false;
 
-        if (usuarioEliminar instanceof Cliente) {
-            integra = FachadaIntegracion.newInstance(Cliente.class);
-        } else if (usuarioEliminar instanceof Proveedor) {
-            integra = FachadaIntegracion.newInstance(Proveedor.class);
-
-        } else if (usuarioEliminar instanceof Organizador) {
-            integra = FachadaIntegracion.newInstance(Organizador.class);
-        }
 
         try {
-            integra.begin();
+
             //Se elimina solo si existe el correo
             Usuario aborrar = buscarUsuarioByEmail(usuarioEliminar.getEmail());
             if (aborrar != null) {
+                integra = FachadaIntegracion.newInstance(Usuario.class);
+
+                integra.begin();
                 result = integra.baja(aborrar.getId());
+                integra.commit();
             }
 
-            integra.commit();
 
         }catch (Exception e){
             System.err.println(e.getMessage());
@@ -99,7 +80,7 @@ public class SAUsuarioImp implements SAUsuario{
         FachadaIntegracion integra = FachadaIntegracion.newInstance(Usuario.class);
 
         integra.begin();
-        List list = integra.ejecutarQuery("from Usuario where email='" + email + "'");
+        List list = integra.ejecutarNamedQuery("Usuario.buscarPorEmail", Arrays.asList(new Pair<>("email", email)));
         integra.commit();
 
         return (list.isEmpty()) ? null : (Usuario) (list.iterator().next());

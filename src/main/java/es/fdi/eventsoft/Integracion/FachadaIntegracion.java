@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.Integracion;
 
 import es.fdi.eventsoft.Integracion.imp.ServicioIntegracionImp;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public interface FachadaIntegracion<T> {
          * Constructor del servicio.
          *
          * @param <T> Class para parametrizar el servicio
+         *           
          * @return Nueva instancia del servicio de integracion parametrizado para T
          */
         static <T> FachadaIntegracion<T> newInstance(Class<T> t){
@@ -26,6 +28,7 @@ public interface FachadaIntegracion<T> {
          * Alta de la @Entity tipo <T>
          *
          * @param <T> Entidad a persistir
+         *
          * @return Instancia de la @Entity administadra (managed) que se persistió.
          *              Null si hay error.
          */
@@ -36,6 +39,7 @@ public interface FachadaIntegracion<T> {
          * Baja de una entidad por ID
          *
          * @param id ID de la entidad
+         *
          * @return True si baja corecta
          *         False si hubo error.
          */
@@ -46,6 +50,7 @@ public interface FachadaIntegracion<T> {
          * Modificacion de la @Entity tipo <T>
          *
          * @param <T> @Entity a modificar
+         *
          * @return Instancia de la @Entity administadra (managed) que se persistió.
          *         Null si hubo error.
          */
@@ -56,6 +61,7 @@ public interface FachadaIntegracion<T> {
          * Busqueda de la entidad por ID
          *
          * @param id ID de la entidad a buscar
+         *
          * @return @Entity buscada por ID
          *          Null si la @Entity no funciona
          */
@@ -68,10 +74,14 @@ public interface FachadaIntegracion<T> {
 
         /** Ejecuta la query pasada
          *
-         * @param query Query en Lenguaje HQL
+         * @param nameQuery Query en Lenguaje HQL
+         * @param params Lista de pares de los parametros de la Query
+         *               String: nombre del parametro
+         *               Object: parametro
+         *
          * @return List con el resultado
          */
-        List ejecutarQuery(String query, List<String> params);
+        List ejecutarNamedQuery(String nameQuery, List<Pair<String, Object>> params);
 
 
 

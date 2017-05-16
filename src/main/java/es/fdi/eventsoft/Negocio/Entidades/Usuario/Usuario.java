@@ -8,8 +8,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -18,6 +16,9 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Usuarios")
+@NamedQueries({
+        @NamedQuery(name = "Usuario.buscarPorEmail", query = "from Usuario u where u.email = :email")
+})
 public class Usuario implements Serializable {
 
     /****************************

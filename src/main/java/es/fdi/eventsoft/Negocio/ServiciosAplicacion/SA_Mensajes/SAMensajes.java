@@ -13,11 +13,7 @@ public interface SAMensajes {
 
     Long crearMensaje(Mensaje mensajeNuevo) ;
 
-<<<<<<< HEAD
-    Mensaje buscarMensaje(Mensaje mensaje) throws ExcepcionNegocio;
-=======
-    public Mensaje buscarMensaje(Long id);
->>>>>>> bcb8b06ffc6f399d332fdab62f593e7d686c2045
+    Mensaje buscarMensaje(Long id);
 
     int eliminarMensaje(Mensaje mensaje) throws ExcepcionNegocio;
 

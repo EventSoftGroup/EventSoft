@@ -2,12 +2,12 @@ package es.fdi.eventsoft.Integracion.imp;
 
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import javafx.util.Pair;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
@@ -83,13 +83,13 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
     }
 
     /**
-     * @see FachadaIntegracion<T>{@link #ejecutarQuery(String, List)}
+     * @see FachadaIntegracion<T>{@link #ejecutarNamedQuery(String, List)}
      */
-    public List ejecutarQuery(String query, List<String> params){
-        Query q = em.createNamedQuery(query);
+    public List ejecutarNamedQuery(String nameQuery, List<Pair<String, Object>> params){
+        Query q = em.createNamedQuery(nameQuery);
 
         for (int i=0; i < params.size(); i++) {
-            q.setParameter(i, params.get(i));
+            q.setParameter(params.get(i).getKey(), params.get(i).getValue());
         }
 
         return q.getResultList();
