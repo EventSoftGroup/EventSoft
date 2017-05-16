@@ -33,9 +33,19 @@ public class TestEmpleados {
     public static void main(String[] args) {
 
 
-        FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("rodri@ucm.es");
+        //Usuario user = FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("rodri@ucm.es");
 
-        FachadaIntegracion integra = FachadaIntegracion.newInstance(Usuario.class);
+        Usuario user2 = new Usuario();
+        user2.setId(7L);
+        List mensajes = FactoriaSA.getInstance().crearSAMensajes().buscarMensajesByUser(user2, true);
+
+
+        System.out.println(mensajes);
+
+
+
+
+
 
 /*
         Usuario cli = new Cliente("nombre1", "apellidos2", null, null);
@@ -48,15 +58,6 @@ public class TestEmpleados {
         cli.setTelefono("123456789");
         cli.setEstado(Usuario.EstadosUsuario.ACTIVO);
 */
-
-        integra.begin();
-
-        boolean bool = integra.baja(42L);
-        //cli = (Usuario) integra.alta(cli);
-
-        integra.commit();
-
-        System.out.println(bool);
 
 
 

@@ -9,6 +9,13 @@ left-side-column.jspf<!-- Left side column. contains the logo and sidebar -->
         <ul class="sidebar-menu">
             <li class="header">PRINCIPAL</li>
             <!-- Optionally, you can add icons to the links -->
+
+            <li
+                <c:if test="${pagina eq 'perfil'}">
+                    class="active"
+                </c:if>
+            ><a href="/usuarios/perfil"><i class="fa fa-line-chart"></i> <span>Perfil</span></a></li>
+
             <li
             <c:if test="${pagina eq 'timeline'}">
                 class="active"

@@ -93,13 +93,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoEliminarMensaje();
                 break;
 
-            case BUSCAR_MENSAJES_BY_USER_EMISOR:
-                miComando = new ComandoBuscarMensajesByUser_Emisor();
+            case BUSCAR_MENSAJES_BY_USER:
+                miComando = new ComandoBuscarMensajesByUser();
                 break;
 
-            case BUSCAR_MENSAJES_BY_USER_RECEPTOR:
-                miComando = new ComandoBuscarMensajesByUser_Receptor();
-                break;
 
 
 

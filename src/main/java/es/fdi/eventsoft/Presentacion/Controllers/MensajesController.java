@@ -5,18 +5,22 @@ import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import javafx.util.Pair;
 import org.hibernate.service.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.OneToMany;
 import javax.servlet.http.HttpSession;
 
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.CREAR_MENSAJE;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_CREAR_MENSAJE;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 import static es.fdi.eventsoft.Presentacion.Controllers.HomeController.isLogin;
 
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
+
+import java.util.List;
 
 
 /**
@@ -32,13 +36,41 @@ public class MensajesController {
     @GetMapping("/buzon")
     public String eventoBuzon(Model model, HttpSession session) {
 
-        if(!isLogin(model, session)) {
+
+        if(!isLogin(model,session)){
             return "login";
-        }else{
-            model.addAttribute("title", "EventSoft - Buzón");
-            model.addAttribute("pagina", "buzon");
-            return "buzon";
+        }else {
+
+            Usuario user = (Usuario) session.getAttribute("usuario");
+
+            //Buscar los mensajes enviados
+            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_MENSAJES_BY_USER).execute(new Pair<>(user, true));
+
+            if (contex.getEvento() == ERROR_BUSCAR_USUARIO) {
+                return "login";
+            }else if(contex.getEvento() == BUSCAR_MENSAJES_BY_USER){
+
+                user.setMensajes_enviados((List) contex.getDatos());
+
+                //Buscar los mensajes recibidos
+                Contexto contex2 = FactoriaComandos.getInstance().crearComando(BUSCAR_MENSAJES_BY_USER).execute(new Pair<>(user, false));
+
+                if (contex2.getEvento() == ERROR_BUSCAR_USUARIO) {
+                    return "login";
+                }else if(contex2.getEvento() == BUSCAR_MENSAJES_BY_USER){
+
+                    user.setMensajes_recibidos((List) contex2.getDatos());
+
+                    session.setAttribute("usuario", user);
+                    model.addAttribute("title", "EventSoft - Buzón");
+                    model.addAttribute("pagina", "buzon");
+
+                    return "buzon";
+
+                }
+            }
         }
+        return "login";
     }
 
 
@@ -103,10 +135,9 @@ public class MensajesController {
         return null;
     }
 
-    @RequestMapping("buscarMensajeByEmisor")
-    public String buscarMensajeByEmisor(Model model) {
+    @RequestMapping(value = "buscarMensajeByEmisor", method = RequestMethod.POST)
+    public String buscarMensajeByEmisor(@RequestParam Usuario emisor, Model model, HttpSession session) {
         //TODO
-
 
         return null;
     }

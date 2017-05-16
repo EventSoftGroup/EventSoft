@@ -17,6 +17,6 @@ public interface SAMensajes {
 
     int eliminarMensaje(Mensaje mensaje) throws ExcepcionNegocio;
 
-    List<Mensaje> buscarMensajesByUser(Usuario usuario, boolean emisor) throws ExcepcionNegocio;
+    List<Mensaje> buscarMensajesByUser(Usuario usuario, boolean emisor);
 
 }

@@ -12,6 +12,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Mensajes")
+@NamedQueries({
+        @NamedQuery(name = "Mensaje.LISTADO_MENSAJES_BY_EMISOR", query = "from Mensaje m where m.emisor = :emisor "),
+        @NamedQuery(name = "Mensaje.LISTADO_MENSAJES_BY_RECEPTOR", query = "from Mensaje m where m.receptor = :receptor ")
+})
 public class Mensaje implements Serializable{
 
     /****************************

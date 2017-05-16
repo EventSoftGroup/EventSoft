@@ -8,7 +8,9 @@ import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.SAMensajes;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
+import javafx.util.Pair;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +27,6 @@ public class SAMensajesImp implements SAMensajes {
         Usuario emisor;
         Usuario receptor;
         Long idMensaje = -1L;
-
-
 
         emisor= saUser.buscarUsuarioByID(mensajeNuevo.getEmisor().getId());
 
@@ -70,8 +70,24 @@ public class SAMensajesImp implements SAMensajes {
     }
 
     @Override
-    public List<Mensaje> buscarMensajesByUser(Usuario usuario, boolean emisor) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public List<Mensaje> buscarMensajesByUser(Usuario usuario, boolean emisor) {
+        FachadaIntegracion integra;
+        List<Mensaje> lista = null;
+
+
+        if(FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByID(usuario.getId()) != null){
+
+            integra = FachadaIntegracion.newInstance(Mensaje.class);
+
+            integra.begin();
+
+            if(emisor) lista = integra.ejecutarNamedQuery("Mensaje.LISTADO_MENSAJES_BY_EMISOR", Arrays.asList(new Pair<>("emisor", usuario)));
+            else lista = integra.ejecutarNamedQuery("Mensaje.LISTADO_MENSAJES_BY_RECEPTOR", Arrays.asList(new Pair<>("receptor", usuario)));
+
+            integra.commit();
+        }
+
+
+        return lista;
     }
 }

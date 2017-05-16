@@ -15,7 +15,7 @@ public interface FachadaIntegracion<T> {
          * Constructor del servicio.
          *
          * @param <T> Class para parametrizar el servicio
-         *           
+         *
          * @return Nueva instancia del servicio de integracion parametrizado para T
          */
         static <T> FachadaIntegracion<T> newInstance(Class<T> t){
