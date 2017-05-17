@@ -5,10 +5,7 @@ import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.*;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -140,6 +137,7 @@ public class UserController {
     public String home(Model model) {
         model.addAttribute("title", "EventSoft");
         model.addAttribute("pagina", "perfil");
+
         return "perfil-usuario";
     }
 

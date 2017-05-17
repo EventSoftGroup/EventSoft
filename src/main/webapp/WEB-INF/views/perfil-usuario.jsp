@@ -27,8 +27,8 @@
                 <small></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
+                <li class="active">Perfil personal</li>
             </ol>
         </section>
         <!-- Main content -->
@@ -40,24 +40,49 @@
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle" src="/dist/img/user4-128x128.jpg"
                                  alt="User profile picture">
-                            <h3 class="profile-username text-center">${cliente.nombre} ${cliente.apellidos}</h3>
+                            <h3 class="profile-username text-center">
+                                <c:catch var="exception">${usuario.nombre}</c:catch>
+
+                                <c:if test="${not empty exception}"> <!-- Profesional -->
+                                    ${usuario.empresa}
+                                </c:if>
+                                <c:if test="${empty exception}"> <!-- Cliente -->
+                                    ${usuario.nombre}
+                                </c:if>
+                            </h3>
                             <!-- <p class="text-muted text-center">Florista Web</p>-->
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Eventos</b> <a class="pull-right">45</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Servicios Ofertados</b> <a class="pull-right">5</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Tags</b>
-                                    <br>
-                                    <p>
-                                        <span class="label label-info">Flores a domicilio</span>
-                                        <span class="label label-info">Ramos</span>
-                                        <span class="label label-info">Bodas</span>
-                                        <span class="label label-info">Fiestas</span>
-                                    </p>
+                                    <c:if test="${rol eq 'Organizador'}">
+                                        <b>Eventos</b> <a class="pull-right">
+                                            <c:if test="${not empty usuario.eventos}">
+                                                ${usuario.eventos.size()}
+                                            </c:if>
+                                        <c:if test="${empty usuario.eventos}">
+                                            0
+                                        </c:if>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${rol eq 'Proveedor'}">
+                                        <b>Servicios Ofertados</b> <a class="pull-right">
+                                        <c:if test="${not empty usuario.servicios}">
+                                            ${usuario.servicios.size()}
+                                        </c:if>
+                                        <c:if test="${empty usuario.servicios}">
+                                            0
+                                        </c:if>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${rol eq 'Cliente'}">
+                                        <b>Eventos Asociados</b> <a class="pull-right">
+                                        <c:if test="${not empty usuario.eventos_Adscritos}">
+                                            ${usuario.eventos_Adscritos.size()}
+                                        </c:if>
+                                        <c:if test="${empty usuario.eventos_Adscritos}">
+                                            0
+                                        </c:if>
+                                        </a>
+                                    </c:if>
                                 </li>
                             </ul>
                             <a href="/eventos/nuevo-mensaje" class="btn btn-primary btn-block"><b>Contactar</b></a>
@@ -68,18 +93,39 @@
                     <!-- About Me Box -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">About Me</h3>
+                            <h3 class="box-title">Información</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
+
                             <strong><i class="fa fa-book margin-r-5"></i> Nombre</strong>
                             <p class="text-muted">
-                                Florista Web .SL
+                                <c:catch var="exception">${usuario.nombre}</c:catch>
+
+                                <c:if test="${not empty exception}"> <!-- Profesional -->
+                                    ${usuario.empresa}
+                                </c:if>
+                                <c:if test="${empty exception}"> <!-- Cliente -->
+                                    ${usuario.nombre}
+                                </c:if>
                             </p>
                             <hr>
-                            <strong><i class="fa fa-map-marker margin-r-5"></i> Localización</strong>
-                            <p class="text-muted">Malibu, California</p>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Dirección</strong>
+                            <p class="text-muted">${usuario.direccion}</p>
                             <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i>Localidad</strong>
+                            <p class="text-muted">${usuario.localidad}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i>Provincia</strong>
+                            <p class="text-muted">${usuario.provincia}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Código Postal</strong>
+                            <p class="text-muted">${usuario.codigoPostal}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Teléfono</strong>
+                            <p class="text-muted">${usuario.telefono}</p>
+                            <hr>
+                            <!--
                             <strong><i class="fa fa-pencil margin-r-5"></i> Servicios</strong>
                             <p>
                                 <span class="label label-info">Flores a domicilio</span>
@@ -89,17 +135,7 @@
                                 <span class="label label-info">Arreglos florales</span>
                             </p>
                             <hr>
-                            <strong><i class="fa fa-bar-chart margin-r-5"></i> Valoraciones</strong>
-                            <p>
-                                <span class="label label-success"><i class="fa fa-thumbs-up margin-r-5"></i>45</span>
-                                <span class="label label-danger"><i class="fa fa-thumbs-down margin-r-5"></i>7</span>
-                                -->
-                                <span class="label label-success"></i>Ratio: 45</span>
-                            </p>
-                            <hr>
-                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Descricpcion</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-                            <hr>
+                            -->
                             <strong><i class="fa fa-file-text-o margin-r-5"></i> Opciones</strong>
                             <p>
                                 <button type="button" class="btn btn-primary" data-widget="collapse"> Enviar mail
@@ -117,7 +153,7 @@
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#activity" data-toggle="tab">Eventos Creados</a></li>
+                            <li class="active"><a href="#activity" data-toggle="tab">Eventos</a></li>
                             <li><a href="#timeline" data-toggle="tab">Valoraciones</a></li>
                             <li><a href="#settings" data-toggle="tab">Modificar Datos</a></li>
                         </ul>
@@ -334,12 +370,26 @@
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="settings">
                                 <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+
+                                    <c:catch var="exception">${usuario.nombre}</c:catch>
+
+                                    <c:if test="${not empty exception}"> <!-- Profesional -->
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-2 control-label">Empresa</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="inputEmpresa" placeholder="Ej.: Miguelañez">
+                                            </div>
                                         </div>
-                                    </div>
+                                    </c:if>
+                                    <c:if test="${empty exception}"> <!-- Cliente -->
+                                        <div class="form-group">
+                                            <label for="inputName" class="col-sm-2 control-label">Nombre y Apellidos</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="inputName" placeholder="Ej.: Miguel Esparza Martín">
+                                            </div>
+                                        </div>
+                                    </c:if>
+
                                     <div class="form-group">
                                         <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10">
@@ -348,38 +398,47 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                        <label for="inputName" class="col-sm-2 control-label">Dirección</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Name">
+                                            <input type="text" class="form-control" id="inputDireccion" placeholder="Calle Coronel Ricardo nº6">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                                        <label for="inputName" class="col-sm-2 control-label">Localidad</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience"
-                                                      placeholder="Experience"></textarea>
+                                            <input type="text" class="form-control" id="inputLocalidad" placeholder="Ej.: Cercedilla">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                                        <label for="inputName" class="col-sm-2 control-label">Provincia</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills"
-                                                   placeholder="Skills">
+                                            <input type="text" class="form-control" id="inputProvincia" placeholder="Ej.: Madrid">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputName" class="col-sm-2 control-label">Código Postal</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputCP" placeholder="Ej.: 40080">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputName" class="col-sm-2 control-label">Teléfono</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputTelefono" placeholder="Ej.: 669304090">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and
-                                                    conditions</a>
+                                                    <input type="checkbox"> Estoy de acuerdo con los <a href="#">terminos y condiciones</a>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                            <button type="submit" class="btn btn-danger">Modificar Datos</button>
                                         </div>
                                     </div>
                                 </form>
