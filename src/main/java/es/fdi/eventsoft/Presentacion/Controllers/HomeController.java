@@ -36,19 +36,12 @@ public class HomeController {
         return true;
     }
 
-
-
-
-
-
-
 //    public String home(HttpSession session,
 //                       @RequestParam (value = "email", defaultValue = "") String email,
 //                       @RequestParam (value = "pass", defaultValue = "") String pass,
 //                       Model model) {
     @RequestMapping("index")
     public String home( @ModelAttribute("userLog") Usuario userLog, BindingResult bindingResult, Model model, HttpSession session) {
-
 
         if(userLog.getEmail().trim().isEmpty()){
             bindingResult.rejectValue("email" , "error.userLog", "Introduzca un Email valido");
@@ -57,8 +50,6 @@ public class HomeController {
             bindingResult.rejectValue("password" , "error.userLog", "Instroduzca una contraseña");
             return "login";
         }
-
-
 
         Contexto contex = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(userLog.getEmail());
 
@@ -107,19 +98,17 @@ public class HomeController {
     @RequestMapping({"/","login"})
     public String login(Model model) {
         model.addAttribute("title", "EventSoft");
-        model.addAttribute("userLog",new Usuario());
+        model.addAttribute("userLog", new Usuario());
         return "login";
     }
-
-
 
     @RequestMapping("sign-out")
     public String signOut(HttpSession session, SessionStatus status, Model model) {
         session.removeAttribute("rol");
+        session.removeAttribute("usuario");
         status.setComplete();
         return "redirect:login";
     }
-
 
     @RequestMapping("500")
     public String getErrorr500(HttpSession session, SessionStatus status, Model model) {
