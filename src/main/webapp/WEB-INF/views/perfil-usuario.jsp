@@ -369,62 +369,61 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" method="post" action="/usuarios/modificar">
 
                                     <c:catch var="exception">${usuario.nombre}</c:catch>
 
                                     <c:if test="${not empty exception}"> <!-- Profesional -->
                                         <div class="form-group">
-                                            <label for="inputName" class="col-sm-2 control-label">Empresa</label>
+                                            <label for="empresa" class="col-sm-2 control-label">Empresa</label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="inputEmpresa" placeholder="Ej.: Miguelañez">
+                                                <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Ej.: Miguelañez" value="${usuario.empresa}">
                                             </div>
                                         </div>
                                     </c:if>
                                     <c:if test="${empty exception}"> <!-- Cliente -->
                                         <div class="form-group">
-                                            <label for="inputName" class="col-sm-2 control-label">Nombre y Apellidos</label>
+                                            <label for="nombre" class="col-sm-2 control-label">Nombre y Apellidos</label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="inputName" placeholder="Ej.: Miguel Esparza Martín">
+                                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej.: Miguel Esparza Martín" value="${usuario.nombre}">
                                             </div>
                                         </div>
                                     </c:if>
 
                                     <div class="form-group">
-                                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                                        <label for="email" class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail"
-                                                   placeholder="Email">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${usuario.email}">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Dirección</label>
+                                        <label for="direccion" class="col-sm-2 control-label">Dirección</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputDireccion" placeholder="Calle Coronel Ricardo nº6">
+                                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle Coronel Ricardo nº6" value="${usuario.direccion}">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Localidad</label>
+                                        <label for="localidad" class="col-sm-2 control-label">Localidad</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputLocalidad" placeholder="Ej.: Cercedilla">
+                                            <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ej.: Cercedilla" value="${usuario.localidad}">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Provincia</label>
+                                        <label for="provincia" class="col-sm-2 control-label">Provincia</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputProvincia" placeholder="Ej.: Madrid">
+                                            <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Ej.: Madrid" value="${usuario.provincia}">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Código Postal</label>
+                                        <label for="codigoPostal" class="col-sm-2 control-label">Código Postal</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputCP" placeholder="Ej.: 40080">
+                                            <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="Ej.: 40080" value="${usuario.codigoPostal}">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Teléfono</label>
+                                        <label for="telefono" class="col-sm-2 control-label">Teléfono</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputTelefono" placeholder="Ej.: 669304090">
+                                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ej.: 669304090" value="${usuario.telefono}">
                                         </div>
                                     </div>
                                     <div class="form-group">

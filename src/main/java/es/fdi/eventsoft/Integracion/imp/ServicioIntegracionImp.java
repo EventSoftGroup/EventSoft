@@ -52,12 +52,13 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
     /**
      * @see FachadaIntegracion<T>{@link #modifica(Object)}
      */
-    public <T> T modifica(T t) {
+    public boolean modifica(T t) {
             try {
-                return em.merge(t);
+                em.merge(t);
+                return true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
-                return null;
+                return false;
             }
         }
 

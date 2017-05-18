@@ -54,7 +54,7 @@ public interface FachadaIntegracion<T> {
          * @return Instancia de la @Entity administadra (managed) que se persistió.
          *         Null si hubo error.
          */
-        <T> T  modifica(T t);
+        boolean modifica(T t);
 
 
         /**

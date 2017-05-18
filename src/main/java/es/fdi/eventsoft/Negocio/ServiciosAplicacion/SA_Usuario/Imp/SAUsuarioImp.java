@@ -87,13 +87,8 @@ public class SAUsuarioImp implements SAUsuario{
     }
 
     @Override
-    public Boolean modificarUsuario(Usuario usuario) {
-        FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
-
-        fachadaIntegracion.begin();
-        fachadaIntegracion.modifica(usuario);
-        fachadaIntegracion.commit();
-
-        return true;
+    public boolean modificarUsuario(Usuario usuario) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
+        return fachadaIntegracion.modifica(usuario);
     }
 }

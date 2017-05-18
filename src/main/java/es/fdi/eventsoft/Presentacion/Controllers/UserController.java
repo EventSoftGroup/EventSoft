@@ -98,8 +98,6 @@ public class UserController {
 
     }
 
-
-
     @RequestMapping(value = "registrar_proveedor", method = RequestMethod.POST)
     public String registrar_Proveedor(@Valid Proveedor proveedor, BindingResult bindingResult, Model model, HttpSession session) {
 
@@ -129,10 +127,6 @@ public class UserController {
         }
     }
 
-
-    /* =================================
-           AQUÍ LOS GETS DE USUARIOS
-       =================================*/
     @RequestMapping("perfil-usuario")
     public String home(Model model) {
         model.addAttribute("title", "EventSoft");
@@ -140,14 +134,6 @@ public class UserController {
 
         return "perfil-usuario";
     }
-
-    /* -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ */
-
-
-    /* =================================
-           AQUÍ LOS POSTS DE USUARIOS
-       ================================= */
-
 
     /*@RequestMapping(value = "registrar_usuario", method = RequestMethod.POST)
     public String registrar_usuario(@ModelAttribute("Organizador") Organizador Organizador,
@@ -201,14 +187,31 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "modificar", method = RequestMethod.PUT)
-    public String modificar(@ModelAttribute("Usuario") Usuario usuario, Model model) {
+    @RequestMapping(value = "modificar", method = RequestMethod.POST)
+    public String modificar(
+            @RequestParam("email") String email,
+            @RequestParam("direccion") String direccion,
+            @RequestParam("localidad") String localidad,
+            @RequestParam("provincia") String provincia,
+            @RequestParam("codigoPostal") String codigoPostal,
+            @RequestParam("telefono") String telefono
+    ) {
+        Usuario usuario = new Usuario(); // Buscar por id en lugar de esto;
+        usuario.setEmail(email);
+        usuario.setDireccion(direccion);
+        usuario.setLocalidad(localidad);
+        usuario.setProvincia(provincia);
+        usuario.setCodigoPostal(codigoPostal);
+        usuario.setTelefono(telefono);
+
+        System.out.println(email);
+
         Contexto contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
 
         if (contexto.getEvento() == MODIFICAR_USUARIO) {
-            return "redirect:/index";
+            return "perfil-usuario";
         } else {
-            return "redirect:./#";
+            return "error-500";
         }
     }
 
