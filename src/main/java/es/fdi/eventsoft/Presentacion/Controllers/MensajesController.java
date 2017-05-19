@@ -30,9 +30,6 @@ import java.util.List;
 @RequestMapping("/mensajes/")
 public class MensajesController {
 
-
-
-
     @GetMapping("/buzon")
     public String eventoBuzon(Model model, HttpSession session) {
         long time_start, time_end;
@@ -96,10 +93,13 @@ public class MensajesController {
         return "nuevo-mensaje";
     }
 
-
     @RequestMapping(value = "/crearMensaje", method = RequestMethod.POST)
-    public String crearMensaje(HttpSession session, Model model,
-            @RequestParam(value = "email") String email, @RequestParam String asunto, @RequestParam String texto) {
+    public String crearMensaje(
+            HttpSession session,
+            Model model,
+            @RequestParam(value = "email") String email,
+            @RequestParam String asunto,
+            @RequestParam String texto) {
 
         if(!isLogin(model,session)){
             return "login";
@@ -138,16 +138,26 @@ public class MensajesController {
         return null;
     }
 
-    @RequestMapping("eliminarMensaje")
-    public String eliminarMensaje(Model model) {
-        //TODO
+    @RequestMapping(value = "eliminar", method = RequestMethod.DELETE)
+    public String eliminarMensaje(@PathVariable("id") Long id, Model model) {
+        if (id > 0) {
+            Contexto contexto = FactoriaComandos.getInstance().crearComando(ELIMINAR_MENSAJE).execute(id);
 
+            if (contexto.getEvento() == ELIMINAR_MENSAJE) {
+                return "buzon";
+            } else {
+                return "error-500";
+            }
+        }
 
-        return null;
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "buscarMensajeByEmisor", method = RequestMethod.POST)
-    public String buscarMensajeByEmisor(@RequestParam Usuario emisor, Model model, HttpSession session) {
+    public String buscarMensajeByEmisor(
+            @RequestParam Usuario emisor,
+            Model model,
+            HttpSession session) {
         //TODO
 
         return null;
