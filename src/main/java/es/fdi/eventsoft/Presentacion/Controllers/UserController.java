@@ -139,41 +139,6 @@ public class UserController {
         return "perfil-usuario";
     }
 
-    /*@RequestMapping(value = "registrar_usuario", method = RequestMethod.POST)
-    public String registrar_usuario(@ModelAttribute("Organizador") Organizador Organizador,
-                                    @ModelAttribute("Proveedor") Proveedor Proveedor,
-                                    @ModelAttribute("Cliente") Cliente Cliente,
-                                    @RequestParam String seleccion,
-                                    HttpSession session) {
-
-        //Creo una nueva variable Usuario que utilizaré para guardarlo en sesión.
-        Usuario Usuario = null;
-
-        if (seleccion.equalsIgnoreCase("Cliente")) {
-            System.out.println("Tengo un nuevo Cliente con nombre: " + Cliente.getNombre());
-            session.setAttribute("nombre", Cliente.getNombre());
-            session.setAttribute("rol", "Cliente");
-        } else if (seleccion.equalsIgnoreCase("Organizador")) {
-            System.out.println("Tengo un nuevo Organizador con nombre: " + Organizador.getEmpresa());
-            session.setAttribute("nombre", Organizador.getEmpresa());
-            session.setAttribute("rol", "Organizador");
-        } else if (seleccion.equalsIgnoreCase("Proveedor")) {
-            System.out.println("Tengo un nuevo Proveedor con nombre: " + Proveedor.getEmpresa());
-            session.setAttribute("nombre", Organizador.getEmpresa());
-            session.setAttribute("rol", "Proveedor");
-        }
-
-        Date ahora = new Date();
-        SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
-        session.setAttribute("fecha_registro", formateador.format(ahora));
-
-        Comando comando = FactoriaComandos.newInstance().crearComando(EventosNegocio.CREAR_USUARIO);
-        Contexto contexto = comando.execute(Cliente);
-        System.out.println("Datos recibidos: " + contexto.getDatos());
-
-        return "redirect:index";
-    }*/
-
     @GetMapping(value = "buscarUsuario/{id}",
             produces = "application/json")
     public @ResponseBody ResponseEntity<Usuario> buscarUsuario(@PathVariable Long id, Model model) {
