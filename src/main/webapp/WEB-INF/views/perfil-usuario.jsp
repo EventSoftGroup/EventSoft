@@ -427,12 +427,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Estoy de acuerdo con los <a href="#">terminos y condiciones</a>
-                                                </label>
-                                            </div>
+                                        <div class="col-sm-10">
+                                            <input type="hidden" id="idUsuario" name="idUsuario" value="${usuario.id}">
                                         </div>
                                     </div>
                                     <div class="form-group">

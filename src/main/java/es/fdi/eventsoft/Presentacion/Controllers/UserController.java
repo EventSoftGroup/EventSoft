@@ -7,6 +7,8 @@ import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.*;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 @Controller
 @RequestMapping("/usuarios/")
 public class UserController {
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping("register")
     public String register(Model model) {
@@ -189,6 +193,7 @@ public class UserController {
 
     @RequestMapping(value = "modificar", method = RequestMethod.POST)
     public String modificar(
+            @RequestParam("idUsuario") Long id,
             @RequestParam("email") String email,
             @RequestParam("direccion") String direccion,
             @RequestParam("localidad") String localidad,
@@ -196,7 +201,10 @@ public class UserController {
             @RequestParam("codigoPostal") String codigoPostal,
             @RequestParam("telefono") String telefono
     ) {
-        Usuario usuario = new Usuario(); // Buscar por id en lugar de esto;
+        Contexto contexto;
+
+        contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_USUARIO_BY_ID).execute(id);
+        Usuario usuario = (Usuario) contexto.getDatos();
         usuario.setEmail(email);
         usuario.setDireccion(direccion);
         usuario.setLocalidad(localidad);
@@ -204,10 +212,7 @@ public class UserController {
         usuario.setCodigoPostal(codigoPostal);
         usuario.setTelefono(telefono);
 
-        System.out.println(email);
-
-        Contexto contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
-
+        contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
         if (contexto.getEvento() == MODIFICAR_USUARIO) {
             return "perfil-usuario";
         } else {
