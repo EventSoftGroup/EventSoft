@@ -13,9 +13,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "Servicios")
-/*@NamedQueries({
-        @NamedQuery(name = "Servicios.buscarPorEvento", query = "from Servicios where :evento member of eventoServicio")
-})*/
+/*
+@NamedQueries({
+        @NamedQuery(name = "Servicio.buscarPorEvento", query = "from Servicio where :evento member of eventoServicio")
+})
+*/
 public class Servicio implements Serializable{
 
     /****************************

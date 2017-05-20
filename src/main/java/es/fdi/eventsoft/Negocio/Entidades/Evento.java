@@ -62,7 +62,10 @@ public class Evento implements Serializable {
      ******* CONSTRUCTORES ******
      ****************************/
 
-    public enum CategoriasEvento {}
+    public enum CategoriasEvento {
+        bodas,
+        despedidas
+    }
 
     public Evento() {}
 

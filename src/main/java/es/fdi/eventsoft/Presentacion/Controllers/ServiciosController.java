@@ -3,7 +3,11 @@ package es.fdi.eventsoft.Presentacion.Controllers;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
+import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,7 @@ import java.util.Date;
 @RequestMapping("/servicios/")
 public class ServiciosController {
 
+    Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
     @RequestMapping("crearServicio")
     public String crearServicio(Model model) {
@@ -61,14 +66,19 @@ public class ServiciosController {
     }
 
     @RequestMapping(
-            value = "buscar-por-evento/{evento}",
+            value = "buscar-por-evento/{idEvento}",
             method = RequestMethod.GET,
             produces = "applicacion/json")
-    public @ResponseBody ResponseEntity<Servicio> buscarByEvento(@PathVariable("evento") String evento) {
-        if (!evento.equalsIgnoreCase("")) {
-            Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_SERVICIOS_BY_EVENTO).execute(evento);
+    public @ResponseBody ResponseEntity<Servicio> buscarByEvento(@PathVariable("idEvento") Long idEvento) {
+        Contexto contexto;
+
+        if (idEvento > 0) {
+            contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_EVENTO).execute(idEvento);
+            Evento evento1 = (Evento) contexto.getDatos();
+            contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_SERVICIOS_BY_EVENTO).execute(evento1);
 
             if (contexto.getEvento() == EventosNegocio.BUSCAR_SERVICIOS_BY_EVENTO) {
+                log.info(((Evento) contexto.getDatos()).getNombre());
                 return new ResponseEntity<>((Servicio) contexto.getDatos(), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

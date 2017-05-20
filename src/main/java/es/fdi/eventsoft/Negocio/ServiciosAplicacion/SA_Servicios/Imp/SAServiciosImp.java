@@ -8,7 +8,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -52,17 +52,14 @@ public class SAServiciosImp implements SAServicios{
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
 
         fachadaIntegracion.begin();
-        String query = "Servicios.buscarPorEvento";
-        List params = new ArrayList();
-        params.add(evento);
-        List servicios = fachadaIntegracion.ejecutarNamedQuery(query, params);
+        List servicios = fachadaIntegracion.ejecutarNamedQuery("Servicio.buscarPorEvento", Arrays.asList(new javafx.util.Pair<>("evento", evento)));
         fachadaIntegracion.commit();
 
         return servicios;
     }
 
     @Override
-    public List<Servicio> buscarServiciosEntreFechas(Date fecha_Ini, Date fecha_Fin) throws ExcepcionNegocio {
+    public List<Servicio> buscarServiciosEntreFechas(Date fecha_Ini, Date fecha_Fin) {
         //TODO
         return null;
     }

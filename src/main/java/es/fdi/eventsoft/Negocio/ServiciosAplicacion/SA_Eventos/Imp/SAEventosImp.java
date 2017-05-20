@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Eventos.Imp;
 
 
+import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Eventos.SAEventos;
@@ -21,9 +22,14 @@ public class SAEventosImp implements SAEventos {
     }
 
     @Override
-    public Evento buscarEvento(Evento evento) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public Evento buscarEvento(Long id) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Evento.class);
+
+        fachadaIntegracion.begin();
+        Evento evento = (Evento) fachadaIntegracion.consulta(id);
+        fachadaIntegracion.commit();
+
+        return evento;
     }
 
     @Override
