@@ -24,9 +24,14 @@ public class SAServiciosImp implements SAServicios{
     }
 
     @Override
-    public Servicio buscarServicio(Servicio servicio) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public Servicio buscarServicio(Long id) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
+
+        fachadaIntegracion.begin();
+        Servicio servicio = (Servicio) fachadaIntegracion.consulta(id);
+        fachadaIntegracion.commit();
+
+        return servicio;
     }
 
     @Override

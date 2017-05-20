@@ -9,6 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns("/*/*");
+        registry.addInterceptor(new AuthenticationInterceptor())
+                                .addPathPatterns("/*/*")
+                                .excludePathPatterns("/usuarios/register",
+                                                    "/usuarios/tipoUsuario",
+                                                    "/usuarios/registrar_cliente",
+                                                    "/usuarios/registrar_organizador",
+                                                    "/usuarios/registrar_proveedor");
     }
 }

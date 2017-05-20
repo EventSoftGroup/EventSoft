@@ -68,11 +68,13 @@ public class SAMensajesImp implements SAMensajes {
     public boolean eliminarMensaje(Long id) {
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Mensaje.class);
 
+        boolean respuesta;
+
         fachadaIntegracion.begin();
-        fachadaIntegracion.baja(id);
+        respuesta = fachadaIntegracion.baja(id);
         fachadaIntegracion.commit();
 
-        return true;
+        return respuesta;
     }
 
     @Override

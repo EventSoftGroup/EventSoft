@@ -48,21 +48,21 @@
                         </div>
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="active" id="botonBandejaEntrada"><a ><i class="fa fa-inbox"></i> Bandeja de Entrada
+                                <li class="active" id="botonBandejaEntrada"><a href="#"><i class="fa fa-inbox"></i> Bandeja de Entrada
                                     <span class="label label-primary pull-right">
                                         <c:if test="${not empty usuario.mensajes_recibidos}">
                                             ${fn:length(usuario.mensajes_recibidos)}
                                         </c:if>
 
                                     </span></a></li>
-                                <li id="botonBandejaEnviados"><a><i class="fa fa-send-o"></i> Enviados
+                                <li id="botonBandejaEnviados"><a href="#"><i class="fa fa-send-o"></i> Enviados
                                     <span class="label label-success pull-right">
                                         <c:if test="${not empty usuario.mensajes_enviados}">
                                             ${fn:length(usuario.mensajes_enviados)}
                                         </c:if>
 
                                     </span></a></li>
-                                <li><a href="#"><i class="fa fa-trash-o"></i> Papelera<span class="label label-warning pull-right"></span></a></li>
+                                <!--<li><a href="#"><i class="fa fa-trash-o"></i> Papelera<span class="label label-warning pull-right"></span></a></li>-->
                             </ul>
                         </div>
                         <!-- /.box-body -->
@@ -84,27 +84,28 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body no-padding">
+                            <c:if test="${not empty usuario.mensajes_recibidos}">
                             <div class="mailbox-controls">
                                 <!-- Check all button -->
-                                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                                <!--<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                                 </button>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                                </div>
+                                </div>-->
                                 <!-- /.btn-group -->
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                                <div class="pull-right">
+                                <!--<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>-->
+                                <!--<div class="pull-right">
                                     1-50/200
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
                                     </div>
-                                    <!-- /.btn-group -->
-                                </div>
+                                </div>-->
                                 <!-- /.pull-right -->
                             </div>
+                            </c:if>
                             <div class="table-responsive mailbox-messages">
                                 <table class="table table-hover table-striped">
                                     <tbody>
@@ -112,10 +113,14 @@
                                     <c:if test="${not empty usuario.mensajes_recibidos}">
 
                                             <c:forEach var="mensaje" items="${usuario.mensajes_recibidos}">
-                                                <tr onclick="location='/mensajes/ver/${mensaje.id}'">
-                                                    <td><input type="checkbox"></td>
+                                                <tr>
+                                                    <!--<td><input type="checkbox"></td>-->
+                                                    <td>
+                                                        <a href="/mensajes/ver/${mensaje.id}" type="button" class="btn btn-default"><i class="fa fa-search"></i> Ver</a>
+                                                        <a href="/mensajes/eliminar/${mensaje.id}" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                    </td>
 
-                                                    <c:catch var="exception">${mensaje.emisor.nombre}</c:catch>
+                                                    <p style="display:none;"><c:catch var="exception">${mensaje.emisor.nombre}</c:catch></p>
 
                                                     <c:if test="${not empty exception}"> <!-- Profesional -->
                                                         <td class="mailbox-name"><a>${mensaje.emisor.empresa}</a></td>
@@ -141,17 +146,18 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer no-padding">
+                            <c:if test="${not empty usuario.mensajes_recibidos}">
                             <div class="mailbox-controls">
                                 <!-- Check all button -->
-                                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                                <!--<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                                 </button>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                                </div>
+                                </div>-->
                                 <!-- /.btn-group -->
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                <!--<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>-->
                                 <div class="pull-right">
                                     1-50/200
                                     <div class="btn-group">
@@ -162,6 +168,7 @@
                                 </div>
                                 <!-- /.pull-right -->
                             </div>
+                            </c:if>
                         </div>
                     </div>
                     <!-- /. box -->
@@ -183,27 +190,28 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body no-padding">
+                            <c:if test="${not empty usuario.mensajes_enviados}">
                             <div class="mailbox-controls">
                                 <!-- Check all button -->
-                                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                                <!--<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                                 </button>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                                </div>
+                                </div>-->
                                 <!-- /.btn-group -->
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                                <div class="pull-right">
+                                <!--<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>-->
+                                <!--<div class="pull-right">
                                     1-50/200
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
                                     </div>
-                                    <!-- /.btn-group -->
-                                </div>
+                                </div>-->
                                 <!-- /.pull-right -->
                             </div>
+                            </c:if>
                             <div class="table-responsive mailbox-messages">
                                 <table class="table table-hover table-striped">
                                     <tbody>
@@ -212,16 +220,20 @@
                                     <c:if test="${not empty usuario.mensajes_enviados}">
 
                                         <c:forEach var="mensaje" items="${usuario.mensajes_enviados}">
-                                            <tr onclick="location='/mensajes/ver/${mensaje.id}'">
-                                                <td><input type="checkbox"></td>
+                                            <tr>
+                                                <!--<td><input type="checkbox"></td>-->
+                                                <td>
+                                                    <a href="/mensajes/ver/${mensaje.id}" class="btn btn-default"><i class="fa fa-search"></i> Ver</a>
+                                                    <a href="/mensajes/eliminar/${mensaje.id}" class="btn btn-default"><i class="fa fa-trash-o"></i> Eliminar</a>
+                                                </td>
 
-                                                <c:catch var="exception">${mensaje.emisor.nombre}</c:catch>
+                                                <p style="display:none;"><c:catch var="exception">${mensaje.emisor.nombre}</c:catch></p>
 
                                                 <c:if test="${not empty exception}"> <!-- Profesional -->
-                                                    <td class="mailbox-name"><a>${mensaje.emisor.empresa}</a></td>
+                                                    <td onclick="location='/mensajes/ver/${mensaje.id}'" class="mailbox-name"><a href="#">${mensaje.emisor.empresa}</a></td>
                                                 </c:if>
                                                 <c:if test="${empty exception}"> <!-- Cliente -->
-                                                    <td class="mailbox-name"><a>${mensaje.emisor.nombre}</a></td>
+                                                    <td onclick="location='/mensajes/ver/${mensaje.id}'" class="mailbox-name"><a href="#">${mensaje.emisor.nombre}</a></td>
                                                 </c:if>
 
                                                 <td class="mailbox-subject"><b>${mensaje.asunto}</b> - ${fn:substring(mensaje.mensaje, 0, 35)}... </td>
@@ -239,17 +251,18 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer no-padding">
+                            <c:if test="${not empty usuario.mensajes_enviados}">
                             <div class="mailbox-controls">
                                 <!-- Check all button -->
-                                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                                <!--<button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                                 </button>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
                                     <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                                </div>
+                                </div>-->
                                 <!-- /.btn-group -->
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                <!--<button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>-->
                                 <div class="pull-right">
                                     1-50/200
                                     <div class="btn-group">
@@ -260,6 +273,7 @@
                                 </div>
                                 <!-- /.pull-right -->
                             </div>
+                            </c:if>
                         </div>
                     </div>
                     <!-- /. box -->

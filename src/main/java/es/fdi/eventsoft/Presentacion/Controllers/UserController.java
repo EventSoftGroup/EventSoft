@@ -1,7 +1,4 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
-
-
-import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
@@ -30,7 +27,6 @@ public class UserController {
     @RequestMapping("register")
     public String register(Model model) {
         model.addAttribute("title", "EventSoft");
-
         return "registrarTipoUsuario";
     }
 
@@ -54,6 +50,14 @@ public class UserController {
             return "register";
         }
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(cliente);
+        if (contexto.getEvento() != null){
+            System.out.println("Le inserto el id");
+            Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(cliente.getEmail());
+            Usuario recibido = (Usuario) contexto_2.getDatos();
+            cliente.setId(recibido.getId());
+        } else {
+            System.out.println("No le inserto el id");
+        }
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("cliente", cliente);
@@ -82,6 +86,11 @@ public class UserController {
         }
 
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(organizador);
+        if (contexto.getEvento() != null) {
+            Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(organizador.getEmail());
+            Usuario recibido = (Usuario) contexto_2.getDatos();
+            organizador.setId(recibido.getId());
+        }
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("organizador", organizador);
@@ -112,6 +121,11 @@ public class UserController {
         }
 
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(proveedor);
+        if (contexto.getEvento() != null) {
+            Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(proveedor.getEmail());
+            Usuario recibido = (Usuario) contexto_2.getDatos();
+            proveedor.setId(recibido.getId());
+        }
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("proveedor", proveedor);

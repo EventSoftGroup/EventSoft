@@ -371,7 +371,7 @@
                             <div class="tab-pane" id="settings">
                                 <form class="form-horizontal" method="post" action="/usuarios/modificar">
 
-                                    <c:catch var="exception">${usuario.nombre}</c:catch>
+                                    <p style="display:none;"><c:catch var="exception">${usuario.nombre}</c:catch></p>
 
                                     <c:if test="${not empty exception}"> <!-- Profesional -->
                                         <div class="form-group">

@@ -33,12 +33,20 @@ public class ServiciosController {
         return null;
     }
 
-    @RequestMapping("buscarServicio")
-    public String buscarServicio(Model model) {
-        //TODO
+    @RequestMapping(value = "buscarServicio/{id}", method = RequestMethod.GET)
+    public String buscarServicio(@PathVariable("id") Long id, Model model) {
+        if (id > 0) {
+            Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_SERVICIO).execute(id);
 
+            if (contexto.getEvento() == EventosNegocio.BUSCAR_SERVICIO) {
+                model.addAttribute("mensaje", contexto.getDatos());
+                return "#";
+            } else {
+                return "error-500";
+            }
+        }
 
-        return null;
+        return "redirect:/index";
     }
 
     @RequestMapping("eliminarServicio")

@@ -8,18 +8,12 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import org.springframework.boot.context.config.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-
-import javax.persistence.Version;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 @Controller
 public class HomeController {

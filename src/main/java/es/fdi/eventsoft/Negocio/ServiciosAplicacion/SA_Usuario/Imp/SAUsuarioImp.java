@@ -22,7 +22,7 @@ public class SAUsuarioImp implements SAUsuario{
         FachadaIntegracion integra = null;
 
             //si no existe ya el correo...
-            if (buscarUsuarioByEmail(usuarioNuevo.getEmail()) != null) {
+            if (buscarUsuarioByEmail(usuarioNuevo.getEmail()) == null) {
 
                 usuarioNuevo.setEstado(Usuario.EstadosUsuario.ACTIVO);
 

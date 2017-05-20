@@ -1,25 +1,16 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
-
-import com.sun.org.apache.regexp.internal.RE;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import javafx.util.Pair;
-import org.hibernate.service.jdbc.connections.internal.UserSuppliedConnectionProviderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.OneToMany;
 import javax.servlet.http.HttpSession;
-
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 import static es.fdi.eventsoft.Presentacion.Controllers.HomeController.isLogin;
-
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
-
 import java.util.List;
 
 
@@ -121,12 +112,12 @@ public class MensajesController {
 
             if (contex.getEvento() == CREAR_MENSAJE) {
                 model.addAttribute("usuario");
-                return "buzon";
+                return "redirect:buzon";
 
             } else if (contex.getEvento() == ERROR_CREAR_MENSAJE) {
                 return "nuevo-mensaje";
             }
-            return "buzon";
+            return "redirect:buzon";
         }
     }
 
@@ -138,19 +129,18 @@ public class MensajesController {
         return null;
     }
 
-    @RequestMapping(value = "eliminar", method = RequestMethod.DELETE)
+    @RequestMapping(value = "eliminar/{id}", method = RequestMethod.GET)
     public String eliminarMensaje(@PathVariable("id") Long id, Model model) {
         if (id > 0) {
             Contexto contexto = FactoriaComandos.getInstance().crearComando(ELIMINAR_MENSAJE).execute(id);
 
             if (contexto.getEvento() == ELIMINAR_MENSAJE) {
-                return "buzon";
+                return "redirect:../buzon";
             } else {
                 return "error-500";
             }
         }
-
-        return "redirect:/index";
+        else return "redirect:../buzon";
     }
 
     @RequestMapping(value = "buscarMensajeByEmisor", method = RequestMethod.POST)

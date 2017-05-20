@@ -35,9 +35,10 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="/eventos/nuevo-mensaje" class="btn btn-primary btn-block margin-bottom">Nuevo mensaje</a>
+                        <a href="/mensajes/mensaje-nuevo" class="btn btn-primary btn-block margin-bottom">Nuevo mensaje</a>
+                        <a href="/mensajes/buzon" class="btn btn-primary btn-block margin-bottom">Volver</a>
 
-                        <div class="box box-solid">
+                        <!--<div class="box box-solid">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Carpetas</h3>
 
@@ -48,15 +49,15 @@
                             </div>
                             <div class="box-body no-padding">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="/eventos/buzon"><i class="fa fa-inbox"></i> Bandeja de Entrada
+                                    <li class="active"><a href="/mensajes/buzon"><i class="fa fa-inbox"></i> Bandeja de Entrada
                                         <span class="label label-primary pull-right">12</span></a></li>
                                     <li><a href="#"><i class="fa fa-envelope-o"></i> Enviados</a></li>
                                     <li><a href="#"><i class="fa fa-star"></i> Favoritos</a></li>
                                     <li><a href="#"><i class="fa fa-trash-o"></i> Papelera<span class="label label-warning pull-right">65</span></a></li>
                                 </ul>
                             </div>
-                            <!-- /.box-body -->
-                        </div>
+
+                        </div>-->
                     </div>
                     <!-- /.col -->
                     <div class="col-md-9">

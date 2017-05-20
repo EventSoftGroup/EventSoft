@@ -15,7 +15,7 @@ public interface SAServicios {
 
     int crearServicio(Servicio servicioNuevo) throws ExcepcionNegocio;
 
-    Servicio buscarServicio(Servicio servicio) throws ExcepcionNegocio;
+    Servicio buscarServicio(Long id) ;
 
     int eliminarServicio(Servicio servicio) throws ExcepcionNegocio;
 
