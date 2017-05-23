@@ -5,6 +5,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,6 @@ public interface SAServicios {
 
     List buscarServiciosByEvento(Evento evento);
 
-    List buscarServiciosEntreFechas(Date fecha_Ini, Date fecha_Fin);
+    List buscarServiciosEntreFechas(ArrayList<String> fechas);
 
 }

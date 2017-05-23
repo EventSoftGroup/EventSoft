@@ -7,14 +7,13 @@ import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
+import javafx.util.Pair;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
-/**
- * Created by Rodrigo de Miguel on 05/05/2017.
- */
 public class SAServiciosImp implements SAServicios{
 
     @Override
@@ -57,15 +56,33 @@ public class SAServiciosImp implements SAServicios{
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
 
         fachadaIntegracion.begin();
-        List servicios = fachadaIntegracion.ejecutarNamedQuery("Servicio.buscarPorEvento", Arrays.asList(new javafx.util.Pair<>("evento", evento)));
+        List servicios = fachadaIntegracion.ejecutarNamedQuery("Servicio.buscarPorEvento", Arrays.asList(new Pair<>("evento", evento)));
         fachadaIntegracion.commit();
 
         return servicios;
     }
 
     @Override
-    public List<Servicio> buscarServiciosEntreFechas(Date fecha_Ini, Date fecha_Fin) {
-        //TODO
-        return null;
+    public List<Servicio> buscarServiciosEntreFechas(ArrayList<String> fechas) {
+        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        ArrayList<Pair> fechasNuevas = new ArrayList<>();
+
+        try {
+            Date fechaIni = format.parse(fechas.get(0));
+            Date fechaFin = format.parse(fechas.get(1));
+
+            fechasNuevas.add(new Pair("fechaIni", fechaIni));
+            fechasNuevas.add(new Pair("fechaFin", fechaFin));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
+
+        fachadaIntegracion.begin();
+        List servicios = fachadaIntegracion.ejecutarNamedQuery("Servicio.buscarEntreFechas", Arrays.asList(fechasNuevas));
+        fachadaIntegracion.commit();
+
+        return servicios;
     }
 }

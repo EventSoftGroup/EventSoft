@@ -14,11 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by Rodrigo de Miguel on 09/05/2017.
- */
 @Controller
 @RequestMapping("/servicios/")
 public class ServiciosController {
@@ -87,6 +85,30 @@ public class ServiciosController {
 
             if (contexto.getEvento() == EventosNegocio.BUSCAR_SERVICIOS_BY_EVENTO) {
                 log.info(((Evento) contexto.getDatos()).getNombre());
+                return new ResponseEntity<>((Servicio) contexto.getDatos(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(
+            value = "buscar-entre-fechas/{fechaIni}/{fechaFin}",
+            method = RequestMethod.GET,
+            produces = "application/json")
+    public @ResponseBody ResponseEntity<Servicio> buscarEntreFechas(@PathVariable("fechaIni") String fechaIni, @PathVariable("fechaFin") String fechaFin) {
+        Contexto contexto;
+        ArrayList<String> fechas = new ArrayList();
+        fechas.add(fechaIni);
+        fechas.add(fechaFin);
+
+        if (fechaIni != null && fechaFin != null) {
+            contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_SERVICIOS_ENTRE_FECHAS).execute(fechas);
+
+            if (contexto.getEvento() == EventosNegocio.BUSCAR_SERVICIOS_ENTRE_FECHAS) {
+                log.info(((Servicio) contexto.getDatos()).getNombre());
                 return new ResponseEntity<>((Servicio) contexto.getDatos(), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

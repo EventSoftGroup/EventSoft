@@ -37,7 +37,7 @@ public class EventoServicio implements Serializable {
 
 
 	public EventoServicio(Evento evento, Servicio servicio) {
-		this.servicio =servicio;
+		this.servicio = servicio;
 		this.evento = evento;
 	}
 
