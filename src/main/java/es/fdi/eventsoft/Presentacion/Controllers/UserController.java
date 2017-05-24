@@ -178,8 +178,7 @@ public class UserController {
             @RequestParam("localidad") String localidad,
             @RequestParam("provincia") String provincia,
             @RequestParam("codigoPostal") String codigoPostal,
-            @RequestParam("telefono") String telefono
-    ) {
+            @RequestParam("telefono") String telefono) {
         Contexto contexto;
 
         contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_USUARIO_BY_ID).execute(id);

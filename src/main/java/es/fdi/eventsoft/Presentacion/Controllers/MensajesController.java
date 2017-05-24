@@ -3,7 +3,12 @@ import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import javafx.util.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +25,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/mensajes/")
 public class MensajesController {
+
+    private Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
     @GetMapping("/buzon")
     public String eventoBuzon(Model model, HttpSession session) {
@@ -153,11 +160,25 @@ public class MensajesController {
         return null;
     }
 
-    @RequestMapping(value = "buscar-por-receptor", method = RequestMethod.GET)
-    public String buscarByReceptor(@RequestParam String query, Model model) {
-        //TODO
+    @RequestMapping(
+            value = "buscar/por-usuario/{idUsuario}",
+            method = RequestMethod.GET,
+            produces = "application/json")
+    public @ResponseBody ResponseEntity<Mensaje> buscarPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        Contexto contexto;
 
-        return null;
+        if (idUsuario != null) {
+            contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_MENSAJES_BY_USER).execute(idUsuario);
+
+            if (contexto.getEvento() == BUSCAR_MENSAJES_BY_USER) {
+                log.info("Se han encontrado mensajes");
+                return new ResponseEntity<Mensaje>((HttpStatus) contexto.getDatos());
+            } else {
+                return new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return new ResponseEntity<Mensaje>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(value = "ver/{id}", method = RequestMethod.GET)

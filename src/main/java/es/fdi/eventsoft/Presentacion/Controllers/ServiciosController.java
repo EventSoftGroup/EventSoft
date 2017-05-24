@@ -21,7 +21,7 @@ import java.util.Date;
 @RequestMapping("/servicios/")
 public class ServiciosController {
 
-    Logger log = LoggerFactory.getLogger(ServiciosController.class);
+    private Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
     @RequestMapping("crearServicio")
     public String crearServicio(Model model) {

@@ -8,6 +8,8 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
+
+    private Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
     public static boolean isLogin(Model model, HttpSession session){
 
@@ -30,10 +34,6 @@ public class HomeController {
         return true;
     }
 
-//    public String home(HttpSession session,
-//                       @RequestParam (value = "email", defaultValue = "") String email,
-//                       @RequestParam (value = "pass", defaultValue = "") String pass,
-//                       Model model) {
     @RequestMapping("index")
     public String home( @ModelAttribute("userLog") Usuario userLog, BindingResult bindingResult, Model model, HttpSession session) {
 
