@@ -153,6 +153,7 @@ public class UserController {
         model.addAttribute("title", "EventSoft");
         model.addAttribute("pagina", "perfil");
         model.addAttribute("usuarioAModificar", session.getAttribute("usuario"));
+        log.info(session.getAttribute("usuario").toString());
         model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
 
         return "perfil-usuario";

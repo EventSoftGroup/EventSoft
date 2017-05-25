@@ -113,7 +113,7 @@
             </div>
         </springForm:form>
 
-        <a href="../index.html" class="text-center">Si estoy registrado</a>
+        <a href="/" class="text-center">Si estoy registrado</a>
     </div>
     <!-- /.form-box -->
 </div>

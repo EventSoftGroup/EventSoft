@@ -1,5 +1,6 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="springForm"%>
 
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -366,74 +367,45 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal" method="post" action="/usuarios/modificar">
-
-                                    <p style="display:none;"><c:catch var="exception">${usuario.nombre}</c:catch></p>
-
-                                    <c:if test="${not empty exception}"> <!-- Profesional -->
-                                        <div class="form-group">
-                                            <label for="empresa" class="col-sm-2 control-label">Empresa</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Ej.: Miguelañez" value="${usuario.empresa}">
-                                            </div>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${empty exception}"> <!-- Cliente -->
-                                        <div class="form-group">
-                                            <label for="nombre" class="col-sm-2 control-label">Nombre y Apellidos</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej.: Miguel Esparza Martín" value="${usuario.nombre}">
-                                            </div>
-                                        </div>
-                                    </c:if>
-
-                                    <div class="form-group">
-                                        <label for="email" class="col-sm-2 control-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${usuario.email}">
-                                        </div>
+                                <springForm:form method="post" name="form_modificar_usuario" modelAttribute="${usuarioAModificar}" action="/usuarios/modificar">
+                                    <!-- Dirección -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="direccion" cssClass="form-control" autofocus="true" placeholder="Dirección" type="text"/>
+                                        <springForm:errors path="direccion" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="direccion" class="col-sm-2 control-label">Dirección</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle Coronel Ricardo nº6" value="${usuario.direccion}">
-                                        </div>
+                                    <!-- Localidad -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="localidad" cssClass="form-control" placeholder="Localidad" type="text"/>
+                                        <springForm:errors path="localidad" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="localidad" class="col-sm-2 control-label">Localidad</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Ej.: Cercedilla" value="${usuario.localidad}">
-                                        </div>
+                                    <!-- Provincia -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="provincia" cssClass="form-control" placeholder="Provincia" type="text"/>
+                                        <springForm:errors path="provincia" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="provincia" class="col-sm-2 control-label">Provincia</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Ej.: Madrid" value="${usuario.provincia}">
-                                        </div>
+                                    <!-- Código postal -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="codigoPostal" cssClass="form-control" placeholder="Código postal" type="text"/>
+                                        <springForm:errors path="codigoPostal" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="codigoPostal" class="col-sm-2 control-label">Código Postal</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="Ej.: 40080" value="${usuario.codigoPostal}">
-                                        </div>
+                                    <!-- Teléfono -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="telefono" cssClass="form-control" placeholder="Teléfono" type="text"/>
+                                        <springForm:errors path="telefono" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="telefono" class="col-sm-2 control-label">Teléfono</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ej.: 669304090" value="${usuario.telefono}">
+                                    <div class="row">
+                                        <!-- /.col -->
+                                        <div class="col-xs-4">
+                                            <button type="submit" class="btn btn-primary btn-block btn-flat">Modificar</button>
                                         </div>
+                                        <!-- /.col -->
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-10">
-                                            <input type="hidden" id="idUsuario" name="idUsuario" value="${usuario.id}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Modificar Datos</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                </springForm:form>
                             </div>
                             <!-- /.tab-pane -->
 

@@ -9,6 +9,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import javafx.util.Pair;
+import org.springframework.context.annotation.Bean;
 
 import java.text.DateFormat;
 import java.text.ParseException;
