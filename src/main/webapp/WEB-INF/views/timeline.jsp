@@ -35,7 +35,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box" id="box_sel_evento">
         <div class="box-header with-border">
           <h3 class="box-title">Selecciona el evento</h3>
 
@@ -50,7 +50,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Selecciona el evento que quieras visualizar</label>
-              <select class="form-control select2" style="width: 100%;">
+              <select id="eventos" class="form-control select2" style="width: 100%;">
                 <option selected="selected">Evento 1</option>
                 <option>Evento 2</option>
                 <option>Evento 3</option>
@@ -59,6 +59,7 @@
                 <option>Evento 6</option>
                 <option>Evento 7</option>
               </select>
+              <button id="aniadirServicio" class="btn btn-primary">Añadir un servicio</button>
             </div>
             <!-- /.form-group -->
           </div>
@@ -69,7 +70,45 @@
         </div>
         <!-- /.box-footer-->
       </div>
-      <!-- /.box -->
+
+
+      <div class="box" id="box_sel_categoria" style="display:none;">
+        <div class="box-header with-border">
+          <h3 id="titulo_categoria" class="box-title">Selecciona la categoria</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Selecciona la categoria que quieras visualizar</label>
+              <select id="categorias" class="form-control select2" style="width: 100%;">
+                <option selected="selected">Categoria 1</option>
+                <option>Categoria 2</option>
+                <option>Categoria 3</option>
+                <option>Categoria 4</option>
+                <option>Categoria 5</option>
+                <option>Categoria 6</option>
+                <option>Categoria 7</option>
+              </select>
+              <button id="buscarPorCategoria" class="btn btn-primary">buscar servicios</button>
+              <button id="sel_evento_nuevo" class="btn btn-primary">Seleccionar un evento nuevo</button>
+            </div>
+            <!-- /.form-group -->
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+
+        </div>
+        <!-- /.box-footer-->
+      </div>
+
 
       <!-- row -->
       <div class="row">
@@ -209,5 +248,6 @@
 <!-- ./wrapper -->
 
 <%@ include file="../fragments/plugins.jspf" %>
+<script src="/dist/js/eventos.js"></script>
 </body>
 </html>
