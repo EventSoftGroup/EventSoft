@@ -108,7 +108,7 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
     /**
      * @see FachadaIntegracion<T>{@link #begin()}
      */
-    public void begin(){
+    public synchronized void begin(){
         em = emf.createEntityManager();
         em.getTransaction().begin();
     }

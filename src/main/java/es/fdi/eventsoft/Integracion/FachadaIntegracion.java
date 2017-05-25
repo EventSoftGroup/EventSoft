@@ -18,9 +18,7 @@ public interface FachadaIntegracion<T> {
          *
          * @return Nueva instancia del servicio de integracion parametrizado para T
          */
-        static <T> FachadaIntegracion<T> newInstance(Class<T> t){
-                return new ServicioIntegracionImp(t);
-        }
+        static <T> FachadaIntegracion<T> newInstance(Class<T> t){ return new ServicioIntegracionImp(t); }
 
 
 

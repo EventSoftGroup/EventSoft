@@ -12,13 +12,9 @@ import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Valoraciones.SAValoracion
  */
 public abstract class FactoriaSA {
 
-    private static FactoriaSA uniqueInstance;
+    private static FactoriaSA uniqueInstance = new FactoriaSAImp();
 
     public static FactoriaSA getInstance() {
-        if (uniqueInstance == null) {
-            uniqueInstance = new FactoriaSAImp();
-        }
-
         return uniqueInstance;
     }
 

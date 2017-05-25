@@ -9,14 +9,9 @@ import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.Imp.FactoriaComandosI
  */
 public abstract class FactoriaComandos {
 
-    private static FactoriaComandos uniqueInstance;
+    private static FactoriaComandos uniqueInstance = new FactoriaComandosImp();
 
     public static FactoriaComandos getInstance(){
-        if (uniqueInstance == null) {
-
-            uniqueInstance = new FactoriaComandosImp();
-        }
-
         return uniqueInstance;
     }
 
