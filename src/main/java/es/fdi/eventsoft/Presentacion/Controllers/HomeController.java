@@ -80,10 +80,10 @@ public class HomeController {
                     return "admin";
                 }
             }else{
-                bindingResult.rejectValue("password" , "error.userLog", "La contraseña no coincide con el email");
+                bindingResult.rejectValue("password" , "error.userLog", "Contraseña incorrecta");
             }
         }else{
-            bindingResult.rejectValue("email" , "error.userLog", "Email no existente en el sistema");
+            bindingResult.rejectValue("email" , "error.userLog", "Email incorrecto");
         }
 
         return "login";

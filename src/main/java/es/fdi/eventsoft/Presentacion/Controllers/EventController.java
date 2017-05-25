@@ -1,10 +1,20 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
+import es.fdi.eventsoft.Negocio.Entidades.Evento;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/eventos/")
@@ -16,6 +26,10 @@ public class EventController {
     public String nuevoEvento(Model model) {
         model.addAttribute("title", "EventSoft - Nuevo evento");
         model.addAttribute("pagina", "nuevo-evento");
+        model.addAttribute("evento", new Evento());
+        model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
+
+
         return "nuevo-evento";
     }
 
@@ -61,11 +75,29 @@ public class EventController {
         return "leer-notificacion";
     }
 
-    @RequestMapping("crearEvento")
-    public String crearEvento(Model model) {
-        //TODO
+    @RequestMapping(value = "crearEvento", method = RequestMethod.POST)
+    public String crearEvento(@Valid Evento evento, BindingResult bindingResult, Model model, HttpSession session,
+        @RequestParam(value = "email") String email){
 
-        return null;
+        System.out.println("******************************************");
+        System.out.println(email);
+        System.out.println(evento);
+        System.out.println("******************************************");
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("tipoUsuario", "organizador");
+            model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
+
+            for(ObjectError err: bindingResult.getAllErrors())
+                System.out.println(err);
+            return "nuevo-evento";
+        }
+
+
+
+
+
+        return "nuevo-evento";
     }
 
     @RequestMapping("buscarEvento")

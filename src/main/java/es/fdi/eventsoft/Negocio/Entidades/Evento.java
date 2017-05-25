@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,10 @@ public class Evento implements Serializable {
     @Column(nullable = false)
     private String nombre;
 
+    @NotBlank
+    @Column(nullable = false)
+    private String descripcion;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Cliente cliente;
@@ -43,13 +48,13 @@ public class Evento implements Serializable {
 
     @Column(name = "Fecha_Inicio", nullable = false)
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    @NotBlank
+    @NotNull
     private Date fechaInicio;
 
 
     @Column(name = "Fecha_Fin", nullable = false)
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    @NotBlank @Future
+    @NotNull @Future
     private Date fechaFin;
 
 
@@ -63,14 +68,17 @@ public class Evento implements Serializable {
      ****************************/
 
     public enum CategoriasEvento {
-        bodas,
-        despedidas
+        BODAS,
+        DESPEDIDAS,
+        BABY_SHOWER,
+        COMIDA_EMPRESA
     }
 
     public Evento() {}
 
-    public Evento(String nombre, Cliente cliente, Organizador organizador, CategoriasEvento categoria, String lugar, Date fechaInicio, Date fechaFin) {
+    public Evento(String nombre, String descripcion, Cliente cliente, Organizador organizador, CategoriasEvento categoria, String lugar, Date fechaInicio, Date fechaFin) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.cliente = cliente;
         this.organizador = organizador;
         this.categoria = categoria;
@@ -79,8 +87,9 @@ public class Evento implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public Evento(String nombre, Cliente cliente, Organizador organizador, CategoriasEvento categoria, String lugar, Date fechaInicio, Date fechaFin, List<EventoServicio> eventoServicios) {
+    public Evento(String nombre, String descripcion, Cliente cliente, Organizador organizador, CategoriasEvento categoria, String lugar, Date fechaInicio, Date fechaFin, List<EventoServicio> eventoServicios) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.cliente = cliente;
         this.organizador = organizador;
         this.categoria = categoria;
@@ -108,6 +117,14 @@ public class Evento implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Cliente getCliente() {
@@ -164,5 +181,20 @@ public class Evento implements Serializable {
 
     public void setEventoServicios(List<EventoServicio> eventoServicios) {
         this.eventoServicios = eventoServicios;
+    }
+
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", cliente=" + cliente +
+                ", organizador=" + organizador +
+                ", categoria=" + categoria +
+                ", lugar='" + lugar + '\'' +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                '}';
     }
 }

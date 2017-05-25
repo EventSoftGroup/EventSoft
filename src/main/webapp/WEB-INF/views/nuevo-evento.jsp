@@ -1,5 +1,7 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags/form"
+           prefix="springForm"%>
 
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -38,35 +40,56 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form">
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Nombre del evento</label>
-                                <input type="text" class="form-control" placeholder="Boda de...">
-                            </div>
-                            <div class="form-group">
-                                <label>Lugar del evento</label>
-                                <input type="text" class="form-control" placeholder="Donde se van a desarrollar los hechos...">
-                            </div>
-
-                            <!-- textarea -->
-                            <div class="form-group">
-                                <label>Descripción</label>
-                                <textarea class="form-control" rows="3" placeholder="Una breve descripción del evento..."></textarea>
-                            </div>
+                        <springForm:form method="POST" name='formulario_crear_evento'  modelAttribute='evento' action="/eventos/crearEvento">
 
                             <!-- select -->
                             <div class="form-group">
-                                <label>Tipo de evento</label>
-                                <select class="form-control">
-                                    <option>Boda</option>
-                                    <option>Despedida de solter@</option>
-                                    <option>Baby Shower</option>
-                                    <option>Comida empresa</option>
-                                </select>
+                                <springForm:label path="categoria">Tipo de evento</springForm:label>
+                                <springForm:select path="categoria" items="${CategoriasEvento}" cssClass="form-control select2" style="width: 45%;"/>
                             </div>
 
-                        </form>
+                            <!-- text input -->
+                            <div class="form-group">
+                                <springForm:label path="nombre">Nombre del evento</springForm:label>
+                                <springForm:input path="nombre" cssClass="form-control" autofocus="true" placeholder="Boda de..." type="text" />
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                <springForm:errors path="nombre" cssClass="alert-error" />
+                            </div>
+                            <div class="form-group">
+                                <springForm:label path="lugar">Lugar del evento</springForm:label>
+                                <springForm:input path="lugar" cssClass="form-control"  placeholder="Donde se van a desarrollar los hechos..." type="text" />
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                <springForm:errors path="lugar" cssClass="alert-error" />
+                            </div>
+
+                            <div class="form-group">
+                                <label path="email">Email cliente:</label>
+                                <input name="email" class="form-control" placeholder="cliente@eventSoft.es" type="email" />
+                            </div>
+
+                            <div class="form-group">
+                                <springForm:label path="descripcion">Descripción</springForm:label>
+                                <springForm:textarea path="descripcion" cssClass="form-control"  placeholder="Una breve descripción del evento..." type="text" />
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                                <springForm:errors path="descripcion" cssClass="alert-error" />
+                            </div>
+
+                            <div class="form-group">
+                                <springForm:label path="fechaInicio">Fecha inicio:</springForm:label>
+                                <springForm:input path="fechaInicio" cssClass="form-control"  placeholder="Fecha inicio" type="date" style="width: 45%;"/>
+                                <springForm:errors path="fechaInicio" cssClass="alert-error" />
+                            </div>
+
+                            <div class="form-group">
+                                <springForm:label path="fechaFin">Fecha fin:</springForm:label>
+                                <springForm:input path="fechaFin" cssClass="form-control"  placeholder="Fecha fin" type="date" style="width: 45%;"/>
+                                <springForm:errors path="fechaFin" cssClass="alert-error" />
+                            </div>
+
+                            <div class="col-xs-4">
+                                <button type="submit" class="btn btn-primary btn-block btn-flat">Crear evento</button>
+                            </div>
+                        </springForm:form>
                     </div>
                     <!-- /.box-body -->
                 </div>
