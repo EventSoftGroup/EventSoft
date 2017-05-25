@@ -177,30 +177,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "modificar", method = RequestMethod.POST)
-    public String modificar(
-            @RequestParam("idUsuario") Long id,
-            @RequestParam("email") String email,
-            @RequestParam("direccion") String direccion,
-            @RequestParam("localidad") String localidad,
-            @RequestParam("provincia") String provincia,
-            @RequestParam("codigoPostal") String codigoPostal,
-            @RequestParam("telefono") String telefono) {
+    public String modificar(@Valid Usuario usuario, BindingResult bindingResult, Model model) {
         Contexto contexto;
 
-        contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_USUARIO_BY_ID).execute(id);
-        Usuario usuario = (Usuario) contexto.getDatos();
-        usuario.setEmail(email);
-        usuario.setDireccion(direccion);
-        usuario.setLocalidad(localidad);
-        usuario.setProvincia(provincia);
-        usuario.setCodigoPostal(codigoPostal);
-        usuario.setTelefono(telefono);
-
-        contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
-        if (contexto.getEvento() == MODIFICAR_USUARIO) {
+        if (bindingResult.hasErrors()) {
             return "perfil-usuario";
         } else {
-            return "error-500";
+            contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
+            if (contexto.getEvento() == MODIFICAR_USUARIO) {
+                return "perfil-usuario";
+            } else {
+                return "error-500";
+            }
         }
     }
 
