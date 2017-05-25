@@ -48,10 +48,14 @@
                                 <springForm:select path="categoria" items="${CategoriasEvento}" cssClass="form-control select2" style="width: 45%;"/>
                             </div>
 
+                            <div class="form-group">
+                                <label path="email">Email cliente:</label>
+                                <input name="email" class="form-control" placeholder="cliente@eventSoft.es" autofocus="true" type="email" />
+                            </div>
                             <!-- text input -->
                             <div class="form-group">
                                 <springForm:label path="nombre">Nombre del evento</springForm:label>
-                                <springForm:input path="nombre" cssClass="form-control" autofocus="true" placeholder="Boda de..." type="text" />
+                                <springForm:input path="nombre" cssClass="form-control"  placeholder="Boda de..." type="text" />
                                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                 <springForm:errors path="nombre" cssClass="alert-error" />
                             </div>
@@ -62,10 +66,7 @@
                                 <springForm:errors path="lugar" cssClass="alert-error" />
                             </div>
 
-                            <div class="form-group">
-                                <label path="email">Email cliente:</label>
-                                <input name="email" class="form-control" placeholder="cliente@eventSoft.es" type="email" />
-                            </div>
+
 
                             <div class="form-group">
                                 <springForm:label path="descripcion">Descripción</springForm:label>

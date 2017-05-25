@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface SAEventos {
 
-    int crearEvento(Evento eventoNuevo) throws ExcepcionNegocio;
+    Long crearEvento(Evento eventoNuevo);
 
     Evento buscarEvento(Long id);
 

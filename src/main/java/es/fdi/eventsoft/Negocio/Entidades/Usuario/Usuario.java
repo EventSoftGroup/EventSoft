@@ -28,48 +28,48 @@ public class Usuario implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column()
-    @Id private Long id;
+    @Id protected Long id;
 
 
     @NotBlank @Column(nullable = false, unique = true)
-    @Email private String email;
+    @Email protected String email;
 
     @Size(min=4, max=16)
     @Column(nullable = false)
-    private String password;
+    protected String password;
 
     @NotBlank
-    private String direccion;
+    protected String direccion;
 
     @NotBlank
-    private String localidad;
+    protected String localidad;
 
     @NotBlank
-    private String provincia;
+    protected String provincia;
 
     @Telefono
     @Column(nullable = false)
-    private String telefono;
+    protected String telefono;
 
     //@NotBlank //@Digits(integer=5, fraction=0)
     //@Pattern(regexp = "\\d{5}")
     @Pattern(regexp = "0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}", message = "Formato incorrecto")
     @Column(nullable = false, unique = true)
-    private String codigoPostal;
+    protected String codigoPostal;
 
     @Column(nullable = false)
-    private EstadosUsuario estado;
+    protected EstadosUsuario estado;
 
     @OneToMany(mappedBy = "emisor", cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Mensaje> mensajes_enviados = new ArrayList<Mensaje>();
+    protected List<Mensaje> mensajes_enviados = new ArrayList<Mensaje>();
 
 
     @OneToMany(mappedBy = "receptor", cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Mensaje> mensajes_recibidos = new ArrayList<Mensaje>();
+    protected List<Mensaje> mensajes_recibidos = new ArrayList<Mensaje>();
 
-    @Version private long version;
+    @Version protected long version;
 
     public Usuario(long l) {
         this.id = l;

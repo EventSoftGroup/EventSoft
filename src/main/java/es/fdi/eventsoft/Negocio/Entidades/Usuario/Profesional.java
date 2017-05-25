@@ -21,11 +21,11 @@ public class Profesional extends Usuario implements Serializable {
 
     @NotBlank
     @Column(nullable = false)
-    private String empresa;
+    protected String empresa;
 
     @NotBlank
     @Column(nullable = false, unique = true)
-    private String CIF;
+    protected String CIF;
 
     @OneToMany(mappedBy = "profesional", fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)

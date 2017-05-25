@@ -1,6 +1,12 @@
 package es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Eventos;
 import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
+import es.fdi.eventsoft.Negocio.Entidades.Evento;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.CREAR_EVENTO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_CREAR_EVENTO;
 
 /**
  * Created by Rodrigo de Miguel on 09/05/2017.
@@ -8,12 +14,9 @@ import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 public class ComandoCrearEvento implements Comando {
 
     public Contexto execute(Object datos){
-        //TODO
-        Contexto contex = null;
 
-
-
-        return contex;
+        Long id = FactoriaSA.getInstance().crearSAEventos().crearEvento((Evento) datos);
+        return new Contexto((id>0)? CREAR_EVENTO:ERROR_CREAR_EVENTO, id);
     }
 
 }

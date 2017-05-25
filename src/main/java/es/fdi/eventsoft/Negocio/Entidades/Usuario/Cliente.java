@@ -67,6 +67,10 @@ public class Cliente extends Usuario implements Serializable {
         this.eventos_Adscritos = eventos_Adscritos;
     }
 
+    public Cliente(String email) {
+        super.email = email;
+    }
+
     /****************************
      **** GETTERS AND SETTERS ***
      ****************************/

@@ -1,7 +1,11 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
+import es.fdi.eventsoft.Negocio.Comandos.Contexto;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
+import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Arrays;
+
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.CREAR_EVENTO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_CREAR_EVENTO;
 
 @Controller
 @RequestMapping("/eventos/")
@@ -79,23 +86,35 @@ public class EventController {
     public String crearEvento(@Valid Evento evento, BindingResult bindingResult, Model model, HttpSession session,
         @RequestParam(value = "email") String email){
 
-        System.out.println("******************************************");
-        System.out.println(email);
-        System.out.println(evento);
-        System.out.println("******************************************");
+        long time_start, time_end;
+        time_start = System.currentTimeMillis();
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || email.trim().isEmpty()) {
             model.addAttribute("tipoUsuario", "organizador");
             model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
-
-            for(ObjectError err: bindingResult.getAllErrors())
-                System.out.println(err);
             return "nuevo-evento";
         }
 
 
+        evento.setCliente(new Cliente(email));
+        evento.setOrganizador((Organizador) session.getAttribute("usuario"));
 
+        Contexto contex = FactoriaComandos.getInstance().crearComando(CREAR_EVENTO).execute(evento);
 
+        if(contex.getEvento() == CREAR_EVENTO){
+            model.addAttribute("tipoUsuario", "organizador");
+            model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
+            time_end = System.currentTimeMillis();
+            System.out.println("The task has taken "+ ( time_end - time_start ) +" milliseconds");
+            return "timeline";
+        }else if (contex.getEvento() == ERROR_CREAR_EVENTO){
+            model.addAttribute("tipoUsuario", "organizador");
+            model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
+            return "nuevo-evento";
+        }
+
+        time_end = System.currentTimeMillis();
+        System.out.println("The task has taken "+ ( time_end - time_start ) +" milliseconds");
 
         return "nuevo-evento";
     }
