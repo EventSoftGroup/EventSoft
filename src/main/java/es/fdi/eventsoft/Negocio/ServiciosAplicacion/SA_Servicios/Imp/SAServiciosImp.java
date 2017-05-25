@@ -2,6 +2,7 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.Imp;
 
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
@@ -17,9 +18,19 @@ import java.util.*;
 public class SAServiciosImp implements SAServicios{
 
     @Override
-    public int crearServicio(Servicio servicioNuevo) throws ExcepcionNegocio {
-        //TODO
-        return 0;
+    public Long crearServicio(Servicio servicioNuevo) {
+        Object result = null;
+        FachadaIntegracion integra = null;
+
+        integra = FachadaIntegracion.newInstance(Servicio.class);
+        integra.begin();
+        result = integra.alta(servicioNuevo);
+        integra.commit();
+
+        if((Servicio)result != null)
+            return ((Servicio) result).getId();
+        else
+            return null;
     }
 
     @Override

@@ -5,6 +5,7 @@ import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,12 +25,22 @@ public class ServiciosController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
-    @RequestMapping("crearServicio")
-    public String crearServicio(Model model) {
-        //TODO
+    @RequestMapping(value = "crear", method = RequestMethod.POST)
+    public String crear(
+            @RequestParam("nombreServicio") String nombre,
+            @RequestParam("listaServicios") Servicio.TiposServicio tipoElegido,
+            @RequestParam("descripcion") String descripcion,
+            HttpSession session
+    ) {
+        Contexto contexto;
+        Servicio servicio = new Servicio(tipoElegido, nombre, descripcion, (Proveedor) session.getAttribute("usuario"));
+        contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_SERVICIO).execute(servicio);
 
-
-        return null;
+        if (contexto.getEvento() == EventosNegocio.CREAR_SERVICIO) {
+            return "perfil-usuario";
+        } else {
+            return "error-500";
+        }
     }
 
     @RequestMapping(value = "buscarServicio/{id}", method = RequestMethod.GET)

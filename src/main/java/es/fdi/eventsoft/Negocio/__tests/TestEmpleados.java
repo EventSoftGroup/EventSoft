@@ -15,10 +15,7 @@ import org.springframework.util.SerializationUtils;
 import sun.util.cldr.CLDRLocaleDataMetaInfo;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
@@ -35,11 +32,11 @@ public class TestEmpleados {
     public static void main(String[] args) {
 //
 
-        Servicio servicio = FactoriaSA.getInstance().crearSAServicios().buscarServicio(2L);
-
-
+        //Servicio servicio = FactoriaSA.getInstance().crearSAServicios().buscarServicio(2L);
+        List lista = Arrays.asList(Servicio.TiposServicio.values());
+        System.out.println(lista);
         //System.out.println("Nombre servicio: " + servicio.getNombre());
-        System.out.println("Id proveedor: " + servicio.getProveedor());
+        //System.out.println("Id proveedor: " + servicio.getProveedor());
 
 
     }

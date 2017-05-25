@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface SAServicios {
 
-    int crearServicio(Servicio servicioNuevo) throws ExcepcionNegocio;
+    Long crearServicio(Servicio servicioNuevo);
 
     Servicio buscarServicio(Long id) ;
 

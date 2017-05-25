@@ -46,9 +46,6 @@
                                 <c:if test="${not empty exception}"> <!-- Profesional -->
                                     ${usuario.empresa}
                                 </c:if>
-                                <c:if test="${empty exception}"> <!-- Cliente -->
-                                    ${usuario.nombre}
-                                </c:if>
                             </h3>
                             <!-- <p class="text-muted text-center">Florista Web</p>-->
                             <ul class="list-group list-group-unbordered">
@@ -105,9 +102,6 @@
                                 <c:if test="${not empty exception}"> <!-- Profesional -->
                                     ${usuario.empresa}
                                 </c:if>
-                                <c:if test="${empty exception}"> <!-- Cliente -->
-                                    ${usuario.nombre}
-                                </c:if>
                             </p>
                             <hr>
                             <strong><i class="fa fa-map-marker margin-r-5"></i> Dirección</strong>
@@ -156,6 +150,9 @@
                             <li class="active"><a href="#activity" data-toggle="tab">Eventos</a></li>
                             <li><a href="#timeline" data-toggle="tab">Valoraciones</a></li>
                             <li><a href="#settings" data-toggle="tab">Modificar Datos</a></li>
+                            <c:if test="${rol eq 'Proveedor'}">
+                                <li><a href="#añadirServicio" data-toggle="tab">Añadir Servicio</a></li>
+                            </c:if>
                         </ul>
                         <div class="tab-content">
                             <div class="active tab-pane" id="activity">
@@ -439,6 +436,48 @@
                                 </form>
                             </div>
                             <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="añadirServicio">
+                                <form class="form-horizontal" method="post" action="/servicios/crear">
+
+                                    <div class="form-group">
+                                        <label for="nombreServicio" class="col-sm-2 control-label">Nombre</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="nombreServicio" name="nombreServicio" placeholder="Ej.: Jardineria" value="">
+                                        </div>
+                                    </div>
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label for="listaServicios" class="col-sm-2 control-label">Tipo de Servicio</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="listaServicios" name="listaServicios">
+                                                <c:forEach var="item" items="${listaTiposServicio}">
+                                                    <option value="${item}">${item}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- textarea -->
+                                    <div class="form-group">
+                                        <label for="descripcion" class="col-sm-2 control-label">Descripción</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" rows="3" id="descripcion" name="descripcion" placeholder="Ej.: Servicio de florista para bodas"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-10">
+                                            <input type="hidden" id="idUsuario2" name="idUsuario" value="${usuario.id}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="btn btn-danger">Añadir Servicio</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.tab-pane -->
+
                         </div>
                         <!-- /.tab-content -->
                     </div>

@@ -55,7 +55,7 @@ public class Servicio implements Serializable{
 
     @Version long version;
 
-    public enum TiposServicio {OTROS }
+    public enum TiposServicio {BODAS, JARDINES, CATERING, OTROS}
 
 
     /****************************
@@ -70,6 +70,13 @@ public class Servicio implements Serializable{
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaRegistro = fechaRegistro;
+        this.proveedor = proveedor;
+    }
+
+    public Servicio(TiposServicio tipo, String nombre, String descripcion, Proveedor proveedor) {
+        this.tipo = tipo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
         this.proveedor = proveedor;
     }
 

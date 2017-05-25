@@ -2,6 +2,7 @@ package es.fdi.eventsoft.Presentacion.Controllers;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
+import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.*;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import org.slf4j.Logger;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import java.util.Arrays;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
@@ -146,9 +149,11 @@ public class UserController {
     }
 
     @RequestMapping("perfil-usuario")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         model.addAttribute("title", "EventSoft");
         model.addAttribute("pagina", "perfil");
+        model.addAttribute("usuarioAModificar", session.getAttribute("usuario"));
+        model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
 
         return "perfil-usuario";
     }
