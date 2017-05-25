@@ -5,6 +5,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,18 +14,18 @@ import java.util.List;
  */
 public interface SAServicios {
 
-    public int crearServicio(Servicio servicioNuevo) throws ExcepcionNegocio;
+    Long crearServicio(Servicio servicioNuevo);
 
-    public Servicio buscarServicio(Servicio servicio) throws ExcepcionNegocio;
+    Servicio buscarServicio(Long id) ;
 
-    public int eliminarServicio(Servicio servicio) throws ExcepcionNegocio;
+    int eliminarServicio(Servicio servicio) throws ExcepcionNegocio;
 
-    public int modificarServicio(Servicio servicioModificado) throws ExcepcionNegocio;
+    int modificarServicio(Servicio servicioModificado) throws ExcepcionNegocio;
 
-    public List<Servicio> buscarServiciosByProveedor(Proveedor proveedor) throws ExcepcionNegocio;
+    List<Servicio> buscarServiciosByProveedor(Proveedor proveedor) throws ExcepcionNegocio;
 
-    public List buscarServiciosByEvento(Evento evento);
+    List buscarServiciosByEvento(Evento evento);
 
-    public List buscarServiciosEntreFechas(Date fecha_Ini, Date fecha_Fin) throws ExcepcionNegocio;
+    List buscarServiciosEntreFechas(ArrayList<String> fechas);
 
 }

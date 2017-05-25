@@ -3,27 +3,21 @@ package es.fdi.eventsoft.Negocio.__tests;
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
-import es.fdi.eventsoft.Negocio.Entidades.Empleado;
-import es.fdi.eventsoft.Negocio.Entidades.Evento;
-import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
+import es.fdi.eventsoft.Negocio.Entidades.*;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.SAMensajes;
 import javafx.scene.input.Mnemonic;
 import javafx.util.Pair;
 import org.springframework.util.SerializationUtils;
 import sun.util.cldr.CLDRLocaleDataMetaInfo;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_MENSAJES_BY_USER;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
 
 /**
@@ -38,7 +32,11 @@ public class TestEmpleados {
     public static void main(String[] args) {
 //
 
-
+        //Servicio servicio = FactoriaSA.getInstance().crearSAServicios().buscarServicio(2L);
+        List lista = Arrays.asList(Servicio.TiposServicio.values());
+        System.out.println(lista);
+        //System.out.println("Nombre servicio: " + servicio.getNombre());
+        //System.out.println("Id proveedor: " + servicio.getProveedor());
 
 
     }

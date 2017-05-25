@@ -1,15 +1,12 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
-
-
-import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
+import es.fdi.eventsoft.Negocio.Entidades.Servicio;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.*;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,16 +17,19 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.util.Arrays;
+
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
 @Controller
 @RequestMapping("/usuarios/")
 public class UserController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
     @RequestMapping("register")
     public String register(Model model) {
         model.addAttribute("title", "EventSoft");
-
         return "registrarTipoUsuario";
     }
 
@@ -53,6 +53,14 @@ public class UserController {
             return "register";
         }
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(cliente);
+        if (contexto.getEvento() != null){
+            System.out.println("Le inserto el id");
+            Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(cliente.getEmail());
+            Usuario recibido = (Usuario) contexto_2.getDatos();
+            cliente.setId(recibido.getId());
+        } else {
+            System.out.println("No le inserto el id");
+        }
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("cliente", cliente);
@@ -81,6 +89,11 @@ public class UserController {
         }
 
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(organizador);
+        if (contexto.getEvento() != null) {
+            Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(organizador.getEmail());
+            Usuario recibido = (Usuario) contexto_2.getDatos();
+            organizador.setId(recibido.getId());
+        }
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("organizador", organizador);
@@ -101,8 +114,6 @@ public class UserController {
 
     }
 
-
-
     @RequestMapping(value = "registrar_proveedor", method = RequestMethod.POST)
     public String registrar_Proveedor(@Valid Proveedor proveedor, BindingResult bindingResult, Model model, HttpSession session) {
 
@@ -113,6 +124,11 @@ public class UserController {
         }
 
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(proveedor);
+        if (contexto.getEvento() != null) {
+            Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(proveedor.getEmail());
+            Usuario recibido = (Usuario) contexto_2.getDatos();
+            proveedor.setId(recibido.getId());
+        }
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
             model.addAttribute("proveedor", proveedor);
@@ -132,59 +148,16 @@ public class UserController {
         }
     }
 
-
-    /* =================================
-           AQUÍ LOS GETS DE USUARIOS
-       =================================*/
     @RequestMapping("perfil-usuario")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         model.addAttribute("title", "EventSoft");
         model.addAttribute("pagina", "perfil");
+        model.addAttribute("usuarioAModificar", session.getAttribute("usuario"));
+        log.info(session.getAttribute("usuario").toString());
+        model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
+
         return "perfil-usuario";
     }
-
-    /* -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_ */
-
-
-    /* =================================
-           AQUÍ LOS POSTS DE USUARIOS
-       ================================= */
-
-
-    /*@RequestMapping(value = "registrar_usuario", method = RequestMethod.POST)
-    public String registrar_usuario(@ModelAttribute("Organizador") Organizador Organizador,
-                                    @ModelAttribute("Proveedor") Proveedor Proveedor,
-                                    @ModelAttribute("Cliente") Cliente Cliente,
-                                    @RequestParam String seleccion,
-                                    HttpSession session) {
-
-        //Creo una nueva variable Usuario que utilizaré para guardarlo en sesión.
-        Usuario Usuario = null;
-
-        if (seleccion.equalsIgnoreCase("Cliente")) {
-            System.out.println("Tengo un nuevo Cliente con nombre: " + Cliente.getNombre());
-            session.setAttribute("nombre", Cliente.getNombre());
-            session.setAttribute("rol", "Cliente");
-        } else if (seleccion.equalsIgnoreCase("Organizador")) {
-            System.out.println("Tengo un nuevo Organizador con nombre: " + Organizador.getEmpresa());
-            session.setAttribute("nombre", Organizador.getEmpresa());
-            session.setAttribute("rol", "Organizador");
-        } else if (seleccion.equalsIgnoreCase("Proveedor")) {
-            System.out.println("Tengo un nuevo Proveedor con nombre: " + Proveedor.getEmpresa());
-            session.setAttribute("nombre", Organizador.getEmpresa());
-            session.setAttribute("rol", "Proveedor");
-        }
-
-        Date ahora = new Date();
-        SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
-        session.setAttribute("fecha_registro", formateador.format(ahora));
-
-        Comando comando = FactoriaComandos.newInstance().crearComando(EventosNegocio.CREAR_USUARIO);
-        Contexto contexto = comando.execute(Cliente);
-        System.out.println("Datos recibidos: " + contexto.getDatos());
-
-        return "redirect:index";
-    }*/
 
     @GetMapping(value = "buscarUsuario/{id}",
             produces = "application/json")
@@ -203,14 +176,31 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "modificar", method = RequestMethod.PUT)
-    public String modificar(@ModelAttribute("Usuario") Usuario usuario, Model model) {
-        Contexto contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
+    @RequestMapping(value = "modificar", method = RequestMethod.POST)
+    public String modificar(
+            @RequestParam("idUsuario") Long id,
+            @RequestParam("email") String email,
+            @RequestParam("direccion") String direccion,
+            @RequestParam("localidad") String localidad,
+            @RequestParam("provincia") String provincia,
+            @RequestParam("codigoPostal") String codigoPostal,
+            @RequestParam("telefono") String telefono) {
+        Contexto contexto;
 
+        contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_USUARIO_BY_ID).execute(id);
+        Usuario usuario = (Usuario) contexto.getDatos();
+        usuario.setEmail(email);
+        usuario.setDireccion(direccion);
+        usuario.setLocalidad(localidad);
+        usuario.setProvincia(provincia);
+        usuario.setCodigoPostal(codigoPostal);
+        usuario.setTelefono(telefono);
+
+        contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
         if (contexto.getEvento() == MODIFICAR_USUARIO) {
-            return "redirect:/index";
+            return "perfil-usuario";
         } else {
-            return "redirect:./#";
+            return "error-500";
         }
     }
 

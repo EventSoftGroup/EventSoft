@@ -5,7 +5,6 @@ import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import javafx.util.Pair;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class SAUsuarioImp implements SAUsuario{
         FachadaIntegracion integra = null;
 
             //si no existe ya el correo...
-            if (buscarUsuarioByEmail(usuarioNuevo.getEmail()) != null) {
+            if (buscarUsuarioByEmail(usuarioNuevo.getEmail()) == null) {
 
                 usuarioNuevo.setEstado(Usuario.EstadosUsuario.ACTIVO);
 
@@ -87,8 +86,8 @@ public class SAUsuarioImp implements SAUsuario{
     }
 
     @Override
-    public Boolean modificarUsuario(Usuario usuario) {
-        FachadaIntegracion<Usuario> fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
+    public boolean modificarUsuario(Usuario usuario) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Usuario.class);
 
         fachadaIntegracion.begin();
         fachadaIntegracion.modifica(usuario);

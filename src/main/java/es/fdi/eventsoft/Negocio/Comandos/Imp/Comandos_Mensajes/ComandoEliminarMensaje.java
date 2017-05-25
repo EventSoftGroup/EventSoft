@@ -2,6 +2,10 @@ package es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Mensajes;
 
 import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
+import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
 /**
  * Created by Rodrigo de Miguel on 09/05/2017.
@@ -9,12 +13,12 @@ import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 public class ComandoEliminarMensaje implements Comando {
 
     public Contexto execute(Object datos){
-        //TODO
-        Contexto contex = null;
 
+        Contexto contex;
 
+        boolean respuesta = FactoriaSA.getInstance().crearSAMensajes().eliminarMensaje((Long) datos);
+        (contex = new Contexto()).setEvento(respuesta ? ELIMINAR_MENSAJE : ERROR_ELIMINAR_MENSAJE);
 
         return contex;
     }
-
 }

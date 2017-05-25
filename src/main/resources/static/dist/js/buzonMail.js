@@ -10,12 +10,14 @@ $(function () {
         panel_bandeja_entrada();
         $('#botonBandejaEntrada').addClass("active");
         $('#botonBandejaEnviados').removeClass("active");
+        $('.box-title').text("Bandeja de entrada");
     })
 
 
     $('#botonBandejaEnviados').on('click', function(event){
         $('#botonBandejaEnviados').addClass("active");
         $('#botonBandejaEntrada').removeClass("active");
+        $('.box-title').text("Mensajes enviados");
 
         panel_bandeja_enviados();
     })

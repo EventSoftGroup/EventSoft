@@ -12,7 +12,7 @@
         <p class="login-box-msg">Rellene el formulario</p>
 
         <form method="POST" id="tipoUsuario" name='tipoUsuario'
-              action="${pageContext.request.contextPath}/usuarios/tipoUsuario.html" >
+              action="${pageContext.request.contextPath}/usuarios/tipoUsuario" >
 
             <div class="row">
                 <div class="col-xs-12">
@@ -36,7 +36,7 @@
 
         </form>
 
-        <a href="../index.html" class="text-center">Si estoy registrado</a>
+        <a href="/" class="text-center">Si estoy registrado</a>
     </div>
     <!-- /.form-box -->
 </div>

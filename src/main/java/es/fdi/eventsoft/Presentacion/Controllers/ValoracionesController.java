@@ -3,6 +3,8 @@ package es.fdi.eventsoft.Presentacion.Controllers;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Entidades.Valoracion;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestAttribute;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/valoraciones/")
 public class ValoracionesController {
+
+    private Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
     @RequestMapping("crearValoracion")
     public String crearValoracion(Model model) {

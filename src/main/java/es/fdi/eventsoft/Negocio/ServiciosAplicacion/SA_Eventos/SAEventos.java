@@ -11,14 +11,14 @@ import java.util.List;
  */
 public interface SAEventos {
 
-    public int crearEvento(Evento eventoNuevo) throws ExcepcionNegocio;
+    int crearEvento(Evento eventoNuevo) throws ExcepcionNegocio;
 
-    public Evento buscarEvento(Evento evento) throws ExcepcionNegocio;
+    Evento buscarEvento(Long id);
 
-    public int eliminarEvento(Evento evento) throws ExcepcionNegocio;
+    int eliminarEvento(Evento evento) throws ExcepcionNegocio;
 
-    public int modificarEvento(Evento eventoModificado) throws ExcepcionNegocio;
+    int modificarEvento(Evento eventoModificado) throws ExcepcionNegocio;
 
-    public List<Evento> buscarEventosByUsuario(Usuario usuario) throws ExcepcionNegocio;
+    List<Evento> buscarEventosByUsuario(Usuario usuario) throws ExcepcionNegocio;
     
 }

@@ -1,5 +1,6 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="springForm"%>
 
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -27,8 +28,8 @@
                 <small></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
+                <li class="active">Perfil personal</li>
             </ol>
         </section>
         <!-- Main content -->
@@ -40,24 +41,46 @@
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle" src="/dist/img/user4-128x128.jpg"
                                  alt="User profile picture">
-                            <h3 class="profile-username text-center">${cliente.nombre} ${cliente.apellidos}</h3>
+                            <h3 class="profile-username text-center">
+                                <c:catch var="exception">${usuario.nombre}</c:catch>
+
+                                <c:if test="${not empty exception}"> <!-- Profesional -->
+                                    ${usuario.empresa}
+                                </c:if>
+                            </h3>
                             <!-- <p class="text-muted text-center">Florista Web</p>-->
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Eventos</b> <a class="pull-right">45</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Servicios Ofertados</b> <a class="pull-right">5</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Tags</b>
-                                    <br>
-                                    <p>
-                                        <span class="label label-info">Flores a domicilio</span>
-                                        <span class="label label-info">Ramos</span>
-                                        <span class="label label-info">Bodas</span>
-                                        <span class="label label-info">Fiestas</span>
-                                    </p>
+                                    <c:if test="${rol eq 'Organizador'}">
+                                        <b>Eventos</b> <a class="pull-right">
+                                            <c:if test="${not empty usuario.eventos}">
+                                                ${usuario.eventos.size()}
+                                            </c:if>
+                                        <c:if test="${empty usuario.eventos}">
+                                            0
+                                        </c:if>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${rol eq 'Proveedor'}">
+                                        <b>Servicios Ofertados</b> <a class="pull-right">
+                                        <c:if test="${not empty usuario.servicios}">
+                                            ${usuario.servicios.size()}
+                                        </c:if>
+                                        <c:if test="${empty usuario.servicios}">
+                                            0
+                                        </c:if>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${rol eq 'Cliente'}">
+                                        <b>Eventos Asociados</b> <a class="pull-right">
+                                        <c:if test="${not empty usuario.eventos_Adscritos}">
+                                            ${usuario.eventos_Adscritos.size()}
+                                        </c:if>
+                                        <c:if test="${empty usuario.eventos_Adscritos}">
+                                            0
+                                        </c:if>
+                                        </a>
+                                    </c:if>
                                 </li>
                             </ul>
                             <a href="/eventos/nuevo-mensaje" class="btn btn-primary btn-block"><b>Contactar</b></a>
@@ -68,18 +91,36 @@
                     <!-- About Me Box -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">About Me</h3>
+                            <h3 class="box-title">Información</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
+
                             <strong><i class="fa fa-book margin-r-5"></i> Nombre</strong>
                             <p class="text-muted">
-                                Florista Web .SL
+                                <c:catch var="exception">${usuario.nombre}</c:catch>
+
+                                <c:if test="${not empty exception}"> <!-- Profesional -->
+                                    ${usuario.empresa}
+                                </c:if>
                             </p>
                             <hr>
-                            <strong><i class="fa fa-map-marker margin-r-5"></i> Localización</strong>
-                            <p class="text-muted">Malibu, California</p>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Dirección</strong>
+                            <p class="text-muted">${usuario.direccion}</p>
                             <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i>Localidad</strong>
+                            <p class="text-muted">${usuario.localidad}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i>Provincia</strong>
+                            <p class="text-muted">${usuario.provincia}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Código Postal</strong>
+                            <p class="text-muted">${usuario.codigoPostal}</p>
+                            <hr>
+                            <strong><i class="fa fa-map-marker margin-r-5"></i> Teléfono</strong>
+                            <p class="text-muted">${usuario.telefono}</p>
+                            <hr>
+                            <!--
                             <strong><i class="fa fa-pencil margin-r-5"></i> Servicios</strong>
                             <p>
                                 <span class="label label-info">Flores a domicilio</span>
@@ -89,17 +130,7 @@
                                 <span class="label label-info">Arreglos florales</span>
                             </p>
                             <hr>
-                            <strong><i class="fa fa-bar-chart margin-r-5"></i> Valoraciones</strong>
-                            <p>
-                                <span class="label label-success"><i class="fa fa-thumbs-up margin-r-5"></i>45</span>
-                                <span class="label label-danger"><i class="fa fa-thumbs-down margin-r-5"></i>7</span>
-                                -->
-                                <span class="label label-success"></i>Ratio: 45</span>
-                            </p>
-                            <hr>
-                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Descricpcion</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-                            <hr>
+                            -->
                             <strong><i class="fa fa-file-text-o margin-r-5"></i> Opciones</strong>
                             <p>
                                 <button type="button" class="btn btn-primary" data-widget="collapse"> Enviar mail
@@ -117,9 +148,12 @@
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#activity" data-toggle="tab">Eventos Creados</a></li>
+                            <li class="active"><a href="#activity" data-toggle="tab">Eventos</a></li>
                             <li><a href="#timeline" data-toggle="tab">Valoraciones</a></li>
                             <li><a href="#settings" data-toggle="tab">Modificar Datos</a></li>
+                            <c:if test="${rol eq 'Proveedor'}">
+                                <li><a href="#añadirServicio" data-toggle="tab">Añadir Servicio</a></li>
+                            </c:if>
                         </ul>
                         <div class="tab-content">
                             <div class="active tab-pane" id="activity">
@@ -333,58 +367,89 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal">
+                                <springForm:form method="post" name="form_modificar_usuario" modelAttribute="${usuarioAModificar}" action="/usuarios/modificar">
+                                    <!-- Dirección -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="direccion" cssClass="form-control" autofocus="true" placeholder="Dirección" type="text"/>
+                                        <springForm:errors path="direccion" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+                                    </div>
+                                    <!-- Localidad -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="localidad" cssClass="form-control" placeholder="Localidad" type="text"/>
+                                        <springForm:errors path="localidad" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+                                    </div>
+                                    <!-- Provincia -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="provincia" cssClass="form-control" placeholder="Provincia" type="text"/>
+                                        <springForm:errors path="provincia" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+                                    </div>
+                                    <!-- Código postal -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="codigoPostal" cssClass="form-control" placeholder="Código postal" type="text"/>
+                                        <springForm:errors path="codigoPostal" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+                                    </div>
+                                    <!-- Teléfono -->
+                                    <div class="form-group has-feedback">
+                                        <springForm:input path="telefono" cssClass="form-control" placeholder="Teléfono" type="text"/>
+                                        <springForm:errors path="telefono" cssClass="alert-error" />
+                                        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                                    </div>
+                                    <div class="row">
+                                        <!-- /.col -->
+                                        <div class="col-xs-4">
+                                            <button type="submit" class="btn btn-primary btn-block btn-flat">Modificar</button>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                </springForm:form>
+                            </div>
+                            <!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="añadirServicio">
+                                <form class="form-horizontal" method="post" action="/servicios/crear">
+
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                        <label for="nombreServicio" class="col-sm-2 control-label">Nombre</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                            <input type="text" class="form-control" id="nombreServicio" name="nombreServicio" placeholder="Ej.: Jardineria" value="">
+                                        </div>
+                                    </div>
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label for="listaServicios" class="col-sm-2 control-label">Tipo de Servicio</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="listaServicios" name="listaServicios">
+                                                <c:forEach var="item" items="${listaTiposServicio}">
+                                                    <option value="${item}">${item}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- textarea -->
+                                    <div class="form-group">
+                                        <label for="descripcion" class="col-sm-2 control-label">Descripción</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" rows="3" id="descripcion" name="descripcion" placeholder="Ej.: Servicio de florista para bodas"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail"
-                                                   placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience"
-                                                      placeholder="Experience"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills"
-                                                   placeholder="Skills">
+                                            <input type="hidden" id="idUsuario2" name="idUsuario" value="${usuario.id}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and
-                                                    conditions</a>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                            <button type="submit" class="btn btn-danger">Añadir Servicio</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <!-- /.tab-pane -->
+
                         </div>
                         <!-- /.tab-content -->
                     </div>

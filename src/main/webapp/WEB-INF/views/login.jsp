@@ -30,7 +30,7 @@
       </div>
       <!-- Password -->
       <div class="form-group has-feedback">
-        <springForm:input path="password" cssClass="form-control" autofocus="true" placeholder="Contraseña" type="password"/>
+        <springForm:input path="password" cssClass="form-control" placeholder="Contraseña" type="password"/>
         <springForm:errors path="password" cssClass="alert-error" />
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
@@ -63,7 +63,7 @@
     <!-- /.social-auth-links -->
 
     <!--<a href="#">I forgot my password</a><br>-->
-    <a href="usuarios/register.html" class="text-center">No estoy registado</a>
+    <a href="usuarios/register" class="text-center">No estoy registado</a>
 
   </div>
   <!-- /.login-box-body -->

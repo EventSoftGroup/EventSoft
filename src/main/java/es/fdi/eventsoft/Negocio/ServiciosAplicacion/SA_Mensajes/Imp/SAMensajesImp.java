@@ -2,6 +2,7 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.Imp;
 
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
@@ -64,9 +65,16 @@ public class SAMensajesImp implements SAMensajes {
     }
 
     @Override
-    public int eliminarMensaje(Mensaje mensaje) throws ExcepcionNegocio {
-        //TODO
-        return 0;
+    public boolean eliminarMensaje(Long id) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Mensaje.class);
+
+        boolean respuesta;
+
+        fachadaIntegracion.begin();
+        respuesta = fachadaIntegracion.baja(id);
+        fachadaIntegracion.commit();
+
+        return respuesta;
     }
 
     @Override

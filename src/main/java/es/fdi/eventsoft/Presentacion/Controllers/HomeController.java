@@ -8,21 +8,19 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import org.springframework.boot.context.config.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-
-import javax.persistence.Version;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 @Controller
 public class HomeController {
+
+    private Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
     public static boolean isLogin(Model model, HttpSession session){
 
@@ -36,19 +34,8 @@ public class HomeController {
         return true;
     }
 
-
-
-
-
-
-
-//    public String home(HttpSession session,
-//                       @RequestParam (value = "email", defaultValue = "") String email,
-//                       @RequestParam (value = "pass", defaultValue = "") String pass,
-//                       Model model) {
     @RequestMapping("index")
     public String home( @ModelAttribute("userLog") Usuario userLog, BindingResult bindingResult, Model model, HttpSession session) {
-
 
         if(userLog.getEmail().trim().isEmpty()){
             bindingResult.rejectValue("email" , "error.userLog", "Introduzca un Email valido");
@@ -57,8 +44,6 @@ public class HomeController {
             bindingResult.rejectValue("password" , "error.userLog", "Instroduzca una contraseña");
             return "login";
         }
-
-
 
         Contexto contex = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(userLog.getEmail());
 
@@ -107,19 +92,17 @@ public class HomeController {
     @RequestMapping({"/","login"})
     public String login(Model model) {
         model.addAttribute("title", "EventSoft");
-        model.addAttribute("userLog",new Usuario());
+        model.addAttribute("userLog", new Usuario());
         return "login";
     }
-
-
 
     @RequestMapping("sign-out")
     public String signOut(HttpSession session, SessionStatus status, Model model) {
         session.removeAttribute("rol");
+        session.removeAttribute("usuario");
         status.setComplete();
         return "redirect:login";
     }
-
 
     @RequestMapping("500")
     public String getErrorr500(HttpSession session, SessionStatus status, Model model) {

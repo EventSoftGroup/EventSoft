@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -59,14 +60,14 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private EstadosUsuario estado;
 
-    @OneToMany(mappedBy = "emisor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "emisor", cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Mensaje> mensajes_enviados;
+    private List<Mensaje> mensajes_enviados = new ArrayList<Mensaje>();
 
 
-    @OneToMany(mappedBy = "receptor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "receptor", cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Mensaje> mensajes_recibidos;
+    private List<Mensaje> mensajes_recibidos = new ArrayList<Mensaje>();
 
     @Version private long version;
 

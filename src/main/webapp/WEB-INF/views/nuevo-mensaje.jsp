@@ -34,9 +34,9 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="/eventos/buzon" class="btn btn-primary btn-block margin-bottom">Volver a la Bandeja de Entrada</a>
+                        <a href="/mensajes/buzon" class="btn btn-primary btn-block margin-bottom">Volver a la Bandeja de Entrada</a>
 
-                        <div class="box box-solid">
+                        <!--<div class="box box-solid">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Carpetas</h3>
 
@@ -54,8 +54,7 @@
                                     <li><a href="#"><i class="fa fa-trash-o"></i> Papelera<span class="label label-warning pull-right">65</span></a></li>
                                 </ul>
                             </div>
-                            <!-- /.box-body -->
-                        </div>
+                        </div>-->
                     </div>
                     <!-- /.col -->
                     <div class="col-md-9">

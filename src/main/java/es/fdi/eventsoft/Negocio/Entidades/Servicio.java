@@ -13,9 +13,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "Servicios")
-/*@NamedQueries({
-        @NamedQuery(name = "Servicios.buscarPorEvento", query = "from Servicios where :evento member of eventoServicio")
-})*/
+@NamedQueries({
+        @NamedQuery(name = "Servicio.buscarPorEvento", query = "from Servicio where :evento member of eventoServicios"),
+        @NamedQuery(name = "Servicio.buscarEntreFechas", query = "from Servicio")
+})
 public class Servicio implements Serializable{
 
     /****************************
@@ -54,7 +55,7 @@ public class Servicio implements Serializable{
 
     @Version long version;
 
-    public enum TiposServicio {OTROS }
+    public enum TiposServicio {BODAS, JARDINES, CATERING, OTROS}
 
 
     /****************************
@@ -69,6 +70,13 @@ public class Servicio implements Serializable{
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaRegistro = fechaRegistro;
+        this.proveedor = proveedor;
+    }
+
+    public Servicio(TiposServicio tipo, String nombre, String descripcion, Proveedor proveedor) {
+        this.tipo = tipo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
         this.proveedor = proveedor;
     }
 

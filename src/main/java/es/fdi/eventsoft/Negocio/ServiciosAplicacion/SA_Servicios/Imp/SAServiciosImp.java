@@ -2,31 +2,47 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.Imp;
 
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
+import javafx.util.Pair;
+import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
-/**
- * Created by Rodrigo de Miguel on 05/05/2017.
- */
 public class SAServiciosImp implements SAServicios{
 
     @Override
-    public int crearServicio(Servicio servicioNuevo) throws ExcepcionNegocio {
-        //TODO
-        return 0;
+    public Long crearServicio(Servicio servicioNuevo) {
+        Object result = null;
+        FachadaIntegracion integra = null;
+
+        integra = FachadaIntegracion.newInstance(Servicio.class);
+        integra.begin();
+        result = integra.alta(servicioNuevo);
+        integra.commit();
+
+        if((Servicio)result != null)
+            return ((Servicio) result).getId();
+        else
+            return null;
     }
 
     @Override
-    public Servicio buscarServicio(Servicio servicio) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public Servicio buscarServicio(Long id) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
+
+        fachadaIntegracion.begin();
+        Servicio servicio = (Servicio) fachadaIntegracion.consulta(id);
+        fachadaIntegracion.commit();
+
+        return servicio;
     }
 
     @Override
@@ -52,18 +68,33 @@ public class SAServiciosImp implements SAServicios{
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
 
         fachadaIntegracion.begin();
-        String query = "Servicios.buscarPorEvento";
-        List params = new ArrayList();
-        params.add(evento);
-        List servicios = fachadaIntegracion.ejecutarNamedQuery(query, params);
+        List servicios = fachadaIntegracion.ejecutarNamedQuery("Servicio.buscarPorEvento", Arrays.asList(new Pair<>("evento", evento)));
         fachadaIntegracion.commit();
 
         return servicios;
     }
 
     @Override
-    public List<Servicio> buscarServiciosEntreFechas(Date fecha_Ini, Date fecha_Fin) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public List<Servicio> buscarServiciosEntreFechas(ArrayList<String> fechas) {
+        DateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+        ArrayList<Pair> fechasNuevas = new ArrayList<>();
+
+        try {
+            Date fechaIni = format.parse(fechas.get(0));
+            Date fechaFin = format.parse(fechas.get(1));
+
+            fechasNuevas.add(new Pair("fechaIni", fechaIni));
+            fechasNuevas.add(new Pair("fechaFin", fechaFin));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
+
+        fachadaIntegracion.begin();
+        List servicios = fachadaIntegracion.ejecutarNamedQuery("Servicio.buscarEntreFechas", Arrays.asList(fechasNuevas));
+        fachadaIntegracion.commit();
+
+        return servicios;
     }
 }
