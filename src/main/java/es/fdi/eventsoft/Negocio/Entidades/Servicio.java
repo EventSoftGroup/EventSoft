@@ -45,9 +45,6 @@ public class Servicio implements Serializable{
 
     @Column(name = "Fecha_Registro", nullable = false)
     @DateTimeFormat(pattern="dd/MM/yyyy")
-<<<<<<< HEAD
-    @Past @NotNull
-=======
     @NotNull @Past
     private Date fechaRegistro;
 
