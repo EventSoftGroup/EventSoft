@@ -40,13 +40,22 @@ public class ServiciosController {
             Model model
     ) {
         Contexto contexto;
+        //Creamos la fecha de registro
         Date fechaRegistro = new Date();
+        //Creamos el nuevo servicio con sus datos
         Servicio servicio = new Servicio(tipoElegido, nombre, descripcion, fechaRegistro, (Proveedor) session.getAttribute("usuario"));
+        //Lo insertamos en la BBDD
         contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_SERVICIO).execute(servicio);
 
-        if (contexto.getEvento() == EventosNegocio.CREAR_SERVICIO) {
+        if (contexto.getEvento() == EventosNegocio.CREAR_SERVICIO) {//Si el servicio se ha creado correctamente
+            //Buscamos de nuevo el proveedor del servicio para actualizar la sesion
+            contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_ID).execute(((Proveedor) session.getAttribute("usuario")).getId());
+            //Actualizamos la sesion
+            session.setAttribute("usuario", (Usuario) contexto.getDatos());
+            //Actualizamos el modelo
             model.addAttribute("usuarioAModificar", session.getAttribute("usuario"));
             model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
+
             return "perfil-usuario";
         } else {
             return "error-500";

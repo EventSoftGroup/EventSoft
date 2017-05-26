@@ -23,15 +23,26 @@ public class SAServiciosImp implements SAServicios{
     @Override
     public Long crearServicio(Servicio servicioNuevo) {
         Object result = null;
-        FachadaIntegracion integra = FachadaIntegracion.newInstance(Servicio.class);
-        integra.begin();
-        result = integra.alta(servicioNuevo);
-        integra.commit();
-
-        if((Servicio)result != null)
-            return ((Servicio) result).getId();
-        else
+        //Buscamos si existe el proveedor del nuevo servicio
+        Object proveedor = FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByID(servicioNuevo.getProveedor().getId());
+        //Si si existe
+        if(proveedor != null){
+            //Creamos una nueva fachada de servicios
+            FachadaIntegracion integra = FachadaIntegracion.newInstance(Servicio.class);
+            integra.begin();
+            //hacemos el alte
+            result = integra.alta(servicioNuevo);
+            integra.commit();
+            //Si se ha realizado correctamente, devolvemos su id
+            if((Servicio)result != null)
+                return ((Servicio) result).getId();
+            else //Si no, devolvemos null
+                return null;
+        }
+        else { //Si no existe, devolvemos null
             return null;
+        }
+
     }
 
     @Override
