@@ -6,11 +6,13 @@ import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import javafx.util.Pair;
 import org.springframework.context.annotation.Bean;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,6 +63,23 @@ public class SAServiciosImp implements SAServicios{
     public List<Servicio> buscarServiciosByProveedor(Proveedor proveedor) throws ExcepcionNegocio {
         //TODO
         return null;
+    }
+
+    @Override
+    public List<Servicio> buscarServiciosByTipoServicio(Servicio.TiposServicio tipoServicio) {
+        FachadaIntegracion integra =FachadaIntegracion.newInstance(Servicio.class);
+
+        integra.begin();
+        List<Servicio> lista = integra.ejecutarNamedQuery("Servicio.buscarPorTipoServicio", Arrays.asList(new Pair<>("tipoServicio", tipoServicio)));
+        integra.commit();
+
+        //El siguiente for es una guarreria de codigo, pero la carga LAZY no funciona bien y la EAGER genera buble infinito
+        for(Servicio serv: lista) {
+            serv.setProveedor(null);
+            serv.setEventoServicios(null);
+        }
+
+        return lista;
     }
 
     @Override

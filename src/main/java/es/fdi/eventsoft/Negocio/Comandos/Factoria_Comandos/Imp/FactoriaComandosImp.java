@@ -125,6 +125,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoBuscarServiciosByProveedor();
                 break;
 
+            case BUSCAR_SERVICIOS_BY_TIPO_SERVICIO:
+                miComando = new ComandoBuscarServiciosByTipoServicio();
+                break;
+
             case BUSCAR_SERVICIOS_BY_EVENTO:
                 miComando = new ComandoBuscarServiciosByEvento();
                 break;

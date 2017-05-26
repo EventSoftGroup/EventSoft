@@ -24,6 +24,8 @@ public interface SAServicios {
 
     List<Servicio> buscarServiciosByProveedor(Proveedor proveedor) throws ExcepcionNegocio;
 
+    List<Servicio> buscarServiciosByTipoServicio(Servicio.TiposServicio tiposServicio);
+
     List buscarServiciosByEvento(Evento evento);
 
     List buscarServiciosEntreFechas(ArrayList<String> fechas);
