@@ -7,7 +7,9 @@ $(function() {
     var combo_categorias = $('#categorias opcion:selected');
     var div_evento = $('#box_sel_evento');
     var div_categoria = $('#box_sel_categoria');
+    var div_sel_eventos = $('#box_sel_categoria_2');
     var texto_titulo_categoria = $('#titulo_categoria');
+    var texto_titulo_sel_eventos = $('#titulo_categoria_2');
 
     var evento_seleccionado = undefined;
     var categoria_seleccionada = undefined;
@@ -27,11 +29,11 @@ $(function() {
     $('#buscarPorCategoria').on('click', function(e){
         e.preventDefault();
 
-        categoria_seleccionada = combo_eventos.text();
+        categoria_seleccionada = combo_categorias.text();
 
-        texto_titulo_categoria.val("Seleccione la categoría para el evento - " + evento_seleccionado + " -");
+        texto_titulo_sel_eventos.val("Seleccione los eventos de la categoria - " + categoria_seleccionada + " -");
         div_categoria.fadeOut(function(){
-            alert("Hasta aquí");
+            div_sel_eventos.fadeIn();
         });
 
     });
