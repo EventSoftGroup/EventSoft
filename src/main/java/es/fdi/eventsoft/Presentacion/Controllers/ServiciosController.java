@@ -92,29 +92,40 @@ public class ServiciosController {
 
 
     @RequestMapping(value = "buscarServiciosByTipoServicio/{tipoServicio}",  method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody ResponseEntity<List<Servicio>> buscarServiciosByTipoServicio(Model model,@PathVariable String tipoServicio) {
-        System.out.println("********************************");
-        System.out.println(tipoServicio);
-        System.out.println("********************************");
+    public @ResponseBody ResponseEntity<List<Servicio>> buscarServiciosByTipoServicio(@PathVariable String tipoServicio) {
 
-        if(Arrays.asList(Servicio.TiposServicio.values()).contains(Servicio.TiposServicio.valueOf(tipoServicio.toUpperCase()))){
-            System.out.println(tipoServicio + " existe en el sistema.");
+        try {
+            if (Arrays.asList(Servicio.TiposServicio.values()).contains(Servicio.TiposServicio.valueOf(tipoServicio.toUpperCase()))) {
+                System.out.println(tipoServicio + " existe en el sistema.");
 
-            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_TIPO_SERVICIO).execute(Servicio.TiposServicio.valueOf(tipoServicio));
+                Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_TIPO_SERVICIO).execute(Servicio.TiposServicio.valueOf(tipoServicio));
 
-            //Contexto contex = new Contexto();
+                if (contex.getEvento() == BUSCAR_SERVICIOS_BY_TIPO_SERVICIO) {
+                    return new ResponseEntity<>((List<Servicio>) contex.getDatos(), HttpStatus.OK);
+                } else if (contex.getEvento() == ERROR_BUSCAR_SERVICIOS) {
+                    return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
 
-            if(contex.getEvento() == BUSCAR_SERVICIOS_BY_TIPO_SERVICIO){
-                return new ResponseEntity<>((List<Servicio>) contex.getDatos(), HttpStatus.OK);
-            }else if(contex.getEvento() == ERROR_BUSCAR_SERVICIOS){
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            } else {
+                System.out.println(tipoServicio + " no existe en el sistema.");
             }
-
-        }else{
-            System.out.println(tipoServicio + " no existe en el sistema.");
+        }catch (IllegalArgumentException e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+
+
+    @RequestMapping(value = "añadirServiciosAEvento/{idEvento}",  method = RequestMethod.GET, produces = "application/json")
+    public String añadirServiciosAEvento(@PathVariable Long idEvento, @RequestParam(value="servicios[]") List<Servicio> servicios) {
+
+
+
+
+
+
+        return "timeline";
     }
 
 
