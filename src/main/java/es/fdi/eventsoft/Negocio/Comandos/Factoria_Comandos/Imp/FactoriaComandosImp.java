@@ -165,6 +165,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoBuscarEventosByUser();
                 break;
 
+            case AÑADIR_SERVICIOS_A_EVENTO:
+                miComando = new ComandoAñadirServiciosAEvento();
+                break;
+
         }
 
         return miComando;

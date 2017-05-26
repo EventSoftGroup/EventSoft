@@ -2,10 +2,14 @@ package es.fdi.eventsoft.Negocio.Entidades;
 
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
+import org.hibernate.annotations.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -58,7 +62,8 @@ public class Evento implements Serializable {
     private Date fechaFin;
 
 
-    @OneToMany(mappedBy = "evento", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "evento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<EventoServicio> eventoServicios;
 
     @Version long version;
@@ -181,6 +186,16 @@ public class Evento implements Serializable {
 
     public void setEventoServicios(List<EventoServicio> eventoServicios) {
         this.eventoServicios = eventoServicios;
+    }
+
+    public void addEventoServicios(List<EventoServicio> eventoServicios) {
+        for (EventoServicio ev :eventoServicios){
+            if(!this.eventoServicios.contains(ev)) {
+                this.eventoServicios.add(ev);
+            }else{
+                System.out.println("eventosServicios ya contiene el servicio");
+            }
+        }
     }
 
     @Override

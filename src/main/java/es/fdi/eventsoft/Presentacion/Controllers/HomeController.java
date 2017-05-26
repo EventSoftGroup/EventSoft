@@ -63,8 +63,8 @@ public class HomeController {
 
                 if(user instanceof Organizador) {
                     session.setAttribute("rol", "Organizador");
-                    model.addAttribute("pagina", "nuevo-evento");
-                    return "redirect:./eventos/nuevo";
+                    model.addAttribute("pagina", "timeline");
+                    return "redirect:./eventos/timeline";
                 }
 
                 if(user instanceof Proveedor) {
@@ -103,6 +103,8 @@ public class HomeController {
         status.setComplete();
         return "redirect:login";
     }
+
+
 
     @RequestMapping("500")
     public String getErrorr500(HttpSession session, SessionStatus status, Model model) {

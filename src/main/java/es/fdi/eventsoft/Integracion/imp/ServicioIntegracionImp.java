@@ -58,6 +58,7 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
                 return true;
             } catch (Exception e) {
                 em.getTransaction().rollback();
+                e.printStackTrace();
                 return false;
             }
         }

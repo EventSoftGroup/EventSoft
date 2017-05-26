@@ -76,6 +76,7 @@ public enum EventosNegocio {
 
 
 
+
     //******** EVENTOS NEGOCIO EVENTOS ************
 
 
@@ -95,7 +96,9 @@ public enum EventosNegocio {
     BUSCAR_EVENTOS_BY_USUARIO,
 
     AÑADIR_SERVICIOS_A_EVENTO,
-    NO_SE_PUDO_AÑADIR_ALGUN_EVENTO;
+    NO_SE_PUDO_AÑADIR_ALGUN_EVENTO,
+    LISTA_SERVICIOS_VACIA,
+    ERROR_AÑADIR_SERVICIOS_A_EVENTO,
 
 
 

@@ -1,5 +1,6 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Eventos;
 
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
@@ -12,6 +13,8 @@ import java.util.List;
 public interface SAEventos {
 
     Long crearEvento(Evento eventoNuevo);
+
+    EventosNegocio añadirServiciosAEvento(Long idEvento, List<Long> servicios);
 
     Evento buscarEvento(Long id);
 

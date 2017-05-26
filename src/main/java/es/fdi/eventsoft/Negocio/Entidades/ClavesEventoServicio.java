@@ -1,7 +1,7 @@
 
 package es.fdi.eventsoft.Negocio.Entidades;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.io.Serializable;
 
 
@@ -14,9 +14,12 @@ public class ClavesEventoServicio implements Serializable {
 
 	private static final long serialVersionUID = 0;
 
-	private Integer idEvento;
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Id private Long id;
 
-	private Integer idServicio;
+	private Long idEvento;
+
+	private Long idServicio;
 
 	/****************************
 	 ******* CONSTRUCTORES ******
@@ -25,7 +28,7 @@ public class ClavesEventoServicio implements Serializable {
 	public ClavesEventoServicio() {}
 
 
-	public ClavesEventoServicio(Integer idEvento, Integer idServicio) {
+	public ClavesEventoServicio(Long idEvento, Long idServicio) {
 		this.idEvento = idEvento;
 		this.idServicio = idServicio;
 	}
@@ -38,19 +41,19 @@ public class ClavesEventoServicio implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Integer getIdEvento() {
+	public Long getIdEvento() {
 		return idEvento;
 	}
 
-	public void setIdEvento(Integer idEvento) {
+	public void setIdEvento(Long idEvento) {
 		this.idEvento = idEvento;
 	}
 
-	public Integer getIdServicio() {
+	public Long getIdServicio() {
 		return idServicio;
 	}
 
-	public void setIdServicio(Integer idServicio) {
+	public void setIdServicio(Long idServicio) {
 		this.idServicio = idServicio;
 	}
 
@@ -73,4 +76,5 @@ public class ClavesEventoServicio implements Serializable {
 		hashcode += idServicio;
 		return hashcode;
 	}
+
 }

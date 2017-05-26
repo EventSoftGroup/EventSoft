@@ -16,7 +16,9 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "Servicios")
+@Table(name = "Servicios", uniqueConstraints={
+        @UniqueConstraint(columnNames = {"tipo", "nombre", "proveedor_id"})
+})
 @NamedQueries({
         @NamedQuery(name = "Servicio.buscarPorEvento", query = "from Servicio where :evento member of eventoServicios"),
         @NamedQuery(name = "Servicio.buscarEntreFechas", query = "from Servicio"),

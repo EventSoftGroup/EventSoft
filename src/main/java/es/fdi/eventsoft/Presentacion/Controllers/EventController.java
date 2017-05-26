@@ -4,22 +4,30 @@ import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
+import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.BreakIterator;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.AÑADIR_SERVICIOS_A_EVENTO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.CREAR_EVENTO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_CREAR_EVENTO;
 
@@ -65,6 +73,8 @@ public class EventController {
     public String eventoTimeline(Model model) {
         model.addAttribute("title", "EventSoft - Timeline");
         model.addAttribute("pagina", "timeline");
+        model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
+
         return "timeline";
     }
 
@@ -118,6 +128,38 @@ public class EventController {
 
         return "nuevo-evento";
     }
+
+    @RequestMapping(value = "añadirServiciosAEvento/{idEvento}",  method = RequestMethod.POST, produces = "application/json")
+    public String añadirServiciosAEvento(@PathVariable Long idEvento, @RequestParam(value="servicios[]") String[] servicios) {
+
+        List<Long> listaIDs = new ArrayList<>();
+
+        Arrays.stream(servicios)
+                .mapToLong((str)-> Long.parseLong(str))
+                .forEach((str)-> listaIDs.add(Long.parseLong(String.valueOf(str))));
+
+
+        System.out.println("*********************************************");
+        System.out.println("idEvento: " + idEvento);
+        System.out.println("listaServicios: " +listaIDs);
+
+        System.out.println("*********************************************");
+
+
+        if(idEvento>0){
+            Contexto contex = FactoriaComandos.getInstance().crearComando(AÑADIR_SERVICIOS_A_EVENTO).execute(new Pair<>(idEvento,  listaIDs));
+
+            System.out.println(contex.getEvento());
+
+            return "redirect:../timeline";
+        }
+
+
+        return "redirect:../timeline";
+    }
+
+
+
 
     @RequestMapping("buscarEvento")
     public String buscarEvento(Model model) {

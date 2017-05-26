@@ -51,13 +51,13 @@
             <div class="form-group">
               <label>Selecciona el evento que quieras visualizar</label>
               <select id="eventos" class="form-control select2" style="width: 100%;">
-                <option selected="selected">Evento 1</option>
-                <option>Evento 2</option>
-                <option>Evento 3</option>
-                <option>Evento 4</option>
-                <option>Evento 5</option>
-                <option>Evento 6</option>
-                <option>Evento 7</option>
+                <option value="1">Evento 1</option>
+                <option value="2">Evento 2</option>
+                <option value="3">Evento 3</option>
+                <option value="4">Evento 4</option>
+                <option value="5">Evento 5</option>
+                <option value="6">Evento 6</option>
+                <option value="7">Evento 7</option>
               </select>
               <button id="aniadirServicio" class="btn btn-primary">Añadir un servicio</button>
             </div>
@@ -88,13 +88,11 @@
           <div class="form-group">
             <label>Selecciona la categoria que quieras visualizar</label>
             <select id="categorias" class="form-control select2" style="width: 100%;">
-              <option selected="selected">Categoria 1</option>
-              <option>Categoria 2</option>
-              <option>Categoria 3</option>
-              <option>Categoria 4</option>
-              <option>Categoria 5</option>
-              <option>Categoria 6</option>
-              <option>Categoria 7</option>
+
+                <c:forEach var="cat" items="${listaTiposServicio}">
+                  <option value="${cat}">${cat}</option>
+                </c:forEach>
+
             </select>
             <button id="buscarPorCategoria" class="btn btn-primary">buscar servicios por esta categoria</button>
             <button id="sel_evento_nuevo" class="btn btn-primary">Seleccionar un evento nuevo</button>
@@ -125,17 +123,7 @@
             <div class="form-group">
               <label>Selecciona los eventos que quieras incluir</label>
               <div id="demoform">
-                <select multiple="multiple" size="10" name="mi_duallist[]">
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3" selected="selected">Option 3</option>
-                  <option value="option4">Option 4</option>
-                  <option value="option5">Option 5</option>
-                  <option value="option6" selected="selected">Option 6</option>
-                  <option value="option7">Option 7</option>
-                  <option value="option8">Option 8</option>
-                  <option value="option9">Option 9</option>
-                  <option value="option0">Option 10</option>
+                <select id="selectServicios" multiple="multiple" size="10" name="mi_duallist[]">
                 </select>
                 <br>
                 <button id="guardar_eventos" type="submit" class="btn btn-primary">Guardar</button>

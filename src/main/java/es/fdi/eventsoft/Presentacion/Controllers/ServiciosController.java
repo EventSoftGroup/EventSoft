@@ -117,16 +117,7 @@ public class ServiciosController {
 
 
 
-    @RequestMapping(value = "añadirServiciosAEvento/{idEvento}",  method = RequestMethod.GET, produces = "application/json")
-    public String añadirServiciosAEvento(@PathVariable Long idEvento, @RequestParam(value="servicios[]") List<Servicio> servicios) {
 
-
-
-
-
-
-        return "timeline";
-    }
 
 
 

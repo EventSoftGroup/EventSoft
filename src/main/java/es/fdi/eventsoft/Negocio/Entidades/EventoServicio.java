@@ -8,6 +8,10 @@ import java.io.Serializable;
 
 
 @Entity
+//@IdClass(ClavesEventoServicio.class)
+@Table(uniqueConstraints={
+		@UniqueConstraint(columnNames = {"evento_id", "servicio_id"})
+})
 public class EventoServicio implements Serializable {
 
 	/****************************
@@ -15,8 +19,8 @@ public class EventoServicio implements Serializable {
 	 ****************************/
 
 	private static final long serialVersionUID = 0;
-	
-	@EmbeddedId private ClavesEventoServicio id;
+
+	@EmbeddedId private ClavesEventoServicio id = new ClavesEventoServicio();
 
 	@ManyToOne
 	@MapsId("idEvento")
@@ -71,5 +75,23 @@ public class EventoServicio implements Serializable {
 
 	public void setServicio(Servicio servicio) {
 		this.servicio = servicio;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		EventoServicio that = (EventoServicio) o;
+
+		if (!evento.getId().equals(that.evento.getId())) return false;
+		return servicio.getId().equals(that.servicio.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		int result = evento.hashCode();
+		result = 31 * result + servicio.hashCode();
+		return result;
 	}
 }

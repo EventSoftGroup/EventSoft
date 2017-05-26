@@ -19,8 +19,12 @@ $(function() {
         e.preventDefault();
 
         evento_seleccionado = combo_eventos.text();
+        console.log($("#eventos option:selected").text());
+        console.log($("#eventos option:selected").val());
 
-        texto_titulo_categoria.val("Seleccione la categoría para el evento - " + evento_seleccionado + " -");
+
+
+        texto_titulo_categoria.text("Seleccione la categoría para el evento - " + $("#eventos option:selected").text() + " -");
         div_evento.fadeOut(function(){
             div_categoria.fadeIn();
         });
@@ -31,10 +35,37 @@ $(function() {
         e.preventDefault();
 
         categoria_seleccionada = combo_categorias.text();
-        texto_titulo_sel_eventos.text("Seleccione los eventos de la categoria - " + categoria_seleccionada + " -");
-        div_categoria.fadeOut(function(){
-            div_sel_eventos.fadeIn();
+
+        texto_titulo_sel_eventos.text("Seleccione los eventos de la categoria - " + $('#categorias option:selected').text() + " -");
+
+
+        console.log("/servicios/buscarServiciosByTipoServicio/" + $('#categorias option:selected').text())
+        $.ajax({
+            type : "GET",
+            url : "/servicios/buscarServiciosByTipoServicio/" + $('#categorias option:selected').text(),
+
+            success : function(response) {
+
+                response.forEach(function(element) {
+                    $('#selectServicios').append($('<option>', {
+                        value: element.id,
+                        text: element.nombre +"  --  " + element.descripcion.substring(0, 55)
+                    }));
+                });
+
+                $('#selectServicios').fadeIn("fast");
+
+                div_categoria.fadeOut(function(){
+                    div_sel_eventos.fadeIn();
+                });
+            },
+
+            error : function(e) {
+                alert("Ocurrió un error al cargar esa categoria");
+                //alert('Error: ' + e);
+            }
         });
+
 
     });
 
@@ -65,7 +96,29 @@ $(function() {
 
     $("#guardar_eventos").on("click", function(e) {
         e.preventDefault();
-        alert($('[name="mi_duallist[]"]').val());
+
+        listaIDsServicios = [];
+        $('[name="mi_duallist[]"]').val().forEach(function (id) {
+            listaIDsServicios.push(Number(id));
+        })
+
+        console.log("/eventos/añadirServiciosAEvento/" + $("#eventos option:selected").val());
+        $.ajax({
+            type : "POST",
+            url : "/eventos/añadirServiciosAEvento/" + $("#eventos option:selected").val(),
+            data: {
+                servicios: listaIDsServicios
+            },
+            success: function () {
+                window.location.href = window.location.href;
+            },
+            error: function () {
+                window.location.href = window.location.href;
+            }
+
+
+        });
+
         return false;
     });
 });

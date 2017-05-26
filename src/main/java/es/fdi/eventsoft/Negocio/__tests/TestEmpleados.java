@@ -2,6 +2,7 @@ package es.fdi.eventsoft.Negocio.__tests;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.*;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
@@ -10,6 +11,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.SAMensajes;
+import es.fdi.eventsoft.Presentacion.Controllers.EventController;
 import javafx.scene.input.Mnemonic;
 import javafx.util.Pair;
 import jdk.nashorn.internal.parser.JSONParser;
@@ -43,62 +45,10 @@ public class TestEmpleados {
 
     public static void main(String[] args){
 
-        Servicio servicio = new Servicio();
-        servicio.setFechaRegistro(new Date());
-        Date fecha = new Date();
-        System.out.println(fecha.getDay());
-        System.out.println(servicio.getFechaRegistroString());
+        EventController controller = new EventController();
 
-        System.out.println(new GregorianCalendar(1979,6,6).getTime());
-        System.out.println(new GregorianCalendar(fecha.getYear(), fecha.getMonth(), fecha.getDay()).getTime());
-        System.out.println(new Date().toString());
-        System.out.println(new Date().getTime());
-        System.out.println(new Date());
-
-        List<Servicio> listaServicios = FactoriaSA.getInstance().crearSAServicios().buscarServiciosByTipoServicio(Servicio.TiposServicio.BODAS);
-        for (Servicio serv: listaServicios) {
-            System.out.println(serv);
-        }
-
-
-
-
-//        FachadaIntegracion integra = FachadaIntegracion.newInstance(Servicio.class);
-//
-//
-//        Servicio servicio;
-//        Proveedor proveedor1 = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("empresa@gmail.com");
-//        Proveedor proveedor2 = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("maruganCFS@gmail.com");
-//
-//        int cont = 0;
-//        int tipoServ = 0;
-//
-//        integra.begin();
-//        for (int i = 0; i < 18; i++) {
-//
-//            servicio = new Servicio(null, "servicio " + i, "descripcionEpica de servicio "+ i, null );
-//
-//            if(i<9) servicio.setProveedor(proveedor1);
-//            else servicio.setProveedor(proveedor2);
-//
-//            if(cont<3){
-//                servicio.setTipo(Servicio.TiposServicio.values()[tipoServ]);
-//
-//            }else{
-//                cont=0;
-//                tipoServ++;
-//                servicio.setTipo(Servicio.TiposServicio.values()[tipoServ]);
-//            }
-//            cont++;
-//
-//            servicio.setFechaRegistro(new Date());
-//            integra.alta(servicio);
-//            System.out.println(servicio.toString());
-//
-//        }
-//
-//
-//        integra.commit();
+        String str = controller.añadirServiciosAEvento(4L, new String[]{"34", "15", "16", "17"});
+        System.out.println(str);
 
     }
 
