@@ -35,7 +35,7 @@
     <section class="content">
 
       <!-- Default box -->
-      <div class="box">
+      <div class="box" id="box_sel_evento">
         <div class="box-header with-border">
           <h3 class="box-title">Selecciona el evento</h3>
 
@@ -50,7 +50,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Selecciona el evento que quieras visualizar</label>
-              <select class="form-control select2" style="width: 100%;">
+              <select id="eventos" class="form-control select2" style="width: 100%;">
                 <option selected="selected">Evento 1</option>
                 <option>Evento 2</option>
                 <option>Evento 3</option>
@@ -59,6 +59,7 @@
                 <option>Evento 6</option>
                 <option>Evento 7</option>
               </select>
+              <button id="aniadirServicio" class="btn btn-primary">Añadir un servicio</button>
             </div>
             <!-- /.form-group -->
           </div>
@@ -69,7 +70,94 @@
         </div>
         <!-- /.box-footer-->
       </div>
-      <!-- /.box -->
+
+
+      <div class="box" id="box_sel_categoria" style="display:none;">
+        <div class="box-header with-border">
+          <h3 id="titulo_categoria" class="box-title">Selecciona la categoria</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Selecciona la categoria que quieras visualizar</label>
+            <select id="categorias" class="form-control select2" style="width: 100%;">
+              <option selected="selected">Categoria 1</option>
+              <option>Categoria 2</option>
+              <option>Categoria 3</option>
+              <option>Categoria 4</option>
+              <option>Categoria 5</option>
+              <option>Categoria 6</option>
+              <option>Categoria 7</option>
+            </select>
+            <button id="buscarPorCategoria" class="btn btn-primary">buscar servicios</button>
+            <button id="sel_evento_nuevo" class="btn btn-primary">Seleccionar un evento nuevo</button>
+          </div>
+          <!-- /.form-group -->
+        </div>
+      </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+
+        </div>
+        <!-- /.box-footer-->
+      </div>
+
+      <div class="box" id="box_sel_categoria_2" style="display:none;">
+        <div class="box-header with-border">
+          <h3 id="titulo_categoria_2" class="box-title"></h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Selecciona los eventos que quieras incluir</label>
+              <form id="demoform" action="#" method="post">
+                <select multiple="multiple" size="10" name="mi_duallist[]">
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3" selected="selected">Option 3</option>
+                  <option value="option4">Option 4</option>
+                  <option value="option5">Option 5</option>
+                  <option value="option6" selected="selected">Option 6</option>
+                  <option value="option7">Option 7</option>
+                  <option value="option8">Option 8</option>
+                  <option value="option9">Option 9</option>
+                  <option value="option0">Option 10</option>
+                </select>
+                <br>
+                <button type="submit" class="btn btn-default btn-block">Submit data</button>
+              </form>
+              <script>
+                  var demo1 = $('select[name="mi_duallist[]"]').bootstrapDualListbox();
+                  $("#demoform").submit(function() {
+                      alert($('[name="mi_duallist[]"]').val());
+                      return false;
+                  });
+              </script>
+            </div>
+            <!-- /.form-group -->
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+
+        </div>
+        <!-- /.box-footer-->
+      </div>
+
 
       <!-- row -->
       <div class="row">
@@ -209,5 +297,7 @@
 <!-- ./wrapper -->
 
 <%@ include file="../fragments/plugins.jspf" %>
+<script src="/dist/js/eventos.js"></script>
+<script src="/dist/js/jquery.bootstrap-duallistbox.js"></script>
 </body>
 </html>
