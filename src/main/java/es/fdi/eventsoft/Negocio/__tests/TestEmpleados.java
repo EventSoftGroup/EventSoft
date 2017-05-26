@@ -45,30 +45,20 @@ public class TestEmpleados {
 
         Servicio servicio = new Servicio();
         servicio.setFechaRegistro(new Date());
+        Date fecha = new Date();
+        System.out.println(fecha.getDay());
+        System.out.println(servicio.getFechaRegistroString());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String c= null;
-        c = sdf.format(servicio.getFechaRegistro());
-        String date=sdf.format(c);
-        System.out.println(date);
-
-        String str = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        System.out.println(new GregorianCalendar(1979,6,6).getTime());
+        System.out.println(new GregorianCalendar(fecha.getYear(), fecha.getMonth(), fecha.getDay()).getTime());
+        System.out.println(new Date().toString());
+        System.out.println(new Date().getTime());
+        System.out.println(new Date());
 
         List<Servicio> listaServicios = FactoriaSA.getInstance().crearSAServicios().buscarServiciosByTipoServicio(Servicio.TiposServicio.BODAS);
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         for (Servicio serv: listaServicios) {
-
-
-            String today = new SimpleDateFormat("dd/MM/yyyy").format(serv.getFechaRegistro());
-
-
-
             System.out.println(serv);
         }
-
-
-
-
 
 
 

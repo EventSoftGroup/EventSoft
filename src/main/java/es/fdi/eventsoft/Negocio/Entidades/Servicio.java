@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,10 @@ public class Servicio implements Serializable{
 
     @Column(name = "Fecha_Registro", nullable = false)
     @DateTimeFormat(pattern="dd/MM/yyyy")
+<<<<<<< HEAD
     @Past @NotNull
+=======
+    @NotNull @Past
     private Date fechaRegistro;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -133,6 +137,10 @@ public class Servicio implements Serializable{
 
     public Date getFechaRegistro() {
         return fechaRegistro;
+    }
+
+    public String getFechaRegistroString(){
+        return new SimpleDateFormat("dd-MM-yyyy").format(this.fechaRegistro);
     }
 
     public void setFechaRegistro(Date fechaRegistro) {

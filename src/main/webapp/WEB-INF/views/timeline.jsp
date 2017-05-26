@@ -84,7 +84,7 @@
           </div>
         </div>
         <div class="box-body">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <div class="form-group">
             <label>Selecciona la categoria que quieras visualizar</label>
             <select id="categorias" class="form-control select2" style="width: 100%;">
@@ -96,7 +96,7 @@
               <option>Categoria 6</option>
               <option>Categoria 7</option>
             </select>
-            <button id="buscarPorCategoria" class="btn btn-primary">buscar servicios</button>
+            <button id="buscarPorCategoria" class="btn btn-primary">buscar servicios por esta categoria</button>
             <button id="sel_evento_nuevo" class="btn btn-primary">Seleccionar un evento nuevo</button>
           </div>
           <!-- /.form-group -->
@@ -121,10 +121,10 @@
           </div>
         </div>
         <div class="box-body">
-          <div class="col-md-4">
+          <div class="col-md-12">
             <div class="form-group">
               <label>Selecciona los eventos que quieras incluir</label>
-              <form id="demoform" action="#" method="post">
+              <div id="demoform">
                 <select multiple="multiple" size="10" name="mi_duallist[]">
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
@@ -138,15 +138,10 @@
                   <option value="option0">Option 10</option>
                 </select>
                 <br>
-                <button type="submit" class="btn btn-default btn-block">Submit data</button>
-              </form>
-              <script>
-                  var demo1 = $('select[name="mi_duallist[]"]').bootstrapDualListbox();
-                  $("#demoform").submit(function() {
-                      alert($('[name="mi_duallist[]"]').val());
-                      return false;
-                  });
-              </script>
+                <button id="guardar_eventos" type="submit" class="btn btn-primary">Guardar</button>
+                <button id="cambiar_evento" class="btn btn-primary">Cambiar evento</button>
+                <button id="cambiar_categoria" class="btn btn-primary">Cambiar categoria</button>
+              </div>
             </div>
             <!-- /.form-group -->
           </div>
