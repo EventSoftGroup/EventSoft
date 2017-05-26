@@ -9,6 +9,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Proveedor extends Profesional {
 
     @OneToMany(mappedBy = "proveedor")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Servicio> servicios;
+    private List<Servicio> servicios = new ArrayList<>();
 
     /****************************
      ******* CONSTRUCTORES ******

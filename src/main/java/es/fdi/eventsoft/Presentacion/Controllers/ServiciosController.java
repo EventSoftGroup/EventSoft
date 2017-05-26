@@ -6,7 +6,9 @@ import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 
 @Controller
 @RequestMapping("/servicios/")
@@ -82,6 +88,38 @@ public class ServiciosController {
 
         return null;
     }
+
+
+
+    @RequestMapping(value = "buscarServiciosByTipoServicio/{tipoServicio}",  method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody ResponseEntity<List<Servicio>> buscarServiciosByTipoServicio(Model model,@PathVariable String tipoServicio) {
+        System.out.println("********************************");
+        System.out.println(tipoServicio);
+        System.out.println("********************************");
+
+        if(Arrays.asList(Servicio.TiposServicio.values()).contains(Servicio.TiposServicio.valueOf(tipoServicio.toUpperCase()))){
+            System.out.println(tipoServicio + " existe en el sistema.");
+
+            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_TIPO_SERVICIO).execute(Servicio.TiposServicio.valueOf(tipoServicio));
+
+            //Contexto contex = new Contexto();
+
+            if(contex.getEvento() == BUSCAR_SERVICIOS_BY_TIPO_SERVICIO){
+                return new ResponseEntity<>((List<Servicio>) contex.getDatos(), HttpStatus.OK);
+            }else if(contex.getEvento() == ERROR_BUSCAR_SERVICIOS){
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+        }else{
+            System.out.println(tipoServicio + " no existe en el sistema.");
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+
+
+    
 
     @RequestMapping(
             value = "buscar-por-evento/{idEvento}",

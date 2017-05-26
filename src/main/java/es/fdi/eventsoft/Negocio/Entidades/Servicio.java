@@ -8,14 +8,18 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+
 
 @Entity
 @Table(name = "Servicios")
 @NamedQueries({
         @NamedQuery(name = "Servicio.buscarPorEvento", query = "from Servicio where :evento member of eventoServicios"),
-        @NamedQuery(name = "Servicio.buscarEntreFechas", query = "from Servicio")
+        @NamedQuery(name = "Servicio.buscarEntreFechas", query = "from Servicio"),
+        @NamedQuery(name = "Servicio.buscarPorTipoServicio", query = "from Servicio s where s.tipo = :tipoServicio")
 })
 public class Servicio implements Serializable{
 
@@ -46,16 +50,16 @@ public class Servicio implements Serializable{
     @ManyToOne(fetch = FetchType.LAZY)
     @NotNull
     @JoinColumn(nullable = false)
-    private Proveedor proveedor;
+    private Proveedor proveedor = new Proveedor();
 
 
     @OneToMany(mappedBy = "servicio", fetch = FetchType.LAZY)
-    private List<EventoServicio> eventoServicios;
+    private List<EventoServicio> eventoServicios = new ArrayList<>();
 
 
     @Version long version;
 
-    public enum TiposServicio {BODAS, JARDINES, CATERING, OTROS}
+    public enum TiposServicio {BODAS, JARDINES, CATERING, DJ, FLORISTA, OTROS}
 
 
     /****************************
@@ -149,5 +153,17 @@ public class Servicio implements Serializable{
 
     public void setEventoServicios(List<EventoServicio> eventoServicios) {
         this.eventoServicios = eventoServicios;
+    }
+
+    @Override
+    public String toString() {
+        return "Servicio{" +
+                "id=" + id +
+                ", tipo=" + tipo +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fechaRegistro=" + fechaRegistro +
+                ", proveedor=" + proveedor +
+                '}';
     }
 }

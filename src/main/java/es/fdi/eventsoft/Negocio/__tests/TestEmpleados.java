@@ -6,15 +6,27 @@ import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.*;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.SAMensajes;
 import javafx.scene.input.Mnemonic;
 import javafx.util.Pair;
+import jdk.nashorn.internal.parser.JSONParser;
+import org.springframework.boot.json.JacksonJsonParser;
+import org.springframework.boot.json.JsonParser;
+import org.springframework.boot.json.JsonParserFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.SerializationUtils;
+import sun.util.calendar.LocalGregorianCalendar;
 import sun.util.cldr.CLDRLocaleDataMetaInfo;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
@@ -29,15 +41,74 @@ import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
 public class TestEmpleados {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
+
+        Servicio servicio = new Servicio();
+        servicio.setFechaRegistro(new Date());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String c= null;
+        c = sdf.format(servicio.getFechaRegistro());
+        String date=sdf.format(c);
+        System.out.println(date);
+
+        String str = new SimpleDateFormat("yyyy-MM-dd").format(date);
+
+        List<Servicio> listaServicios = FactoriaSA.getInstance().crearSAServicios().buscarServiciosByTipoServicio(Servicio.TiposServicio.BODAS);
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        for (Servicio serv: listaServicios) {
+
+
+            String today = new SimpleDateFormat("dd/MM/yyyy").format(serv.getFechaRegistro());
+
+
+
+            System.out.println(serv);
+        }
+
+
+
+
+
+
+
+
+//        FachadaIntegracion integra = FachadaIntegracion.newInstance(Servicio.class);
 //
-
-        //Servicio servicio = FactoriaSA.getInstance().crearSAServicios().buscarServicio(2L);
-        List lista = Arrays.asList(Servicio.TiposServicio.values());
-        System.out.println(lista);
-        //System.out.println("Nombre servicio: " + servicio.getNombre());
-        //System.out.println("Id proveedor: " + servicio.getProveedor());
-
+//
+//        Servicio servicio;
+//        Proveedor proveedor1 = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("empresa@gmail.com");
+//        Proveedor proveedor2 = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail("maruganCFS@gmail.com");
+//
+//        int cont = 0;
+//        int tipoServ = 0;
+//
+//        integra.begin();
+//        for (int i = 0; i < 18; i++) {
+//
+//            servicio = new Servicio(null, "servicio " + i, "descripcionEpica de servicio "+ i, null );
+//
+//            if(i<9) servicio.setProveedor(proveedor1);
+//            else servicio.setProveedor(proveedor2);
+//
+//            if(cont<3){
+//                servicio.setTipo(Servicio.TiposServicio.values()[tipoServ]);
+//
+//            }else{
+//                cont=0;
+//                tipoServ++;
+//                servicio.setTipo(Servicio.TiposServicio.values()[tipoServ]);
+//            }
+//            cont++;
+//
+//            servicio.setFechaRegistro(new Date());
+//            integra.alta(servicio);
+//            System.out.println(servicio.toString());
+//
+//        }
+//
+//
+//        integra.commit();
 
     }
 
