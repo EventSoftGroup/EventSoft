@@ -30,6 +30,9 @@ public class Proveedor extends Profesional {
 
     public Proveedor() { }
 
+    public Proveedor(Long id) {
+        this.id = id;
+    }
 
     public Proveedor(List<Servicio> servicios) {
         this.servicios = servicios;

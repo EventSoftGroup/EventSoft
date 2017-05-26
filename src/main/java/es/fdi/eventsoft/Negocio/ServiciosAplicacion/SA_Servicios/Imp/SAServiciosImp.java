@@ -11,12 +11,15 @@ import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import javafx.util.Pair;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.context.request.FacesRequestAttributes;
 
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static java.lang.System.out;
 
 public class SAServiciosImp implements SAServicios{
 
@@ -69,9 +72,34 @@ public class SAServiciosImp implements SAServicios{
     }
 
     @Override
-    public List<Servicio> buscarServiciosByProveedor(Proveedor proveedor) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public List<Servicio> buscarServiciosByProveedor(Proveedor proveedor) {
+
+        List<Servicio> lista = null;
+        FachadaIntegracion integra;
+        Proveedor finalProveedor;
+
+
+        if(proveedor.getEmail() != null) finalProveedor = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail(proveedor.getEmail());
+        else if (proveedor.getId() != null) finalProveedor = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByID(proveedor.getId());
+        else return lista;
+
+        integra = FachadaIntegracion.newInstance(Servicio.class);
+        integra.begin();
+        lista = integra.ejecutarNamedQuery("Servicio.buscarByProveedor", Arrays.asList(new Pair<>("proveedor", proveedor)));
+        integra.commit();
+
+
+        finalProveedor.setServicios(null);
+
+        //Stream para limpiar los servicios de la BBDD
+        lista.stream()
+                .map((serv) -> {
+                    serv.setProveedor(finalProveedor);
+                    serv.setEventoServicios(null);
+                    return serv;
+                }).count();
+
+        return lista;
     }
 
     @Override

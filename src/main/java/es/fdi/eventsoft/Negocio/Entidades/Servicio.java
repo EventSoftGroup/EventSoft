@@ -22,6 +22,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "Servicio.buscarPorEvento", query = "from Servicio where :evento member of eventoServicios"),
         @NamedQuery(name = "Servicio.buscarEntreFechas", query = "from Servicio"),
+        @NamedQuery(name = "Servicio.buscarByProveedor", query = "from Servicio s where s.proveedor = :proveedor"),
         @NamedQuery(name = "Servicio.buscarPorTipoServicio", query = "from Servicio s where s.tipo = :tipoServicio")
 })
 public class Servicio implements Serializable{

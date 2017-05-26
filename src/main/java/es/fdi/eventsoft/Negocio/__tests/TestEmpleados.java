@@ -45,11 +45,9 @@ public class TestEmpleados {
 
     public static void main(String[] args){
 
-        EventController controller = new EventController();
+        List lista = FactoriaSA.getInstance().crearSAServicios().buscarServiciosByProveedor(new Proveedor(59L));
 
-        String str = controller.añadirServiciosAEvento(4L, new String[]{"34", "15", "16", "17"});
-        System.out.println(str);
-
+        lista.stream().forEach(System.out::println);
     }
 
     public static void persistirEmpleado(Empleado emp) {

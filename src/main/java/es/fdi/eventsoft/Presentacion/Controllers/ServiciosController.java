@@ -9,6 +9,7 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
+import org.hibernate.validator.constraints.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -94,12 +95,20 @@ public class ServiciosController {
         return null;
     }
 
-    @RequestMapping("buscarServiciosByProveedor")
-    public String buscarServiciosByProveedor(Model model) {
-        //TODO
+    @RequestMapping("buscarServiciosByProveedor/{id}")
+    public String buscarServiciosByProveedor(@PathVariable("proveed") Long id,  Model model) {
 
+        if (id > 0) {
+            Contexto contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(id);
 
-        return null;
+            if (contexto.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
+                return "#";
+            } else {
+                return "error-500";
+            }
+        }
+
+        return "redirect:/index";
     }
 
 
