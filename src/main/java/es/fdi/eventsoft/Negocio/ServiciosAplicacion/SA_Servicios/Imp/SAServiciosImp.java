@@ -23,9 +23,7 @@ public class SAServiciosImp implements SAServicios{
     @Override
     public Long crearServicio(Servicio servicioNuevo) {
         Object result = null;
-        FachadaIntegracion integra = null;
-
-        integra = FachadaIntegracion.newInstance(Servicio.class);
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Servicio.class);
         integra.begin();
         result = integra.alta(servicioNuevo);
         integra.commit();

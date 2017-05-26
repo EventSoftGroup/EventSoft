@@ -36,13 +36,17 @@ public class ServiciosController {
             @RequestParam("nombreServicio") String nombre,
             @RequestParam("listaServicios") Servicio.TiposServicio tipoElegido,
             @RequestParam("descripcion") String descripcion,
-            HttpSession session
+            HttpSession session,
+            Model model
     ) {
         Contexto contexto;
-        Servicio servicio = new Servicio(tipoElegido, nombre, descripcion, (Proveedor) session.getAttribute("usuario"));
+        Date fechaRegistro = new Date();
+        Servicio servicio = new Servicio(tipoElegido, nombre, descripcion, fechaRegistro, (Proveedor) session.getAttribute("usuario"));
         contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_SERVICIO).execute(servicio);
 
         if (contexto.getEvento() == EventosNegocio.CREAR_SERVICIO) {
+            model.addAttribute("usuarioAModificar", session.getAttribute("usuario"));
+            model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
             return "perfil-usuario";
         } else {
             return "error-500";

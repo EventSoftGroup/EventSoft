@@ -44,7 +44,7 @@ public class Servicio implements Serializable{
 
     @Column(name = "Fecha_Registro", nullable = false)
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    @NotBlank @Past
+    @Past @NotNull
     private Date fechaRegistro;
 
     @ManyToOne(fetch = FetchType.LAZY)
