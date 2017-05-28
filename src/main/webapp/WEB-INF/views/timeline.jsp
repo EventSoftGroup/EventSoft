@@ -124,6 +124,7 @@
               <label>Selecciona los eventos que quieras incluir</label>
               <div id="demoform">
                 <select id="selectServicios" multiple="multiple" size="10" name="mi_duallist[]">
+
                 </select>
                 <br>
                 <button id="guardar_eventos" type="submit" class="btn btn-primary">Guardar</button>

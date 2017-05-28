@@ -31,7 +31,7 @@ $(function() {
 
     })
 
-    $('#buscarPorCategoria').on('click', function(e){
+    $('.content').on('click', '#buscarPorCategoria', function(e){
         e.preventDefault();
 
         categoria_seleccionada = combo_categorias.text();
@@ -53,10 +53,9 @@ $(function() {
                     }));
                 });
 
-                $('#selectServicios').fadeIn("fast");
-
                 div_categoria.fadeOut(function(){
                     div_sel_eventos.fadeIn();
+                    demo1.bootstrapDualListbox('refresh');
                 });
             },
 
