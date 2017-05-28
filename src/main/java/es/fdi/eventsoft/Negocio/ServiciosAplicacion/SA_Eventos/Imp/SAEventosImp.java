@@ -13,6 +13,7 @@ import es.fdi.eventsoft.Negocio.Entidades.EventoServicio;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Eventos.SAEventos;
@@ -24,6 +25,7 @@ import javafx.util.Pair;
 import javax.swing.event.ListDataEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
@@ -150,8 +152,52 @@ public class SAEventosImp implements SAEventos {
     }
 
     @Override
-    public List<Evento> buscarEventosByUsuario(Usuario usuario) throws ExcepcionNegocio {
-        //TODO
-        return null;
+    public List<Evento> buscarEventosByUsuario(Usuario usuario) {
+        List<Evento> lista = null;
+        FachadaIntegracion integra;
+        Usuario finalUsuario = usuario;
+
+        if(usuario == null) return null;
+
+        try {
+
+            if (usuario.getEmail() != null) finalUsuario = (Usuario) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail(usuario.getEmail());
+            else if (usuario.getId() != null) finalUsuario = (Usuario) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByID(usuario.getId());
+            else return lista;
+
+
+            if(finalUsuario == null) return null;
+            if (finalUsuario instanceof Cliente) {
+                try{
+                    Cliente cliente = (Cliente) finalUsuario;
+                    integra = FachadaIntegracion.newInstance(Evento.class);
+                    integra.begin();
+                    lista = integra.ejecutarNamedQuery("Evento.buscarEventosPorUsuario", Arrays.asList(new Pair<>("cliente", cliente)));
+                    System.out.println(lista);
+                    integra.commit();
+
+                } catch (Exception e){
+
+                }
+            }
+            else if (finalUsuario instanceof Organizador) {
+                System.out.println("Eres un organizador");
+            }
+            else
+                System.out.println("No eres nadie");
+
+            //Stream para limpiar los servicios de la BBDD
+            /*lista.stream().map((evento) -> {
+                serv.setProveedor(finalProveedor);
+                evento.set
+                serv.setEventoServicios(null);
+                return serv;
+            }).count();*/
+
+        }catch (ClassCastException e){
+            return null;
+        }
+
+        return lista;
     }
 }

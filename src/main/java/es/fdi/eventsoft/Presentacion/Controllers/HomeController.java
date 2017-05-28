@@ -104,8 +104,6 @@ public class HomeController {
         return "redirect:login";
     }
 
-
-
     @RequestMapping("500")
     public String getErrorr500(HttpSession session, SessionStatus status, Model model) {
         return "error-500";
