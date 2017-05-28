@@ -2,14 +2,17 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.Imp;
 
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import javafx.util.Pair;
+import org.hibernate.annotations.Cascade;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.context.request.FacesRequestAttributes;
 
@@ -19,6 +22,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_SERVICIOS_BY_PROVEEDOR;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_SERVICIO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
 import static java.lang.System.out;
 
 public class SAServiciosImp implements SAServicios{
@@ -72,32 +78,36 @@ public class SAServiciosImp implements SAServicios{
     }
 
     @Override
-    public List<Servicio> buscarServiciosByProveedor(Proveedor proveedor) {
-
+    public List<Servicio> buscarServiciosByProveedor(Proveedor prov) {
         List<Servicio> lista = null;
         FachadaIntegracion integra;
         Proveedor finalProveedor;
 
+        if(prov == null) return null;
 
-        if(proveedor.getEmail() != null) finalProveedor = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail(proveedor.getEmail());
-        else if (proveedor.getId() != null) finalProveedor = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByID(proveedor.getId());
-        else return lista;
+        try {
+            if (prov.getEmail() != null) finalProveedor = (Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByEmail(prov.getEmail());
+            else if (prov.getId() != null) finalProveedor =(Proveedor) FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByID(prov.getId());
+            else return lista;
 
-        integra = FachadaIntegracion.newInstance(Servicio.class);
-        integra.begin();
-        lista = integra.ejecutarNamedQuery("Servicio.buscarByProveedor", Arrays.asList(new Pair<>("proveedor", proveedor)));
-        integra.commit();
+            if(finalProveedor == null) return null;
+                integra = FachadaIntegracion.newInstance(Servicio.class);
+                integra.begin();
+                lista = integra.ejecutarNamedQuery("Servicio.buscarByProveedor", Arrays.asList(new Pair<>("proveedor", finalProveedor)));
+                integra.commit();
 
+                finalProveedor.setServicios(null);
 
-        finalProveedor.setServicios(null);
-
-        //Stream para limpiar los servicios de la BBDD
-        lista.stream()
-                .map((serv) -> {
+                //Stream para limpiar los servicios de la BBDD
+                lista.stream().map((serv) -> {
                     serv.setProveedor(finalProveedor);
                     serv.setEventoServicios(null);
                     return serv;
                 }).count();
+
+        }catch (ClassCastException e){
+            return null;
+        }
 
         return lista;
     }

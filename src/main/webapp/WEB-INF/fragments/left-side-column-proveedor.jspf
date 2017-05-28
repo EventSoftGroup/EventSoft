@@ -20,6 +20,11 @@ left-side-column.jspf<!-- Left side column. contains the logo and sidebar -->
                 </c:if>
             ><a href="/eventos/timeline"><i class="fa fa-line-chart"></i> <span>Mis Eventos</span></a></li>
             <li
+                    <c:if test="${pagina eq 'Servicios-Ofertados'}">
+                        class="active"
+                    </c:if>
+            ><a href="/servicios/buscarServiciosByProveedor/${usuario.id}"><i class="fa fa-line-chart"></i> <span>Mis Servicios</span></a></li>
+            <li
                 <c:if test="${pagina eq 'calendario'}">
                     class="active"
                 </c:if>

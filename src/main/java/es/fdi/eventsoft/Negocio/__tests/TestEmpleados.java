@@ -15,6 +15,7 @@ import es.fdi.eventsoft.Presentacion.Controllers.EventController;
 import javafx.scene.input.Mnemonic;
 import javafx.util.Pair;
 import jdk.nashorn.internal.parser.JSONParser;
+import org.hibernate.cfg.annotations.PropertyBinder;
 import org.springframework.boot.json.JacksonJsonParser;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
@@ -32,6 +33,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
+import static java.lang.System.out;
 
 
 /**
@@ -45,9 +47,72 @@ public class TestEmpleados {
 
     public static void main(String[] args){
 
-        List lista = FactoriaSA.getInstance().crearSAServicios().buscarServiciosByProveedor(new Proveedor(59L));
+        Usuario user = new Usuario();
+        Proveedor prov = new Proveedor();
+        Contexto contex;
 
-        lista.stream().forEach(System.out::println);
+
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(null);
+        out.println(contex.getEvento());
+
+
+        user.setId(56L);
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(user);
+        out.println(contex.getEvento());
+
+        prov.setId(56L);
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(62L);
+        out.println(contex.getEvento());
+
+
+        prov.setId(62L);
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
+        out.println(contex.getEvento());
+        ((List) contex.getDatos()).forEach(out::println);
+
+        prov.setId(59L);
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
+        out.println(contex.getEvento());
+        ((List) contex.getDatos()).forEach(out::println);
+
+
+        prov.setId(30000L);
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
+        out.println(contex.getEvento());
+
+        prov.setId(-10L);
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
+        out.println(contex.getEvento());
+
+
+        prov.setEmail(null);
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
+        out.println(contex.getEvento());
+
+
+        prov.setEmail("empresa@gmail.com");
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
+        out.println(contex.getEvento());
+
+
+        prov.setEmail("tomini18@hotmail.com");
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
+        out.println(contex.getEvento());
+
+
+        prov.setEmail("azsdfgasfgv");
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
+        out.println(contex.getEvento());
+
+
+
+
+
+
+
+        List lista = FactoriaSA.getInstance().crearSAServicios().buscarServiciosByProveedor(new Proveedor(56L));
+
+        lista.stream().forEach(out::println);
     }
 
     public static void persistirEmpleado(Empleado emp) {
@@ -156,23 +221,23 @@ public class TestEmpleados {
         fiVal.alta(val1);
 */
         //System.out.println(fiVal.consulta(1L));
-        System.out.println();
+        out.println();
     }
 
     private static void imprimirClientes(FachadaIntegracion<Cliente> SI) {
         List<Cliente> emps = SI.listado();
-        System.out.println("Hay " + emps.size() + " clientes en el sistema");
+        out.println("Hay " + emps.size() + " clientes en el sistema");
         for (Cliente emp : emps) {
-            System.out.println(emp.toString());
+            out.println(emp.toString());
         }
     }
 
 
     private static void imprimirOrgans(FachadaIntegracion<Organizador> SI) {
         List<Organizador> emps = SI.listado();
-        System.out.println("Hay " + emps.size() + " Organizadores en el sistema");
+        out.println("Hay " + emps.size() + " Organizadores en el sistema");
         for (Organizador emp : emps) {
-            System.out.println(emp.toString());
+            out.println(emp.toString());
         }
     }
 
