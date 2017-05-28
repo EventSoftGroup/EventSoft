@@ -96,13 +96,14 @@ public class ServiciosController {
     }
 
     @RequestMapping("buscarServiciosByProveedor/{id}")
-    public String buscarServiciosByProveedor(@PathVariable("proveed") Long id,  Model model) {
+    public String buscarServiciosByProveedor(@PathVariable("id") Long id,  Model model) {
 
         if (id > 0) {
-            Contexto contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(id);
+            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(id);
 
-            if (contexto.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
-                return "#";
+            if (contex.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
+                model.addAttribute("servicios", contex.getDatos());
+                return "Servicios-Ofertados";
             } else {
                 return "error-500";
             }
