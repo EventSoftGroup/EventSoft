@@ -20,9 +20,9 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://qxp814.pino.es/qxp814" />
-            <property name="javax.persistence.jdbc.user" value="qxp814" />
-            <property name="javax.persistence.jdbc.password" value="VeL3RdYRnp98" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/qxp814" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
             <property name="hibernate.show.sql" value="true"></property>
             <property name="hibernate.hbm2ddl.auto" value="update" />
