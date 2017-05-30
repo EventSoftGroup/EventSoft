@@ -146,9 +146,14 @@ public class SAEventosImp implements SAEventos {
     }
 
     @Override
-    public int modificarEvento(Evento eventoModificado) throws ExcepcionNegocio {
-        //TODO
-        return 0;
+    public boolean modificarEvento(Evento eventoModificado){
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Evento.class);
+
+        fachadaIntegracion.begin();
+        boolean result = fachadaIntegracion.modifica(eventoModificado);
+        fachadaIntegracion.commit();
+
+        return result;
     }
 
     @Override

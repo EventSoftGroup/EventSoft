@@ -20,7 +20,7 @@ public interface SAEventos {
 
     int eliminarEvento(Evento evento) throws ExcepcionNegocio;
 
-    int modificarEvento(Evento eventoModificado) throws ExcepcionNegocio;
+    boolean modificarEvento(Evento eventoModificado);
 
     List<Evento> buscarEventosByUsuario(Usuario usuario);
     
