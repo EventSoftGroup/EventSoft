@@ -146,9 +146,14 @@ public class SAEventosImp implements SAEventos {
     }
 
     @Override
-    public int modificarEvento(Evento eventoModificado) throws ExcepcionNegocio {
-        //TODO
-        return 0;
+    public boolean modificarEvento(Evento eventoModificado){
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Evento.class);
+
+        fachadaIntegracion.begin();
+        boolean result = fachadaIntegracion.modifica(eventoModificado);
+        fachadaIntegracion.commit();
+
+        return result;
     }
 
     @Override
@@ -173,26 +178,28 @@ public class SAEventosImp implements SAEventos {
                     integra = FachadaIntegracion.newInstance(Evento.class);
                     integra.begin();
                     lista = integra.ejecutarNamedQuery("Evento.buscarEventosPorUsuario", Arrays.asList(new Pair<>("cliente", cliente)));
-                    System.out.println(lista);
                     integra.commit();
+                    return lista;
 
                 } catch (Exception e){
-
+                    return null;
                 }
             }
             else if (finalUsuario instanceof Organizador) {
-                System.out.println("Eres un organizador");
+                try{
+                    Organizador organizador = (Organizador) finalUsuario;
+                    integra = FachadaIntegracion.newInstance(Evento.class);
+                    integra.begin();
+                    lista = integra.ejecutarNamedQuery("Evento.buscarEventosPorUsuario_2", Arrays.asList(new Pair<>("organizador", organizador)));
+                    integra.commit();
+                    return lista;
+
+                } catch (Exception e){
+                    return null;
+                }
             }
             else
                 System.out.println("No eres nadie");
-
-            //Stream para limpiar los servicios de la BBDD
-            /*lista.stream().map((evento) -> {
-                serv.setProveedor(finalProveedor);
-                evento.set
-                serv.setEventoServicios(null);
-                return serv;
-            }).count();*/
 
         }catch (ClassCastException e){
             return null;

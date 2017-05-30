@@ -9,11 +9,27 @@ $(function() {
     var div_evento = $('#box_sel_evento');
     var div_categoria = $('#box_sel_categoria');
     var div_sel_eventos = $('#box_sel_categoria_2');
+    var div_mostrar_eventos = $('#box_mostrar_eventos');
     var texto_titulo_categoria = $('#titulo_categoria');
     var texto_titulo_sel_eventos = $('#titulo_categoria_2');
 
     var evento_seleccionado = undefined;
     var categoria_seleccionada = undefined;
+
+    div_mostrar_eventos.hide();
+
+    $.ajax({
+        type : "GET",
+        url : "/eventos/buscarEventosByUser/",
+        success : function(response) {
+            alert(response);
+        },
+        error: function () {
+            alert("Error");
+        }
+
+
+    });
 
     $('#aniadirServicio').on('click', function(e){
         e.preventDefault();

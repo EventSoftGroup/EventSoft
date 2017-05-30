@@ -70,6 +70,42 @@
         </div>
         <!-- /.box-footer-->
       </div>
+      <div class="box" id="box_mostrar_eventos">
+        <div class="box-header with-border">
+          <h3 class="box-title">Selecciona el evento</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Selecciona el evento que quieras visualizar</label>
+              <select id="eventos" class="form-control select2" style="width: 100%;">
+                <option value="1">Evento 1</option>
+                <option value="2">Evento 2</option>
+                <option value="3">Evento 3</option>
+                <option value="4">Evento 4</option>
+                <option value="5">Evento 5</option>
+                <option value="6">Evento 6</option>
+                <option value="7">Evento 7</option>
+              </select>
+              <button id="aniadirServicio" class="btn btn-primary">Añadir un servicio</button>
+              <button id="mostrarEventos" class="btn btn-primary">Mostrar todos mis eventos</button>
+            </div>
+            <!-- /.form-group -->
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+
+        </div>
+        <!-- /.box-footer-->
+      </div>
 
 
       <div class="box" id="box_sel_categoria" style="display:none;">
