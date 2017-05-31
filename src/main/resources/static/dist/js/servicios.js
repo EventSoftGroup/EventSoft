@@ -17,7 +17,6 @@ $(function() {
             },
             error: function(xhr, status, error) {
 
-                debugger
                 var err = eval("(" + xhr.responseText + ")");
                 console.log(error);
                 console.log(xhr);

@@ -10,6 +10,7 @@ import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion
 
 import java.util.List;
 
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_EVENTOS_BY_USUARIO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ELIMINAR_SERVICIO;
 import static java.lang.System.out;
 
@@ -26,7 +27,7 @@ public class TestEmpleados {
     public static void main(String[] args){
 
 
-        FactoriaSA.getInstance().crearSAServicios().eliminarServicio(null);
+        /*FactoriaSA.getInstance().crearSAServicios().eliminarServicio(null);
 
         Long id = new Long(20000L);
         Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
@@ -39,20 +40,22 @@ public class TestEmpleados {
 
         id = new Long(-2000L);
         contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
-        System.out.println(contex.getEvento());
+        System.out.println(contex.getEvento());*/
 
 
 
-//
-//        //Usuario user = new Cliente("tomini18@hotmail.com", "1234", "", "", "", "", "", null, null, null, null, "", null, null);
-//        Organizador org = new Organizador("sergio@pino.es", "1234", "", "", "", "", "", null, "", "", null, null);
-//        //Proveedor prov = new Proveedor();
-//        Contexto contex;
-//
-//
-//        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTOS_BY_USUARIO).execute(org);
-//        System.out.println();
-//
+
+
+
+        //Usuario user = new Cliente("tomini18@hotmail.com", "1234", "", "", "", "", "", null, null, null, null, "", null, null);
+        Organizador org = new Organizador("sergio@pino.es", "1234", "", "", "", "", "", null, "", "", null, null);
+        //Proveedor prov = new Proveedor();
+        Contexto contex;
+
+
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTOS_BY_USUARIO).execute(org);
+        System.out.println(contex.getDatos());
+
         /*
         user.setId(56L);
         contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(user);

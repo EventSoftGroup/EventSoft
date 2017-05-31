@@ -171,6 +171,12 @@ public class SAEventosImp implements SAEventos {
                     integra.begin();
                     lista = integra.ejecutarNamedQuery("Evento.buscarEventosPorUsuario", Arrays.asList(new Pair<>("cliente", cliente)));
                     integra.commit();
+                    //El siguiente for es una guarreria de codigo, pero la carga LAZY no funciona bien y la EAGER genera buble infinito
+                    for(Evento ev: lista) {
+                        ev.setOrganizador(null);
+                        ev.setCliente(null);
+                        ev.setEventoServicios(null);
+                    }
                     return lista;
 
                 } catch (Exception e){
@@ -184,6 +190,12 @@ public class SAEventosImp implements SAEventos {
                     integra.begin();
                     lista = integra.ejecutarNamedQuery("Evento.buscarEventosPorUsuario_2", Arrays.asList(new Pair<>("organizador", organizador)));
                     integra.commit();
+                    //El siguiente for es una guarreria de codigo, pero la carga LAZY no funciona bien y la EAGER genera buble infinito
+                    for(Evento ev: lista) {
+                        ev.setOrganizador(null);
+                        ev.setCliente(null);
+                        ev.setEventoServicios(null);
+                    }
                     return lista;
 
                 } catch (Exception e){

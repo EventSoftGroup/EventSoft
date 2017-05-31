@@ -188,15 +188,9 @@ public class EventController {
         usuario.setId(((Usuario) session.getAttribute("usuario")).getId());
         usuario.setEmail(((Usuario) session.getAttribute("usuario")).getEmail());
 
-
         contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTOS_BY_USUARIO).execute(usuario);
 
-        System.out.println("Llego a aqui");
-        System.out.println((List<Evento>)contex.getDatos());
-        //return new ResponseEntity<>((List<Evento>) contex.getDatos(), HttpStatus.OK);
-        //return new ResponseEntity<>((List<Evento>) null, HttpStatus.OK);
-
-        return new ResponseEntity<>((List<Evento>) null, HttpStatus.OK);
+        return new ResponseEntity<>((List<Evento>) contex.getDatos(), HttpStatus.OK);
 
     }
 
