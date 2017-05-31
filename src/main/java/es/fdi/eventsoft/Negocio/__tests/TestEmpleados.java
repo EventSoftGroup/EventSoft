@@ -12,7 +12,6 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.SAMensajes;
 import es.fdi.eventsoft.Presentacion.Controllers.EventController;
-import javafx.scene.input.Mnemonic;
 import javafx.util.Pair;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.hibernate.cfg.annotations.PropertyBinder;
