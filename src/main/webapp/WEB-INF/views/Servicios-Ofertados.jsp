@@ -59,7 +59,7 @@
                                     <thead>
                                     <tr>
                                         <th class="text-center">      </th>
-                                        <th class="text-center">Número</th>
+                                        <th class="text-center">Nº</th>
                                         <th class="text-center">Tipo servicio</th>
                                         <th class="text-center">Nombre</th>
                                         <th class="text-center">Descripción</th>
@@ -90,8 +90,7 @@
                                                 <td class="mailbox-date text-center">
                                                     <fmt:formatDate type = "date" value = "${servicio.fechaRegistro}" />
                                                         </td>
-                                                <td class="mailbox-subject"><a href="/servicios/eliminar/${servicio.id}" type="button"
-                                                                               class="btn btn-default text-center" ><i class="fa fa-trash-o"></i>Eliminar</a></td>
+                                                <td class="mailbox-subject"><a type="button" class="btn btn-default text-center botonEliminarServicio" id="servicio-${servicio.id}" data-id="${servicio.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
                                             </tr>
                                         </c:forEach>
 
@@ -137,7 +136,7 @@ immediately after the control sidebar -->
 
 <!-- ./wrapper -->
 <%@ include file="../fragments/plugins.jspf" %>
-<script src="/dist/js/buzonMail.js"></script>
+<script src="/dist/js/servicios.js"></script>
 <!-- iCheck -->
 <!-- Page Script -->
 <script>
