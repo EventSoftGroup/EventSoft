@@ -47,15 +47,16 @@ public class TestEmpleados {
 
     public static void main(String[] args){
 
-        Usuario user = new Usuario();
-        Proveedor prov = new Proveedor();
+        //Usuario user = new Cliente("tomini18@hotmail.com", "1234", "", "", "", "", "", null, null, null, null, "", null, null);
+        Organizador org = new Organizador("sergio@pino.es", "1234", "", "", "", "", "", null, "", "", null, null);
+        //Proveedor prov = new Proveedor();
         Contexto contex;
 
 
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(null);
-        out.println(contex.getEvento());
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTOS_BY_USUARIO).execute(org);
+        System.out.println();
 
-
+        /*
         user.setId(56L);
         contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(user);
         out.println(contex.getEvento());
@@ -113,6 +114,10 @@ public class TestEmpleados {
         List lista = FactoriaSA.getInstance().crearSAServicios().buscarServiciosByProveedor(new Proveedor(56L));
 
         lista.stream().forEach(out::println);
+
+        */
+
+
     }
 
     public static void persistirEmpleado(Empleado emp) {

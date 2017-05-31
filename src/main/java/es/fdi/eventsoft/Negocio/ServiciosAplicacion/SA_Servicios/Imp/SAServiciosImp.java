@@ -66,9 +66,21 @@ public class SAServiciosImp implements SAServicios{
     }
 
     @Override
-    public int eliminarServicio(Servicio servicio) throws ExcepcionNegocio {
-        //TODO
-        return 0;
+    public boolean eliminarServicio(Long servicio){
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
+
+        boolean respuesta;
+        Servicio s = buscarServicio(servicio);
+        if(s != null){
+            fachadaIntegracion.begin();
+            respuesta = fachadaIntegracion.baja(servicio);
+            fachadaIntegracion.commit();
+        }
+        else{
+            respuesta = false;
+        }
+
+        return respuesta;
     }
 
     @Override

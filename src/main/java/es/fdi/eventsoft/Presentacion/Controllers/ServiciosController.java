@@ -79,12 +79,20 @@ public class ServiciosController {
         return "redirect:/index";
     }
 
-    @RequestMapping("eliminarServicio")
-    public String eliminarServicio(Model model) {
-        //TODO
+    @RequestMapping(value = "eliminar/{id}", method = RequestMethod.GET)
+    public String eliminarServicio(@PathVariable("id") Long id, Model model) {
+        if(id > 0) {
+            Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
 
-
-        return null;
+            if (contex.getEvento() == ELIMINAR_SERVICIO) {
+                return "redirect:../buzon";
+            } else {
+                return "error-500";
+            }
+        }
+        else {
+            return "redirect:../buzon";
+        }
     }
 
     @RequestMapping("modificarServicio")
@@ -139,12 +147,6 @@ public class ServiciosController {
     }
 
 
-
-
-
-
-
-    
 
     @RequestMapping(
             value = "buscar-por-evento/{idEvento}",

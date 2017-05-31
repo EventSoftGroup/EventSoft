@@ -9,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -18,6 +20,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "Eventos")
+@NamedQueries({
+        @NamedQuery(name = "Evento.buscarEventosPorUsuario", query = "from Evento e join fetch e.cliente join fetch e.organizador where e.cliente = :cliente"),
+        @NamedQuery(name = "Evento.buscarEventosPorUsuario_2", query = "from Evento e join fetch e.organizador join fetch e.cliente where e.organizador = :organizador")
+})
 public class Evento implements Serializable {
 
     /****************************
