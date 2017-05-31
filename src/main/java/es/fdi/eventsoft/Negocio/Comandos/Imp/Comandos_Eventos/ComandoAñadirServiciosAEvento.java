@@ -1,8 +1,8 @@
 package es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Eventos;
+
 import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
-import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import javafx.util.Pair;
 

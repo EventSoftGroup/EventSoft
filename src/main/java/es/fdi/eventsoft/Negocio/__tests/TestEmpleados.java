@@ -2,37 +2,15 @@ package es.fdi.eventsoft.Negocio.__tests;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
-import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
-import es.fdi.eventsoft.Negocio.Entidades.*;
+import es.fdi.eventsoft.Negocio.Entidades.Empleado;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes.SAMensajes;
-import es.fdi.eventsoft.Presentacion.Controllers.EventController;
-import javafx.scene.input.Mnemonic;
-import javafx.util.Pair;
-import jdk.nashorn.internal.parser.JSONParser;
-import org.hibernate.cfg.annotations.PropertyBinder;
-import org.springframework.boot.json.JacksonJsonParser;
-import org.springframework.boot.json.JsonParser;
-import org.springframework.boot.json.JsonParserFactory;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.util.SerializationUtils;
-import sun.util.calendar.LocalGregorianCalendar;
-import sun.util.cldr.CLDRLocaleDataMetaInfo;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.List;
 
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ELIMINAR_SERVICIO;
 import static java.lang.System.out;
 
 
@@ -47,15 +25,34 @@ public class TestEmpleados {
 
     public static void main(String[] args){
 
-        //Usuario user = new Cliente("tomini18@hotmail.com", "1234", "", "", "", "", "", null, null, null, null, "", null, null);
-        Organizador org = new Organizador("sergio@pino.es", "1234", "", "", "", "", "", null, "", "", null, null);
-        //Proveedor prov = new Proveedor();
-        Contexto contex;
+
+        FactoriaSA.getInstance().crearSAServicios().eliminarServicio(null);
+
+        Long id = new Long(20000L);
+        Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
+        System.out.println(contex.getEvento());
 
 
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTOS_BY_USUARIO).execute(org);
-        System.out.println();
+        contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(null);
+        System.out.println(contex.getEvento());
 
+
+        id = new Long(-2000L);
+        contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
+        System.out.println(contex.getEvento());
+
+
+
+//
+//        //Usuario user = new Cliente("tomini18@hotmail.com", "1234", "", "", "", "", "", null, null, null, null, "", null, null);
+//        Organizador org = new Organizador("sergio@pino.es", "1234", "", "", "", "", "", null, "", "", null, null);
+//        //Proveedor prov = new Proveedor();
+//        Contexto contex;
+//
+//
+//        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTOS_BY_USUARIO).execute(org);
+//        System.out.println();
+//
         /*
         user.setId(56L);
         contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(user);

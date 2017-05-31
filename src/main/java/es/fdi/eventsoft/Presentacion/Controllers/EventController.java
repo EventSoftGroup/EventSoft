@@ -1,15 +1,12 @@
 package es.fdi.eventsoft.Presentacion.Controllers;
 
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
-import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
-import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,21 +15,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_MENSAJES_BY_USER;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
-import static es.fdi.eventsoft.Presentacion.Controllers.HomeController.isLogin;
 
 @Controller
 @RequestMapping("/eventos/")

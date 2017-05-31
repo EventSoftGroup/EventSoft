@@ -1,7 +1,7 @@
 
 package es.fdi.eventsoft.Negocio.Entidades;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 

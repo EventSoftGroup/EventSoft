@@ -3,7 +3,6 @@ package es.fdi.eventsoft.Integracion;
 import es.fdi.eventsoft.Integracion.imp.ServicioIntegracionImp;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

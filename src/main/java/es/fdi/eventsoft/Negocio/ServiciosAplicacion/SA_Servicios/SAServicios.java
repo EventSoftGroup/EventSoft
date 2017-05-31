@@ -6,7 +6,6 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

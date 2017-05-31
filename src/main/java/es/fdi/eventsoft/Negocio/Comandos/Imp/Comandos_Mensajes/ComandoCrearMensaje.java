@@ -1,11 +1,10 @@
 package es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Mensajes;
+
 import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
-import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.CREAR_EVENTO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.CREAR_MENSAJE;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_CREAR_MENSAJE;
 

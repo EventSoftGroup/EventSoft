@@ -1,7 +1,5 @@
 package es.fdi.eventsoft.Negocio.Entidades.Validadores;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;

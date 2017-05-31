@@ -2,7 +2,6 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Mensajes;
 
 import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
-import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 
 import java.util.List;
 

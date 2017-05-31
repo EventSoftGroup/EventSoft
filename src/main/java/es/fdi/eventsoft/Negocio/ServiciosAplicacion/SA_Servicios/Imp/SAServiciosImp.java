@@ -2,30 +2,21 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.Imp;
 
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
-import es.fdi.eventsoft.Negocio.Comandos.Contexto;
-import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
 import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import javafx.util.Pair;
-import org.hibernate.annotations.Cascade;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.context.request.FacesRequestAttributes;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_SERVICIOS_BY_PROVEEDOR;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_SERVICIO;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
-import static java.lang.System.out;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class SAServiciosImp implements SAServicios{
 
@@ -56,11 +47,15 @@ public class SAServiciosImp implements SAServicios{
 
     @Override
     public Servicio buscarServicio(Long id) {
-        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
+        Servicio servicio = null;
 
-        fachadaIntegracion.begin();
-        Servicio servicio = (Servicio) fachadaIntegracion.consulta(id);
-        fachadaIntegracion.commit();
+        if(id != null) {
+            FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
+
+            fachadaIntegracion.begin();
+            servicio = (Servicio) fachadaIntegracion.consulta(id);
+            fachadaIntegracion.commit();
+        }
 
         return servicio;
     }

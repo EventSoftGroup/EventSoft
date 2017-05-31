@@ -6,7 +6,6 @@ import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
 
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO_BY_EMAIL;
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_USUARIO_BY_ID;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_BUSCAR_USUARIO;
 
 /**
