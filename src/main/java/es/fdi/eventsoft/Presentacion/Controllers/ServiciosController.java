@@ -102,7 +102,7 @@ public class ServiciosController {
             Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(id);
 
             if (contex.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
-                model.addAttribute("servicios", contex.getDatos());
+                model.addAttribute("listaServicios", contex.getDatos());
                 return "Servicios-Ofertados";
             } else {
                 return "error-500";

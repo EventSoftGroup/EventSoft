@@ -108,6 +108,7 @@
                             </c:if>
                             <div class="table-responsive mailbox-messages">
                                 <table class="table table-hover table-striped">
+
                                     <tbody>
 
                                     <c:if test="${not empty usuario.mensajes_recibidos}">
