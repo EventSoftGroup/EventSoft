@@ -13,9 +13,13 @@
         <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador</class>
         <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor</class>
 
+
         <class>es.fdi.eventsoft.Negocio.Entidades.Mensaje</class>
         <class>es.fdi.eventsoft.Negocio.Entidades.Valoracion</class>
-
+        <class>es.fdi.eventsoft.Negocio.Entidades.Servicio</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.Evento</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.EventoServicio</class>
+        <class>es.fdi.eventsoft.Negocio.Entidades.ClavesEventoServicio</class>
 
 
         <properties>
@@ -24,8 +28,7 @@
             <property name="javax.persistence.jdbc.user" value="qxp814" />
             <property name="javax.persistence.jdbc.password" value="VeL3RdYRnp98" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-            <property name="hibernate.show.sql" value="true"></property>
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="update" /> 
         </properties>
     </persistence-unit>
 
