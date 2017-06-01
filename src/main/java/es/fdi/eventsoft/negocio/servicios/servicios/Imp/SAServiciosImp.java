@@ -1,15 +1,6 @@
 package es.fdi.eventsoft.negocio.servicios.servicios.Imp;
 
 
-import es.fdi.eventsoft.Integracion.FachadaIntegracion;
-import es.fdi.eventsoft.Negocio.Entidades.ClavesEventoServicio;
-import es.fdi.eventsoft.Negocio.Entidades.Evento;
-import es.fdi.eventsoft.Negocio.Entidades.EventoServicio;
-import es.fdi.eventsoft.Negocio.Entidades.Servicio;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
-import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.SAServicios;
-import es.fdi.eventsoft.Negocio.__excepcionNegocio.ExcepcionNegocio;
 import es.fdi.eventsoft.integracion.FachadaIntegracion;
 import es.fdi.eventsoft.negocio.entidades.Evento;
 import es.fdi.eventsoft.negocio.entidades.EventoServicio;
@@ -105,12 +96,12 @@ public class SAServiciosImp implements SAServicios{
         int respuesta;
         boolean ok;
         Servicio s = buscarServicio(servicio);
-        List<EventoServicio> listaEventoServicio = s.getEventoServicios();
+
         //Si el servicio existe...
         if(s != null){
             //Recuperamos y recorremos su lista de EventoServicio para saber a que eventos esta asociado
+            List<EventoServicio> listaEventoServicio = s.getEventoServicios();
 
-            int cont = numEventosVencidos(listaEventoServicio);
             //Si no tiene eventos asociados, eliminamos el servicio
             if(listaEventoServicio == null){
                 fachadaIntegracion.begin();
@@ -123,8 +114,9 @@ public class SAServiciosImp implements SAServicios{
             }
             //Si tiene eventos asociados
             else{
+                int cont = numEventosVencidos(listaEventoServicio);
                 //Si todos los eventos que tiene asociados son pasados, eliminamos
-                if(listaEventoServicio != null && listaEventoServicio.size() == cont){
+                if(listaEventoServicio.size() == cont){
                     //Primero, eliminamos sus EventoServicio
                     //eliminarEventosServicios(listaEventoServicio);
                     //Y, despues, eliminamos el servicio
