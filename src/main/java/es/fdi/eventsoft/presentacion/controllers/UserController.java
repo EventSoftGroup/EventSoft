@@ -8,7 +8,6 @@ import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
 import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
-import es.fdi.eventsoft.negocio.__excepcionNegocio.ExcepcionNegocio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -195,7 +194,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "eliminar", method = RequestMethod.POST)
-    public String eliminar(Model model, HttpSession session) throws ExcepcionNegocio {
+    public String eliminar(Model model, HttpSession session) {
         Contexto context = FactoriaComandos.getInstance().crearComando(ELIMINAR_USUARIO).execute(session.getAttribute("usuario"));
 
         if (context.getEvento() == ELIMINAR_USUARIO) {

@@ -8,7 +8,6 @@ import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
 import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
 import es.fdi.eventsoft.negocio.servicios.servicios.SAServicios;
-import es.fdi.eventsoft.negocio.__excepcionNegocio.ExcepcionNegocio;
 import javafx.util.Pair;
 
 import java.text.DateFormat;
@@ -127,7 +126,7 @@ public class SAServiciosImp implements SAServicios{
     }
 
     @Override
-    public int modificarServicio(Servicio servicioModificado) throws ExcepcionNegocio {
+    public int modificarServicio(Servicio servicioModificado) {
         //TODO
         return 0;
     }

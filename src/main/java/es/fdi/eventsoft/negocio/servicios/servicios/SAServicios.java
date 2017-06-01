@@ -3,7 +3,6 @@ package es.fdi.eventsoft.negocio.servicios.servicios;
 import es.fdi.eventsoft.negocio.entidades.Evento;
 import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
-import es.fdi.eventsoft.negocio.__excepcionNegocio.ExcepcionNegocio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ public interface SAServicios {
 
     int eliminarServicio(Long servicio);
 
-    int modificarServicio(Servicio servicioModificado) throws ExcepcionNegocio;
+    int modificarServicio(Servicio servicioModificado);
 
     List<Servicio> buscarServiciosByProveedor(Proveedor proveedor);
 

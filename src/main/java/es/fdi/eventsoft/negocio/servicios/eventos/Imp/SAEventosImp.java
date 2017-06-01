@@ -13,7 +13,6 @@ import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
 import es.fdi.eventsoft.negocio.servicios.eventos.SAEventos;
 import es.fdi.eventsoft.negocio.servicios.servicios.SAServicios;
 import es.fdi.eventsoft.negocio.servicios.usuarios.SAUsuario;
-import es.fdi.eventsoft.negocio.__excepcionNegocio.ExcepcionNegocio;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -129,7 +128,7 @@ public class SAEventosImp implements SAEventos {
     }
 
     @Override
-    public int eliminarEvento(Evento evento) throws ExcepcionNegocio {
+    public int eliminarEvento(Evento evento) {
         //TODO
         return 0;
     }

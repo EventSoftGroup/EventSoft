@@ -3,7 +3,6 @@ package es.fdi.eventsoft.negocio.servicios.eventos;
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.entidades.Evento;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
-import es.fdi.eventsoft.negocio.__excepcionNegocio.ExcepcionNegocio;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public interface SAEventos {
 
     Evento buscarEvento(Long id);
 
-    int eliminarEvento(Evento evento) throws ExcepcionNegocio;
+    int eliminarEvento(Evento evento);
 
     boolean modificarEvento(Evento eventoModificado);
 

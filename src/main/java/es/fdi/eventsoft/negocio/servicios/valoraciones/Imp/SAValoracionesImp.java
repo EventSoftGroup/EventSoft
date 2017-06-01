@@ -3,7 +3,6 @@ package es.fdi.eventsoft.negocio.servicios.valoraciones.Imp;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
 import es.fdi.eventsoft.negocio.entidades.Valoracion;
 import es.fdi.eventsoft.negocio.servicios.valoraciones.SAValoraciones;
-import es.fdi.eventsoft.negocio.__excepcionNegocio.ExcepcionNegocio;
 
 import java.util.List;
 
@@ -14,25 +13,25 @@ public class SAValoracionesImp implements SAValoraciones {
 
 
     @Override
-    public int crearValoracion(Valoracion valoracionNueva) throws ExcepcionNegocio {
+    public int crearValoracion(Valoracion valoracionNueva) {
         //TODO
         return 0;
     }
 
     @Override
-    public Valoracion buscarValoracion(Valoracion valoracion) throws ExcepcionNegocio {
+    public Valoracion buscarValoracion(Valoracion valoracion) {
         //TODO
         return null;
     }
 
     @Override
-    public int eliminarValoracion(Valoracion valoracion) throws ExcepcionNegocio {
+    public int eliminarValoracion(Valoracion valoracion) {
         //TODO
         return 0;
     }
 
     @Override
-    public List<Valoracion> buscarValoracionesByUsuario(Usuario usuario) throws ExcepcionNegocio {
+    public List<Valoracion> buscarValoracionesByUsuario(Usuario usuario) {
         //TODO
         return null;
     }
