@@ -2,6 +2,7 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.Imp;
 
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
+import es.fdi.eventsoft.Negocio.Entidades.ClavesEventoServicio;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
 import es.fdi.eventsoft.Negocio.Entidades.EventoServicio;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
@@ -58,6 +59,34 @@ public class SAServiciosImp implements SAServicios{
         return servicio;
     }
 
+    private int numEventosVencidos(List<EventoServicio> listaEvenServ) {
+        Iterator<EventoServicio> it = listaEvenServ.iterator();
+        Evento act;
+        Date fechaAct = new Date();
+        int cont = 0;
+        while (it.hasNext()) {
+            //Obtenemos el evento actual
+            act = it.next().getEvento();
+            //Si la fecha de fin es anterior a la fecha actual
+            if (act.getFechaFin().before(fechaAct)) {
+                cont++;
+            }
+        }
+        return cont;
+    }/*
+    private void eliminarEventosServicios(List<EventoServicio> lista) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(EventoServicio.class);
+        boolean ok = true;
+        Iterator<EventoServicio> it = lista.iterator();
+        Long act;
+        while (it.hasNext()) {
+            //Obtenemos el evento actual
+            ClavesEventoServicio = it.next().getId();
+            fachadaIntegracion.begin();
+            ok = fachadaIntegracion.baja(act);
+            fachadaIntegracion.commit();
+        }
+    }*/
     @Override
     public int eliminarServicio(Long servicio){
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
@@ -69,59 +98,43 @@ public class SAServiciosImp implements SAServicios{
         int respuesta;
         boolean ok;
         Servicio s = buscarServicio(servicio);
+        List<EventoServicio> listaEventoServicio = s.getEventoServicios();
         //Si el servicio existe...
         if(s != null){
             //Recuperamos y recorremos su lista de EventoServicio para saber a que eventos esta asociado
-            List<EventoServicio> listaEventos = s.getEventoServicios();
-            Iterator<EventoServicio> it = listaEventos.iterator();
-            Evento act;
-            Date fechaAct = new Date();
-            int cont = 0;
-            while(it.hasNext()){
-                //Obtenemos el evento actual
-                act = it.next().getEvento();
-                //Si la fecha de fin es anterior a la fecha actual
-                if(act.getFechaFin().before(fechaAct)){
-                    cont++;
-                }
-            }
+
+            int cont = numEventosVencidos(listaEventoServicio);
             //Si no tiene eventos asociados, eliminamos el servicio
-            if(listaEventos == null){
+            if(listaEventoServicio == null){
                 fachadaIntegracion.begin();
                 ok = fachadaIntegracion.baja(servicio);
                 fachadaIntegracion.commit();
 
-                if(ok){
-                    respuesta = 0;
-                }
-                else{
-                    respuesta = 1;
-                }
+                if(ok){respuesta = 0;}
+                else {respuesta = 1;}
+
             }
             //Si tiene eventos asociados
             else{
                 //Si todos los eventos que tiene asociados son pasados, eliminamos
-                if(listaEventos != null && listaEventos.size() == cont){
+                if(listaEventoServicio != null && listaEventoServicio.size() == cont){
+                    //Primero, eliminamos sus EventoServicio
+                    //eliminarEventosServicios(listaEventoServicio);
+                    //Y, despues, eliminamos el servicio
                     fachadaIntegracion.begin();
                     ok = fachadaIntegracion.baja(servicio);
                     fachadaIntegracion.commit();
 
-                    if(ok){
-                        respuesta = 0;
-                    }
-                    else{
-                        respuesta = 2;
-                    }
+                    if(ok){respuesta = 0;}
+                    else {respuesta = 2;}
                 }
-                else{ //En caso contrario, devolvemos un error
+                else //En caso contrario, devolvemos un error
                     respuesta = 2;
-                }
             }
         }
         //Si no encuentra el servicio
-        else{
+        else
             respuesta = 1;
-        }
 
         return respuesta;
     }
