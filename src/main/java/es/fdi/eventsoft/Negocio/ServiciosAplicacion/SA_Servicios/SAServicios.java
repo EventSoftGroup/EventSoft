@@ -17,7 +17,7 @@ public interface SAServicios {
 
     Servicio buscarServicio(Long id) ;
 
-    boolean eliminarServicio(Long servicio);
+    int eliminarServicio(Long servicio);
 
     int modificarServicio(Servicio servicioModificado) throws ExcepcionNegocio;
 

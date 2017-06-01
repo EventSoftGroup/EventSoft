@@ -3,6 +3,7 @@ package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Servicios.Imp;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Entidades.Evento;
+import es.fdi.eventsoft.Negocio.Entidades.EventoServicio;
 import es.fdi.eventsoft.Negocio.Entidades.Servicio;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
@@ -13,10 +14,7 @@ import javafx.util.Pair;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class SAServiciosImp implements SAServicios{
 
@@ -61,18 +59,68 @@ public class SAServiciosImp implements SAServicios{
     }
 
     @Override
-    public boolean eliminarServicio(Long servicio){
+    public int eliminarServicio(Long servicio){
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
 
-        boolean respuesta;
+        //La respuesta podran ser tres cosas:
+        //0 -> Si se elimino el servicio correctamente
+        //1 -> Si no se encontro el servicio a eliminar
+        //2 -> Si el servicio tiene eventos asociados
+        int respuesta;
+        boolean ok;
         Servicio s = buscarServicio(servicio);
+        //Si el servicio existe...
         if(s != null){
-            fachadaIntegracion.begin();
-            respuesta = fachadaIntegracion.baja(servicio);
-            fachadaIntegracion.commit();
+            //Recuperamos y recorremos su lista de EventoServicio para saber a que eventos esta asociado
+            List<EventoServicio> listaEventos = s.getEventoServicios();
+            Iterator<EventoServicio> it = listaEventos.iterator();
+            Evento act;
+            Date fechaAct = new Date();
+            int cont = 0;
+            while(it.hasNext()){
+                //Obtenemos el evento actual
+                act = it.next().getEvento();
+                //Si la fecha de fin es anterior a la fecha actual
+                if(act.getFechaFin().before(fechaAct)){
+                    cont++;
+                }
+            }
+            //Si no tiene eventos asociados, eliminamos el servicio
+            if(listaEventos == null){
+                fachadaIntegracion.begin();
+                ok = fachadaIntegracion.baja(servicio);
+                fachadaIntegracion.commit();
+
+                if(ok){
+                    respuesta = 0;
+                }
+                else{
+                    respuesta = 1;
+                }
+            }
+            //Si tiene eventos asociados
+            else{
+                //Si todos los eventos que tiene asociados son pasados, eliminamos
+                if(listaEventos != null && listaEventos.size() == cont){
+                    fachadaIntegracion.begin();
+                    ok = fachadaIntegracion.baja(servicio);
+                    fachadaIntegracion.commit();
+
+                    if(ok){
+                        respuesta = 0;
+                    }
+                    else{
+                        respuesta = 2;
+                    }
+                }
+                else{ //En caso contrario, devolvemos un error
+                    respuesta = 2;
+                }
+            }
         }
+        //Si no encuentra el servicio
         else{
-            respuesta = false;
+            respuesta = 1;
         }
 
         return respuesta;
