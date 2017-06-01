@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../fragments/head.jspf" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -289,7 +291,7 @@
 <!-- ./wrapper -->
 
 <%@ include file="../fragments/plugins.jspf" %>
-<script src="/dist/js/eventos.js"></script>
-<script src="/dist/js/jquery.bootstrap-duallistbox.js"></script>
+<script src="<c:url value="/resources/dist/js/eventos.js" />"></script>
+<script src="<c:url value="/resources/dist/js/jquery.bootstrap-duallistbox.js" />"></script>
 </body>
 </html>

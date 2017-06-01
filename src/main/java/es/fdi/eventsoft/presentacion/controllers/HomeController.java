@@ -98,7 +98,7 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("sign-out")
+    @RequestMapping("/logout")
     public String signOut(HttpSession session, SessionStatus status, Model model) {
         session.removeAttribute("rol");
         session.removeAttribute("usuario");

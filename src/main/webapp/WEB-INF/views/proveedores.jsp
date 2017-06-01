@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../fragments/head.jspf" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -336,7 +338,7 @@
     <!-- <script src="/plugins/chartjs/Chart.min.js"></script> -->
 
     <!-- Script for Charts of "Gastos e ingresos" y "tipos de eventos" -->
-    <script src="/dist/js/scriptChartsFer.js"></script>
+    <script src="<c:url value="/resources/dist/js/scriptChartsFer.js" />"></script>
 
 
 </body>

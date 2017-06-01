@@ -1,4 +1,4 @@
-package es.fdi.eventsoft.negocio.servicios.servicios.Imp;
+package es.fdi.eventsoft.negocio.servicios.servicios.imp;
 
 
 import es.fdi.eventsoft.integracion.FachadaIntegracion;

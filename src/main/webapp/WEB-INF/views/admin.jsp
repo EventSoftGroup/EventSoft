@@ -1,5 +1,6 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -399,7 +400,7 @@
 <!-- <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> -->
 
 <!-- Script for Charts of Evolucion usuarios -->
-<script src="/dist/js/scriptChartsRodri.js"></script>
+<script src="<c:url value="/resources/dist/js/scriptChartsRodri.js" />"></script>
 
 
 
