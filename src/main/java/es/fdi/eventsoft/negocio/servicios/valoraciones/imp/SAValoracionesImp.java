@@ -1,4 +1,4 @@
-package es.fdi.eventsoft.negocio.servicios.valoraciones.Imp;
+package es.fdi.eventsoft.negocio.servicios.valoraciones.imp;
 
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
 import es.fdi.eventsoft.negocio.entidades.Valoracion;

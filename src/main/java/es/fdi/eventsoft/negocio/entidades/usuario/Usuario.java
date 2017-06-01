@@ -22,13 +22,11 @@ import java.util.List;
 })
 public class Usuario implements Serializable {
 
-    /****************************
-     ********* ATRIBUTOS ********
-     ****************************/
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column()
     @Id protected Long id;
+
+    private String roles;
 
 
     @NotBlank @Column(nullable = false, unique = true)
@@ -119,6 +117,14 @@ public class Usuario implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public String getEmail() {

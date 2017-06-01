@@ -1,5 +1,6 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -126,7 +127,7 @@
     <%@ include file="../fragments/plugins.jspf" %>
     <!-- fullCalendar 2.2.5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-    <script src="/plugins/fullcalendar/fullcalendar.min.js"></script>
+    <script src="<c:url value="/resources/plugins/fullcalendar/fullcalendar.min.js" />"></script>
     <!-- Page specific script -->
     <script>
         $(function () {

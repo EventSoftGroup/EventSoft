@@ -1,15 +1,15 @@
 package es.fdi.eventsoft.negocio.servicios.factoria.imp;
 
 import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
-import es.fdi.eventsoft.negocio.servicios.eventos.Imp.SAEventosImp;
+import es.fdi.eventsoft.negocio.servicios.eventos.imp.SAEventosImp;
 import es.fdi.eventsoft.negocio.servicios.eventos.SAEventos;
-import es.fdi.eventsoft.negocio.servicios.mensajes.Imp.SAMensajesImp;
+import es.fdi.eventsoft.negocio.servicios.mensajes.imp.SAMensajesImp;
 import es.fdi.eventsoft.negocio.servicios.mensajes.SAMensajes;
-import es.fdi.eventsoft.negocio.servicios.servicios.Imp.SAServiciosImp;
+import es.fdi.eventsoft.negocio.servicios.servicios.imp.SAServiciosImp;
 import es.fdi.eventsoft.negocio.servicios.servicios.SAServicios;
-import es.fdi.eventsoft.negocio.servicios.usuarios.Imp.SAUsuarioImp;
+import es.fdi.eventsoft.negocio.servicios.usuarios.imp.SAUsuarioImp;
 import es.fdi.eventsoft.negocio.servicios.usuarios.SAUsuario;
-import es.fdi.eventsoft.negocio.servicios.valoraciones.Imp.SAValoracionesImp;
+import es.fdi.eventsoft.negocio.servicios.valoraciones.imp.SAValoracionesImp;
 import es.fdi.eventsoft.negocio.servicios.valoraciones.SAValoraciones;
 
 /**

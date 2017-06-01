@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../fragments/head.jspf" %>
-<%@ taglib uri="http://www.springframework.org/tags/form"
-           prefix="springForm"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="springForm"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
@@ -43,6 +44,6 @@
 <!-- /.register-box -->
 
 <%@ include file="../fragments/plugins.jspf" %>
-<script src="/dist/js/register.js"></script>
+<script src="<c:url value="/resources/dist/js/register.js" />"></script>
 </body>
 </html>
