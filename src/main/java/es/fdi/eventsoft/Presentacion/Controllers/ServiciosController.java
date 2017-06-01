@@ -76,20 +76,21 @@ public class ServiciosController {
         return "redirect:/index";
     }
 
-    @RequestMapping(value = "eliminar/{id}", method = RequestMethod.GET)
-    public String eliminarServicio(@PathVariable("id") Long id, Model model) {
+    @RequestMapping(value = "eliminar/{id}", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<String> eliminarServicio(@PathVariable("id") Long id, Model model) {
         if(id > 0) {
             Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
 
             if (contex.getEvento() == ELIMINAR_SERVICIO) {
-                return "redirect:../buzon";
-            } else {
-                return "error-500";
+                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.OK);
+            } else if(contex.getEvento() == ERROR_ELIMINAR_SERVICIO){
+                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.NOT_FOUND);
+            }
+            else if(contex.getEvento() == ERROR_SERVICIO_ASOCIADO_A_EVENTO){
+                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.CONFLICT);
             }
         }
-        else {
-            return "redirect:../buzon";
-        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping("modificarServicio")
