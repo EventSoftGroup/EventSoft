@@ -7,19 +7,19 @@
     <persistence-unit name="aplicacion">
 
 
-        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Profesional</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Usuario</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Cliente</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Profesional</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Organizador</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Proveedor</class>
 
 
-        <class>es.fdi.eventsoft.Negocio.Entidades.Mensaje</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.Valoracion</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.Servicio</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.Evento</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.EventoServicio</class>
-        <class>es.fdi.eventsoft.Negocio.Entidades.ClavesEventoServicio</class>
+        <class>es.fdi.eventsoft.negocio.entidades.Mensaje</class>
+        <class>es.fdi.eventsoft.negocio.entidades.Valoracion</class>
+        <class>es.fdi.eventsoft.negocio.entidades.Servicio</class>
+        <class>es.fdi.eventsoft.negocio.entidades.Evento</class>
+        <class>es.fdi.eventsoft.negocio.entidades.EventoServicio</class>
+        <class>es.fdi.eventsoft.negocio.entidades.ClavesEventoServicio</class>
 
 
         <properties>
