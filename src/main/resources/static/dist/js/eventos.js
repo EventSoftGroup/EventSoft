@@ -14,7 +14,8 @@ $(function() {
     var texto_titulo_sel_eventos = $('#titulo_categoria_2');
     var boton_mostrarEventos = $('#mostrarEventosTodos');
     var boton_ocultarEventos= $('#ocultarEventos');
-    var panel_todos_evnetos = $('#panelTodosLosEventos');
+    var panel_todos_eventos = $('#panelTodosLosEventos');
+    var panel_evento = $('#panelUnEvento');
     var cargando = $('#cargando');
     var tabla_eventos = $('#tabla_eventos tbody');
 
@@ -23,8 +24,10 @@ $(function() {
 
     div_mostrar_eventos.hide();
     boton_ocultarEventos.hide();
-    panel_todos_evnetos.hide();
+    panel_todos_eventos.hide();
     cargando.hide();
+    panel_evento.hide();
+
 
     $('#aniadirServicio').on('click', function(e){
         e.preventDefault();
@@ -132,34 +135,110 @@ $(function() {
         return false;
     });
 
+
+    $("#eventos").on("change", function(e) {
+        e.preventDefault();
+        buscarEvento($("#eventos option:selected").val());
+    });
+
+
+
     $("#mostrarEventosTodos").on("click", function(e) {
         e.preventDefault();
+        buscarTodosLosEventos(false);
+
+    });
+    var buscarEvento = function(idEvento) {
+        boton_mostrarEventos.show();
+        boton_ocultarEventos.hide();
         cargando.show();
-        var fecha_inicio = undefined;
-        var fecha_fin = undefined;
+        panel_todos_eventos.fadeOut();
+        $.ajax({
+            type : "GET",
+            url : "/eventos/buscarEvento/"+idEvento,
+            success : function(response) {
+
+                panel_todos_eventos.fadeOut(function(){
+                    boton_mostrarEventos.show();
+                    boton_ocultarEventos.hide();
+                    panel_evento.fadeIn();
+                    cargando.hide();
+                });
+
+                var dini = undefined;
+                var dfin = undefined;
+
+
+                //Cargamos el evento
+                dini = new Date(response.fechaInicio);
+                dfin = new Date(response.fechaFin);
+                $("#tabla_evento tbody").empty();
+                $("#tabla_evento tbody").append("<tr></tr>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.nombre+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.categoria+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.descripcion.substring(1,70)+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.lugar+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dini.getDate() + '-' + dini.getMonth() + '-' + dini.getFullYear()+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dfin.getDate() + '-' + dfin.getMonth() + '-' + dfin.getFullYear()+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject'><a type='button' class='btn btn-default text-center botonEliminarServicio' id='' data-id=''><i class='fa fa-trash-o'></i>Eliminar</a></td>");
+
+
+            },
+            error: function () {
+                cargando.hide();
+                alert("Error");
+            }
+        });
+    };
+
+    var buscarTodosLosEventos = function(ini) {
+        cargando.show();
         $.ajax({
             type : "GET",
             url : "/eventos/buscarEventosByUser/",
             success : function(response) {
-                alert(response);
-                boton_mostrarEventos.hide();
-                boton_ocultarEventos.show();
-                panel_todos_evnetos.show();
-                cargando.hide();
+
+                //Caso del botón
+                if (!ini) {
+
+                    var dini = undefined;
+                    var dfin = undefined;
 
 
-                //Cargamos los eventos
-                response.forEach(function(e){
-                    $("#tabla_eventos tbody").append("<tr></tr>");
-                    $("#tabla_eventos tbody tr:last-child").append("<td><a href='/eventos/buscarEvento/' type='button' class='btn btn-default text-center'><i class='fa fa-search'></i> Ver</a></td>");
-                    $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.nombre+"</td>");
-                    $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.categoria+"</td>");
-                    $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.descripcion.substring(1,70)+"</td>");
-                    $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.lugar+"</td>");
-                    $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-date text-center'>"+e.fechaInicio+"</td>");
-                    $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-date text-center'>"+e.fechaFin+"</td>");
-                    $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject'><a type='button' class='btn btn-default text-center botonEliminarServicio' id='' data-id=''><i class='fa fa-trash-o'></i>Eliminar</a></td>");
-                })
+                    //Cargamos los eventos
+                    $("#tabla_eventos tbody").empty();
+                    response.forEach(function(e){
+                        dini = new Date(e.fechaInicio);
+                        dfin = new Date(e.fechaFin);
+                        $("#tabla_eventos tbody").append("<tr></tr>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td><a href='/eventos/buscarEvento/' type='button' class='btn btn-default text-center'><i class='fa fa-search'></i> Ver</a></td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.nombre+"</td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.categoria+"</td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.descripcion.substring(1,70)+"</td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.lugar+"</td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dini.getDate() + '-' + dini.getMonth() + '-' + dini.getFullYear()+"</td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dfin.getDate() + '-' + dfin.getMonth() + '-' + dfin.getFullYear()+"</td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject'><a type='button' class='btn btn-default text-center botonEliminarServicio' id='' data-id=''><i class='fa fa-trash-o'></i>Eliminar</a></td>");
+                    });
+
+
+                    panel_evento.fadeOut(function(){
+                        boton_mostrarEventos.hide();
+                        boton_ocultarEventos.show();
+                        panel_todos_eventos.fadeIn();
+                        cargando.hide();
+                    });
+                }
+                else {
+                    //Cargamos los eventos
+
+                    cargando.hide();
+                    $('#eventos').empty();
+                    response.forEach(function(e){
+                        $('#eventos').append("<option value='"+e.id+"'>"+e.nombre+"</option>");
+                    });
+                    buscarEvento($("#eventos option:selected").val());
+                }
 
             },
             error: function () {
@@ -171,14 +250,17 @@ $(function() {
                 console.log(status);
             }
         });
-    });
+    }
 
     $("#ocultarEventos").on("click", function(e) {
         e.preventDefault();
 
         boton_mostrarEventos.show();
         boton_ocultarEventos.hide();
-        panel_todos_evnetos.hide();
+        panel_todos_eventos.hide();
+        buscarEvento($("#eventos option:selected").val());
     });
 
+    //EVENTOS INICIALES.
+    buscarTodosLosEventos(true);
 });

@@ -51,13 +51,7 @@
             <div class="form-group">
               <label>Selecciona el evento que quieras visualizar</label>
               <select id="eventos" class="form-control select2" style="width: 100%;">
-                <option value="1">Evento 1</option>
-                <option value="2">Evento 2</option>
-                <option value="3">Evento 3</option>
-                <option value="4">Evento 4</option>
-                <option value="5">Evento 5</option>
-                <option value="6">Evento 6</option>
-                <option value="7">Evento 7</option>
+
               </select>
               <button id="aniadirServicio" class="btn btn-primary">Añadir un servicio</button>
               <button id="mostrarEventosTodos" class="btn btn-primary">Mostrar todos los eventos</button>
@@ -88,13 +82,7 @@
             <div class="form-group">
               <label>Selecciona el evento que quieras visualizar</label>
               <select id="eventos" class="form-control select2" style="width: 100%;">
-                <option value="1">Evento 1</option>
-                <option value="2">Evento 2</option>
-                <option value="3">Evento 3</option>
-                <option value="4">Evento 4</option>
-                <option value="5">Evento 5</option>
-                <option value="6">Evento 6</option>
-                <option value="7">Evento 7</option>
+
               </select>
               <button id="aniadirServicio" class="btn btn-primary">Añadir un servicio</button>
               <button id="mostrarEventos" class="btn btn-primary">Mostrar todos mis eventos</button>
@@ -200,20 +188,12 @@
         <div class="col-md-12" id="bandeja_recibidos">
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Servicios Ofertados</h3>
+              <h3 class="box-title">Todos los eventos</h3>
 
-              <div class="box-tools pull-right">
-                <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Buscar mensaje">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                </div>
-              </div>
-              <!-- /.box-tools -->
+
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <c:if test="${not empty listaServicios}">
-              </c:if>
               <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped" id="tabla_eventos">
                   <thead>
@@ -230,8 +210,49 @@
                   </thead>
 
                   <tbody>
+                  </tbody>
+                </table>
+                <!-- /.table -->
+              </div>
+              <!-- /.mail-box-messages -->
+            </div>
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+
+        <div class="table-responsive mailbox-messages">
+
+        </div>
+        <!-- /.mail-box-messages -->
+      </div>
+
+      <div class="row" id="panelUnEvento">
+        <!-- /.col -->
+        <div class="col-md-12" id="bandeja_recibido">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Datos del evento</h3>
 
 
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="table-responsive mailbox-messages">
+                <table class="table table-hover table-striped" id="tabla_evento">
+                  <thead>
+                  <tr>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Categoria</th>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Lugar</th>
+                    <th class="text-center">Fecha inicio</th>
+                    <th class="text-center">Fecha fin</th>
+                    <th class="text-center">      </th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
                   </tbody>
                 </table>
                 <!-- /.table -->

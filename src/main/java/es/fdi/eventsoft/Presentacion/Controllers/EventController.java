@@ -155,12 +155,14 @@ public class EventController {
 
 
 
-    @RequestMapping("buscarEvento")
-    public String buscarEvento(Model model) {
-        //TODO
+    @RequestMapping(value = "buscarEvento/{idEvento}",  method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody ResponseEntity<Evento> buscarEvento(Model model, @PathVariable Long idEvento) {
+        Contexto contex;
+        Usuario usuario = new Usuario();
 
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTO).execute(idEvento);
 
-        return null;
+        return new ResponseEntity<>((Evento)contex.getDatos(), HttpStatus.OK);
     }
 
     @RequestMapping("modificarEvento")
@@ -181,7 +183,7 @@ public class EventController {
 
     @RequestMapping(value = "buscarEventosByUser",  method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody ResponseEntity<List<Evento>> buscarEventosByUser(Model model, HttpSession session) {
-        //TODO
+
         Contexto contex;
         Usuario usuario = new Usuario();
 

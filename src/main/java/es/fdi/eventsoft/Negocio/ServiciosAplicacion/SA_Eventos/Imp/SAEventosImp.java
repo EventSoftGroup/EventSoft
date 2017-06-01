@@ -127,6 +127,9 @@ public class SAEventosImp implements SAEventos {
         fachadaIntegracion.begin();
         Evento evento = (Evento) fachadaIntegracion.consulta(id);
         fachadaIntegracion.commit();
+        evento.setCliente(null);
+        evento.setOrganizador(null);
+        evento.setEventoServicios(null);
 
         return evento;
     }

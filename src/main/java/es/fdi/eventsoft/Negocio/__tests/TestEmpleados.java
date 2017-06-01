@@ -10,6 +10,7 @@ import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion
 
 import java.util.List;
 
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_EVENTO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.BUSCAR_EVENTOS_BY_USUARIO;
 import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ELIMINAR_SERVICIO;
 import static java.lang.System.out;
@@ -48,12 +49,12 @@ public class TestEmpleados {
 
 
         //Usuario user = new Cliente("tomini18@hotmail.com", "1234", "", "", "", "", "", null, null, null, null, "", null, null);
-        Organizador org = new Organizador("sergio@pino.es", "1234", "", "", "", "", "", null, "", "", null, null);
+        //Organizador org = new Organizador("sergio@pino.es", "1234", "", "", "", "", "", null, "", "", null, null);
         //Proveedor prov = new Proveedor();
         Contexto contex;
 
 
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTOS_BY_USUARIO).execute(org);
+        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTO).execute(5L);
         System.out.println(contex.getDatos());
 
         /*
