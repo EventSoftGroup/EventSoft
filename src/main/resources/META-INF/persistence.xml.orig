@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+
+    <persistence-unit name="aplicacion">
+
+
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Usuario</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Cliente</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Profesional</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Organizador</class>
+        <class>es.fdi.eventsoft.negocio.entidades.usuario.Proveedor</class>
+
+
+        <class>es.fdi.eventsoft.negocio.entidades.Mensaje</class>
+        <class>es.fdi.eventsoft.negocio.entidades.Valoracion</class>
+        <class>es.fdi.eventsoft.negocio.entidades.Servicio</class>
+        <class>es.fdi.eventsoft.negocio.entidades.Evento</class>
+        <class>es.fdi.eventsoft.negocio.entidades.EventoServicio</class>
+        <class>es.fdi.eventsoft.negocio.entidades.ClavesEventoServicio</class>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://qxp814.pino.es/qxp814" />
+            <property name="javax.persistence.jdbc.user" value="qxp814" />
+            <property name="javax.persistence.jdbc.password" value="VeL3RdYRnp98" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+            <property name="hibernate.show.sql" value="true"></property>
+<<<<<<< HEAD
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+=======
+            <!-- <property name="hibernate.hbm2ddl.auto" value="update" />-->
+
+
+
+>>>>>>> 7ef6eaf283bf662aec23f119e7f31be5d378d323
+        </properties>
+    </persistence-unit>
+
+</persistence>
