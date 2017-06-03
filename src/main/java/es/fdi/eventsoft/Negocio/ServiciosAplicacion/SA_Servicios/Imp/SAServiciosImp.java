@@ -85,6 +85,23 @@ public class SAServiciosImp implements SAServicios{
     }
 
     @Override
+    public List<Servicio> listarServicios() {
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Servicio.class);
+        List<Servicio> lista = null;
+
+        integra.begin();
+        lista = integra.listado();
+
+        lista.stream().forEach((serv)-> {
+            serv.getProveedor().getEmail();
+            serv.setEventoServicios(null);
+        });
+        integra.commit();
+
+        return lista;
+    }
+
+    @Override
     public List<Servicio> buscarServiciosByProveedor(Proveedor prov) {
         List<Servicio> lista = null;
         FachadaIntegracion integra;

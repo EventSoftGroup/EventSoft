@@ -18,4 +18,6 @@ public interface SAMensajes {
 
     List<Mensaje> buscarMensajesByUser(Usuario usuario, boolean emisor);
 
+    Long totalMensajes();
+
 }

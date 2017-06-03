@@ -199,4 +199,24 @@ public class SAEventosImp implements SAEventos {
 
         return lista;
     }
+
+    @Override
+    public List<Evento> listarEventos() {
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Evento.class);
+        List<Evento> lista;
+
+        integra.begin();
+        lista = integra.listado();
+
+        lista.stream().forEach(e -> {
+            e.getCliente().getEmail();
+            e.getOrganizador().getEmail();
+            e.setEventoServicios(null);
+        });
+
+        integra.commit();
+
+
+        return lista;
+    }
 }

@@ -1,7 +1,11 @@
 package es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.Imp;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.Proveedor;
 import es.fdi.eventsoft.Negocio.Entidades.Usuario.Usuario;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.SA_Usuario.SAUsuario;
 import javafx.util.Pair;
@@ -95,5 +99,17 @@ public class SAUsuarioImp implements SAUsuario{
         fachadaIntegracion.commit();
 
         return true;
+    }
+
+    @Override
+    public List<Usuario> listarUsuariosByTipo(Class<? extends Usuario> tipoUsuario) {
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(tipoUsuario);
+        List lista = null;
+
+        integra.begin();
+        lista = integra.listado();
+        integra.commit();
+
+        return lista;
     }
 }

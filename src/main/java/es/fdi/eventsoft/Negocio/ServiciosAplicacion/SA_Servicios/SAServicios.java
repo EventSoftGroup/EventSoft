@@ -21,6 +21,8 @@ public interface SAServicios {
 
     int modificarServicio(Servicio servicioModificado) throws ExcepcionNegocio;
 
+    List<Servicio> listarServicios();
+
     List<Servicio> buscarServiciosByProveedor(Proveedor proveedor);
 
     List<Servicio> buscarServiciosByTipoServicio(Servicio.TiposServicio tiposServicio);

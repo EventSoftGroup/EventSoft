@@ -18,6 +18,9 @@ public enum EventosNegocio {
 
     EMAIL_YA_EXISTENTE,
 
+    ERROR_LISTAR_USUARIOS,
+    LISTAR_USUARIOS,
+
 
     //******** EVENTOS NEGOCIO VALORACIONES ************
 
@@ -100,7 +103,5 @@ public enum EventosNegocio {
     NO_SE_PUDO_AÑADIR_ALGUN_EVENTO,
     LISTA_SERVICIOS_VACIA,
     ERROR_AÑADIR_SERVICIOS_A_EVENTO,
-
-
-
+    LISTAR_SERVICIOS, LISTAR_EVENTOS, COUNT_MENSAJES;
 }

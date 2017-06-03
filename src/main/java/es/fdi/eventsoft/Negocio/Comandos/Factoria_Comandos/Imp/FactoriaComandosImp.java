@@ -4,10 +4,7 @@ import es.fdi.eventsoft.Negocio.Comandos.Comando;
 import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Eventos.*;
-import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Mensajes.ComandoBuscarMensaje;
-import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Mensajes.ComandoBuscarMensajesByUser;
-import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Mensajes.ComandoCrearMensaje;
-import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Mensajes.ComandoEliminarMensaje;
+import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Mensajes.*;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Servicios.*;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Usuarios.*;
 import es.fdi.eventsoft.Negocio.Comandos.Imp.Comandos_Valoraciones.ComandoBuscarValoracion;
@@ -50,7 +47,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoModificarUsuario();
                 break;
 
-
+            case LISTAR_USUARIOS:
+                miComando = new ComandoListarUsuarios();
+                break;
 
 
 
@@ -100,6 +99,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoBuscarMensajesByUser();
                 break;
 
+            case COUNT_MENSAJES:
+                miComando = new ComandoCountMensajes();
+                break;
+
 
 
 
@@ -140,6 +143,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoBuscarServiciosEntreFechas();
                 break;
 
+            case LISTAR_SERVICIOS:
+                miComando = new ComandoListarServicios();
+                break;
+
 
 
 
@@ -170,6 +177,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
 
             case AÑADIR_SERVICIOS_A_EVENTO:
                 miComando = new ComandoAñadirServiciosAEvento();
+                break;
+
+            case LISTAR_EVENTOS:
+                miComando = new ComandoListarEventos();
                 break;
 
         }

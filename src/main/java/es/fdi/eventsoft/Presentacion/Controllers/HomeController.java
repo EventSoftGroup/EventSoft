@@ -56,7 +56,14 @@ public class HomeController {
 
             if (user.getPassword().equals(userLog.getPassword())) {
 
+
                 session.setAttribute("usuario", user);
+                if(user.getEmail().equals("adminIW@ucm.es")) {
+                    session.setAttribute("rol", "Administrador");
+                    model.addAttribute("pagina", "admin");
+                    return "admin";
+                }
+
                 if(user instanceof Cliente) {
                 session.setAttribute("rol", "Cliente");
                 model.addAttribute("pagina", "perfil-usuario");
@@ -76,11 +83,6 @@ public class HomeController {
                     return "redirect:./eventos/proveedores";
                 }
 
-                if(user.getEmail().equals("adminIW@ucm.es")) {
-                    session.setAttribute("rol", "Administrador");
-                    model.addAttribute("pagina", "admin");
-                    return "admin";
-                }
             }else{
                 bindingResult.rejectValue("password" , "error.userLog", "Contraseña incorrecta");
             }

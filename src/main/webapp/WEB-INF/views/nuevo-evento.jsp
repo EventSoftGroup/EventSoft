@@ -75,6 +75,18 @@
                                 <springForm:errors path="descripcion" cssClass="alert-error" />
                             </div>
 
+                            <!--
+                            <div class="form-group">
+                                <label path="fechaInicio" for="fechaInicio">Fecha Inicio:</label>
+                                <input name="fechaInicio" class="form-control" placeholder="dd/mm/yyyy" type="date" style="width: 45%;"/>
+                                <springForm:errors path="fechaInicio" cssClass="alert-error" />
+                            </div>
+                            <div class="form-group">
+                                <label path="fechaFin" for="fechaFin">Fecha Fin:</label>
+                                <input name="fechaFin" class="form-control" placeholder="dd/mm/yyyy" type="date" style="width: 45%;"/>
+                                <springForm:errors path="fechaFin" cssClass="alert-error" />
+                            </div>
+                            -->
                             <div class="form-group">
                                 <springForm:label path="fechaInicio">Fecha inicio:</springForm:label>
                                 <springForm:input path="fechaInicio" cssClass="form-control"  placeholder="Fecha inicio" type="date" style="width: 45%;"/>

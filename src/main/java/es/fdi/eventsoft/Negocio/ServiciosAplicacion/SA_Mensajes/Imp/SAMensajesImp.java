@@ -96,4 +96,15 @@ public class SAMensajesImp implements SAMensajes {
 
         return lista;
     }
+
+    @Override
+    public Long totalMensajes() {
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(Mensaje.class);
+
+        integra.begin();
+        Long num = integra.getRowCount();
+        integra.commit();
+
+        return num;
+    }
 }

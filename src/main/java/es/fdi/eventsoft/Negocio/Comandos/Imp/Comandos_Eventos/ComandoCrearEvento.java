@@ -14,8 +14,13 @@ import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ERROR_CREAR_EVENT
 public class ComandoCrearEvento implements Comando {
 
     public Contexto execute(Object datos){
+        Long id;
+        try {
+            id = FactoriaSA.getInstance().crearSAEventos().crearEvento((Evento) datos);
+        }catch (NullPointerException e){
+            id = -1L;
+        }
 
-        Long id = FactoriaSA.getInstance().crearSAEventos().crearEvento((Evento) datos);
         return new Contexto((id>0)? CREAR_EVENTO:ERROR_CREAR_EVENTO, id);
     }
 

@@ -2,16 +2,35 @@ package es.fdi.eventsoft.Negocio.__tests;
 
 import es.fdi.eventsoft.Integracion.FachadaIntegracion;
 import es.fdi.eventsoft.Negocio.Comandos.Contexto;
+import es.fdi.eventsoft.Negocio.Comandos.EventosNegocio;
 import es.fdi.eventsoft.Negocio.Comandos.Factoria_Comandos.FactoriaComandos;
 import es.fdi.eventsoft.Negocio.Entidades.Empleado;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Cliente;
-import es.fdi.eventsoft.Negocio.Entidades.Usuario.Organizador;
+import es.fdi.eventsoft.Negocio.Entidades.Evento;
+import es.fdi.eventsoft.Negocio.Entidades.Mensaje;
+import es.fdi.eventsoft.Negocio.Entidades.Servicio;
+import es.fdi.eventsoft.Negocio.Entidades.Usuario.*;
 import es.fdi.eventsoft.Negocio.ServiciosAplicacion.Factoria_ServiciosAplicacion.FactoriaSA;
+import javafx.util.Pair;
+import org.omg.CORBA.TIMEOUT;
+import org.springframework.ui.Model;
+import sun.util.cldr.CLDRLocaleDataMetaInfo;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
-import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.ELIMINAR_SERVICIO;
+import static es.fdi.eventsoft.Negocio.Comandos.EventosNegocio.*;
+import static java.lang.System.in;
 import static java.lang.System.out;
+import static java.lang.System.setOut;
 
 
 /**
@@ -19,103 +38,182 @@ import static java.lang.System.out;
  */
 
 
-
 public class TestEmpleados {
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws ParseException {
 
 
-        FactoriaSA.getInstance().crearSAServicios().eliminarServicio(null);
-
-        Long id = new Long(20000L);
-        Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
-        System.out.println(contex.getEvento());
+        Date fecha = formateaFecha("2017-06-03");
+        System.out.println(fecha);
 
 
-        contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(null);
-        System.out.println(contex.getEvento());
+        fecha = formateaFecha("03/06/2017");
+        System.out.println(fecha);
 
 
-        id = new Long(-2000L);
-        contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
-        System.out.println(contex.getEvento());
+        Calendar cal = Calendar.getInstance();
+        String dateInString = new java.text.SimpleDateFormat("EEEE, dd/MM/yyyy/hh:mm:ss").format(cal.getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd/MM/yyyy/hh:mm:ss");
+
+        Date parsedDate = null;
+        try {
+            parsedDate = formatter.parse(dateInString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(parsedDate);
+
+        Date myDate = new Date();
+        System.out.println(myDate);
+        System.out.println(new SimpleDateFormat("MM-dd-yyyy").format(myDate));
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(myDate));
+        System.out.println(myDate);
 
 
+        cal.add(Calendar.DATE, 1);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(cal.getTime());
+        // Output "Wed Sep 26 14:23:28 EST 2012"
 
-//
-//        //Usuario user = new Cliente("tomini18@hotmail.com", "1234", "", "", "", "", "", null, null, null, null, "", null, null);
-//        Organizador org = new Organizador("sergio@pino.es", "1234", "", "", "", "", "", null, "", "", null, null);
-//        //Proveedor prov = new Proveedor();
-//        Contexto contex;
-//
-//
-//        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTOS_BY_USUARIO).execute(org);
-//        System.out.println();
-//
-        /*
-        user.setId(56L);
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(user);
-        out.println(contex.getEvento());
+        String formatted = format1.format(cal.getTime());
+        System.out.println(formatted);
+        // Output "2012-09-26"
 
-        prov.setId(56L);
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(62L);
-        out.println(contex.getEvento());
-
-
-        prov.setId(62L);
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
-        out.println(contex.getEvento());
-        ((List) contex.getDatos()).forEach(out::println);
-
-        prov.setId(59L);
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
-        out.println(contex.getEvento());
-        ((List) contex.getDatos()).forEach(out::println);
-
-
-        prov.setId(30000L);
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
-        out.println(contex.getEvento());
-
-        prov.setId(-10L);
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
-        out.println(contex.getEvento());
-
-
-        prov.setEmail(null);
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
-        out.println(contex.getEvento());
-
-
-        prov.setEmail("empresa@gmail.com");
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
-        out.println(contex.getEvento());
-
-
-        prov.setEmail("tomini18@hotmail.com");
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
-        out.println(contex.getEvento());
-
-
-        prov.setEmail("azsdfgasfgv");
-        contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(prov);
-        out.println(contex.getEvento());
-
-
-
-
-
-
-
-        List lista = FactoriaSA.getInstance().crearSAServicios().buscarServiciosByProveedor(new Proveedor(56L));
-
-        lista.stream().forEach(out::println);
-
-        */
+        try {
+            System.out.println(format1.parse(formatted));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        // Output "Wed Sep 26 00:00:00 EST 2012"
 
 
     }
+
+
+    private static Date formateaFecha(String fechaInicio) {
+
+        DateFormat dateFormat;
+        Date fecha = null;
+
+        try {
+            dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            fecha = dateFormat.parse(fechaInicio);
+        } catch (ParseException e) {
+
+            try {
+                dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                fecha = dateFormat.parse(fechaInicio);
+            } catch (ParseException e1) {
+                fecha = null;
+            }
+        }
+
+        return fecha;
+    }
+
+
+    public static void pruebaCapacidadThreads() {
+
+
+        FachadaIntegracion integracion = FachadaIntegracion.newInstance(Cliente.class);
+
+        int tam = 30;
+        List<Long> list = new ArrayList<>();
+
+        long time_start, time_end;
+        time_start = System.currentTimeMillis();
+        for (int i = 0; i < tam; i++) {
+            list.add(lanzarPruebaThreads());
+        }
+        time_end = System.currentTimeMillis();
+
+        System.out.println("********************************************");
+        System.out.println(tam + " ejecuciones CON HILOS --> " + (time_end - time_start) + " ms. MEDIA: " + (time_end - time_start) / tam);
+        System.out.println("********************************************");
+
+        list.stream().forEach((time) -> System.out.println("The task has taken " + (time) + " milliseconds"));
+
+
+    }
+
+
+    public static long lanzarPruebaThreads() {
+
+
+//        Contexto[] contexListarClientes = new Contexto[1];
+//        contexListarClientes[0] = FactoriaComandos.getInstance().crearComando(LISTAR_USUARIOS).execute(Cliente.class);
+//
+//        Contexto[] contexListarProveedores = new Contexto[1];
+//        contexListarProveedores[0] = FactoriaComandos.getInstance().crearComando(LISTAR_USUARIOS).execute(Proveedor.class);
+//
+//        Contexto[] contexListarOrganizadores  = new Contexto[1];
+//        contexListarOrganizadores[0] = FactoriaComandos.getInstance().crearComando(LISTAR_USUARIOS).execute(Organizador.class);
+//
+//        Contexto[] contexCountMensajes = new Contexto[1];
+//        contexCountMensajes[0] = FactoriaComandos.getInstance().crearComando(COUNT_MENSAJES).execute(null);
+//
+//        Contexto[] contexListarServicios = new Contexto[1];
+//        contexListarServicios[0] = FactoriaComandos.getInstance().crearComando(LISTAR_SERVICIOS).execute(null);
+//
+//        Contexto[] contexListarEventos = new Contexto[1];
+//        contexListarEventos[0] = FactoriaComandos.getInstance().crearComando(LISTAR_EVENTOS).execute(null);
+
+        long time_start, time_end;
+        time_start = System.currentTimeMillis();
+
+
+        Contexto[] contexListarClientes = new Contexto[1];
+        Runnable hilo1 = () -> contexListarClientes[0] = FactoriaComandos.getInstance().crearComando(LISTAR_USUARIOS).execute(Cliente.class);
+
+        Contexto[] contexListarProveedores = new Contexto[1];
+        Runnable hilo2 = () -> contexListarProveedores[0] = FactoriaComandos.getInstance().crearComando(LISTAR_USUARIOS).execute(Proveedor.class);
+
+        Contexto[] contexListarOrganizadores = new Contexto[1];
+        Runnable hilo3 = () -> contexListarOrganizadores[0] = FactoriaComandos.getInstance().crearComando(LISTAR_USUARIOS).execute(Organizador.class);
+
+        Contexto[] contexCountMensajes = new Contexto[1];
+        Runnable hilo4 = () -> contexCountMensajes[0] = FactoriaComandos.getInstance().crearComando(COUNT_MENSAJES).execute(null);
+
+        Contexto[] contexListarServicios = new Contexto[1];
+        Runnable hilo5 = () -> contexListarServicios[0] = FactoriaComandos.getInstance().crearComando(LISTAR_SERVICIOS).execute(null);
+
+        Contexto[] contexListarEventos = new Contexto[1];
+        Runnable hilo6 = () -> contexListarEventos[0] = FactoriaComandos.getInstance().crearComando(LISTAR_EVENTOS).execute(null);
+
+        Stream<Runnable> flujo = Stream.of(hilo1, hilo2, hilo3, hilo4, hilo5, hilo6);
+        ExecutorService executor = Executors.newCachedThreadPool();
+
+        flujo.forEach(executor::execute);
+        executor.shutdown();
+        try {
+            if (executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS)) {
+                System.out.println();
+                System.out.println("*******************************************************************************************************************");
+                System.out.println("*******************************************************************************************************************");
+                System.out.println();
+                System.out.println(contexListarClientes[0].getEvento() + " --> " + ((List) contexListarClientes[0].getDatos()).size());
+                System.out.println(contexListarOrganizadores[0].getEvento() + " --> " + ((List) contexListarOrganizadores[0].getDatos()).size());
+                System.out.println(contexListarProveedores[0].getEvento() + " --> " + ((List) contexListarProveedores[0].getDatos()).size());
+
+                System.out.println(contexListarServicios[0].getEvento() + " --> " + ((List) contexListarServicios[0].getDatos()).size());
+                System.out.println(contexListarEventos[0].getEvento() + " --> " + ((List) contexListarEventos[0].getDatos()).size());
+
+                System.out.println(contexCountMensajes[0].getEvento() + " --> " + ((Long) contexCountMensajes[0].getDatos()));
+                System.out.println();
+                System.out.println("*******************************************************************************************************************");
+                System.out.println("*******************************************************************************************************************");
+                System.out.println();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        time_end = System.currentTimeMillis();
+        return (time_end - time_start);
+    }
+
 
     public static void persistirEmpleado(Empleado emp) {
 
@@ -242,7 +340,6 @@ public class TestEmpleados {
             out.println(emp.toString());
         }
     }
-
 
 
 }
