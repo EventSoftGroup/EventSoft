@@ -2,6 +2,7 @@ package es.fdi.eventsoft;
 
 import es.fdi.eventsoft.negocio.servicios.usuarios.imp.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -26,12 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/webjars/**", "/usuarios/register", "/usuarios/tipoUsuario", "/index").permitAll()
+                    .antMatchers("/usuarios/register").anonymous()
+                    .antMatchers("/usuarios/tipoUsuario").anonymous()
+                    .antMatchers("/usuarios/registrar_*").anonymous()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
-                    .loginPage("/")
-                    .loginProcessingUrl("/index")
+                    .loginPage("/login")
                     .permitAll()
                     .and()
                 .logout()
@@ -43,15 +45,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**");
+                .antMatchers("/resources/**")
+                .antMatchers("/webjars/**");
     }
 
     @Autowired
+    @Qualifier("userDetailsService")
     private UserDetailsService userDetailsService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
 }

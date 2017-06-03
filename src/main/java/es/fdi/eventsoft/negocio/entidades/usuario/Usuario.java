@@ -32,7 +32,6 @@ public class Usuario implements Serializable {
     @NotBlank @Column(nullable = false, unique = true)
     @Email protected String email;
 
-    @Size(min=4, max=16)
     @Column(nullable = false)
     protected String password;
 

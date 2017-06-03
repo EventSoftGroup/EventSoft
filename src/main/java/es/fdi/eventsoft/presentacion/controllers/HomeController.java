@@ -11,6 +11,8 @@ import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +38,9 @@ public class HomeController {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     public static boolean isLogin(Model model, HttpSession session){
 
         Usuario user = (Usuario) session.getAttribute("usuario");
@@ -48,7 +53,13 @@ public class HomeController {
         return true;
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.POST)
+    @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
+    public String welcome(Model model, HttpSession session) {
+        return "index";
+    }
+
+    /*
+    @RequestMapping(value = { "/", "/welcome" })
     public String home( @ModelAttribute("userLog") Usuario userLog, BindingResult bindingResult, Model model, HttpSession session) {
 
         if(userLog.getEmail().trim().isEmpty()){
@@ -104,11 +115,21 @@ public class HomeController {
 
         return "login";
     }
+    */
 
-    @RequestMapping({"/","login"})
-    public String login(Model model) {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model, String error, String logout) {
+        if (error != null) {
+            model.addAttribute("error", "Usuario o Contraseña incorrectos.");
+        }
+
+        if (logout != null) {
+            model.addAttribute("message", "Sesión cerrada correctamente.");
+        }
+
         model.addAttribute("title", "EventSoft");
         model.addAttribute("userLog", new Usuario());
+
         return "login";
     }
 
@@ -118,10 +139,11 @@ public class HomeController {
         session.removeAttribute("usuario");
         session.invalidate();
         status.setComplete();
-        return "redirect:login";
+
+        return "redirect:login?logout";
     }
 
-    @RequestMapping("500")
+    @RequestMapping("/500")
     public String getErrorr500(HttpSession session, SessionStatus status, Model model) {
         return "error-500";
     }

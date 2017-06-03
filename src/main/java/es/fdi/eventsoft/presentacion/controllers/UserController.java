@@ -10,8 +10,10 @@ import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +34,9 @@ public class UserController {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @RequestMapping("register")
     public String register(Model model) {
@@ -58,6 +63,8 @@ public class UserController {
             model.addAttribute("tipoUsuario", "cliente");
             return "register";
         }
+        cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
+        cliente.setRoles("USER,CLIENTE");
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(cliente);
         if (contexto.getEvento() != null){
             System.out.println("Le inserto el id");
@@ -94,6 +101,8 @@ public class UserController {
             return "register";
         }
 
+        organizador.setPassword(passwordEncoder.encode(organizador.getPassword()));
+        organizador.setRoles("USER,ORGANIZADOR");
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(organizador);
         if (contexto.getEvento() != null) {
             Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(organizador.getEmail());
@@ -129,6 +138,8 @@ public class UserController {
             return "register";
         }
 
+        proveedor.setPassword(passwordEncoder.encode(proveedor.getPassword()));
+        proveedor.setRoles("USER,PROVEEDOR");
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(proveedor);
         if (contexto.getEvento() != null) {
             Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(proveedor.getEmail());
@@ -159,7 +170,6 @@ public class UserController {
         model.addAttribute("title", "EventSoft");
         model.addAttribute("pagina", "perfil");
         model.addAttribute("usuarioAModificar", session.getAttribute("usuario"));
-        log.info(session.getAttribute("usuario").toString());
         model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
 
         return "perfil-usuario";
