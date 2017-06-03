@@ -14,15 +14,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
@@ -95,10 +101,10 @@ public class EventController {
     public String crearEvento(@Valid Evento evento, BindingResult bindingResult, Model model, HttpSession session,
         @RequestParam(value = "email") String email){
 
-        long time_start, time_end;
-        time_start = System.currentTimeMillis();
+        if(bindingResult.hasErrors() || (email.trim().isEmpty())){
 
-        if (bindingResult.hasErrors() || email.trim().isEmpty()) {
+            System.out.println(email.trim());
+            System.out.println("ALGUN ERROR");
             model.addAttribute("tipoUsuario", "organizador");
             model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
             return "nuevo-evento";
@@ -108,24 +114,43 @@ public class EventController {
         evento.setCliente(new Cliente(email));
         evento.setOrganizador((Organizador) session.getAttribute("usuario"));
 
+        System.out.println(evento);
         Contexto contex = FactoriaComandos.getInstance().crearComando(CREAR_EVENTO).execute(evento);
 
         if(contex.getEvento() == CREAR_EVENTO){
             model.addAttribute("tipoUsuario", "organizador");
             model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
-            time_end = System.currentTimeMillis();
-            System.out.println("The task has taken "+ ( time_end - time_start ) +" milliseconds");
             return "timeline";
         }else if (contex.getEvento() == ERROR_CREAR_EVENTO){
+            System.out.println(ERROR_CREAR_EVENTO);
             model.addAttribute("tipoUsuario", "organizador");
             model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
             return "nuevo-evento";
         }
 
-        time_end = System.currentTimeMillis();
-        System.out.println("The task has taken "+ ( time_end - time_start ) +" milliseconds");
-
+        System.out.println("FINAL ABSOLUTO");
         return "nuevo-evento";
+    }
+
+    private Date formateaFecha(String fechaInicio) {
+
+        DateFormat dateFormat;
+        Date fecha = null;
+
+        try {
+            dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            fecha = dateFormat.parse(fechaInicio);
+        } catch (ParseException e) {
+
+            try {
+                dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                fecha = dateFormat.parse(fechaInicio);
+            } catch (ParseException e1) {
+                fecha = null;
+            }
+        }
+
+        return fecha;
     }
 
     @RequestMapping(value = "añadirServiciosAEvento/{idEvento}",  method = RequestMethod.POST, produces = "application/json")

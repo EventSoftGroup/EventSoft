@@ -114,13 +114,7 @@
                 <!-- /.mail-box-messages -->
             </div>
             <!-- /.box-body -->
-    </div>
-</div>
-<!-- /. box -->
-</div>
 
-
-</div>
 <!-- /.row -->
 </section>
 <!-- /.content -->

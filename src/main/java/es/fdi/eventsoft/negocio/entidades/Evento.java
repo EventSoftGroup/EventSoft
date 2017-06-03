@@ -52,14 +52,15 @@ public class Evento implements Serializable {
     private String lugar;
 
     @Column(name = "Fecha_Inicio", nullable = false)
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @NotNull
     private Date fechaInicio;
 
 
     @Column(name = "Fecha_Fin", nullable = false)
-    @DateTimeFormat(pattern="dd/MM/yyyy")
-    @NotNull @Future
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @NotNull
+    @Future
     private Date fechaFin;
 
 

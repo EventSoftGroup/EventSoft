@@ -20,6 +20,8 @@ public interface SAServicios {
 
     int modificarServicio(Servicio servicioModificado);
 
+    List<Servicio> listarServicios();
+
     List<Servicio> buscarServiciosByProveedor(Proveedor proveedor);
 
     List<Servicio> buscarServiciosByTipoServicio(Servicio.TiposServicio tiposServicio);

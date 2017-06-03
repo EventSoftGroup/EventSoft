@@ -3,11 +3,9 @@ package es.fdi.eventsoft.negocio.comandos.factoria.imp;
 import es.fdi.eventsoft.negocio.comandos.Comando;
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.comandos.factoria.FactoriaComandos;
+import es.fdi.eventsoft.negocio.comandos.imp.mensajes.*;
+import es.fdi.eventsoft.negocio.comandos.imp.usuarios.ComandoListarUsuarios;
 import es.fdi.eventsoft.negocio.comandos.imp.eventos.*;
-import es.fdi.eventsoft.negocio.comandos.imp.mensajes.ComandoBuscarMensaje;
-import es.fdi.eventsoft.negocio.comandos.imp.mensajes.ComandoBuscarMensajesByUser;
-import es.fdi.eventsoft.negocio.comandos.imp.mensajes.ComandoCrearMensaje;
-import es.fdi.eventsoft.negocio.comandos.imp.mensajes.ComandoEliminarMensaje;
 import es.fdi.eventsoft.negocio.comandos.imp.servicios.*;
 import es.fdi.eventsoft.negocio.comandos.imp.usuarios.*;
 import es.fdi.eventsoft.negocio.comandos.imp.valoraciones.ComandoBuscarValoracion;
@@ -50,7 +48,9 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoModificarUsuario();
                 break;
 
-
+            case LISTAR_USUARIOS:
+                miComando = new ComandoListarUsuarios();
+                break;
 
 
 
@@ -100,6 +100,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoBuscarMensajesByUser();
                 break;
 
+            case COUNT_MENSAJES:
+                miComando = new ComandoCountMensajes();
+                break;
+
 
 
 
@@ -140,6 +144,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 miComando = new ComandoBuscarServiciosEntreFechas();
                 break;
 
+            case LISTAR_SERVICIOS:
+                miComando = new ComandoListarServicios();
+                break;
+
 
 
 
@@ -170,6 +178,10 @@ public class FactoriaComandosImp extends FactoriaComandos {
 
             case AÑADIR_SERVICIOS_A_EVENTO:
                 miComando = new ComandoAñadirServiciosAEvento();
+                break;
+
+            case LISTAR_EVENTOS:
+                miComando = new ComandoListarEventos();
                 break;
 
         }
