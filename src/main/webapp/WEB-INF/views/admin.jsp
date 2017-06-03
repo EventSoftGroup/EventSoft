@@ -1,5 +1,6 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -403,7 +404,23 @@ immediately after the control sidebar -->
     $.widget.bridge('uibutton', $.ui.button);
 </script>
 
+<<<<<<< HEAD
 <script src="/dist/js/scriptChartsRodri.js"></script>
+=======
+<!-- dateRangePicker -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+-->
+
+<!-- datepicker -->
+<!-- <script src="/plugins/datepicker/bootstrap-datepicker.js"></script> -->
+
+<!-- Bootstrap WYSIHTML5 -->
+<!-- <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> -->
+
+<!-- Script for Charts of Evolucion usuarios -->
+<script src="<c:url value="/resources/dist/js/scriptChartsRodri.js" />"></script>
+>>>>>>> 44622fcf781cea692be54249b86528cea6beb841
 
 
 </body>

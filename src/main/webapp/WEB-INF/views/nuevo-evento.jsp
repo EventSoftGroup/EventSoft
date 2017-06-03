@@ -1,7 +1,7 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://www.springframework.org/tags/form"
-           prefix="springForm"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="springForm"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -328,29 +328,29 @@
     </script>
 
     <!-- Sparkline -->
-    <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    <script src="<c:url value="/resources/plugins/sparkline/jquery.sparkline.min.js" />"></script>
 
     <!-- jvectormap -->
-    <script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="<c:url value="/resources/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" />"></script>
+    <script src="<c:url value="/resources/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" />"></script>
 
     <!-- jQuery Knob Chart -->
     <!--  +++++++++++++++++++++++++++++ -->
-    <script src="/plugins/knob/jquery.knob.js"></script>
+    <script src="<c:url value="/resources/plugins/knob/jquery.knob.js" />"></script>
 
     <!-- daterangepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-    <script src="/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="<c:url value="/resources/plugins/daterangepicker/daterangepicker.js" />"></script>
 
     <!-- datepicker -->
-    <script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="<c:url value="/resources/plugins/datepicker/bootstrap-datepicker.js" />"></script>
 
     <!-- Bootstrap WYSIHTML5 -->
-    <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-
+    <script src="<c:url value="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" />"></script>
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="/dist/js/pages/dashboard.js"></script> -->
+    <script src="<c:url value="/resources/dist/js/pages/dashboard.js" />"></script>
 
 
 </body>
