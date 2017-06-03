@@ -17,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -27,6 +29,9 @@ import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @RequestMapping("register")
     public String register(Model model) {

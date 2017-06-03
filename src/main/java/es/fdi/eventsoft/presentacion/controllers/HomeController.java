@@ -10,19 +10,31 @@ import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public static boolean isLogin(Model model, HttpSession session){
 
@@ -36,7 +48,7 @@ public class HomeController {
         return true;
     }
 
-    @RequestMapping("index")
+    @RequestMapping(value = "/index", method = RequestMethod.POST)
     public String home( @ModelAttribute("userLog") Usuario userLog, BindingResult bindingResult, Model model, HttpSession session) {
 
         if(userLog.getEmail().trim().isEmpty()){
@@ -102,6 +114,7 @@ public class HomeController {
     public String signOut(HttpSession session, SessionStatus status, Model model) {
         session.removeAttribute("rol");
         session.removeAttribute("usuario");
+        session.invalidate();
         status.setComplete();
         return "redirect:login";
     }

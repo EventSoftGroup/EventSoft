@@ -12,9 +12,9 @@
 
   <div class="login-box-body">
     <p class="login-box-msg">Introduce email y contraseña</p>
-    <springForm:form method="POST" id="formulario_Login" name='formulario_Login'  modelAttribute='userLog' action="../index.html">
+    <springForm:form method="POST" id="formulario_Login" name='formulario_Login'  modelAttribute='userLog' action="/index">
       <div class="form-group has-feedback">
-        <springForm:input path="email" cssClass="form-control" autofocus="true" placeholder="Email" type="email"/>
+        <springForm:input name="username" path="email" cssClass="form-control" autofocus="true" placeholder="Email" type="email"/>
         <springForm:errors path="email" cssClass="alert-error" />
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>

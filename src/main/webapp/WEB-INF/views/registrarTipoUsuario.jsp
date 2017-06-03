@@ -6,7 +6,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <img src="../../dist/img/icono_transparente.png"/>
+        <img src="<c:url value="/resources/dist/img/icono_transparente.png" />" />
     </div>
 
     <div class="register-box-body">
@@ -25,6 +25,7 @@
                             <option value="proveedor">Proveedor</option>
                         </select>
                     </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </div>
             </div>
             <div class="row">

@@ -17,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -30,6 +32,9 @@ import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 public class EventController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @RequestMapping("/nuevo")
     public String nuevoEvento(Model model) {
