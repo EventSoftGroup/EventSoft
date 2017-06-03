@@ -1,10 +1,7 @@
 <%@ include file="../fragments/head.jspf" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<<<<<<< HEAD
-=======
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
->>>>>>> 44622fcf781cea692be54249b86528cea6beb841
 
 <!-- Content Wrapper. Contains page content -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -117,13 +114,7 @@
                 <!-- /.mail-box-messages -->
             </div>
             <!-- /.box-body -->
-    </div>
-</div>
-<!-- /. box -->
-</div>
 
-
-</div>
 <!-- /.row -->
 </section>
 <!-- /.content -->
