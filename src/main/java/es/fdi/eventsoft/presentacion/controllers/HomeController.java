@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -55,67 +56,43 @@ public class HomeController {
 
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcome(Model model, HttpSession session) {
-        return "index";
-    }
-
-    /*
-    @RequestMapping(value = { "/", "/welcome" })
-    public String home( @ModelAttribute("userLog") Usuario userLog, BindingResult bindingResult, Model model, HttpSession session) {
-
-        if(userLog.getEmail().trim().isEmpty()){
-            bindingResult.rejectValue("email" , "error.userLog", "Introduzca un Email valido");
-            return "login";
-        }else if(userLog.getPassword().trim().isEmpty()){
-            bindingResult.rejectValue("password" , "error.userLog", "Instroduzca una contraseña");
-            return "login";
-        }
-
-        Contexto contex = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(userLog.getEmail());
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Contexto contex = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(user.getUsername());
 
         model.addAttribute("title", "EventSoft");
 
         if(contex.getEvento() == EventosNegocio.BUSCAR_USUARIO_BY_EMAIL) {
-            Usuario user = (Usuario) contex.getDatos();
+            Usuario usuario = (Usuario) contex.getDatos();
 
-            if (user.getPassword().equals(userLog.getPassword())) {
+            session.setAttribute("usuario", usuario);
+            if(usuario.getEmail().equals("adminIW@ucm.es")) {
+                session.setAttribute("rol", "Administrador");
+                model.addAttribute("pagina", "admin");
+                return "admin";
+            }
 
-
-                session.setAttribute("usuario", user);
-                if(user.getEmail().equals("adminIW@ucm.es")) {
-                    session.setAttribute("rol", "Administrador");
-                    model.addAttribute("pagina", "admin");
-                    return "admin";
-                }
-
-                if(user instanceof Cliente) {
+            if(usuario instanceof Cliente) {
                 session.setAttribute("rol", "Cliente");
                 model.addAttribute("pagina", "perfil-usuario");
                 return "redirect:./usuarios/perfil-usuario";
-                }
-
-                if(user instanceof Organizador) {
-                    session.setAttribute("rol", "Organizador");
-                    model.addAttribute("pagina", "timeline");
-                    return "redirect:./eventos/timeline";
-                }
-
-                if(user instanceof Proveedor) {
-                    System.out.println("Logueado como Proveedor");
-                    session.setAttribute("rol", "Proveedor");
-                    model.addAttribute("pagina", "proveedores");
-                    return "redirect:./eventos/proveedores";
-                }
-
-            }else{
-                bindingResult.rejectValue("password" , "error.userLog", "Contraseña incorrecta");
             }
-        }else{
-            bindingResult.rejectValue("email" , "error.userLog", "Email incorrecto");
+
+            if(usuario instanceof Organizador) {
+                session.setAttribute("rol", "Organizador");
+                model.addAttribute("pagina", "timeline");
+                return "redirect:./eventos/timeline";
+            }
+
+            if(usuario instanceof Proveedor) {
+                System.out.println("Logueado como Proveedor");
+                session.setAttribute("rol", "Proveedor");
+                model.addAttribute("pagina", "proveedores");
+                return "redirect:./eventos/proveedores";
+            }
         }
 
-        return "login";
+        return "redirect:/500";
     }
-    */
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
