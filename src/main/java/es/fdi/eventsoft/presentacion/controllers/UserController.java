@@ -202,10 +202,10 @@ public class UserController {
             contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
             if (contexto.getEvento() == MODIFICAR_USUARIO) {
                 return "perfil-usuario";
-            } else {
-                return "error-500";
             }
         }
+
+        return "perfil-usuario";
     }
 
     @RequestMapping(value = "eliminar", method = RequestMethod.POST)

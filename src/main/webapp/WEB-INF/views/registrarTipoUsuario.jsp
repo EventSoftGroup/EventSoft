@@ -12,7 +12,7 @@
     <div class="register-box-body">
         <p class="login-box-msg">Rellene el formulario</p>
 
-        <form method="POST" id="tipoUsuario" name='tipoUsuario'
+        <form method="post" id="tipoUsuario" name='tipoUsuario'
               action="${pageContext.request.contextPath}/usuarios/tipoUsuario" >
 
             <div class="row">
