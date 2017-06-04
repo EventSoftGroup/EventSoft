@@ -182,9 +182,6 @@ public class EventController {
         return "redirect:../timeline";
     }
 
-
-
-
     @RequestMapping(value = "buscarEvento/{idEvento}",  method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody ResponseEntity<Evento> buscarEvento(Model model, @PathVariable Long idEvento) {
         Contexto contex;
