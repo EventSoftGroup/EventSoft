@@ -2,6 +2,7 @@ package es.fdi.eventsoft.negocio.servicios.servicios.imp;
 
 
 import es.fdi.eventsoft.integracion.FachadaIntegracion;
+import es.fdi.eventsoft.negocio.entidades.ClavesEventoServicio;
 import es.fdi.eventsoft.negocio.entidades.Evento;
 import es.fdi.eventsoft.negocio.entidades.EventoServicio;
 import es.fdi.eventsoft.negocio.entidades.Servicio;
@@ -71,20 +72,20 @@ public class SAServiciosImp implements SAServicios{
             }
         }
         return cont;
-    }/*
+    }
     private void eliminarEventosServicios(List<EventoServicio> lista) {
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(EventoServicio.class);
         boolean ok = true;
         Iterator<EventoServicio> it = lista.iterator();
-        Long act;
+        ClavesEventoServicio act;
         while (it.hasNext()) {
             //Obtenemos el evento actual
-            ClavesEventoServicio = it.next().getId();
+            act = it.next().getId();
             fachadaIntegracion.begin();
-            ok = fachadaIntegracion.baja(act);
+            ok = fachadaIntegracion.bajaEventoServicio(act);
             fachadaIntegracion.commit();
         }
-    }*/
+    }
     @Override
     public int eliminarServicio(Long servicio){
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Servicio.class);
@@ -118,7 +119,7 @@ public class SAServiciosImp implements SAServicios{
                 //Si todos los eventos que tiene asociados son pasados, eliminamos
                 if(listaEventoServicio.size() == cont){
                     //Primero, eliminamos sus EventoServicio
-                    //eliminarEventosServicios(listaEventoServicio);
+                    eliminarEventosServicios(listaEventoServicio);
                     //Y, despues, eliminamos el servicio
                     fachadaIntegracion.begin();
                     ok = fachadaIntegracion.baja(servicio);

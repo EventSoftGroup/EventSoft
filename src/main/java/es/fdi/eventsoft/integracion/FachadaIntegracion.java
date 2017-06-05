@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.integracion;
 
 import es.fdi.eventsoft.integracion.imp.ServicioIntegracionImp;
+import es.fdi.eventsoft.negocio.entidades.ClavesEventoServicio;
 import javafx.util.Pair;
 
 import java.util.List;
@@ -42,6 +43,15 @@ public interface FachadaIntegracion<T> {
          */
         boolean baja(Long id);
 
+        /**
+         * Baja de una entidad EventoServicio por ID
+         *
+         * @param id ID de la entidad
+         *
+         * @return True si baja corecta
+         *         False si hubo error.
+         */
+        public boolean bajaEventoServicio(ClavesEventoServicio id);
 
         /**
          * Modificacion de la @Entity tipo <T>

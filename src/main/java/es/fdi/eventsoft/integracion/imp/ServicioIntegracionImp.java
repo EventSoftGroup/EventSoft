@@ -2,6 +2,7 @@ package es.fdi.eventsoft.integracion.imp;
 
 
 import es.fdi.eventsoft.integracion.FachadaIntegracion;
+import es.fdi.eventsoft.negocio.entidades.ClavesEventoServicio;
 import javafx.util.Pair;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Map;
 
 public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
 
@@ -49,6 +51,15 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
         }
     }
 
+    public boolean bajaEventoServicio(ClavesEventoServicio id) {
+        try {
+            em.remove(em.find(entityClass, id));
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            return false;
+        }
+    }
     /**
      * @see FachadaIntegracion<T>{@link #modifica(Object)}
      */
@@ -90,6 +101,11 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
     public List ejecutarNamedQuery(String nameQuery, List<Pair<String, Object>> params){
         Query q = em.createNamedQuery(nameQuery);
 
+        /*Map<String, Object> ps = null;
+        for (Map.Entry<String, Object> e : ps.entrySet()) {
+            q.setParameter(e.getKey(), e.getValue());
+        }
+        */
         for (int i=0; i < params.size(); i++) {
             q.setParameter(params.get(i).getKey(), params.get(i).getValue());
         }
