@@ -25,7 +25,7 @@
         <section class="content-header">
             <h1>
                 <c:if test="${not empty listaServicios}">
-                    <small> ${fn:length(listaServicios)} servicios</small>
+                    <small> <c:out value="${fn:length(listaServicios)}"></c:out> servicios</small>
                 </c:if>
             </h1>
             <ol class="breadcrumb">
@@ -82,12 +82,12 @@
                                                        class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
 
                                                 </td>
-                                                <td class="mailbox-subject text-center">${count}<c:set var="count" value="${count + 1}" scope="page"/></td>
+                                                <td class="mailbox-subject text-center"><c:out value="${count}"></c:out><c:set var="count" value="${count + 1}" scope="page"/></td>
 
-                                                <!-- <p style="display:none;"><c:catch var="exception">${servicio.nombre}</c:catch></p>-->
-                                                <td class="mailbox-subject text-center">${servicio.tipo}</td>
-                                                <td class="mailbox-subject text-center"><b>${servicio.nombre}</b></td>
-                                                <td class="mailbox-subject">${fn:substring(servicio.descripcion, 0, 70)}...</td>
+                                                <!-- <p style="display:none;"><c:catch var="exception"><c:out value="${servicio.nombre}"></c:out></c:catch></p>-->
+                                                <td class="mailbox-subject text-center"><c:out value="${servicio.tipo}"></c:out></td>
+                                                <td class="mailbox-subject text-center"><b><c:out value="${servicio.nombre}"></c:out></b></td>
+                                                <td class="mailbox-subject"><c:out value="${fn:substring(servicio.descripcion, 0, 70)}"></c:out> ...</td>
                                                 <td class="mailbox-date text-center">
                                                     <fmt:formatDate type = "date" value = "${servicio.fechaRegistro}" />
                                                         </td>

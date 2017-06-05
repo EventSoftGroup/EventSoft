@@ -23,7 +23,7 @@
         <section class="content-header">
             <h1>
                 Notificaciones
-                <small>5 notificaciones nuevas</small>
+                <!--<small>5 notificaciones nuevas</small>-->
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>

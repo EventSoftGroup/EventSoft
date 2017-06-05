@@ -24,7 +24,7 @@
         <section class="content-header">
             <h1>
                 Buzón
-                <small>13 mensajes nuevos</small>
+                <!--<small>13 mensajes nuevos</small>-->
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
@@ -52,14 +52,14 @@
                                 <li class="active" id="botonBandejaEntrada"><a href="#"><i class="fa fa-inbox"></i> Bandeja de Entrada
                                     <span class="label label-primary pull-right">
                                         <c:if test="${not empty usuario.mensajes_recibidos}">
-                                            ${fn:length(usuario.mensajes_recibidos)}
+                                            <c:out value="${fn:length(usuario.mensajes_recibidos)}"></c:out>
                                         </c:if>
 
                                     </span></a></li>
                                 <li id="botonBandejaEnviados"><a href="#"><i class="fa fa-send-o"></i> Enviados
                                     <span class="label label-success pull-right">
                                         <c:if test="${not empty usuario.mensajes_enviados}">
-                                            ${fn:length(usuario.mensajes_enviados)}
+                                            <c:out value="${fn:length(usuario.mensajes_enviados)}"></c:out>
                                         </c:if>
 
                                     </span></a></li>
@@ -122,17 +122,17 @@
                                                         <a href="/mensajes/eliminar/${mensaje.id}" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                     </td>
 
-                                                    <p style="display:none;"><c:catch var="exception">${mensaje.emisor.nombre}</c:catch></p>
+                                                    <p style="display:none;"><c:catch var="exception"><c:out value="${mensaje.emisor.nombre}"></c:out></c:catch></p>
 
                                                     <c:if test="${not empty exception}"> <!-- Profesional -->
-                                                        <td class="mailbox-name"><a>${mensaje.emisor.empresa}</a></td>
+                                                        <td class="mailbox-name"><a><c:out value="${mensaje.emisor.empresa}"></c:out></a></td>
                                                     </c:if>
                                                     <c:if test="${empty exception}"> <!-- Cliente -->
-                                                        <td class="mailbox-name"><a>${mensaje.emisor.nombre}</a></td>
+                                                        <td class="mailbox-name"><a><c:out value="${mensaje.emisor.nombre}"></c:out></a></td>
                                                     </c:if>
 
-                                                    <td class="mailbox-subject"><b>${mensaje.asunto}</b> - ${fn:substring(mensaje.mensaje, 0, 35)}... </td>
-                                                    <td class="mailbox-date">${mensaje.fechaEnvio}</td>
+                                                    <td class="mailbox-subject"><b><c:out value="${mensaje.asunto}"></c:out></b> - <c:out value="${fn:substring(mensaje.mensaje, 0, 35)}"></c:out> ... </td>
+                                                    <td class="mailbox-date"><c:out value="${mensaje.fechaEnvio}"></c:out></td>
                                                 </tr>
                                             </c:forEach>
 
@@ -229,17 +229,17 @@
                                                     <a href="/mensajes/eliminar/${mensaje.id}" class="btn btn-default"><i class="fa fa-trash-o"></i> Eliminar</a>
                                                 </td>
 
-                                                <p style="display:none;"><c:catch var="exception">${mensaje.emisor.nombre}</c:catch></p>
+                                                <p style="display:none;"><c:catch var="exception"><c:out value="${mensaje.emisor.nombre}"></c:out></c:catch></p>
 
                                                 <c:if test="${not empty exception}"> <!-- Profesional -->
-                                                    <td onclick="location='/mensajes/ver/${mensaje.id}'" class="mailbox-name"><a href="#">${mensaje.emisor.empresa}</a></td>
+                                                    <td onclick="location='/mensajes/ver/${mensaje.id}'" class="mailbox-name"><a href="#"><c:out value="${mensaje.emisor.empresa}"></c:out></a></td>
                                                 </c:if>
                                                 <c:if test="${empty exception}"> <!-- Cliente -->
-                                                    <td onclick="location='/mensajes/ver/${mensaje.id}'" class="mailbox-name"><a href="#">${mensaje.emisor.nombre}</a></td>
+                                                    <td onclick="location='/mensajes/ver/${mensaje.id}'" class="mailbox-name"><a href="#"><c:out value="${mensaje.emisor.nombre}"></c:out></a></td>
                                                 </c:if>
 
-                                                <td class="mailbox-subject"><b>${mensaje.asunto}</b> - ${fn:substring(mensaje.mensaje, 0, 35)}... </td>
-                                                <td class="mailbox-date">${mensaje.fechaEnvio}</td>
+                                                <td class="mailbox-subject"><b><c:out value="${mensaje.asunto}"></c:out></b> - <c:out value="${fn:substring(mensaje.mensaje, 0, 35)}"></c:out> ... </td>
+                                                <td class="mailbox-date"><c:out value="${mensaje.fechaEnvio}"></c:out></td>
                                             </tr>
                                         </c:forEach>
 

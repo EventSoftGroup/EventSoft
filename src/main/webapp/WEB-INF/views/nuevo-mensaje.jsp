@@ -24,7 +24,7 @@
             <section class="content-header">
                 <h1>
                     Buzón
-                    <small>13 mensajes nuevos</small>
+                    <!--<small>13 mensajes nuevos</small>-->
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>

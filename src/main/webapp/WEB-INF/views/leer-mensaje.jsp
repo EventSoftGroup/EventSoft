@@ -23,7 +23,7 @@
             <section class="content-header">
                 <h1>
                     Buzón
-                    <small>13 mensajes nuevos</small>
+                    <!--<small>13 mensajes nuevos</small>-->
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
@@ -73,9 +73,9 @@
                             <!-- /.box-header -->
                             <div class="box-body no-padding">
                                 <div class="mailbox-read-info">
-                                    <h3>${mensaje.asunto}</h3>
+                                    <h3><c:out value="${mensaje.asunto}"></c:out></h3>
                                     <!--<h5>De: -->
-                                        <span class="mailbox-read-time pull-right">${mensaje.fechaEnvio}</span></h5>
+                                        <span class="mailbox-read-time pull-right"><c:out value="${mensaje.fechaEnvio}"></c:out></span></h5>
                                 </div>
                                 <!-- /.mailbox-read-info -->
                                 <div class="mailbox-controls with-border text-center">
@@ -93,7 +93,7 @@
                                 </div>
                                 <!-- /.mailbox-controls -->
                                 <div class="mailbox-read-message">
-                                    ${mensaje.mensaje}
+                                    <c:out value="${mensaje.mensaje}"></c:out>
                                 </div>
                                 <!-- /.mailbox-read-message -->
                             </div>

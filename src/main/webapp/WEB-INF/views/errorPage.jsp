@@ -9,11 +9,11 @@
 
         <div class="error-page">
 
-            <h1 class="headline text-red">${errorCode}</h1>
+            <h1 class="headline text-red"><c:out value="${errorCode}"></c:out></h1>
             <div class="error-content">
                 <h2><i class="fa fa-warning text-red"></i>Oooops!</h2>
                 <h3>
-                    ${errorMsg}
+                    <c:out value="${errorMsg}"></c:out>
                 </h3>
             </div>
         </div>

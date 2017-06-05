@@ -8,7 +8,7 @@
         <%@ include file="../fragments/header.jspf" %>
         <%@ include file="../fragments/left-side-column.jspf" %>
         <div class="content-wrapper">
-            <h1>${message}</h1>
+            <h1><c:out value="${message}"></c:out></h1>
             <h2>Bienvenido a EventSoft</h2>
             <h2>Administración</h2>
         </div>

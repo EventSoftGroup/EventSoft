@@ -14,7 +14,7 @@
         <form method="post" action="login">
             <h2 class="form-heading">ACCESO</h2>
 
-            <span>${message}</span>
+            <span><c:out value="${message}"></c:out></span>
             <div class="form-group ${error != null ? 'has-error' : ''}">
                 <input type="email" name="username" class="form-control" placeholder="Email" value="" autofocus />
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -24,7 +24,7 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <span>${error}</span>
+            <span><c:out value="${error}"></c:out></span>
             <div class="form-group">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
                 <h4 class="text-center"><a href="${contextPath}/usuarios/register">Crear cuenta</a></h4>

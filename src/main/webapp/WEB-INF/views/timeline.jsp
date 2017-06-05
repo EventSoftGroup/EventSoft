@@ -118,7 +118,7 @@
             <select id="categorias" class="form-control select2" style="width: 100%;">
 
                 <c:forEach var="cat" items="${listaTiposServicio}">
-                  <option value="${cat}">${cat}</option>
+                  <option value="${cat}"><c:out value="${cat}"></c:out></option>
                 </c:forEach>
 
             </select>

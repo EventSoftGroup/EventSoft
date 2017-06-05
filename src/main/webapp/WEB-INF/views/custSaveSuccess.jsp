@@ -18,10 +18,10 @@
     Empleado Saved Successfully.
 </h3>
 
-<strong>Nombre: </strong>${empleado.nombre}<br>
-<strong>Apellidos: </strong>${empleado.apellidos}<br>
-<strong>Email: </strong>${empleado.email}<br>
-<strong>Telefono: </strong>${empleado.telefono}<br>
+<strong>Nombre: </strong><c:out value="${empleado.nombre}"></c:out><br>
+<strong>Apellidos: </strong><c:out value="${empleado.apellidos}"></c:out><br>
+<strong>Email: </strong><c:out value="${empleado.email}"></c:out><br>
+<strong>Telefono: </strong><c:out value="${empleado.telefono}"></c:out><br>
 <strong>FechaNacimiento: </strong><fmt:formatDate value="${empleado.fechaNacimiento}" type="date" /><br>
 
 </body>

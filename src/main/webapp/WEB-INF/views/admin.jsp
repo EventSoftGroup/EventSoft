@@ -41,7 +41,7 @@
                     <!-- small box  PROVEEDORES-->
                     <div class="small-box bg-teal">
                         <div class="inner">
-                            <h3>${fn:length(listaClinetes)}</h3>
+                            <h3><c:out value="${fn:length(listaClinetes)}"></c:out></h3>
                             <p>Num clientes</p>
                         </div>
                         <div class="icon">
@@ -54,7 +54,7 @@
                     <!-- small box ORGANIZADORES-->
                     <div class="small-box bg-light-blue">
                         <div class="inner">
-                            <h3>${fn:length(listaOrganizadores)}</h3>
+                            <h3><c:out value="${fn:length(listaOrganizadores)}"></c:out></h3>
                             <p>Num organizadores</p>
                         </div>
                         <div class="icon">
@@ -67,7 +67,7 @@
                     <!-- small box USUARIOS-->
                     <div class="small-box bg-blue">
                         <div class="inner">
-                            <h3>${fn:length(listaProveedores)}</h3>
+                            <h3><c:out value="${fn:length(listaProveedores)}"></c:out></h3>
                             <p>Num proveedores</p>
                         </div>
                         <div class="icon">
@@ -80,7 +80,7 @@
                     <!-- small box USUARIOS-->
                     <div class="small-box bg-lime">
                         <div class="inner">
-                            <h3>${fn:length(listaServicios)}</h3>
+                            <h3><c:out value="${fn:length(listaServicios)}"></c:out></h3>
                             <p>Servicios ofertados</p>
                         </div>
                         <div class="icon">
@@ -93,7 +93,7 @@
                     <!-- small box ECENTOS ACTUALES-->
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>${fn:length(listaEventos)}</h3>
+                            <h3><c:out value="${fn:length(listaEventos)}"></c:out></h3>
                             <p>Eventos organizados</p>
                         </div>
                         <div class="icon">
@@ -107,7 +107,7 @@
                     <!-- small box ECENTOS ACTUALES-->
                     <div class="small-box bg-gray">
                         <div class="inner">
-                            <h3>${numTotalMensajes}</h3>
+                            <h3><c:out value="${numTotalMensajes}"></c:out></h3>
                             <p>Mensajes enviados</p>
                         </div>
                         <div class="icon">
@@ -153,10 +153,10 @@
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
                                                     </td>
 
-                                                    <td class="mailbox-subject text-center">${cli.email}</td>
-                                                    <td class="mailbox-subject text-center"><b>${cli.nombre}</b></td>
-                                                    <td class="mailbox-subject text-center"><b>${cli.provincia}</b></td>
-                                                    <td class="mailbox-subject text-center"><b>${cli.telefono}</b></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${cli.email}"></c:out></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${cli.nombre}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${cli.provincia}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${cli.telefono}"></c:out></b></td>
 
                                                     <td class="mailbox-subject">
                                                         <a type="button" class="btn btn-default text-center botonEliminarServicio" id="cliente-${cli.id}" data-id="${cli.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
@@ -200,10 +200,10 @@
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
                                                     </td>
 
-                                                    <td class="mailbox-subject text-center">${prov.email}</td>
-                                                    <td class="mailbox-subject text-center"><b>${prov.empresa}</b></td>
-                                                    <td class="mailbox-subject text-center"><b>${prov.provincia}</b></td>
-                                                    <td class="mailbox-subject text-center"><b>${prov.telefono}</b></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${prov.email}"></c:out></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${prov.empresa}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${prov.provincia}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${prov.telefono}"></c:out></b></td>
 
                                                     <td class="mailbox-subject"><a type="button" class="btn btn-default text-center botonEliminarServicio" id="proveedor-${prov.id}" data-id="${prov.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
                                                 </tr>
@@ -245,10 +245,10 @@
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
                                                     </td>
 
-                                                    <td class="mailbox-subject text-center">${orga.email}</td>
-                                                    <td class="mailbox-subject text-center"><b>${orga.empresa}</b></td>
-                                                    <td class="mailbox-subject text-center"><b>${orga.provincia}</b></td>
-                                                    <td class="mailbox-subject text-center"><b>${orga.telefono}</b></td>
+                                                    <td class="mailbox-subject text-center">$<c:out value="{orga.email}"></c:out></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${orga.empresa}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${orga.provincia}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${orga.telefono}"></c:out></b></td>
 
                                                     <td class="mailbox-subject">
                                                         <a type="button" class="btn btn-default text-center botonEliminarServicio" id="organizador-${prov.id}" data-id="${prov.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
@@ -307,10 +307,10 @@
                                                        class="btn btn-default text-center "><i class="fa fa-search"></i> Ver</a>
 
                                                 </td>
-                                                <!-- <p style="display:none;"><c:catch var="exception">${servicio.nombre}</c:catch></p>-->
-                                                <td class="mailbox-subject text-center col-md-1">${servicio.tipo}</td>
-                                                <td class="mailbox-subject text-center col-md-1"><b>${servicio.nombre}</b></td>
-                                                <td class="mailbox-subject col-md-1">${fn:substring(servicio.descripcion, 0, 70)}...</td>
+                                                <!-- <p style="display:none;"><c:catch var="exception"><c:out value="${servicio.nombre}"></c:out></c:catch></p>-->
+                                                <td class="mailbox-subject text-center col-md-1"><c:out value="${servicio.tipo}"></c:out></td>
+                                                <td class="mailbox-subject text-center col-md-1"><b><c:out value="${servicio.nombre}"></c:out></b></td>
+                                                <td class="mailbox-subject col-md-1"><c:out value="${fn:substring(servicio.descripcion, 0, 70)}"></c:out> ...</td>
                                                 <td class="mailbox-date text- col-md-1">
                                                     <fmt:formatDate type = "date" value = "${servicio.fechaRegistro}" />
                                                 </td>
@@ -352,11 +352,11 @@
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
 
                                                     </td>
-                                                    <td class="mailbox-subject text-center">${evento.categoria}</td>
-                                                    <!-- <p style="display:none;"><c:catch var="exception">${evento.nombre}</c:catch></p>-->
+                                                    <td class="mailbox-subject text-center"><c:out value="${evento.categoria}"></c:out></td>
+                                                    <!-- <p style="display:none;"><c:catch var="exception"><c:out value="${evento.nombre}"></c:out></c:catch></p>-->
 
-                                                    <td class="mailbox-subject text-center"><b>${evento.nombre}</b></td>
-                                                    <td class="mailbox-subject">${fn:substring(evento.descripcion, 0, 30)}...</td>
+                                                    <td class="mailbox-subject text-center"><b><c:out value="${evento.nombre}"></c:out></b></td>
+                                                    <td class="mailbox-subject"><c:out value="${fn:substring(evento.descripcion, 0, 30)}"></c:out> ...</td>
                                                     <td class="mailbox-date text-center">
                                                         <fmt:formatDate type = "date" value = "${evento.fechaInicio}" />
                                                     </td>
