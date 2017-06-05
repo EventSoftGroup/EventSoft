@@ -1,0 +1,13 @@
+<!-- Content Header (Page header) -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<section class="content-header">
+    <h1>
+        Nuevo evento
+        <small>Panel para la creacion de un nuevo evento.</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Eventos</a></li>
+        <li class="active">Nuevo</li>
+    </ol>
+</section>
