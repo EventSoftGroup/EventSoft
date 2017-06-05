@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,9 @@ import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 public class ServiciosController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @RequestMapping(value = "crear", method = RequestMethod.POST)
     public String crear(

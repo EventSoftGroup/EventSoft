@@ -1,13 +1,11 @@
 package es.fdi.eventsoft.negocio.servicios.usuarios.imp;
 
+
 import es.fdi.eventsoft.integracion.FachadaIntegracion;
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
 import es.fdi.eventsoft.negocio.servicios.usuarios.SAUsuario;
 import javafx.util.Pair;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -100,4 +98,15 @@ public class SAUsuarioImp implements SAUsuario {
         return true;
     }
 
+    @Override
+    public List<Usuario> listarUsuariosByTipo(Class<? extends Usuario> tipoUsuario) {
+        FachadaIntegracion integra = FachadaIntegracion.newInstance(tipoUsuario);
+        List lista = null;
+
+        integra.begin();
+        lista = integra.listado();
+        integra.commit();
+
+        return lista;
+    }
 }

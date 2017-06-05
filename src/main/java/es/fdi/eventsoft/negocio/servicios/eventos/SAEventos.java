@@ -1,5 +1,6 @@
 package es.fdi.eventsoft.negocio.servicios.eventos;
 
+
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.entidades.Evento;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
@@ -22,5 +23,7 @@ public interface SAEventos {
     boolean modificarEvento(Evento eventoModificado);
 
     List<Evento> buscarEventosByUsuario(Usuario usuario);
+
+    List<Evento> listarEventos();
     
 }

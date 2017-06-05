@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 
 /**
  * Created by Rodrigo de Miguel on 09/05/2017.
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ValoracionesController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @RequestMapping("crearValoracion")
     public String crearValoracion(Model model) {

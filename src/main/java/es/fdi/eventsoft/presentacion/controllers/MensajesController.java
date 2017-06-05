@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -29,6 +31,9 @@ import static es.fdi.eventsoft.presentacion.controllers.HomeController.isLogin;
 public class MensajesController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @GetMapping("/buzon")
     public String eventoBuzon(Model model, HttpSession session) {

@@ -5,15 +5,11 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
     <persistence-unit name="aplicacion">
-
-
         <class>es.fdi.eventsoft.negocio.entidades.usuario.Usuario</class>
         <class>es.fdi.eventsoft.negocio.entidades.usuario.Cliente</class>
         <class>es.fdi.eventsoft.negocio.entidades.usuario.Profesional</class>
         <class>es.fdi.eventsoft.negocio.entidades.usuario.Organizador</class>
         <class>es.fdi.eventsoft.negocio.entidades.usuario.Proveedor</class>
-
-
         <class>es.fdi.eventsoft.negocio.entidades.Mensaje</class>
         <class>es.fdi.eventsoft.negocio.entidades.Valoracion</class>
         <class>es.fdi.eventsoft.negocio.entidades.Servicio</class>
@@ -21,19 +17,28 @@
         <class>es.fdi.eventsoft.negocio.entidades.EventoServicio</class>
         <class>es.fdi.eventsoft.negocio.entidades.ClavesEventoServicio</class>
 
-
         <properties>
+            <!--MYSQL-REMOTO-->
+            <!--
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://qxp814.pino.es/qxp814" />
             <property name="javax.persistence.jdbc.user" value="qxp814" />
             <property name="javax.persistence.jdbc.password" value="VeL3RdYRnp98" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
-            <property name="hibernate.show.sql" value="true"></property>
+            -->
+
+            <!--HSQLDB-LOCAL-->
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
+            <property name="javax.persistence.jdbc.password" value="" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+
+            <!--OTRAS PROPIEDADES-->
+            <property name="hibernate.show.sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update" />
-
-
-
+            <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
+            <!--<property name="hibernate.hbm2ddl.import_files" value="import.sql"/>-->
         </properties>
     </persistence-unit>
-
 </persistence>
