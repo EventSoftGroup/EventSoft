@@ -98,9 +98,9 @@
                                 <springForm:input path="fechaFin" cssClass="form-control"  placeholder="Fecha fin" type="date" style="width: 45%;"/>
                                 <springForm:errors path="fechaFin" cssClass="alert-error" />
                             </div>
-
+                            
                             <div class="col-xs-4">
-                                
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 <button type="submit" class="btn btn-primary btn-block btn-flat">Crear evento</button>
                             </div>
                         </springForm:form>

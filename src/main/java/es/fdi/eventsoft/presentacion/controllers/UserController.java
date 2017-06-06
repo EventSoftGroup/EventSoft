@@ -123,7 +123,6 @@ public class UserController {
         }else{
             model.addAttribute("pagina", "error-500");
             return "error-500";
-
         }
 
     }
