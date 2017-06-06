@@ -42,7 +42,7 @@ public class ServiciosController {
             HttpSession session,
             Model model
     ) {
-        log.debug("LLEGA");
+        
         Contexto contexto;
         //Creamos la fecha de registro
         Date fechaRegistro = new Date();
