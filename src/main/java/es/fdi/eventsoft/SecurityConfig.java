@@ -1,6 +1,5 @@
 package es.fdi.eventsoft;
 
-import es.fdi.eventsoft.negocio.servicios.usuarios.imp.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutUrl("/logout")
                     .permitAll();
+
     }
 
     @Override
@@ -58,5 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
+
+
 
 }
