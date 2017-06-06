@@ -302,7 +302,7 @@
 
                             <div class="tab-pane" id="añadirServicio">
                                 <form class="form-horizontal" method="post" action="/servicios/crear">
-
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     <div class="form-group">
                                         <label for="nombreServicio" class="col-sm-2 control-label">Nombre</label>
                                         <div class="col-sm-10">

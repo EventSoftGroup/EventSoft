@@ -66,7 +66,8 @@
                                 <h3 class="box-title">Nuevo Mensaje</h3>
                             </div>
                             <!-- /.box-header -->
-                            <form method="POST" action="./crearMensaje">
+                            <form method="POST" action="/mensajes/crear">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 <div class="box-body">
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Para:" name="email">
