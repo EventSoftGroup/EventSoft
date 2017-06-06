@@ -1,8 +1,0 @@
-<script src="<c:url value="/resources/plugins/jQuery/jquery-2.2.3.min.js" />" ></script>
-<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script src="<c:url value="/resources/plugins/slimScroll/jquery.slimscroll.min.js" />" ></script>
-<script src="<c:url value="/resources/plugins/fastclick/fastclick.js" />" ></script>
-<script src="<c:url value="/resources/dist/js/app.min.js" />" ></script>
-<script src="<c:url value="/resources/dist/js/demo.js" />" ></script>
-<script src="<c:url value="/resources/plugins/chartjs/Chart.min.js" />" ></script>

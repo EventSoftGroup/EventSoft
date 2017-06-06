@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="box-body" id="panel_eventos">
-          <div class="col-md-4">
+          <div class="col-md-5">
             <div class="form-group">
               <label>Selecciona el evento que quieras visualizar</label>
               <select id="eventos" class="form-control select2" style="width: 100%;">
@@ -79,7 +79,7 @@
           </div>
         </div>
         <div class="box-body">
-          <div class="col-md-4">
+          <div class="col-md-5">
             <div class="form-group">
               <label>Selecciona el evento que quieras visualizar</label>
               <select id="eventos" class="form-control select2" style="width: 100%;">

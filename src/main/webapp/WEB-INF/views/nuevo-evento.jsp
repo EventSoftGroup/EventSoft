@@ -40,7 +40,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <springForm:form method="POST" name='formulario_crear_evento'  modelAttribute='evento' action="/eventos/crearEvento">
+                        <springForm:form method="POST" name='formulario_crear_evento'  modelAttribute='evento' action="/eventos/crear-evento">
 
                             <!-- select -->
                             <div class="form-group">
