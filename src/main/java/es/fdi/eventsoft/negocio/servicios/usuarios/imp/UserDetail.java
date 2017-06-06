@@ -46,8 +46,8 @@ public class UserDetail implements UserDetailsService {
             return new org.springframework.security.core.userdetails.User(
                     u.getEmail(), u.getPassword(), roles);
         } catch (Exception e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
+            //log.error(e.getMessage());
+            //e.printStackTrace();
             throw new UsernameNotFoundException("Usuario con email: " + email + " no encontrado.");
         }
     }

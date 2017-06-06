@@ -51,7 +51,7 @@ public class Usuario implements Serializable {
     //@NotBlank //@Digits(integer=5, fraction=0)
     //@Pattern(regexp = "\\d{5}")
     @Pattern(regexp = "0[1-9][0-9]{3}|[1-4][0-9]{4}|5[0-2][0-9]{3}", message = "Formato incorrecto")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     protected String codigoPostal;
 
     @Column(nullable = false)

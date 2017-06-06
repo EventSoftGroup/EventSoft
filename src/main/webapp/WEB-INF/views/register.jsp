@@ -20,7 +20,6 @@
         <p class="login-box-msg">Rellene el formulario</p>
 
             <springForm:form method="post" id="formulario_registro" name='formulario_registro'  modelAttribute='${tipoUsuario}' action="${pageContext.request.contextPath}/usuarios/registrar_${tipoUsuario}">
-
             <div id="form_especifico">
                 <c:if test="${tipoUsuario eq 'cliente'}">
                     <div id="form_cliente">

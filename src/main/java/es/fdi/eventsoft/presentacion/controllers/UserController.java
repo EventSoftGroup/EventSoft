@@ -66,22 +66,21 @@ public class UserController {
         cliente.setPassword(passwordEncoder.encode(cliente.getPassword()));
         cliente.setRoles("USER,CLIENTE");
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(cliente);
-        if (contexto.getEvento() != null){
-            System.out.println("Le inserto el id");
+        /*if (contexto.getEvento() != null){
             Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(cliente.getEmail());
             Usuario recibido = (Usuario) contexto_2.getDatos();
             cliente.setId(recibido.getId());
         } else {
             System.out.println("No le inserto el id");
-        }
+        }*/
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
-            model.addAttribute("cliente", cliente);
+            /*model.addAttribute("cliente", cliente);
             session.setAttribute("usuario", cliente);
             session.setAttribute("rol", "Cliente");
             session.setAttribute("usuario", cliente);
-            model.addAttribute("pagina", "perfil-usuario");
-            return "perfil-usuario";
+            model.addAttribute("pagina", "perfil-usuario");*/
+            return "redirect:/login";
         }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
             model.addAttribute("tipoUsuario", "cliente");
             bindingResult.rejectValue("email" , "error.cliente", "Email ya existente en el sistema");
@@ -104,19 +103,19 @@ public class UserController {
         organizador.setPassword(passwordEncoder.encode(organizador.getPassword()));
         organizador.setRoles("USER,ORGANIZADOR");
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(organizador);
-        if (contexto.getEvento() != null) {
+        /*if (contexto.getEvento() != null) {
             Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(organizador.getEmail());
             Usuario recibido = (Usuario) contexto_2.getDatos();
             organizador.setId(recibido.getId());
-        }
+        }*/
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
-            model.addAttribute("organizador", organizador);
+            /*model.addAttribute("organizador", organizador);
             session.setAttribute("usuario", organizador);
             session.setAttribute("rol", "Organizador");
             session.setAttribute("usuario", organizador);
-            model.addAttribute("pagina", "nuevo-evento");
-            return "redirect:/eventos/nuevo";
+            model.addAttribute("pagina", "nuevo-evento");*/
+            return "redirect:/login";
         }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
             model.addAttribute("tipoUsuario", "organizador");
             bindingResult.rejectValue("email" , "error.organizador", "Email ya existente en el sistema");
@@ -141,19 +140,19 @@ public class UserController {
         proveedor.setPassword(passwordEncoder.encode(proveedor.getPassword()));
         proveedor.setRoles("USER,PROVEEDOR");
         Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_USUARIO).execute(proveedor);
-        if (contexto.getEvento() != null) {
+        /*if (contexto.getEvento() != null) {
             Contexto contexto_2 = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(proveedor.getEmail());
             Usuario recibido = (Usuario) contexto_2.getDatos();
             proveedor.setId(recibido.getId());
-        }
+        }*/
 
         if(contexto.getEvento() == EventosNegocio.USUARIO_CREADO){
-            model.addAttribute("proveedor", proveedor);
+            /*model.addAttribute("proveedor", proveedor);
             session.setAttribute("usuario", proveedor);
             session.setAttribute("rol", "Proveedor");
             session.setAttribute("email", proveedor.getEmail());
-            model.addAttribute("pagina", "proveedores");
-            return "redirect:/eventos/proveedores";
+            model.addAttribute("pagina", "proveedores");*/
+            return "redirect:/login";
         }else if(contexto.getEvento() == EventosNegocio.EMAIL_YA_EXISTENTE){
             model.addAttribute("tipoUsuario", "proveedor");
             bindingResult.rejectValue("email" , "error.proveedor", "Email ya existente en el sistema");
@@ -213,7 +212,7 @@ public class UserController {
         Contexto context = FactoriaComandos.getInstance().crearComando(ELIMINAR_USUARIO).execute(session.getAttribute("usuario"));
 
         if (context.getEvento() == ELIMINAR_USUARIO) {
-            return "redirect:/";
+            return "redirect:/logout";
         } else {
             return "redirect:/";
         }

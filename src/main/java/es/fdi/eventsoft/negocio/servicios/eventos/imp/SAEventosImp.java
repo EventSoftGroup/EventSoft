@@ -146,7 +146,7 @@ public class SAEventosImp implements SAEventos {
 
     @Override
     public List<Evento> buscarEventosByUsuario(Usuario usuario) {
-        List<Evento> lista = null;
+        List<Evento> lista = new ArrayList<Evento>();
         FachadaIntegracion integra;
         Usuario finalUsuario = usuario;
 

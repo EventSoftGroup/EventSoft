@@ -23,8 +23,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Timeline
-        <small>example</small>
+        Mis eventos
+        <small></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -47,7 +47,7 @@
               <i class="fa fa-times"></i></button>
           </div>
         </div>
-        <div class="box-body">
+        <div class="box-body" id="panel_eventos">
           <div class="col-md-4">
             <div class="form-group">
               <label>Selecciona el evento que quieras visualizar</label>

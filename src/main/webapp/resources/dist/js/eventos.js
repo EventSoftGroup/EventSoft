@@ -53,10 +53,10 @@ $(function() {
         texto_titulo_sel_eventos.text("Seleccione los eventos de la categoria - " + $('#categorias option:selected').text() + " -");
 
 
-        console.log("/servicios/buscarServiciosByTipoServicio/" + $('#categorias option:selected').text())
+        console.log("/servicios/por-tipo-servicio/" + $('#categorias option:selected').text())
         $.ajax({
             type : "GET",
-            url : "/servicios/buscarServiciosByTipoServicio/" + $('#categorias option:selected').text(),
+            url : "/servicios/por-tipo-servicio/" + $('#categorias option:selected').text(),
 
             success : function(response) {
 
@@ -115,10 +115,10 @@ $(function() {
             listaIDsServicios.push(Number(id));
         })
 
-        console.log("/eventos/añadirServiciosAEvento/" + $("#eventos option:selected").val());
+        console.log("/eventos/anadir-servicios-evento/" + $("#eventos option:selected").val());
         $.ajax({
             type : "POST",
-            url : "/eventos/añadirServiciosAEvento/" + $("#eventos option:selected").val(),
+            url : "/eventos/anadir-servicios-evento/" + $("#eventos option:selected").val(),
             data: {
                 servicios: listaIDsServicios
             },
@@ -155,7 +155,7 @@ $(function() {
         panel_todos_eventos.fadeOut();
         $.ajax({
             type : "GET",
-            url : "/eventos/buscarEvento/"+idEvento,
+            url : "/eventos/buscar/"+idEvento,
             success : function(response) {
 
                 panel_todos_eventos.fadeOut(function(){
@@ -195,9 +195,8 @@ $(function() {
         cargando.show();
         $.ajax({
             type : "GET",
-            url : "/eventos/buscarEventosByUser/",
+            url : "/eventos/buscar/por-usuario/",
             success : function(response) {
-
                 //Caso del botón
                 if (!ini) {
 
@@ -231,13 +230,20 @@ $(function() {
                 }
                 else {
                     //Cargamos los eventos
-
                     cargando.hide();
                     $('#eventos').empty();
                     response.forEach(function(e){
                         $('#eventos').append("<option value='"+e.id+"'>"+e.nombre+"</option>");
                     });
-                    buscarEvento($("#eventos option:selected").val());
+                    if (response.length !== 0) {
+                        $('#box_sel_evento h3.box-title').text("Seleccione un evento");
+                        buscarEvento($("#eventos option:selected").val());
+                    }
+                    else{
+                        $('#box_sel_evento h3.box-title').text("No existe ningún evento registrado");
+                        $('#panel_eventos').hide();
+
+                    }
                 }
 
             },
