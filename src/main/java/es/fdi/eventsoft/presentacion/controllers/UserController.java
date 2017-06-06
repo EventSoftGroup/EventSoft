@@ -58,7 +58,7 @@ public class UserController {
 
     @RequestMapping(value = "/registrar_cliente", method = RequestMethod.POST)
     public String registrar_Cliente(@Valid Cliente cliente, BindingResult bindingResult, Model model, HttpSession session) {
-        cliente.mostrar();
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("tipoUsuario", "cliente");
             return "register";
@@ -194,7 +194,7 @@ public class UserController {
     @RequestMapping(value = "/modificar", method = RequestMethod.POST)
     public String modificar(@Valid Usuario usuario, BindingResult bindingResult, Model model) {
         Contexto contexto;
-
+        usuario.mostrar();
         if (bindingResult.hasErrors()) {
             return "perfil-usuario";
         } else {

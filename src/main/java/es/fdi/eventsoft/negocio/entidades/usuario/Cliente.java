@@ -109,11 +109,11 @@ public class Cliente extends Usuario implements Serializable {
 
     public void mostrar(){
         System.out.println("Nombre: " + this.getNombre());
-        System.out.println("Nombre: " + this.getApellidos());
-        System.out.println("Nombre: " + this.getDireccion());
-        System.out.println("Nombre: " + this.getLocalidad());
-        System.out.println("Nombre: " + this.getProvincia());
-        System.out.println("Nombre: " + this.getCodigoPostal());
-        System.out.println("Nombre: " + this.getTelefono());
+        System.out.println("Apellidos: " + this.getApellidos());
+        System.out.println("Dir: " + this.getDireccion());
+        System.out.println("Localizacion: " + this.getLocalidad());
+        System.out.println("Provincia: " + this.getProvincia());
+        System.out.println("CP: " + this.getCodigoPostal());
+        System.out.println("Telefono: " + this.getTelefono());
     }
 }

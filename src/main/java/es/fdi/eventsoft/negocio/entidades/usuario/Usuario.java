@@ -205,4 +205,12 @@ public class Usuario implements Serializable {
     public void setMensajes_recibidos(List<Mensaje> mensajes_recibidos) {
         this.mensajes_recibidos = mensajes_recibidos;
     }
+    public void mostrar(){
+        System.out.println("Email: " + this.getEmail());
+        System.out.println("Dir: " + this.getDireccion());
+        System.out.println("Localidad: " + this.getLocalidad());
+        System.out.println("Provincia: " + this.getProvincia());
+        System.out.println("CP: " + this.getCodigoPostal());
+        System.out.println("Telef: " + this.getTelefono());
+    }
 }

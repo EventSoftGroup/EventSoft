@@ -58,10 +58,12 @@
                         <img src="<c:url value="/resources/dist/img/user2-160x160.jpg" />" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">
-                            <c:catch var="exception"><c:out value="${usuario.nombre}"></c:out></c:catch>
 
-                            <c:if test="${not empty exception}"> <!-- Profesional -->
+                            <c:if test="${rol eq 'Proveedor' || rol eq 'Organizador'}"> <!-- Profesional -->
                                 <c:out value="${usuario.empresa}"></c:out>
+                            </c:if>
+                            <c:if test="${rol eq 'Cliente'}">
+                                <c:out value="${usuario.nombre}"></c:out>
                             </c:if>
                         </span>
                     </a>
@@ -71,10 +73,11 @@
                             <img src="<c:url value="/resources/dist/img/user2-160x160.jpg" />" class="img-circle" alt="User Image">
 
                             <p>
-                                <c:catch var="exception"><c:out value="${usuario.nombre}"></c:out></c:catch>
-
-                                <c:if test="${not empty exception}"> <!-- Profesional -->
-                                        <c:out value="${usuario.empresa}"></c:out>
+                                <c:if test="${rol eq 'Proveedor' || rol eq 'Organizador'}"> <!-- Profesional -->
+                                    <c:out value="${usuario.empresa}"></c:out>
+                                </c:if>
+                                <c:if test="${rol eq 'Cliente'}">
+                                    <c:out value="${usuario.nombre}"></c:out>
                                 </c:if>
                                  - <c:out value="${rol}"></c:out>
                             </p>

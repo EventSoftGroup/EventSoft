@@ -42,11 +42,14 @@
                             <img class="profile-user-img img-responsive img-circle" src="<c:url value="/resources/dist/img/user4-128x128.jpg" />"
                                  alt="User profile picture">
                             <h3 class="profile-username text-center">
-                                <c:catch var="exception"><c:out value="${usuario.nombre}"></c:out></c:catch>
 
-                                <c:if test="${not empty exception}"> <!-- Profesional -->
-                                        <c:out value="${usuario.empresa}"></c:out>
+                                <c:if test="${rol eq 'Proveedor' || rol eq 'Organizador'}"> <!-- Profesional -->
+                                    <c:out value="${usuario.empresa}"></c:out>
                                 </c:if>
+                                <c:if test="${rol eq 'Cliente'}">
+                                    <c:out value="${usuario.nombre}"></c:out>
+                                </c:if>
+
                             </h3>
                             <!-- <p class="text-muted text-center">Florista Web</p>-->
                             <ul class="list-group list-group-unbordered">
@@ -255,6 +258,7 @@
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="settings">
                                 <springForm:form method="post" name="form_modificar_usuario" modelAttribute="usuarioAModificar" action="/usuarios/modificar">
+
                                     <!-- Dirección -->
                                     <div class="form-group has-feedback">
                                         <springForm:input path="direccion" cssClass="form-control" autofocus="true" placeholder="Dirección" type="text"/>
