@@ -2,7 +2,12 @@ package es.fdi.eventsoft.negocio.__tests;
 
 
 import es.fdi.eventsoft.integracion.FachadaIntegracion;
+import es.fdi.eventsoft.negocio.comandos.Contexto;
+import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
+import es.fdi.eventsoft.negocio.comandos.factoria.FactoriaComandos;
+import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
+import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -21,7 +26,7 @@ public class TestEmpleados {
 
     public static void main(String[] args) throws ParseException {
 
-
+/*
         Date fecha = formateaFecha("2017-06-03");
         System.out.println(fecha);
 
@@ -65,7 +70,25 @@ public class TestEmpleados {
             e.printStackTrace();
         }
         // Output "Wed Sep 26 00:00:00 EST 2012"
-
+*/
+        //Creamos un servicio
+        String s = "chelo@hotmail.com";
+        Contexto c =  FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_USUARIO_BY_EMAIL).execute(s);
+        Proveedor p = (Proveedor) c.getDatos();
+        System.out.println(p.getDireccion());
+        System.out.println(p.getId());
+        /*Servicio serv = new Servicio(Servicio.TiposServicio.DJ, "Dj FER", "el mejor dj de españa", new Date(),(Proveedor) c.getDatos());
+        c  = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_SERVICIO).execute(serv);
+        //Lo mostramos
+        Long id = (Long)c.getDatos();
+        if( id != null){
+            System.out.println(id);
+            //Lo eliminamos
+            //c = FactoriaComandos.getInstance().crearComando(EventosNegocio.ELIMINAR_SERVICIO).execute(id);
+            //String resp = (String) c.getDatos();
+            //System.out.println(resp);
+        }
+    */
 
     }
 
