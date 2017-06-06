@@ -137,7 +137,8 @@
                                 </button>
                                 <button type="button" class="btn btn-warning" data-widget="collapse"> Modificar datos
                                 </button>
-                                <form method="POST" action="./eliminar">
+                                <form method="post" action="/usuarios/eliminar">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                 </form>
                         </div>
