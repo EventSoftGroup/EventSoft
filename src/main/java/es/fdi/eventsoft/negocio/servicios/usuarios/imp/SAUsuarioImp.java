@@ -6,15 +6,14 @@ import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
 import es.fdi.eventsoft.negocio.servicios.usuarios.SAUsuario;
 import javafx.util.Pair;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 
-/**
- * Created by Rodrigo de Miguel on 05/05/2017.
- */
+@Service
 public class SAUsuarioImp implements SAUsuario {
 
     public EventosNegocio crearUsuario(Usuario usuarioNuevo){

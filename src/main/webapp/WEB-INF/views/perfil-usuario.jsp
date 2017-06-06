@@ -258,7 +258,7 @@
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="settings">
                                 <springForm:form method="post" name="form_modificar_usuario" modelAttribute="usuarioAModificar" action="/usuarios/modificar">
-
+                                    <springForm:input path="id" type="hidden" />
                                     <!-- Dirección -->
                                     <div class="form-group has-feedback">
                                         <springForm:input path="direccion" cssClass="form-control" autofocus="true" placeholder="Dirección" type="text"/>

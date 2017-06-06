@@ -8,6 +8,8 @@ import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
 import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
+import es.fdi.eventsoft.negocio.entidades.validadores.UserValidator;
+import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,8 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserValidator userValidator;
 
     @RequestMapping("/register")
     public String register(Model model) {
@@ -191,17 +195,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/modificar", method = RequestMethod.POST)
-    public String modificar(@Valid Usuario usuario, BindingResult bindingResult, Model model) {
-        Contexto contexto;
-        usuario.mostrar();
+    public String modificar(@ModelAttribute("usuarioAModificar") Usuario usuario, BindingResult bindingResult, Model model) {
+        userValidator.validate(usuario, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "perfil-usuario";
-        } else {
-            contexto = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(usuario);
-            if (contexto.getEvento() == MODIFICAR_USUARIO) {
-                return "perfil-usuario";
-            }
         }
+
+        Usuario original = FactoriaSA.getInstance().crearSAUsuarios().buscarUsuarioByID(usuario.getId());
+        original.setDireccion(usuario.getDireccion());
+        original.setLocalidad(usuario.getLocalidad());
+        original.setProvincia(usuario.getProvincia());
+        original.setCodigoPostal(usuario.getCodigoPostal());
+        original.setTelefono(usuario.getTelefono());
+        FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(original);
 
         return "perfil-usuario";
     }

@@ -213,4 +213,23 @@ public class Usuario implements Serializable {
         System.out.println("CP: " + this.getCodigoPostal());
         System.out.println("Telef: " + this.getTelefono());
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", roles='" + roles + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", localidad='" + localidad + '\'' +
+                ", provincia='" + provincia + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", codigoPostal='" + codigoPostal + '\'' +
+                ", estado=" + estado +
+                ", mensajes_enviados=" + mensajes_enviados +
+                ", mensajes_recibidos=" + mensajes_recibidos +
+                ", version=" + version +
+                '}';
+    }
 }
