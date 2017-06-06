@@ -100,6 +100,7 @@
                             </div>
 
                             <div class="col-xs-4">
+                                
                                 <button type="submit" class="btn btn-primary btn-block btn-flat">Crear evento</button>
                             </div>
                         </springForm:form>
