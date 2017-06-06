@@ -58,7 +58,7 @@ public class UserController {
 
     @RequestMapping(value = "/registrar_cliente", method = RequestMethod.POST)
     public String registrar_Cliente(@Valid Cliente cliente, BindingResult bindingResult, Model model, HttpSession session) {
-
+        cliente.mostrar();
         if (bindingResult.hasErrors()) {
             model.addAttribute("tipoUsuario", "cliente");
             return "register";

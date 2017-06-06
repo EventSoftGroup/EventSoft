@@ -106,4 +106,14 @@ public class Cliente extends Usuario implements Serializable {
     public void setEventos_Adscritos(List<Evento> eventos_Adscritos) {
         this.eventos_Adscritos = eventos_Adscritos;
     }
+
+    public void mostrar(){
+        System.out.println("Nombre: " + this.getNombre());
+        System.out.println("Nombre: " + this.getApellidos());
+        System.out.println("Nombre: " + this.getDireccion());
+        System.out.println("Nombre: " + this.getLocalidad());
+        System.out.println("Nombre: " + this.getProvincia());
+        System.out.println("Nombre: " + this.getCodigoPostal());
+        System.out.println("Nombre: " + this.getTelefono());
+    }
 }

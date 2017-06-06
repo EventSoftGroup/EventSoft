@@ -39,7 +39,7 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="/dist/img/user4-128x128.jpg"
+                            <img class="profile-user-img img-responsive img-circle" src="<c:url value="/resources/dist/img/user4-128x128.jpg" />"
                                  alt="User profile picture">
                             <h3 class="profile-username text-center">
                                 <c:catch var="exception"><c:out value="${usuario.nombre}"></c:out></c:catch>
@@ -160,7 +160,7 @@
                                 <!-- Post -->
                                 <div class="post">
                                     <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="/dist/img/user1-128x128.jpg"
+                                        <img class="img-circle img-bordered-sm" src="<c:url value="/resources/dist/img/user1-128x128.jpg" />"
                                              alt="user image">
                                         <span class="username">
                           <a href="#">Boda de Jonathan Burke Jr.</a>
@@ -177,14 +177,14 @@
                                     </p>
                                     <div class="row margin-bottom">
                                         <div class="col-sm-3">
-                                            <img class="img-responsive" src="/dist/img/Flores/1.jpg" alt="Photo">
+                                            <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/1.jpg" />" alt="Photo">
                                             <!-- /.row -->
                                         </div>
                                         <div class="col-sm-3">
-                                            <img class="img-responsive" src="/dist/img/Flores/2.jpg" alt="Photo">
+                                            <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/2.jpg" />" alt="Photo">
                                         </div>
                                         <div class="col-sm-6">
-                                            <img class="img-responsive" src="/dist/img/Flores/4.jpg" alt="Photo">
+                                            <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/4.jpg" />" alt="Photo">
                                         </div>
                                         <!-- /.col -->
                                     </div>
@@ -205,7 +205,7 @@
                                 <!-- Post -->
                                 <div class="post clearfix">
                                     <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="/dist/img/user7-128x128.jpg"
+                                        <img class="img-circle img-bordered-sm" src="<c:url value="/resources/dist/img/user7-128x128.jpg" />"
                                              alt="User Image">
                                         <span class="username">
                           <a href="#">Fiesta cumpleaños de Sarah Ross</a>
@@ -216,21 +216,21 @@
                                     <!-- /.user-block -->
                                     <div class="row margin-bottom">
                                         <div class="col-sm-6">
-                                            <img class="img-responsive" src="/dist/img/Flores/7.jpg" alt="Photo">
+                                            <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/7.jpg" />" alt="Photo">
                                         </div>
                                         <!-- /.col -->
                                         <div class="col-sm-6">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <img class="img-responsive" src="/dist/img/Flores/3.jpg"
+                                                    <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/3.jpg" />"
                                                          alt="Photo">
                                                 </div>
                                                 <!-- /.col -->
                                                 <div class="col-sm-6">
-                                                    <img class="img-responsive" src="/dist/img/Flores/5.jpg"
+                                                    <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/5.jpg" />"
                                                          alt="Photo">
                                                     <br>
-                                                    <img class="img-responsive" src="/dist/img/Flores/6.jpg"
+                                                    <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/6.jpg" />"
                                                          alt="Photo">
                                                 </div>
                                                 <!-- /.col -->
