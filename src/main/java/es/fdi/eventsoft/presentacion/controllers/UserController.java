@@ -27,7 +27,7 @@ import javax.validation.Valid;
 import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 
 @Controller
-@RequestMapping("/usuarios/")
+@RequestMapping("/usuarios")
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -38,13 +38,13 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping("register")
+    @RequestMapping("/register")
     public String register(Model model) {
         model.addAttribute("title", "EventSoft");
         return "registrarTipoUsuario";
     }
 
-    @RequestMapping("tipoUsuario")
+    @RequestMapping("/tipoUsuario")
     public String registerDatosCLiente(@RequestParam String seleccion, Model model) {
 
         model.addAttribute("tipoUsuario", seleccion);
@@ -56,7 +56,7 @@ public class UserController {
         return "register";
     }
 
-    @RequestMapping(value = "registrar_cliente", method = RequestMethod.POST)
+    @RequestMapping(value = "/registrar_cliente", method = RequestMethod.POST)
     public String registrar_Cliente(@Valid Cliente cliente, BindingResult bindingResult, Model model, HttpSession session) {
 
         if (bindingResult.hasErrors()) {
@@ -93,7 +93,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "registrar_organizador", method = RequestMethod.POST)
+    @RequestMapping(value = "/registrar_organizador", method = RequestMethod.POST)
     public String registrar_Organizador(@Valid Organizador organizador, BindingResult bindingResult, Model model, HttpSession session) {
 
         if (bindingResult.hasErrors()) {
@@ -129,7 +129,7 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "registrar_proveedor", method = RequestMethod.POST)
+    @RequestMapping(value = "/registrar_proveedor", method = RequestMethod.POST)
     public String registrar_Proveedor(@Valid Proveedor proveedor, BindingResult bindingResult, Model model, HttpSession session) {
 
         if (bindingResult.hasErrors()) {
@@ -165,7 +165,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping("perfil-usuario")
+    @RequestMapping("/perfil-usuario")
     public String home(Model model, HttpSession session) {
         model.addAttribute("title", "EventSoft");
         model.addAttribute("pagina", "perfil");
@@ -175,7 +175,7 @@ public class UserController {
         return "perfil-usuario";
     }
 
-    @GetMapping(value = "buscarUsuario/{id}",
+    @GetMapping(value = "/buscar/{id}",
             produces = "application/json")
     public @ResponseBody ResponseEntity<Usuario> buscarUsuario(@PathVariable Long id, Model model) {
 
@@ -192,7 +192,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "modificar", method = RequestMethod.POST)
+    @RequestMapping(value = "/modificar", method = RequestMethod.POST)
     public String modificar(@Valid Usuario usuario, BindingResult bindingResult, Model model) {
         Contexto contexto;
 
@@ -208,7 +208,7 @@ public class UserController {
         return "perfil-usuario";
     }
 
-    @RequestMapping(value = "eliminar", method = RequestMethod.POST)
+    @RequestMapping(value = "/eliminar", method = RequestMethod.POST)
     public String eliminar(Model model, HttpSession session) {
         Contexto context = FactoriaComandos.getInstance().crearComando(ELIMINAR_USUARIO).execute(session.getAttribute("usuario"));
 

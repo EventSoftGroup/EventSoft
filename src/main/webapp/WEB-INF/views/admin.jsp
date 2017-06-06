@@ -149,7 +149,7 @@
                                             <c:forEach var="cli" items="${listaClinetes}">
                                                 <tr>
                                                     <!--<td><input type="checkbox"></td>-->
-                                                    <td><a href="/servicios/buscarServicio/${cli.id}" type="button"
+                                                    <td><a href="/servicios/buscar/${cli.id}" type="button"
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
                                                     </td>
 
@@ -196,7 +196,7 @@
                                             <c:forEach var="prov" items="${listaProveedores}">
                                                 <tr>
                                                     <!--<td><input type="checkbox"></td>-->
-                                                    <td><a href="/servicios/buscarServicio/${prov.id}" type="button"
+                                                    <td><a href="/servicios/buscar/${prov.id}" type="button"
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
                                                     </td>
 
@@ -241,7 +241,7 @@
                                             <c:forEach var="orga" items="${listaOrganizadores}">
                                                 <tr>
                                                     <!--<td><input type="checkbox"></td>-->
-                                                    <td><a href="/servicios/buscarServicio/${orga.id}" type="button"
+                                                    <td><a href="/servicios/buscar/${orga.id}" type="button"
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
                                                     </td>
 
@@ -303,7 +303,7 @@
                                             <tr>
                                                 <!--<td><input type="checkbox"></td>-->
                                                 <td class="col-md-1">
-                                                    <a href="/servicios/buscarServicio/${servicio.id}" type="button"
+                                                    <a href="/servicios/buscar/${servicio.id}" type="button"
                                                        class="btn btn-default text-center "><i class="fa fa-search"></i> Ver</a>
 
                                                 </td>
@@ -348,7 +348,7 @@
                                                 <tr>
                                                     <!--<td><input type="checkbox"></td>-->
                                                     <td>
-                                                        <a href="/servicios/buscarServicio/${evento.id}" type="button"
+                                                        <a href="/servicios/buscar/${evento.id}" type="button"
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
 
                                                     </td>

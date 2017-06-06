@@ -35,7 +35,7 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="/mensajes/mensaje-nuevo" class="btn btn-primary btn-block margin-bottom">Nuevo mensaje</a>
+                        <a href="/mensajes/nuevo" class="btn btn-primary btn-block margin-bottom">Nuevo mensaje</a>
                         <a href="/mensajes/buzon" class="btn btn-primary btn-block margin-bottom">Volver</a>
 
                         <!--<div class="box box-solid">

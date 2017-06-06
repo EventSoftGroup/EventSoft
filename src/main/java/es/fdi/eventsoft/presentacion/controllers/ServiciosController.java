@@ -26,7 +26,7 @@ import java.util.List;
 import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 
 @Controller
-@RequestMapping("/servicios/")
+@RequestMapping("/servicios")
 public class ServiciosController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
@@ -34,7 +34,7 @@ public class ServiciosController {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @RequestMapping(value = "crear", method = RequestMethod.POST)
+    @RequestMapping(value = "/crear", method = RequestMethod.POST)
     public String crear(
             @RequestParam("nombreServicio") String nombre,
             @RequestParam("listaServicios") Servicio.TiposServicio tipoElegido,
@@ -65,7 +65,7 @@ public class ServiciosController {
         }
     }
 
-    @RequestMapping(value = "buscarServicio/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/buscar/{id}", method = RequestMethod.GET)
     public String buscarServicio(@PathVariable("id") Long id, Model model) {
         if (id > 0) {
             Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_SERVICIO).execute(id);
@@ -81,7 +81,7 @@ public class ServiciosController {
         return "redirect:/index";
     }
 
-    @RequestMapping(value = "eliminar/{id}", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<String> eliminarServicio(@PathVariable("id") Long id, Model model) {
         if(id > 0) {
             Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
@@ -98,7 +98,7 @@ public class ServiciosController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping("modificarServicio")
+    @RequestMapping("/modificar")
     public String modificarServicio(Model model) {
         //TODO
 
@@ -106,7 +106,7 @@ public class ServiciosController {
         return null;
     }
 
-    @RequestMapping("buscarServiciosByProveedor/{id}")
+    @RequestMapping("/buscar/por-proveedor/{id}")
     public String buscarServiciosByProveedor(@PathVariable("id") Long id,  Model model) {
 
         if (id > 0) {
@@ -123,9 +123,7 @@ public class ServiciosController {
         return "redirect:/index";
     }
 
-
-
-    @RequestMapping(value = "buscarServiciosByTipoServicio/{tipoServicio}",  method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/buscar/por-tipo-servicio/{tipoServicio}",  method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody ResponseEntity<List<Servicio>> buscarServiciosByTipoServicio(@PathVariable String tipoServicio) {
 
         try {
@@ -149,10 +147,8 @@ public class ServiciosController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-
-
     @RequestMapping(
-            value = "buscar-por-evento/{idEvento}",
+            value = "/buscar/por-evento/{idEvento}",
             method = RequestMethod.GET,
             produces = "applicacion/json")
     public @ResponseBody ResponseEntity<Servicio> buscarByEvento(@PathVariable("idEvento") Long idEvento) {
@@ -175,7 +171,7 @@ public class ServiciosController {
     }
 
     @RequestMapping(
-            value = "buscar-entre-fechas/{fechaIni}/{fechaFin}",
+            value = "/buscar/entre-fechas/{fechaIni}/{fechaFin}",
             method = RequestMethod.GET,
             produces = "application/json")
     public @ResponseBody ResponseEntity<Servicio> buscarEntreFechas(@PathVariable("fechaIni") String fechaIni, @PathVariable("fechaFin") String fechaFin) {
@@ -196,13 +192,6 @@ public class ServiciosController {
         }
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-    @RequestMapping(value = "buscar-entre-fechas", method = RequestMethod.GET)
-    public String buscarEntreFechas(@RequestParam Date fechaIni, @RequestParam Date fechaFin, Model model) {
-        // TODO
-
-        return null;
     }
 
 }

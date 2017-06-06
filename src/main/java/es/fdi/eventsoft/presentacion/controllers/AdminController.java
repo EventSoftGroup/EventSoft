@@ -22,12 +22,12 @@ import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 
 
 @Controller
-@RequestMapping("/administracion/")
+@RequestMapping("/administracion")
 public class AdminController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
-    @RequestMapping("admin")
+    @RequestMapping("/admin")
     public String home(Model model){
 
         long time_start, time_end;

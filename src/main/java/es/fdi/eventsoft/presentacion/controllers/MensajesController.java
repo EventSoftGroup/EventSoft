@@ -27,7 +27,7 @@ import static es.fdi.eventsoft.presentacion.controllers.HomeController.isLogin;
  * Created by Rodrigo de Miguel on 09/05/2017.
  */
 @Controller
-@RequestMapping("/mensajes/")
+@RequestMapping("/mensajes")
 public class MensajesController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
@@ -87,7 +87,7 @@ public class MensajesController {
         }
     }
 
-    @GetMapping("/nuevo-mensaje")
+    @GetMapping("/nuevo")
     public String eventoNuevoMensaje(Model model, HttpSession session) {
         model.addAttribute("title", "EventSoft - Nuevo Mensaje");
 
@@ -98,7 +98,7 @@ public class MensajesController {
         return "nuevo-mensaje";
     }
 
-    @RequestMapping(value = "/crearMensaje", method = RequestMethod.POST)
+    @RequestMapping(value = "/crear", method = RequestMethod.POST)
     public String crearMensaje(
             HttpSession session,
             Model model,
@@ -135,7 +135,7 @@ public class MensajesController {
         }
     }
 
-    @RequestMapping("buscarMensaje")
+    @RequestMapping("/buscar")
     public String buscarMensaje(Model model) {
         //TODO
 
@@ -143,7 +143,7 @@ public class MensajesController {
         return null;
     }
 
-    @RequestMapping(value = "eliminar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
     public String eliminarMensaje(@PathVariable("id") Long id, Model model) {
         if (id > 0) {
             Contexto contexto = FactoriaComandos.getInstance().crearComando(ELIMINAR_MENSAJE).execute(id);
@@ -157,7 +157,7 @@ public class MensajesController {
         else return "redirect:../buzon";
     }
 
-    @RequestMapping(value = "buscarMensajeByEmisor", method = RequestMethod.POST)
+    @RequestMapping(value = "/buscar/por-emisor/{idEmisor}", method = RequestMethod.POST)
     public String buscarMensajeByEmisor(
             @RequestParam Usuario emisor,
             Model model,
@@ -168,7 +168,7 @@ public class MensajesController {
     }
 
     @RequestMapping(
-            value = "buscar/por-usuario/{idUsuario}",
+            value = "/buscar/por-usuario/{idUsuario}",
             method = RequestMethod.GET,
             produces = "application/json")
     public @ResponseBody ResponseEntity<Mensaje> buscarPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
@@ -188,7 +188,7 @@ public class MensajesController {
         return new ResponseEntity<Mensaje>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "ver/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/ver/{id}", method = RequestMethod.GET)
     public String ver(@PathVariable("id") Long id, Model model) {
         if (id > 0) {
             Contexto contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_MENSAJE).execute(id);

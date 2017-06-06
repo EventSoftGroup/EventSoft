@@ -78,7 +78,7 @@
                                             <tr>
                                                 <!--<td><input type="checkbox"></td>-->
                                                 <td>
-                                                    <a href="/servicios/buscarServicio/${servicio.id}" type="button"
+                                                    <a href="/servicios/buscar/${servicio.id}" type="button"
                                                        class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
 
                                                 </td>

@@ -34,7 +34,7 @@ import java.util.List;
 import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 
 @Controller
-@RequestMapping("/eventos/")
+@RequestMapping("/eventos")
 public class EventController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
@@ -48,7 +48,6 @@ public class EventController {
         model.addAttribute("pagina", "nuevo-evento");
         model.addAttribute("evento", new Evento());
         model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
-
 
         return "nuevo-evento";
     }
@@ -97,7 +96,7 @@ public class EventController {
         return "leer-notificacion";
     }
 
-    @RequestMapping(value = "crearEvento", method = RequestMethod.POST)
+    @RequestMapping(value = "/crear-evento", method = RequestMethod.POST)
     public String crearEvento(@Valid Evento evento, BindingResult bindingResult, Model model, HttpSession session,
         @RequestParam(value = "email") String email){
 
@@ -153,7 +152,7 @@ public class EventController {
         return fecha;
     }
 
-    @RequestMapping(value = "añadirServiciosAEvento/{idEvento}",  method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/anadir-servicios-evento/{idEvento}",  method = RequestMethod.POST, produces = "application/json")
     public String añadirServiciosAEvento(@PathVariable Long idEvento, @RequestParam(value="servicios[]") String[] servicios) {
 
         List<Long> listaIDs = new ArrayList<>();
@@ -182,7 +181,7 @@ public class EventController {
         return "redirect:../timeline";
     }
 
-    @RequestMapping(value = "buscarEvento/{idEvento}",  method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/buscar/{idEvento}",  method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody ResponseEntity<Evento> buscarEvento(Model model, @PathVariable Long idEvento) {
         Contexto contex;
         Usuario usuario = new Usuario();
@@ -192,7 +191,7 @@ public class EventController {
         return new ResponseEntity<>((Evento)contex.getDatos(), HttpStatus.OK);
     }
 
-    @RequestMapping("modificarEvento")
+    @RequestMapping("/modificar")
     public String modificarEvento(Model model) {
         //TODO
 
@@ -200,7 +199,7 @@ public class EventController {
         return null;
     }
 
-    @RequestMapping("eliminarEvento")
+    @RequestMapping("/eliminar")
     public String eliminarEvento(Model model) {
         //TODO
 
@@ -208,7 +207,7 @@ public class EventController {
         return null;
     }
 
-    @RequestMapping(value = "buscarEventosByUser",  method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/buscar/por-usuario",  method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody ResponseEntity<List<Evento>> buscarEventosByUser(Model model, HttpSession session) {
 
         Contexto contex;

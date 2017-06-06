@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
  * Created by Rodrigo de Miguel on 09/05/2017.
  */
 @Controller
-@RequestMapping("/valoraciones/")
+@RequestMapping("/valoraciones")
 public class ValoracionesController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
@@ -27,7 +27,7 @@ public class ValoracionesController {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @RequestMapping("crearValoracion")
+    @RequestMapping("/crear")
     public String crearValoracion(Model model) {
         //TODO
 
@@ -36,7 +36,7 @@ public class ValoracionesController {
         return null;
     }
 
-    @RequestMapping("buscarValoracion")
+    @RequestMapping("/buscar")
     public String buscarValoracion(Model model) {
         //TODO
 
@@ -45,7 +45,7 @@ public class ValoracionesController {
         return null;
     }
 
-    @RequestMapping(value = "eliminar", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/eliminar", method = RequestMethod.DELETE)
     public String eliminar(@RequestAttribute("Valoracion") Valoracion valoracion) {
         FachadaIntegracion<Valoracion> fachadaIntegracion = FachadaIntegracion.newInstance(Valoracion.class);
         fachadaIntegracion.baja(valoracion.getId());
@@ -53,7 +53,7 @@ public class ValoracionesController {
         return "valoracion-eliminada";
     }
 
-    @RequestMapping("buscarValoracionesByUser")
+    @RequestMapping("/buscar/por-usuario/{idUsuario}")
     public String buscarValoracionesByUser(Model model) {
         //TODO
 
