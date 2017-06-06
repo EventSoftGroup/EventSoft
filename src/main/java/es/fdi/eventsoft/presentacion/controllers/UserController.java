@@ -213,9 +213,9 @@ public class UserController {
         Contexto context = FactoriaComandos.getInstance().crearComando(ELIMINAR_USUARIO).execute(session.getAttribute("usuario"));
 
         if (context.getEvento() == ELIMINAR_USUARIO) {
-            return "redirect:/login";
+            return "redirect:/";
         } else {
-            return "redirect:./#";
+            return "redirect:/";
         }
 
     }
