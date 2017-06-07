@@ -42,7 +42,7 @@ public class ServiciosController {
             HttpSession session,
             Model model
     ) {
-        
+
         Contexto contexto;
         //Creamos la fecha de registro
         Date fechaRegistro = new Date();
@@ -82,11 +82,26 @@ public class ServiciosController {
         return "redirect:/index";
     }
 
-    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<String> eliminarServicio(@PathVariable("id") Long id, Model model) {
-        if(id > 0) {
-            Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(id);
+    @RequestMapping(value = "/eliminar/{idP}/{idS}", method = RequestMethod.GET)
+    public String eliminarServicio(@PathVariable("idP") Long idProv, @PathVariable("idS") Long idServ, Model model) {
+        if(idServ > 0) {
 
+            Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(idServ);
+
+            if (contex.getEvento() == ELIMINAR_SERVICIO) {
+                contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(idProv);
+
+                if (contex.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
+                    model.addAttribute("listaServicios", contex.getDatos());
+                    return "Servicios-Ofertados";
+                }
+
+            } else {
+                return "error-500";
+            }
+        }
+        else return "error-500";
+            /*
             if (contex.getEvento() == ELIMINAR_SERVICIO) {
                 return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.OK);
             } else if(contex.getEvento() == ERROR_ELIMINAR_SERVICIO){
@@ -97,6 +112,8 @@ public class ServiciosController {
             }
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        */
+        return "redirect:/index";
     }
 
     @RequestMapping("/modificar")

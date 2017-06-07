@@ -84,7 +84,6 @@ public class HomeController {
             }
 
             if(usuario instanceof Proveedor) {
-                System.out.println("Logueado como Proveedor");
                 session.setAttribute("rol", "Proveedor");
                 model.addAttribute("pagina", "proveedores");
                 return "redirect:./eventos/proveedores";

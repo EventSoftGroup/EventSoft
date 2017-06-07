@@ -94,17 +94,16 @@ public class SAServiciosImp implements SAServicios{
         //0 -> Si se elimino el servicio correctamente
         //1 -> Si no se encontro el servicio a eliminar
         //2 -> Si el servicio tiene eventos asociados
+
         int respuesta;
         boolean ok;
         Servicio s = buscarServicio(servicio);
-
         //Si el servicio existe...
         if(s != null){
             //Recuperamos y recorremos su lista de EventoServicio para saber a que eventos esta asociado
             List<EventoServicio> listaEventoServicio = s.getEventoServicios();
-
             //Si no tiene eventos asociados, eliminamos el servicio
-            if(listaEventoServicio == null){
+            if(listaEventoServicio.size() == 0){
                 fachadaIntegracion.begin();
                 ok = fachadaIntegracion.baja(servicio);
                 fachadaIntegracion.commit();
@@ -133,9 +132,9 @@ public class SAServiciosImp implements SAServicios{
             }
         }
         //Si no encuentra el servicio
-        else
+        else {
             respuesta = 1;
-
+        }
         return respuesta;
     }
 
