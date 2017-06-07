@@ -187,7 +187,7 @@
                                 <ul class="products-list product-list-in-box">
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="/dist/img/default-50x50.gif" alt="Product Image">
+                                            <img src="<c:url value="/resources/dist/img/default-50x50.gif" />" alt="Product Image">
                                         </div>
                                         <div class="product-info">
                                             <a href="javascript:void(0)" class="product-title">Samsung TV
@@ -200,7 +200,7 @@
                                     <!-- /.item -->
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="/dist/img/default-50x50.gif" alt="Product Image">
+                                            <img src="<c:url value="/resources/dist/img/default-50x50.gif" />" alt="Product Image">
                                         </div>
                                         <div class="product-info">
                                             <a href="javascript:void(0)" class="product-title">Encimera - Electrolux EHF6232IOK
@@ -213,7 +213,7 @@
                                     <!-- /.item -->
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="/dist/img/default-50x50.gif" alt="Product Image">
+                                            <img src="<c:url value="/resources/dist/img/default-50x50.gif" />" alt="Product Image">
                                         </div>
                                         <div class="product-info">
                                             <a href="javascript:void(0)" class="product-title">Cafetera superautomática - Philips Saeco HD 8821/01
@@ -226,7 +226,7 @@
                                     <!-- /.item -->
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="/dist/img/default-50x50.gif" alt="Product Image">
+                                            <img src="<c:url value="/resources/dist/img/default-50x50.gif" />" alt="Product Image">
                                         </div>
                                         <div class="product-info">
                                             <a href="javascript:void(0)" class="product-title">Frigorífico Americano - Samsung RS7527THCSL/EF

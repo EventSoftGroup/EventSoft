@@ -91,7 +91,8 @@
                                                 <td class="mailbox-date text-center">
                                                     <fmt:formatDate type = "date" value = "${servicio.fechaRegistro}" />
                                                         </td>
-                                                <td class="mailbox-subject"><a type="button" class="btn btn-default text-center botonEliminarServicio" id="servicio-${servicio.id}" data-id="${servicio.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
+
+                                                <td class="mailbox-subject"><a href="/servicios/eliminar/${usuario.id}/${servicio.id}" type="button" class="btn btn-default text-center"><i class="fa fa-trash-o"></i>Eliminar</a></td>
                                             </tr>
                                         </c:forEach>
 

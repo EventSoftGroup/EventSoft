@@ -77,7 +77,6 @@
                                     </div>
                                     <div class="form-group">
                                         <textarea id="compose-textarea" class="form-control" name="texto" placeholder="Texto:">
-
                                         </textarea>
                                     </div>
                                 </div>

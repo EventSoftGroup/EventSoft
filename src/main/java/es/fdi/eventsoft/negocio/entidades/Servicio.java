@@ -1,6 +1,8 @@
 package es.fdi.eventsoft.negocio.entidades;
 
 import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -58,6 +60,7 @@ public class Servicio implements Serializable{
 
 
     @OneToMany(mappedBy = "servicio", fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EventoServicio> eventoServicios = new ArrayList<>();
 
 
