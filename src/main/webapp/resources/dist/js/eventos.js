@@ -53,10 +53,10 @@ $(function() {
         texto_titulo_sel_eventos.text("Seleccione los eventos de la categoria - " + $('#categorias option:selected').text() + " -");
 
 
-        console.log("/servicios/por-tipo-servicio/" + $('#categorias option:selected').text())
+        console.log("/servicios/buscar/por-tipo-servicio/" + $('#categorias option:selected').text())
         $.ajax({
             type : "GET",
-            url : "/servicios/por-tipo-servicio/" + $('#categorias option:selected').text(),
+            url : "/servicios/buscar/por-tipo-servicio/" + $('#categorias option:selected').text(),
 
             success : function(response) {
 
