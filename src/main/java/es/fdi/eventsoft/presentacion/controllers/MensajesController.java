@@ -143,7 +143,6 @@ public class MensajesController {
         return null;
     }
 
-    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
     public String eliminarMensaje(@PathVariable("id") Long id, Model model) {
         if (id > 0) {
             Contexto contexto = FactoriaComandos.getInstance().crearComando(ELIMINAR_MENSAJE).execute(id);

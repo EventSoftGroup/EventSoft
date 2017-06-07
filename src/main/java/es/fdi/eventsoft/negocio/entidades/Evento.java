@@ -2,6 +2,7 @@ package es.fdi.eventsoft.negocio.entidades;
 
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
+import es.fdi.eventsoft.negocio.entidades.validadores.FechaEventos;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -60,7 +61,6 @@ public class Evento implements Serializable {
     @Column(name = "Fecha_Fin", nullable = false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @NotNull
-    @Future
     private Date fechaFin;
 
 

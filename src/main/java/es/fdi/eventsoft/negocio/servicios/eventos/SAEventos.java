@@ -18,7 +18,7 @@ public interface SAEventos {
 
     Evento buscarEvento(Long id);
 
-    int eliminarEvento(Evento evento);
+    boolean eliminarEvento(Long Id);
 
     boolean modificarEvento(Evento eventoModificado);
 

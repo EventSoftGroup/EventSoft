@@ -148,8 +148,8 @@
         <div class="box-body">
           <div class="col-md-12">
             <div class="form-group">
-              <label>Selecciona los eventos que quieras incluir</label>
               <div id="demoform">
+                <label id="label_listado_servicios">Selecciona los eventos que quieras incluir</label>
                 <select id="selectServicios" multiple="multiple" size="10" name="mi_duallist[]">
 
                 </select>

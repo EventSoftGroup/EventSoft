@@ -199,12 +199,19 @@ public class EventController {
         return null;
     }
 
-    @RequestMapping("/eliminar")
-    public String eliminarEvento(Model model) {
-        //TODO
+    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
+    public String eliminarEvento(@PathVariable("id") Long id, Model model) {
+        if (id > 0) {
+            Contexto contexto = FactoriaComandos.getInstance().crearComando(ELIMINAR_EVENTO).execute(id);
 
+            if (contexto.getEvento() == ELIMINAR_EVENTO) {
+                return "redirect:../timeline";
+            } else {
+                return "error-500";
+            }
+        }
+        else return "redirect:../timeline";
 
-        return null;
     }
 
     @RequestMapping(value = "/buscar/por-usuario",  method = RequestMethod.GET, produces = "application/json")

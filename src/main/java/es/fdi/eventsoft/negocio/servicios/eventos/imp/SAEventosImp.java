@@ -5,6 +5,7 @@ import es.fdi.eventsoft.integracion.FachadaIntegracion;
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.entidades.Evento;
 import es.fdi.eventsoft.negocio.entidades.EventoServicio;
+import es.fdi.eventsoft.negocio.entidades.Mensaje;
 import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
@@ -128,9 +129,16 @@ public class SAEventosImp implements SAEventos {
     }
 
     @Override
-    public int eliminarEvento(Evento evento) {
-        //TODO
-        return 0;
+    public boolean eliminarEvento(Long id) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Evento.class);
+
+        boolean respuesta;
+
+        fachadaIntegracion.begin();
+        respuesta = fachadaIntegracion.baja(id);
+        fachadaIntegracion.commit();
+
+        return respuesta;
     }
 
     @Override

@@ -50,7 +50,7 @@ $(function() {
 
         categoria_seleccionada = combo_categorias.text();
 
-        texto_titulo_sel_eventos.text("Seleccione los eventos de la categoria - " + $('#categorias option:selected').text() + " -");
+        texto_titulo_sel_eventos.text("Seleccione que servicios de la categoria - " + $('#categorias option:selected').text() + " - incluir en el evento -" + $("#eventos option:selected").text()+" -");
 
 
         console.log("/servicios/buscar/por-tipo-servicio/" + $('#categorias option:selected').text())
@@ -60,6 +60,7 @@ $(function() {
 
             success : function(response) {
 
+                $('#selectServicios').empty();
                 response.forEach(function(element) {
                     $('#selectServicios').append($('<option>', {
                         value: element.id,
@@ -67,10 +68,23 @@ $(function() {
                     }));
                 });
 
-                div_categoria.fadeOut(function(){
-                    div_sel_eventos.fadeIn();
-                    demo1.bootstrapDualListbox('refresh');
-                });
+                if (response.length !== 0){
+                    div_categoria.fadeOut(function(){
+                        $('.bootstrap-duallistbox-container').show();
+                        $('#guardar_eventos').show();
+                        $('#label_listado_servicios').text("Selecciona los servicios que quieras incluir");
+                        div_sel_eventos.fadeIn();
+                        demo1.bootstrapDualListbox('refresh');
+                    });
+                } else {
+                    div_categoria.fadeOut(function() {
+                        $('.bootstrap-duallistbox-container').hide();
+                        $('#label_listado_servicios').text("Pulse cambiar categoría para intentar con otra distinta");
+                        $('#guardar_eventos').hide();
+                        texto_titulo_sel_eventos.text("No existe ningún servicio en la categoría: -" + $('#categorias option:selected').text() + " -");
+                        div_sel_eventos.fadeIn();
+                    });
+                }
             },
 
             error : function(e) {
@@ -116,11 +130,16 @@ $(function() {
         })
 
         console.log("/eventos/anadir-servicios-evento/" + $("#eventos option:selected").val());
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
         $.ajax({
             type : "POST",
             url : "/eventos/anadir-servicios-evento/" + $("#eventos option:selected").val(),
             data: {
                 servicios: listaIDsServicios
+            },
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
             },
             success: function () {
                 window.location.href = window.location.href;
@@ -128,8 +147,6 @@ $(function() {
             error: function () {
                 window.location.href = window.location.href;
             }
-
-
         });
 
         return false;
@@ -180,7 +197,7 @@ $(function() {
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.lugar+"</td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dini.getDate() + '-' + dini.getMonth() + '-' + dini.getFullYear()+"</td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dfin.getDate() + '-' + dfin.getMonth() + '-' + dfin.getFullYear()+"</td>");
-                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject'><a type='button' class='btn btn-default text-center botonEliminarServicio' id='' data-id=''><i class='fa fa-trash-o'></i>Eliminar</a></td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject'><a href='/eventos/eliminar/"+response.id+"' type='button' class='btn btn-default text-center botonEliminarEvento' id='"+response.id+"' data-id=''><i class='fa fa-trash-o'></i>Eliminar</a></td>");
 
 
             },
