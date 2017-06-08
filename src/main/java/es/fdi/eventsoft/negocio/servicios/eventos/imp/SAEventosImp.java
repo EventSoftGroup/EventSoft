@@ -144,12 +144,20 @@ public class SAEventosImp implements SAEventos {
     @Override
     public boolean modificarEvento(Evento eventoModificado){
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Evento.class);
+        boolean ok = true;
+        if(eventoModificado.getNombre().equalsIgnoreCase("") ||
+        eventoModificado.getLugar().equalsIgnoreCase("") ||
+                eventoModificado.getDescripcion().equalsIgnoreCase("") || eventoModificado.getFechaInicio().after(eventoModificado.getFechaFin())){
+            ok = false;
+        }
+        else{
+            fachadaIntegracion.begin();
+            ok = fachadaIntegracion.modifica(eventoModificado);
+            fachadaIntegracion.commit();
+        }
 
-        fachadaIntegracion.begin();
-        boolean result = fachadaIntegracion.modifica(eventoModificado);
-        fachadaIntegracion.commit();
 
-        return result;
+        return ok;
     }
 
     @Override

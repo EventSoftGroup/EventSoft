@@ -197,6 +197,7 @@ $(function() {
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.lugar+"</td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dini.getDate() + '-' + dini.getMonth() + '-' + dini.getFullYear()+"</td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dfin.getDate() + '-' + dfin.getMonth() + '-' + dfin.getFullYear()+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject'><a href='/eventos/vista-modificar/"+response.id+"' type='button' class='btn btn-default text-center botonModificarEvento' id='"+response.id+"' data-id=''>Modificar</a></td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject'><a href='/eventos/eliminar/"+response.id+"' type='button' class='btn btn-default text-center botonEliminarEvento' id='"+response.id+"' data-id=''><i class='fa fa-trash-o'></i>Eliminar</a></td>");
 
 

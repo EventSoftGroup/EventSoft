@@ -10,11 +10,12 @@
         <div class="error-page">
 
             <h1 class="headline text-red"><c:out value="${errorCode}"></c:out></h1>
-            <div class="error-content">
+            <h3 class="error-content">
                 <h2><i class="fa fa-warning text-red"></i>Oooops!</h2>
                 <h3>
                     <c:out value="${errorMsg}"></c:out>
                 </h3>
+                <h3><a href="/"> Volver al Inicio</a></h3>
             </div>
         </div>
         <!-- /.error-page -->

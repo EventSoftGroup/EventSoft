@@ -7,6 +7,7 @@ import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
+import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
 import javafx.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -191,12 +192,37 @@ public class EventController {
         return new ResponseEntity<>((Evento)contex.getDatos(), HttpStatus.OK);
     }
 
-    @RequestMapping("/modificar")
-    public String modificarEvento(Model model) {
-        //TODO
+    @RequestMapping(value = "/vista-modificar/{idEvento}", method = RequestMethod.GET)
+    public String vistaModificarEvento(@PathVariable Long idEvento, Model model) {
+        System.out.println("LLega");
+        Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTO).execute(idEvento);
+        model.addAttribute("eventoAModificar", contex);
+        return "modificar-evento";
+    }
 
+    @RequestMapping(value = "/modificar", method = RequestMethod.POST)
+    public String modificarEvento(@ModelAttribute("eventoAModificar") Evento eventoNuevo, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "perfil-usuario";
+        }
 
-        return null;
+        Evento original = FactoriaSA.getInstance().crearSAEventos().buscarEvento(eventoNuevo.getId());
+        original.setNombre(eventoNuevo.getNombre());
+        original.setCategoria(eventoNuevo.getCategoria());
+        original.setLugar(eventoNuevo.getLugar());
+        original.setDescripcion(eventoNuevo.getDescripcion());
+        original.setFechaInicio(eventoNuevo.getFechaInicio());
+        original.setFechaFin(eventoNuevo.getFechaFin());
+
+        Contexto c = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(original);
+
+        if(c.getEvento() == MODIFICAR_EVENTO){
+            model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
+            return "timeline";
+        }
+        else{
+            return "error-401";
+        }
     }
 
     @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
