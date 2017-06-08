@@ -15,9 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -196,7 +194,7 @@ public class EventController {
     public String vistaModificarEvento(@PathVariable Long idEvento, Model model) {
         System.out.println("LLega");
         Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTO).execute(idEvento);
-        model.addAttribute("eventoAModificar", contex);
+        model.addAttribute("eventoAModificar", (Evento) contex.getDatos());
         return "modificar-evento";
     }
 

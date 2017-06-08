@@ -83,8 +83,8 @@
                             <!-- CAMPOS A ELIMINAR -->
                             <!-- Localidad -->
                             <div class="form-group has-feedback">
-                                <springForm:input path="localidad" cssClass="form-control" placeholder="Localidad" type="text"/>
-                                <springForm:errors path="localidad" cssClass="alert-error" />
+                                <springForm:input path="lugar" cssClass="form-control" placeholder="lugar" type="text"/>
+                                <springForm:errors path="lugar" cssClass="alert-error" />
                                 <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
                             </div>
 
