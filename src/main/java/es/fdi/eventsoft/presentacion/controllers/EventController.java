@@ -192,9 +192,10 @@ public class EventController {
 
     @RequestMapping(value = "/vista-modificar/{idEvento}", method = RequestMethod.GET)
     public String vistaModificarEvento(@PathVariable Long idEvento, Model model) {
-        System.out.println("LLega");
         Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTO).execute(idEvento);
         model.addAttribute("eventoAModificar", (Evento) contex.getDatos());
+        model.addAttribute("CategoriasEvento", Evento.CategoriasEvento.values());
+
         return "modificar-evento";
     }
 

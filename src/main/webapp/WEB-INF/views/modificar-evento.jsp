@@ -102,17 +102,7 @@
                 </div>
             </section>
             <section class="col-lg-6 connectedSortable">
-        <!-- Calendar -->
-        <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
 
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-                <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
-            </div>
-        </div>
         <!-- /.box -->
     </section>
 
