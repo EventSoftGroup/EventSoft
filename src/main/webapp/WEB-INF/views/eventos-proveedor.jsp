@@ -36,70 +36,67 @@
 
         <!-- Main content -->
         <section class="content">
+
+            <!-- Comienzo bucle por servicios. -->
+            <c:forEach var="servicio" items="${listaServicios}">
+
             <div class="row">
                 <!-- /.col -->
                 <div class="col-md-12" id="bandeja_recibidos">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Servicios Ofertados</h3>
+                            <h3 class="box-title">Eventos asociados al servicio - <c:out value="${servicio.nombre}"></c:out> -</h3>
 
-                            <div class="box-tools pull-right">
-
-                            </div>
-                            <!-- /.box-tools -->
                         </div>
-                        <!-- /.box-header -->
                         <div class="box-body no-padding">
-                            <c:if test="${not empty listaServicios}">
-                            </c:if>
                             <div class="table-responsive mailbox-messages">
+                                <c:set var="cantidad" scope="page" value="${servicio.getEventoServicios().size()}" />
+                                <c:if test="${cantidad > 0}">
                                 <table class="table table-hover table-striped">
+
+
                                     <thead>
                                     <tr>
-                                        <th class="text-center">      </th>
-                                        <th class="text-center">Nº</th>
-                                        <th class="text-center">Tipo servicio</th>
                                         <th class="text-center">Nombre</th>
-                                        <th class="text-center">Descripción</th>
-                                        <th class="text-center">Fecha de Registro</th>
-                                        <th class="text-center">      </th>
+                                        <th class="text-center">Categoria</th>
+                                        <th class="text-center">Descripcion</th>
+                                        <th class="text-center">Lugar</th>
+                                        <th class="text-center">Fecha Inicio</th>
+                                        <th class="text-center">Fecha Fin</th>
                                     </tr>
                                     </thead>
 
-                                    <tbody>
+                                    <!-- bucle para los eventos asociados -->
 
-                                    <c:if test="${not empty listaServicios}">
 
-                                        <c:set var="count" value="1" scope="page" />
-                                        <c:forEach var="servicio" items="${listaServicios}">
-                                            <tr>
-                                                <!--<td><input type="checkbox"></td>-->
-                                                <td>
-                                                    <a href="/servicios/buscar/${servicio.id}" type="button"
-                                                       class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
 
-                                                </td>
-                                                <td class="mailbox-subject text-center"><c:out value="${count}"></c:out><c:set var="count" value="${count + 1}" scope="page"/></td>
+                                    <c:set var="count" value="1" scope="page" />
+                                    <c:forEach var="eventoservicio" items="${servicio.getEventoServicios()}">
+                                        <tr>
+                                            <td class="mailbox-subject text-center"><c:out value="${eventoservicio.getEvento().getNombre()}"></c:out></td>
+                                            <td class="mailbox-subject text-center"><b><c:out value="${eventoservicio.getEvento().getCategoria()}"></c:out></b></td>
+                                            <td class="mailbox-subject text-center"><c:out value="${fn:substring(eventoservicio.getEvento().getDescripcion(), 0, 70)}"></c:out> ...</td>
+                                            <td class="mailbox-subject text-center"><b><c:out value="${eventoservicio.getEvento().getLugar()}"></c:out></b></td>
+                                            <td class="mailbox-date text-center">
+                                                <fmt:formatDate type = "date" value = "${eventoservicio.getEvento().getFechaInicio()}" />
+                                            </td>
+                                            <td class="mailbox-date text-center">
+                                                <fmt:formatDate type = "date" value = "${eventoservicio.getEvento().getFechaFin()}" />
+                                            </td>
 
-                                                <!-- <p style="display:none;"><c:catch var="exception"><c:out value="${servicio.nombre}"></c:out></c:catch></p>-->
-                                                <td class="mailbox-subject text-center"><c:out value="${servicio.tipo}"></c:out></td>
-                                                <td class="mailbox-subject text-center"><b><c:out value="${servicio.nombre}"></c:out></b></td>
-                                                <td class="mailbox-subject"><c:out value="${fn:substring(servicio.descripcion, 0, 70)}"></c:out> ...</td>
-                                                <td class="mailbox-date text-center">
-                                                    <fmt:formatDate type = "date" value = "${servicio.fechaRegistro}" />
-                                                        </td>
-
-                                                <td class="mailbox-subject"><a href="/servicios/eliminar/${usuario.id}/${servicio.id}" type="button" class="btn btn-default text-center"><i class="fa fa-trash-o"></i>Eliminar</a></td>
-                                            </tr>
-                                        </c:forEach>
-
-                                    </c:if>
+                                        </tr>
+                                    </c:forEach>
 
                                     </tbody>
+
                                 </table>
-                                <!-- /.table -->
+                                </c:if>
+                                <c:if test="${cantidad <= 0}">
+                                    <b><p style="margin-left: 2%; font-size: 11pt;">*Servicio sin eventos asociados</p></b>
+                                </c:if>
+
                             </div>
-                            <!-- /.mail-box-messages -->
+
                         </div>
                     </div>
                     <!-- /. box -->
@@ -111,6 +108,7 @@
                 </div>
                 <!-- /.mail-box-messages -->
             </div>
+            </c:forEach>
             <!-- /.box-body -->
 
 <!-- /.row -->

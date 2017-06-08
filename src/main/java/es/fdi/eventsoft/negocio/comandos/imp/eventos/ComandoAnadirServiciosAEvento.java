@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Rodrigo de Miguel on 09/05/2017.
  */
-public class ComandoAñadirServiciosAEvento implements Comando {
+public class ComandoAnadirServiciosAEvento implements Comando {
 
     public Contexto execute(Object datos){
         Pair<Long, List<Long>> par = (Pair<Long, List<Long>>) datos;

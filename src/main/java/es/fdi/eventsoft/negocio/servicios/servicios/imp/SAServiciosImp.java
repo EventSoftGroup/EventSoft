@@ -166,7 +166,6 @@ public class SAServiciosImp implements SAServicios{
         List<Servicio> lista = null;
         FachadaIntegracion integra;
         Proveedor finalProveedor;
-
         if(prov == null) return null;
 
         try {
@@ -178,14 +177,16 @@ public class SAServiciosImp implements SAServicios{
                 integra = FachadaIntegracion.newInstance(Servicio.class);
                 integra.begin();
                 lista = integra.ejecutarNamedQuery("Servicio.buscarByProveedor", Arrays.asList(new Pair<>("proveedor", finalProveedor)));
-                integra.commit();
 
+                for(Servicio serv: lista) {
+                    List listaES = (List) serv.getEventoServicios();
+                }
+                integra.commit();
                 finalProveedor.setServicios(null);
 
                 //Stream para limpiar los servicios de la BBDD
                 lista.stream().map((serv) -> {
                     serv.setProveedor(finalProveedor);
-                    serv.setEventoServicios(null);
                     return serv;
                 }).count();
 

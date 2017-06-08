@@ -177,7 +177,7 @@ public class FactoriaComandosImp extends FactoriaComandos {
                 break;
 
             case AÑADIR_SERVICIOS_A_EVENTO:
-                miComando = new ComandoAñadirServiciosAEvento();
+                miComando = new ComandoAnadirServiciosAEvento();
                 break;
 
             case LISTAR_EVENTOS:

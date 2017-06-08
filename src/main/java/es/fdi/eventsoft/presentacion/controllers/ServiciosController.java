@@ -93,6 +93,7 @@ public class ServiciosController {
 
                 if (contex.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
                     model.addAttribute("listaServicios", contex.getDatos());
+                    model.addAttribute("pagina", "Servicios-Ofertados");
                     return "Servicios-Ofertados";
                 }
 
@@ -132,7 +133,26 @@ public class ServiciosController {
 
             if (contex.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
                 model.addAttribute("listaServicios", contex.getDatos());
+                model.addAttribute("pagina", "Servicios-Ofertados");
                 return "Servicios-Ofertados";
+            } else {
+                return "error-500";
+            }
+        }
+
+        return "redirect:/index";
+    }
+
+    @RequestMapping("/buscar/eventos-por-proveedor/{id}")
+    public String buscarServiciosEventosByProveedor(@PathVariable("id") Long id,  Model model) {
+
+        if (id > 0) {
+            Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(id);
+
+            if (contex.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
+                model.addAttribute("listaServicios", contex.getDatos());
+                model.addAttribute("pagina", "servicios-eventos");
+                return "eventos-proveedor";
             } else {
                 return "error-500";
             }
