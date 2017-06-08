@@ -10,6 +10,8 @@ import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
 import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
 import es.fdi.eventsoft.negocio.servicios.servicios.SAServicios;
 import javafx.util.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class SAServiciosImp implements SAServicios{
+
+    private Logger log = LoggerFactory.getLogger(SAServiciosImp.class);
 
     @Override
     public Long crearServicio(Servicio servicioNuevo) {

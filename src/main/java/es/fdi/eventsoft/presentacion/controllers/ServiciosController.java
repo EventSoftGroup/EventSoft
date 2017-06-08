@@ -185,27 +185,25 @@ public class ServiciosController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(
-            value = "/buscar/por-evento/{idEvento}",
-            method = RequestMethod.GET,
-            produces = "applicacion/json")
-    public @ResponseBody ResponseEntity<Servicio> buscarByEvento(@PathVariable("idEvento") Long idEvento) {
+    @RequestMapping(value = "/buscar/por-evento/{idEvento}", method = RequestMethod.GET)
+    public String buscarByEvento(@PathVariable("idEvento") Long idEvento, Model model) {
         Contexto contexto;
+        Evento evento;
 
         if (idEvento > 0) {
-            contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_EVENTO).execute(idEvento);
-            Evento evento1 = (Evento) contexto.getDatos();
-            contexto = FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_SERVICIOS_BY_EVENTO).execute(evento1);
+            evento = (Evento) FactoriaComandos.getInstance().crearComando(BUSCAR_EVENTO).execute(idEvento).getDatos();
+            contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_EVENTO).execute(evento);
 
-            if (contexto.getEvento() == EventosNegocio.BUSCAR_SERVICIOS_BY_EVENTO) {
-                log.info(((Evento) contexto.getDatos()).getNombre());
-                return new ResponseEntity<>((Servicio) contexto.getDatos(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            if (contexto.getEvento() == BUSCAR_SERVICIOS_BY_EVENTO) {
+                model.addAttribute("listaServicios", contexto.getDatos());
+                model.addAttribute("evento", evento);
+                model.addAttribute("pagina", "servicios-eventos");
+
+                return "servicios-evento";
             }
         }
 
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return "redirect:/";
     }
 
     @RequestMapping(

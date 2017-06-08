@@ -22,7 +22,7 @@ import java.util.List;
         @UniqueConstraint(columnNames = {"tipo", "nombre", "proveedor_id"})
 })
 @NamedQueries({
-        @NamedQuery(name = "Servicio.buscarPorEvento", query = "from Servicio where :evento member of eventoServicios"),
+        @NamedQuery(name = "Servicio.buscarPorEvento", query = "select servicio from EventoServicio where evento_id = :evento"),
         @NamedQuery(name = "Servicio.buscarEntreFechas", query = "from Servicio"),
         @NamedQuery(name = "Servicio.buscarByProveedor", query = "from Servicio s where s.proveedor = :proveedor"),
         @NamedQuery(name = "Servicio.buscarPorTipoServicio", query = "from Servicio s where s.tipo = :tipoServicio")
