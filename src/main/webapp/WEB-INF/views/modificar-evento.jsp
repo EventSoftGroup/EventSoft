@@ -40,7 +40,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <springForm:form method="post" name="form_evento_usuario" modelAttribute="eventoAModificar" action="/eventos/modificar">
+                        <springForm:form method="post" name="form_modificar_evento" modelAttribute="eventoAModificar" action="/eventos/modificar">
                             <springForm:input path="id" type="hidden" />
                             <!-- NOMBRE -->
                             <div class="form-group">
@@ -80,18 +80,11 @@
                                 <springForm:input path="fechaFin" cssClass="form-control"  placeholder="Fecha fin" type="date" style="width: 45%;"/>
                                 <springForm:errors path="fechaFin" cssClass="alert-error" />
                             </div>
-                            <!-- CAMPOS A ELIMINAR -->
-                            <!-- Localidad -->
-                            <div class="form-group has-feedback">
-                                <springForm:input path="lugar" cssClass="form-control" placeholder="lugar" type="text"/>
-                                <springForm:errors path="lugar" cssClass="alert-error" />
-                                <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
-                            </div>
 
                             <div class="row">
                                 <!-- /.col -->
                                 <div class="col-xs-4">
-                                    <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     <button type="submit" class="btn btn-primary btn-block btn-flat">Modificar</button>
                                 </div>
                                 <!-- /.col -->

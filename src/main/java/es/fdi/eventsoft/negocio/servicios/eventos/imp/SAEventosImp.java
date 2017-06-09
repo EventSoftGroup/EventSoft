@@ -120,6 +120,9 @@ public class SAEventosImp implements SAEventos {
 
         fachadaIntegracion.begin();
         Evento evento = (Evento) fachadaIntegracion.consulta(id);
+        //evento.getCliente();
+        //evento.getOrganizador();
+        //evento.getEventoServicios();
         fachadaIntegracion.commit();
         evento.setCliente(null);
         evento.setOrganizador(null);
@@ -145,17 +148,10 @@ public class SAEventosImp implements SAEventos {
     public boolean modificarEvento(Evento eventoModificado){
         FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Evento.class);
         boolean ok = true;
-        if(eventoModificado.getNombre().equalsIgnoreCase("") ||
-        eventoModificado.getLugar().equalsIgnoreCase("") ||
-                eventoModificado.getDescripcion().equalsIgnoreCase("") || eventoModificado.getFechaInicio().after(eventoModificado.getFechaFin())){
-            ok = false;
-        }
-        else{
-            fachadaIntegracion.begin();
-            ok = fachadaIntegracion.modifica(eventoModificado);
-            fachadaIntegracion.commit();
-        }
 
+        fachadaIntegracion.begin();
+        ok = fachadaIntegracion.modifica(eventoModificado);
+        fachadaIntegracion.commit();
 
         return ok;
     }

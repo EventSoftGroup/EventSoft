@@ -7,6 +7,7 @@ import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
 import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
+import es.fdi.eventsoft.negocio.entidades.validadores.EventValidator;
 import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
 import javafx.util.Pair;
 import org.slf4j.Logger;
@@ -37,6 +38,8 @@ import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
 public class EventController {
 
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
+
+    private EventValidator eventValidator = new EventValidator();
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -201,26 +204,32 @@ public class EventController {
 
     @RequestMapping(value = "/modificar", method = RequestMethod.POST)
     public String modificarEvento(@ModelAttribute("eventoAModificar") Evento eventoNuevo, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "perfil-usuario";
-        }
 
-        Evento original = FactoriaSA.getInstance().crearSAEventos().buscarEvento(eventoNuevo.getId());
-        original.setNombre(eventoNuevo.getNombre());
-        original.setCategoria(eventoNuevo.getCategoria());
-        original.setLugar(eventoNuevo.getLugar());
-        original.setDescripcion(eventoNuevo.getDescripcion());
-        original.setFechaInicio(eventoNuevo.getFechaInicio());
-        original.setFechaFin(eventoNuevo.getFechaFin());
+        eventValidator.validate(eventoNuevo, bindingResult);
 
-        Contexto c = FactoriaComandos.getInstance().crearComando(MODIFICAR_USUARIO).execute(original);
+        if(bindingResult.hasErrors()){
+            model.addAttribute("eventoAModificar", eventoNuevo);
+            model.addAttribute("CategoriasEvento", Evento.CategoriasEvento.values());
 
-        if(c.getEvento() == MODIFICAR_EVENTO){
-            model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
-            return "timeline";
+           return "modificar-evento";
         }
         else{
-            return "error-401";
+            Evento original = FactoriaSA.getInstance().crearSAEventos().buscarEvento(eventoNuevo.getId());
+            original.setNombre(eventoNuevo.getNombre());
+            original.setCategoria(eventoNuevo.getCategoria());
+            original.setLugar(eventoNuevo.getLugar());
+            original.setDescripcion(eventoNuevo.getDescripcion());
+            original.setFechaInicio(eventoNuevo.getFechaInicio());
+            original.setFechaFin(eventoNuevo.getFechaFin());
+            Contexto c = FactoriaComandos.getInstance().crearComando(MODIFICAR_EVENTO).execute(original);
+
+            if(c.getEvento() == MODIFICAR_EVENTO){
+                model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
+                return "timeline";
+            }
+            else{
+                return "error-401";
+            }
         }
     }
 
