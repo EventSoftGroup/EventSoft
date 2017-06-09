@@ -34,7 +34,7 @@ public class EventValidator implements Validator {
             errors.rejectValue("descrpcion" , "error.evento", "Campo vacio. Rellenalo");
         }
         else if(evento.getFechaInicio().after(evento.getFechaFin())) {
-            errors.rejectValue("fecha" , "error.evento", "Fecha posterior a la de Fin. Ajustela");
+            errors.rejectValue("fechaInicio" , "error.evento", "Fecha posterior a la de Fin. Ajustela");
         }
     }
 }

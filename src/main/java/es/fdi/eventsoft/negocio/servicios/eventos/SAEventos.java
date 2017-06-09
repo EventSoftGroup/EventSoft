@@ -18,6 +18,8 @@ public interface SAEventos {
 
     Evento buscarEvento(Long id);
 
+    Evento buscarEventoParaModificar(Long id);
+
     boolean eliminarEvento(Long Id);
 
     boolean modificarEvento(Evento eventoModificado);

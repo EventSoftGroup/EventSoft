@@ -214,7 +214,7 @@ public class EventController {
            return "modificar-evento";
         }
         else{
-            Evento original = FactoriaSA.getInstance().crearSAEventos().buscarEvento(eventoNuevo.getId());
+            Evento original = FactoriaSA.getInstance().crearSAEventos().buscarEventoParaModificar(eventoNuevo.getId());
             original.setNombre(eventoNuevo.getNombre());
             original.setCategoria(eventoNuevo.getCategoria());
             original.setLugar(eventoNuevo.getLugar());

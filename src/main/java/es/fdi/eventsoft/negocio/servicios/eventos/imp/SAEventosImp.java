@@ -130,6 +130,16 @@ public class SAEventosImp implements SAEventos {
 
         return evento;
     }
+    @Override
+    public Evento buscarEventoParaModificar(Long id) {
+        FachadaIntegracion fachadaIntegracion = FachadaIntegracion.newInstance(Evento.class);
+
+        fachadaIntegracion.begin();
+        Evento evento = (Evento) fachadaIntegracion.consulta(id);
+        fachadaIntegracion.commit();
+
+        return evento;
+    }
 
     @Override
     public boolean eliminarEvento(Long id) {
