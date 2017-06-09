@@ -23,5 +23,11 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Usuario usuario = (Usuario) o;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "direccion", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "localidad", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "provincia", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "codigoPostal", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono", "NotEmpty");
     }
 }
