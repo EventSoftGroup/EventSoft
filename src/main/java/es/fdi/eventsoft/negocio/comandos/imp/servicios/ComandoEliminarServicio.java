@@ -21,15 +21,15 @@ public class ComandoEliminarServicio implements Comando {
 
         if(respuesta == 0){
             contex.setEvento(EventosNegocio.ELIMINAR_SERVICIO);
-            contex.setDatos(new String("Servicio Eliminado Correctamente."));
+            contex.setDatos(new String("Servicio Eliminado Correctamente"));
         }
         else if(respuesta == 1){
             contex.setEvento(EventosNegocio.ERROR_ELIMINAR_SERVICIO);
-            contex.setDatos(new String("ERROR al eliminar el servicio."));
+            contex.setDatos(new String("¡ERROR! No se pudo eliminar el servicio"));
         }
         else if(respuesta == 2){
             contex.setEvento(EventosNegocio.ERROR_SERVICIO_ASOCIADO_A_EVENTO);
-            contex.setDatos(new String("ERROR. El servicio está asociado a algún evento."));
+            contex.setDatos(new String("¡ERROR! El servicio está asociado a algún evento en desarrollo o futuro"));
         }
 
         return contex;
