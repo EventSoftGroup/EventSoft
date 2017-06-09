@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -28,7 +29,7 @@ public class AdminController {
     private Logger log = LoggerFactory.getLogger(ServiciosController.class);
 
     @RequestMapping("/admin")
-    public String home(Model model){
+    public String home(Model model, HttpSession session){
 
         long time_start, time_end;
         time_start = System.currentTimeMillis();
@@ -68,7 +69,7 @@ public class AdminController {
                 time_end = System.currentTimeMillis();
                 System.out.println("The task has taken "+ ( time_end - time_start ) +" milliseconds");
 
-
+                session.setAttribute("rol", "Administrador");
                 model.addAttribute("title", "EventSoft");
                 model.addAttribute("pagina", "admin");
                 return "admin";

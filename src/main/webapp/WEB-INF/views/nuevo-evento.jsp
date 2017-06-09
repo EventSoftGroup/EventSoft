@@ -38,6 +38,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Datos generales</h3>
                     </div>
+                    <c:catch var="exception"><span class="alert-error"><c:out value="${mensajeError}" ></c:out></span></c:catch>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <springForm:form method="POST" name='formulario_crear_evento'  modelAttribute='evento' action="/eventos/crear-evento">
@@ -50,7 +51,8 @@
 
                             <div class="form-group">
                                 <label path="email">Email cliente:</label>
-                                <input name="email" class="form-control" placeholder="cliente@eventSoft.es" autofocus="true" type="email" />
+                                <input name="email" class="form-control" placeholder="cliente@eventSoft.es" autofocus="true" type="email" value="<c:catch var="exception"><c:out value="${emailCliente}" ></c:out></c:catch>" />
+                                <c:catch var="exception"><span class="alert-error"><c:out value="${mensajeErrorEmailCliente}" ></c:out></span></c:catch>
                             </div>
                             <!-- text input -->
                             <div class="form-group">

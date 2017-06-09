@@ -404,7 +404,6 @@ immediately after the control sidebar -->
     $.widget.bridge('uibutton', $.ui.button);
 </script>
 
-<script src="<c:url value="/resources/dist/js/scriptChartsRodri.js" />"></script>
 
 
 </body>

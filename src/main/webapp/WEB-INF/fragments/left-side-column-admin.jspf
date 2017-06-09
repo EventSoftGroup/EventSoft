@@ -14,16 +14,6 @@ left-side-column.jspf<!-- Left side column. contains the logo and sidebar -->
                     class="active"
                 </c:if>
             ><a href="/administracion/admin"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
-            <li
-                <c:if test="${pagina eq 'calendario'}">
-                    class="active"
-                </c:if>
-            ><a href="/eventos/calendario"><i class="fa fa-calendar"></i> <span>Calendario</span></a></li>
-            <li
-                <c:if test="${pagina eq 'buzon'}">
-                    class="active"
-                </c:if>
-            ><a href="/mensajes/buzon"><i class="fa fa-envelope"></i> <span>Buzón</span></a></li>
 
         </ul>
         <!-- /.sidebar-menu -->

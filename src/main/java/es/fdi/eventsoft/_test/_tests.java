@@ -1,14 +1,14 @@
 package es.fdi.eventsoft._test;
 
 import es.fdi.eventsoft.integracion.FachadaIntegracion;
-import es.fdi.eventsoft.negocio.comandos.Contexto;
+import es.fdi.eventsoft.negocio.comandos.Comando;
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.comandos.factoria.FactoriaComandos;
 import es.fdi.eventsoft.negocio.entidades.Evento;
-import es.fdi.eventsoft.negocio.entidades.EventoServicio;
-import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
-import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
+import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
+import es.fdi.eventsoft.negocio.servicios.eventos.SAEventos;
+import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -26,8 +26,15 @@ public class _tests {
 
     public static void main(String[] args) throws ParseException {
 
-/*
-        Date fecha = formateaFecha("2017-06-03");
+
+        testCrearEvento();
+
+
+
+
+
+
+/*      Date fecha = formateaFecha("2017-06-03");
         System.out.println(fecha);
 
 
@@ -72,19 +79,19 @@ public class _tests {
         // Output "Wed Sep 26 00:00:00 EST 2012"
 */
         //Creamos un servicio
-        Proveedor p = new Proveedor(5L);
-        Contexto c =  FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(p);
-        List listaServicios = (List) c.getDatos();
-
-        for (int i = 0; i < listaServicios.size(); i++) {
-            Servicio miservicio = (Servicio) listaServicios.get(i);
-            System.out.println(miservicio.getDescripcion());
-            List listaES = (List) miservicio.getEventoServicios();
-            for (int j = 0; j < listaES.size(); j++){
-                EventoServicio es = (EventoServicio) listaES.get(j);
-                System.out.println(es.getEvento().getId());
-            }
-        }
+//        Proveedor p = new Proveedor(5L);
+//        Contexto c =  FactoriaComandos.getInstance().crearComando(EventosNegocio.BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(p);
+//        List listaServicios = (List) c.getDatos();
+//
+//        for (int i = 0; i < listaServicios.size(); i++) {
+//            Servicio miservicio = (Servicio) listaServicios.get(i);
+//            System.out.println(miservicio.getDescripcion());
+//            List listaES = (List) miservicio.getEventoServicios();
+//            for (int j = 0; j < listaES.size(); j++){
+//                EventoServicio es = (EventoServicio) listaES.get(j);
+//                System.out.println(es.getEvento().getId());
+//            }
+//        }
 
         /*Servicio serv = new Servicio(Servicio.TiposServicio.DJ, "Dj FER", "el mejor dj de espaÃ±a", new Date(),(Proveedor) c.getDatos());
         c  = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_SERVICIO).execute(serv);
@@ -98,6 +105,92 @@ public class _tests {
             //System.out.println(resp);
         }
     */
+
+    }
+
+    private static void testCrearEvento() {
+        Evento evento = new Evento();
+        Cliente cli;
+        Organizador org;
+        EventosNegocio result;
+        Comando comando = FactoriaComandos.getInstance().crearComando(EventosNegocio.CREAR_EVENTO);
+        SAEventos sa = FactoriaSA.getInstance().crearSAEventos();
+        List<EventosNegocio> lista = new ArrayList();
+
+
+        org = new Organizador(); org.setId(9L); evento.setOrganizador(org);
+
+        //email inexistente
+        cli = new Cliente(); cli.setEmail("asdfsdf@sdfadfafsdf.asdfasfasfasdfa");
+        evento.setCliente(cli);
+        lista.add(comando.execute(evento).getEvento());
+
+
+
+        //Cliente valido
+        cli = new Cliente(); cli.setEmail("fer_marugan@hotmail.com");
+        evento.setCliente(cli);
+        lista.add(comando.execute(evento).getEvento());
+
+
+
+
+        //cliente email--> null
+        cli = new Cliente(); cli.setEmail(null);
+        evento.setCliente(cli);
+        lista.add(comando.execute(evento).getEvento());
+
+
+        //cliente --> null
+        cli = new Cliente();
+        evento.setCliente(null);
+        lista.add(comando.execute(evento).getEvento());
+
+
+        //Cliente --> Organizador
+        cli = new Cliente(); cli.setEmail("eventos@hotmail.com");
+        evento.setCliente(cli);
+        lista.add(comando.execute(evento).getEvento());
+
+
+        //cliente --> proveedor
+        cli = new Cliente(); cli.setEmail("proveedor@hotmail.com");
+        evento.setCliente(cli);
+        lista.add(comando.execute(evento).getEvento());
+
+
+
+
+        cli = new Cliente(); cli.setEmail("fer_marugan@hotmail.com");
+        evento.setCliente(cli);
+
+        //org valido
+        org = new Organizador(); org.setId(9L);
+        evento.setOrganizador(org);
+        lista.add(comando.execute(evento).getEvento());
+
+        //Org --> null
+        org = null;
+        evento.setOrganizador(org);
+        lista.add(comando.execute(evento).getEvento());
+
+        //org --> no existe
+        org = new Organizador(); org.setId(900000L);
+        evento.setOrganizador(org);
+        lista.add(comando.execute(evento).getEvento());
+
+
+        //org --> cliente/ proveed
+        org = new Organizador(); org.setId(8L);
+        evento.setOrganizador(org);
+        lista.add(comando.execute(evento).getEvento());
+
+
+        final int[] cont = {0};
+        lista.stream().forEach((event)-> {
+            cont[0] += 1;
+            System.out.println("Test " + cont[0] + ": " + event);
+        });
 
     }
 

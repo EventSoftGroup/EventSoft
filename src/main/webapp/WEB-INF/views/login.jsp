@@ -11,7 +11,7 @@
     </div>
 
     <div class="login-box-body">
-        <form method="post" action="login">
+        <form method="post" action="/login">
             <h2 class="form-heading">ACCESO</h2>
 
             <span><c:out value="${message}"></c:out></span>

@@ -38,25 +38,7 @@
                     <div class="col-md-3">
                         <a href="/mensajes/buzon" class="btn btn-primary btn-block margin-bottom">Volver a la Bandeja de Entrada</a>
 
-                        <!--<div class="box box-solid">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Carpetas</h3>
 
-                                <div class="box-tools">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="box-body no-padding">
-                                <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="/eventos/buzon"><i class="fa fa-inbox"></i> Bandeja de Entrada
-                                        <span class="label label-primary pull-right">12</span></a></li>
-                                    <li><a href="#"><i class="fa fa-envelope-o"></i> Enviados</a></li>
-                                    <li><a href="#"><i class="fa fa-star"></i> Favoritos</a></li>
-                                    <li><a href="#"><i class="fa fa-trash-o"></i> Papelera<span class="label label-warning pull-right">65</span></a></li>
-                                </ul>
-                            </div>
-                        </div>-->
                     </div>
                     <!-- /.col -->
                     <div class="col-md-9">
@@ -76,8 +58,7 @@
                                         <input class="form-control" placeholder="Asunto:" name="asunto">
                                     </div>
                                     <div class="form-group">
-                                        <textarea id="compose-textarea" class="form-control" name="texto" placeholder="Texto:">
-                                        </textarea>
+                                        <textarea class="form-control" rows="5" name="texto" placeholder="Texto:"></textarea>
                                     </div>
                                 </div>
                                 <!-- /.box-body -->

@@ -39,7 +39,7 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="<c:url value="/resources/dist/img/user4-128x128.jpg" />"
+                            <img class="profile-user-img img-responsive img-circle" src="<c:url value="/resources/dist/img/profile.svg" />"
                                  alt="User profile picture">
                             <h3 class="profile-username text-center">
 
@@ -86,7 +86,6 @@
                                     </c:if>
                                 </li>
                             </ul>
-                            <a href="/eventos/nuevo-mensaje" class="btn btn-primary btn-block"><b>Contactar</b></a>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -148,115 +147,13 @@
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#activity" data-toggle="tab">Eventos</a></li>
-                            <!--<li><a href="#timeline" data-toggle="tab">Valoraciones</a></li>-->
-                            <li><a href="#settings" data-toggle="tab">Modificar Datos</a></li>
+                            <li><a class="active" href="#settings" data-toggle="tab">Modificar Datos</a></li>
                             <c:if test="${rol eq 'Proveedor'}">
                                 <li><a href="#añadirServicio" data-toggle="tab">Añadir Servicio</a></li>
                             </c:if>
                         </ul>
                         <div class="tab-content">
-                            <div class="active tab-pane" id="activity">
-                                <!-- Post -->
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="<c:url value="/resources/dist/img/user1-128x128.jpg" />"
-                                             alt="user image">
-                                        <span class="username">
-                          <a href="#">Boda de Jonathan Burke Jr.</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                                        <span class="description">Shared publicly - 7:30 PM today</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers, typographers and the
-                                        like. Some people hate it and argue for its demise, but others ignore the hate
-                                        as they create awesome tools to help create filler text for everyone from bacon
-                                        lovers to Charlie Sheen fans.
-                                    </p>
-                                    <div class="row margin-bottom">
-                                        <div class="col-sm-3">
-                                            <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/1.jpg" />" alt="Photo">
-                                            <!-- /.row -->
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/2.jpg" />" alt="Photo">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/4.jpg" />" alt="Photo">
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <ul class="list-inline">
-                                        <li><a href="#" class="link-black text-sm"><i
-                                                class="fa fa-share margin-r-5"></i> Share</a></li>
-                                        <li><a href="#" class="link-black text-sm"><i
-                                                class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                                        </li>
-                                        <li class="pull-right">
-                                            <a href="#" class="link-black text-sm"><i
-                                                    class="fa fa-comments-o margin-r-5"></i> Comments
-                                                (5)</a></li>
-                                    </ul>
-                                    <input class="form-control input-sm" type="text" placeholder="Type a comment">
-                                </div>
-                                <!-- /.post -->
-                                <!-- Post -->
-                                <div class="post clearfix">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="<c:url value="/resources/dist/img/user7-128x128.jpg" />"
-                                             alt="User Image">
-                                        <span class="username">
-                          <a href="#">Fiesta cumpleaños de Sarah Ross</a>
-                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
-                        </span>
-                                        <span class="description">Sent you a message - 3 days ago</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <div class="row margin-bottom">
-                                        <div class="col-sm-6">
-                                            <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/7.jpg" />" alt="Photo">
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-sm-6">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/3.jpg" />"
-                                                         alt="Photo">
-                                                </div>
-                                                <!-- /.col -->
-                                                <div class="col-sm-6">
-                                                    <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/5.jpg" />"
-                                                         alt="Photo">
-                                                    <br>
-                                                    <img class="img-responsive" src="<c:url value="/resources/dist/img/Flores/6.jpg" />"
-                                                         alt="Photo">
-                                                </div>
-                                                <!-- /.col -->
-                                            </div>
-                                            <!-- /.row -->
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
-                                    <ul class="list-inline">
-                                        <li><a href="#" class="link-black text-sm"><i
-                                                class="fa fa-share margin-r-5"></i> Share</a></li>
-                                        <li><a href="#" class="link-black text-sm"><i
-                                                class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
-                                        </li>
-                                        <li class="pull-right">
-                                            <a href="#" class="link-black text-sm"><i
-                                                    class="fa fa-comments-o margin-r-5"></i> Comments
-                                                (5)</a></li>
-                                    </ul>
-                                    <input class="form-control input-sm" type="text" placeholder="Type a comment">
-                                </div>
-                                <!-- /.post -->
-                            </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="settings">
+                            <div class="active tab-pane" id="settings">
                                 <springForm:form method="post" name="form_modificar_usuario" modelAttribute="usuarioAModificar" action="/usuarios/modificar">
                                     <springForm:input path="id" type="hidden" />
                                     <!-- Dirección -->

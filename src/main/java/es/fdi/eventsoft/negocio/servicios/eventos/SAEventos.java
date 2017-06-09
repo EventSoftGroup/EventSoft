@@ -12,6 +12,14 @@ import java.util.List;
  */
 public interface SAEventos {
 
+    /** Crea un evento y retorna el resultado
+     *
+     * @param eventoNuevo evento para crear en BBDD
+     * @return  if (id >0) CREAR_EVENTO;
+                else if(id == -1L) ERROR_CREAR_EVENTO;
+                else if(id == -2L) ERROR_CLIENTE_ERRONEO;
+                else if(id == -3L) ERROR_ORGANIZADOR_ERRONEO;
+     */
     Long crearEvento(Evento eventoNuevo);
 
     EventosNegocio añadirServiciosAEvento(Long idEvento, List<Long> servicios);

@@ -189,14 +189,15 @@ $(function() {
                 //Cargamos el evento
                 dini = new Date(response.fechaInicio);
                 dfin = new Date(response.fechaFin);
+
                 $("#tabla_evento tbody").empty();
                 $("#tabla_evento tbody").append("<tr></tr>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.nombre+"</td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.categoria+"</td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.descripcion.substring(0,70)+"</td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+response.lugar+"</td>");
-                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dini.getDate() + '-' + dini.getMonth() + '-' + dini.getFullYear()+"</td>");
-                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dfin.getDate() + '-' + dfin.getMonth() + '-' + dfin.getFullYear()+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dini.getDate() + '-' + (dini.getMonth().valueOf()+1) + '-' + dini.getFullYear()+"</td>");
+                $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dfin.getDate() + '-' + (dfin.getMonth().valueOf()+1) + '-' + dfin.getFullYear()+"</td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject'><a href='/servicios/buscar/por-evento/"+response.id+"' type='button' class='btn btn-default text-center botonVerServicios' id='"+response.id+"' data-id=''><i class='fa fa-trash-o'></i>Ver servicios</a></td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject'><a href='/eventos/vista-modificar/"+response.id+"' type='button' class='btn btn-default text-center botonModificarEvento' id='"+response.id+"' data-id=''>Modificar</a></td>");
                 $("#tabla_evento tbody tr:last-child").append("<td class='mailbox-subject'><a href='/eventos/eliminar/"+response.id+"' type='button' class='btn btn-default text-center botonEliminarEvento' id='"+response.id+"' data-id=''><i class='fa fa-trash-o'></i>Eliminar</a></td>");
@@ -229,14 +230,15 @@ $(function() {
                     response.forEach(function(e){
                         dini = new Date(e.fechaInicio);
                         dfin = new Date(e.fechaFin);
+
                         $("#tabla_eventos tbody").append("<tr></tr>");
                         $("#tabla_eventos tbody tr:last-child").append("<td><a href='/eventos/buscarEvento/' type='button' class='btn btn-default text-center'><i class='fa fa-search'></i> Ver</a></td>");
                         $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.nombre+"</td>");
                         $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.categoria+"</td>");
                         $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.descripcion.substring(1,70)+"</td>");
                         $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.lugar+"</td>");
-                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dini.getDate() + '-' + dini.getMonth() + '-' + dini.getFullYear()+"</td>");
-                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dfin.getDate() + '-' + dfin.getMonth() + '-' + dfin.getFullYear()+"</td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dini.getDate() + '-' + (dini.getMonth().valueOf()+1) + '-' + dini.getFullYear()+"</td>");
+                        $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-date text-center'>"+dfin.getDate() + '-' + (dfin.getMonth().valueOf()+1) + '-' + dfin.getFullYear()+"</td>");
                         $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject'><a type='button' class='btn btn-default text-center botonEliminarServicio' id='' data-id=''><i class='fa fa-trash-o'></i>Eliminar</a></td>");
                     });
 

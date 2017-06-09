@@ -58,13 +58,6 @@ public class EventController {
         return "calendario";
     }
 
-    @RequestMapping("/proveedores")
-    public String eventoProveedores(Model model) {
-        model.addAttribute("title", "EventSoft - Proveedores");
-        model.addAttribute("pagina", "proveedores");
-        return "proveedores";
-    }
-
     @RequestMapping("/leer-mensaje")
     public String eventoLeerMensaje(Model model) {
         model.addAttribute("title", "EventSoft - Leer Mensaje");
@@ -75,6 +68,7 @@ public class EventController {
     @RequestMapping("/timeline")
     public String eventoTimeline(Model model) {
         model.addAttribute("title", "EventSoft - Timeline");
+
         model.addAttribute("pagina", "timeline");
         model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
 
@@ -99,15 +93,22 @@ public class EventController {
     public String crearEvento(@Valid Evento evento, BindingResult bindingResult, Model model, HttpSession session,
         @RequestParam(value = "email") String email){
 
-        if(bindingResult.hasErrors() || (email.trim().isEmpty())){
 
-            System.out.println(email.trim());
-            System.out.println("ALGUN ERROR");
-            model.addAttribute("tipoUsuario", "organizador");
-            model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
-            return "nuevo-evento";
+
+        if(evento.getFechaInicio()!= null && evento.getFechaFin()!= null && evento.getFechaInicio().after(evento.getFechaFin())){
+            bindingResult.rejectValue("fechaInicio" , "error.evento", "Fecha de INICIO debe ser anterior a la fecha de FIN del evento");
         }
 
+        if(bindingResult.hasErrors() || (email.trim().isEmpty())){
+            if(email.trim().isEmpty()) model.addAttribute("mensajeErrorEmailCliente", "Email de cliente no puede estar vacio");
+            model.addAttribute("emailCliente", email);
+
+            System.out.println("ALGUN ERROR en el formulario");
+            model.addAttribute("tipoUsuario", "organizador");
+            model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
+            model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
+            return "nuevo-evento";
+        }
 
         evento.setCliente(new Cliente(email));
         evento.setOrganizador((Organizador) session.getAttribute("usuario"));
@@ -115,15 +116,26 @@ public class EventController {
         System.out.println(evento);
         Contexto contex = FactoriaComandos.getInstance().crearComando(CREAR_EVENTO).execute(evento);
 
+
+
+        model.addAttribute("tipoUsuario", "organizador");
+        model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
         if(contex.getEvento() == CREAR_EVENTO){
-            model.addAttribute("tipoUsuario", "organizador");
-            model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
             return "timeline";
-        }else if (contex.getEvento() == ERROR_CREAR_EVENTO){
-            System.out.println(ERROR_CREAR_EVENTO);
-            model.addAttribute("tipoUsuario", "organizador");
-            model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
-            return "nuevo-evento";
+        }else{
+            model.addAttribute("emailCliente", email);
+            model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
+            System.out.println(contex.getEvento());
+            if (contex.getEvento() == ERROR_CREAR_EVENTO){
+                model.addAttribute("mensajeError", "Error al crear el evento");
+                return "nuevo-evento";
+            }else if (contex.getEvento() == ERROR_CLIENTE_ERRONEO){
+                model.addAttribute("mensajeErrorEmailCliente", "Email de cliente erroneo");
+                return "nuevo-evento";
+            }else if (contex.getEvento() == ERROR_ORGANIZADOR_ERRONEO){
+                model.addAttribute("mensajeError", "Error al crear el evento con el Organizador actual");
+                return "nuevo-evento";
+            }
         }
 
         System.out.println("FINAL ABSOLUTO");

@@ -29,23 +29,40 @@ public class SAEventosImp implements SAEventos {
 
         FachadaIntegracion integra;
         Long id = -1L;
-        SAUsuario saUsuario = FactoriaSA.getInstance().crearSAUsuarios();
+        SAUsuario saUsuario;
+        Cliente cliente = null;
+        Organizador organizador = null;
 
-        Cliente cliente = (Cliente) saUsuario.buscarUsuarioByEmail(eventoNuevo.getCliente().getEmail());
-        Organizador organizador = (Organizador) saUsuario.buscarUsuarioByID(eventoNuevo.getOrganizador().getId());
 
-        if(organizador != null){
-            if(cliente != null){
-                eventoNuevo.setCliente(cliente);
-                eventoNuevo.setOrganizador(organizador);
+        if (eventoNuevo.getOrganizador() == null) id = -3L;
+        else if (eventoNuevo.getCliente() == null) id = -2L;
+        else{
+            saUsuario  = FactoriaSA.getInstance().crearSAUsuarios();
 
-                integra = FachadaIntegracion.newInstance(Evento.class);
-                integra.begin();
-                id = ((Evento) integra.alta(eventoNuevo)).getId();
+            try {
+                cliente = (Cliente) saUsuario.buscarUsuarioByEmail(eventoNuevo.getCliente().getEmail());
+            }catch (ClassCastException e ){ return -2L;}
 
-                integra.commit();
-            }
+            try {
+                organizador = (Organizador) saUsuario.buscarUsuarioByID(eventoNuevo.getOrganizador().getId());
+            }catch (ClassCastException e ){ return -3L; }
+
+
+            if (organizador == null) id = -3L;
+            else if (cliente == null) id = -2L;
+            else {
+                    eventoNuevo.setCliente(cliente);
+                    eventoNuevo.setOrganizador(organizador);
+
+                    integra = FachadaIntegracion.newInstance(Evento.class);
+                    integra.begin();
+                    id = ((Evento) integra.alta(eventoNuevo)).getId();
+
+                    integra.commit();
+                }
+
         }
+
 
         return id;
     }

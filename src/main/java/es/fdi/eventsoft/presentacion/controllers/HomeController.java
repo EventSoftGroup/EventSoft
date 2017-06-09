@@ -65,28 +65,26 @@ public class HomeController {
             Usuario usuario = (Usuario) contex.getDatos();
 
             session.setAttribute("usuario", usuario);
-            if(usuario.getEmail().equals("adminIW@ucm.es")) {
+
+            if(usuario.getRoles().equalsIgnoreCase("ADMIN")) {
                 session.setAttribute("rol", "Administrador");
                 model.addAttribute("pagina", "admin");
-                return "admin";
-            }
+                return "redirect:./administracion/admin";
 
-            if(usuario instanceof Cliente) {
+            } else if (usuario instanceof Cliente) {
                 session.setAttribute("rol", "Cliente");
                 model.addAttribute("pagina", "perfil-usuario");
                 return "redirect:./usuarios/perfil-usuario";
-            }
 
-            if(usuario instanceof Organizador) {
+            } else if (usuario instanceof Organizador) {
                 session.setAttribute("rol", "Organizador");
                 model.addAttribute("pagina", "timeline");
-                return "redirect:./eventos/timeline";
-            }
+                return "timeline";
 
-            if(usuario instanceof Proveedor) {
+            } else if (usuario instanceof Proveedor) {
                 session.setAttribute("rol", "Proveedor");
                 model.addAttribute("pagina", "proveedores");
-                return "redirect:./eventos/proveedores";
+                return "redirect:./servicios/buscar/por-proveedor/" + usuario.getId();
             }
         }
 
