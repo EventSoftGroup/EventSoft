@@ -78,10 +78,12 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="/usuarios/perfil-usuario" class="btn btn-default btn-flat">Perfil</a>
+                                <c:if test="${rol eq 'Proveedor' || rol eq 'Organizador' || rol eq 'Cliente'}">
+                                    <a href="/usuarios/perfil-usuario" class="btn btn-default btn-flat">Perfil</a>
+                                </c:if>
                             </div>
                             <div class="pull-right">
-                                <a href="/logout" class="btn btn-default btn-flat">Salir</a>
+                                <a href="/logout" class="btn btn-default btn-flat">Cerrar Sesión</a>
                             </div>
                         </li>
                     </ul>
