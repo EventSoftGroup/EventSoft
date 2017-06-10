@@ -28,8 +28,7 @@
                 <small>Proveedores</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li class="active"><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
             </ol>
         </section>
         <!-- Main content -->
@@ -42,7 +41,7 @@
                     <div class="small-box bg-teal">
                         <div class="inner">
                             <h3><c:out value="${fn:length(listaClinetes)}"></c:out></h3>
-                            <p>Num clientes</p>
+                            <p>Nº de Clientes</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person"></i>
@@ -55,7 +54,7 @@
                     <div class="small-box bg-light-blue">
                         <div class="inner">
                             <h3><c:out value="${fn:length(listaOrganizadores)}"></c:out></h3>
-                            <p>Num organizadores</p>
+                            <p>Nº de Organizadores</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person"></i>
@@ -68,7 +67,7 @@
                     <div class="small-box bg-blue">
                         <div class="inner">
                             <h3><c:out value="${fn:length(listaProveedores)}"></c:out></h3>
-                            <p>Num proveedores</p>
+                            <p>Nº de Proveedores</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person"></i>
@@ -81,7 +80,7 @@
                     <div class="small-box bg-lime">
                         <div class="inner">
                             <h3><c:out value="${fn:length(listaServicios)}"></c:out></h3>
-                            <p>Servicios ofertados</p>
+                            <p>Nº Servicios ofertados</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -94,7 +93,7 @@
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3><c:out value="${fn:length(listaEventos)}"></c:out></h3>
-                            <p>Eventos organizados</p>
+                            <p>Nº Eventos organizados</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -108,7 +107,7 @@
                     <div class="small-box bg-gray">
                         <div class="inner">
                             <h3><c:out value="${numTotalMensajes}"></c:out></h3>
-                            <p>Mensajes enviados</p>
+                            <p>Nº Mensajes enviados</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-android-mail"></i>
@@ -245,7 +244,7 @@
                                                            class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
                                                     </td>
 
-                                                    <td class="mailbox-subject text-center">$<c:out value="{orga.email}"></c:out></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${orga.email}"></c:out></td>
                                                     <td class="mailbox-subject text-center"><b><c:out value="${orga.empresa}"></c:out></b></td>
                                                     <td class="mailbox-subject text-center"><b><c:out value="${orga.provincia}"></c:out></b></td>
                                                     <td class="mailbox-subject text-center"><b><c:out value="${orga.telefono}"></c:out></b></td>
