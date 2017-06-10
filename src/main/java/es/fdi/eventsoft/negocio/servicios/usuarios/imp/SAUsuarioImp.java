@@ -58,7 +58,6 @@ public class SAUsuarioImp implements SAUsuario {
 
         try {
 
-            System.out.println(usuarioEliminar.getEmail());
             Usuario aborrar = new Usuario();
             //Se elimina solo si existe el correo
             if (usuarioEliminar.getEmail() != null){

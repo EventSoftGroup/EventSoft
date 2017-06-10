@@ -145,9 +145,6 @@ public class SAEventosImp implements SAEventos {
 
         fachadaIntegracion.begin();
         Evento evento = (Evento) fachadaIntegracion.consulta(id);
-        //evento.getCliente();
-        //evento.getOrganizador();
-        //evento.getEventoServicios();
         fachadaIntegracion.commit();
         evento.setCliente(null);
         evento.setOrganizador(null);
@@ -245,8 +242,7 @@ public class SAEventosImp implements SAEventos {
                     return null;
                 }
             }
-            else
-                System.out.println("No eres nadie");
+            else{}
 
         }catch (ClassCastException e){
             return null;

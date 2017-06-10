@@ -70,7 +70,7 @@ public class AdminController {
 
             if(executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS)) {
                 time_end = System.currentTimeMillis();
-                System.out.println("The task has taken "+ ( time_end - time_start ) +" milliseconds");
+                //System.out.println("The task has taken "+ ( time_end - time_start ) +" milliseconds");
 
                 session.setAttribute("rol", "Administrador");
                 model.addAttribute("title", "EventSoft");
@@ -115,18 +115,7 @@ public class AdminController {
 
         }
         else return "error-500";
-            /*
-            if (contex.getEvento() == ELIMINAR_SERVICIO) {
-                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.OK);
-            } else if(contex.getEvento() == ERROR_ELIMINAR_SERVICIO){
-                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.NOT_FOUND);
-            }
-            else if(contex.getEvento() == ERROR_SERVICIO_ASOCIADO_A_EVENTO){
-                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.CONFLICT);
-            }
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        */
+
     }
 
     @RequestMapping(value = "/eliminar-evento/{id}", method = RequestMethod.GET)

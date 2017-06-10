@@ -103,7 +103,7 @@ public String eventoCalendario(Model model) {
             if(email.trim().isEmpty()) model.addAttribute("mensajeErrorEmailCliente", "Email de cliente no puede estar vacio");
             model.addAttribute("emailCliente", email);
 
-            System.out.println("ALGUN ERROR en el formulario");
+
             model.addAttribute("tipoUsuario", "organizador");
             model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
             model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
@@ -126,7 +126,7 @@ public String eventoCalendario(Model model) {
         }else{
             model.addAttribute("emailCliente", email);
             model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
-            System.out.println(contex.getEvento());
+
             if (contex.getEvento() == ERROR_CREAR_EVENTO){
                 model.addAttribute("mensajeError", "Error al crear el evento");
                 return "nuevo-evento";
@@ -139,7 +139,6 @@ public String eventoCalendario(Model model) {
             }
         }
 
-        System.out.println("FINAL ABSOLUTO");
         return "nuevo-evento";
     }
 
@@ -154,12 +153,6 @@ public String eventoCalendario(Model model) {
                 .mapToLong((str)-> Long.parseLong(str))
                 .forEach((str)-> listaIDs.add(Long.parseLong(String.valueOf(str))));
 
-
-        System.out.println("*********************************************");
-        System.out.println("idEvento: " + idEvento);
-        System.out.println("listaServicios: " +listaIDs);
-
-        System.out.println("*********************************************");
 
 
         if(idEvento<=0) {
@@ -188,8 +181,6 @@ public String eventoCalendario(Model model) {
                 model.addAttribute("mensajeError", "Error al buscar el evento");
             }
         }
-
-        System.out.println(contex.getEvento());
 
         return new ResponseEntity<>((contex.getEvento()== ANADIR_SERVICIOS_A_EVENTO)? "Servicios añadidos correctamente" : contex.getEvento().toString(), estatus);
     }
