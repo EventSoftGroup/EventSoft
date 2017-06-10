@@ -30,11 +30,12 @@ $(function() {
 
                 response.forEach(function(e){
 
+                    fechaIni = new Date(e.fechaInicio);
                     date = new Date(e.fechaFin);
 
                     events.push(new event(e.nombre,
-                                        e.fechaInicio,
-                                        date.setDate(date.getDate() + 1)));
+                        fechaIni.setDate(fechaIni.getDate() + 1),
+                        date.setDate(date.getDate() + 1)));
                 });
 
                 function ini_events(ele) {
