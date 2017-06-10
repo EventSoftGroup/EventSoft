@@ -5,15 +5,20 @@ import es.fdi.eventsoft.negocio.comandos.Comando;
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.comandos.factoria.FactoriaComandos;
 import es.fdi.eventsoft.negocio.entidades.Evento;
+import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
 import es.fdi.eventsoft.negocio.servicios.eventos.SAEventos;
 import es.fdi.eventsoft.negocio.servicios.factoria.FactoriaSA;
+import javafx.util.Pair;
+import sun.security.jgss.krb5.ServiceCreds;
 
+import javax.naming.CompositeName;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -27,12 +32,12 @@ public class _tests {
     public static void main(String[] args) throws ParseException {
 
 
+        EventosNegocio evnt = FactoriaSA.getInstance().crearSAEventos().añadirServiciosAEvento(6L, Arrays.asList(18L));
+
+        System.out.println(evnt);
+
+
         testCrearEvento();
-
-
-
-
-
 
 /*      Date fecha = formateaFecha("2017-06-03");
         System.out.println(fecha);

@@ -18,7 +18,9 @@ import java.util.List;
 @Table(name = "Eventos")
 @NamedQueries({
         @NamedQuery(name = "Evento.buscarEventosPorUsuario", query = "from Evento e join fetch e.cliente join fetch e.organizador where e.cliente = :cliente"),
-        @NamedQuery(name = "Evento.buscarEventosPorUsuario_2", query = "from Evento e join fetch e.organizador join fetch e.cliente where e.organizador = :organizador")
+        @NamedQuery(name = "Evento.buscarEventosPorUsuario_2", query = "from Evento e join fetch e.organizador join fetch e.cliente where e.organizador = :organizador"),
+        @NamedQuery(name = "Evento.EventosDeServicioConFechaFinMayorA",
+                query = "select es.evento FROM EventoServicio es join es.evento where es.servicio = :servicio AND (es.evento.fechaFin > :fechaFin)")
 })
 public class Evento implements Serializable {
 

@@ -4,6 +4,8 @@ package es.fdi.eventsoft.presentacion.controllers;
 import es.fdi.eventsoft.negocio.comandos.Contexto;
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.comandos.factoria.FactoriaComandos;
+import es.fdi.eventsoft.negocio.entidades.Evento;
+import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
 import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/")
@@ -79,11 +82,14 @@ public class HomeController {
             } else if (usuario instanceof Organizador) {
                 session.setAttribute("rol", "Organizador");
                 model.addAttribute("pagina", "timeline");
+                model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
+                model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
                 return "timeline";
 
             } else if (usuario instanceof Proveedor) {
                 session.setAttribute("rol", "Proveedor");
                 model.addAttribute("pagina", "proveedores");
+                model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
                 return "redirect:./servicios/buscar/por-proveedor/" + usuario.getId();
             }
         }

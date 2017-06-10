@@ -44,7 +44,7 @@
 
             <!--OTRAS PROPIEDADES-->
             <property name="hibernate.show.sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <!-- <property name="hibernate.hbm2ddl.auto" value="update" />-->
             <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
             <!--<property name="hibernate.hbm2ddl.import_files" value="import.sql"/>-->
         </properties>

@@ -25,6 +25,9 @@
       <h1>
         Mis eventos
         <small></small>
+        <c:catch var="exception"><span id="mensajeError" class="alert-error"><c:out value="${mensajeError}" ></c:out></span></c:catch>
+        <c:catch var="exception"><span id="mensaje" class="alert-success"><c:out value="${mensaje}" ></c:out></span></c:catch>
+
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>

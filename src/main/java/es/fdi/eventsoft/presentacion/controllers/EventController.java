@@ -1,6 +1,7 @@
 package es.fdi.eventsoft.presentacion.controllers;
 
 import es.fdi.eventsoft.negocio.comandos.Contexto;
+import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.comandos.factoria.FactoriaComandos;
 import es.fdi.eventsoft.negocio.entidades.Evento;
 import es.fdi.eventsoft.negocio.entidades.Servicio;
@@ -23,12 +24,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static es.fdi.eventsoft.negocio.comandos.EventosNegocio.*;
@@ -145,32 +142,13 @@ public class EventController {
         return "nuevo-evento";
     }
 
-    private Date formateaFecha(String fechaInicio) {
-
-        DateFormat dateFormat;
-        Date fecha = null;
-
-        try {
-            dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            fecha = dateFormat.parse(fechaInicio);
-        } catch (ParseException e) {
-
-            try {
-                dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                fecha = dateFormat.parse(fechaInicio);
-            } catch (ParseException e1) {
-                fecha = null;
-            }
-        }
-
-        return fecha;
-    }
-
     @RequestMapping(value = "/anadir-servicios-evento/{idEvento}",  method = RequestMethod.POST, produces = "application/json")
-    public String añadirServiciosAEvento(@PathVariable Long idEvento, @RequestParam(value="servicios[]") String[] servicios) {
+    public @ResponseBody ResponseEntity<String> añadirServiciosAEvento(Model model, @PathVariable Long idEvento, @RequestParam(value="servicios[]") String[] servicios) {
 
         List<Long> listaIDs = new ArrayList<>();
-
+        Contexto contex = null;
+        HttpStatus estatus = HttpStatus.BAD_REQUEST;
+        
         Arrays.stream(servicios)
                 .mapToLong((str)-> Long.parseLong(str))
                 .forEach((str)-> listaIDs.add(Long.parseLong(String.valueOf(str))));
@@ -183,16 +161,36 @@ public class EventController {
         System.out.println("*********************************************");
 
 
-        if(idEvento>0){
-            Contexto contex = FactoriaComandos.getInstance().crearComando(AÑADIR_SERVICIOS_A_EVENTO).execute(new Pair<>(idEvento,  listaIDs));
+        if(idEvento<=0) {
+            model.addAttribute("mensajeError", "ID de evento erroneo");
+        }else{
+            contex = FactoriaComandos.getInstance().crearComando(ANADIR_SERVICIOS_A_EVENTO).execute(new Pair<>(idEvento,  listaIDs));
 
-            System.out.println(contex.getEvento());
 
-            return "redirect:../timeline";
+            if(contex.getEvento() == ANADIR_SERVICIOS_A_EVENTO){
+                model.addAttribute("mensaje", "Añadidos correctamente!");
+                estatus = HttpStatus.OK;
+
+            }else if(contex.getEvento() == ERROR_AÑADIR_SERVICIOS_A_EVENTO){
+                model.addAttribute("mensajeError", "Error al añadir los servicios al evento.");
+
+            }else if(contex.getEvento() == SERVICIO_CON_FECHAS_OCUPADAS){
+                model.addAttribute("mensajeError", "Servicio con las fechas ocupadas para ese dia");
+
+            }else if(contex.getEvento() == NO_SE_PUDO_AÑADIR_ALGUN_EVENTO){
+                model.addAttribute("mensajeError", "ERROR. No se pudo agregar algún servicio");
+
+            }else if(contex.getEvento() == LISTA_SERVICIOS_VACIA){
+                model.addAttribute("mensajeError", "Lista de servicios vacía");
+
+            }else if(contex.getEvento() == ERROR_BUSCAR_EVENTO){
+                model.addAttribute("mensajeError", "Error al buscar el evento");
+            }
         }
 
+        System.out.println(contex.getEvento());
 
-        return "redirect:../timeline";
+        return new ResponseEntity<>((contex.getEvento()== ANADIR_SERVICIOS_A_EVENTO)? "Servicios añadidos correctamente" : contex.getEvento().toString(), estatus);
     }
 
     @RequestMapping(value = "/buscar/{idEvento}",  method = RequestMethod.GET, produces = "application/json")

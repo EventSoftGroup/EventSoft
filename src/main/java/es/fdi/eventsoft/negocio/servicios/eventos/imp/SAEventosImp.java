@@ -5,7 +5,6 @@ import es.fdi.eventsoft.integracion.FachadaIntegracion;
 import es.fdi.eventsoft.negocio.comandos.EventosNegocio;
 import es.fdi.eventsoft.negocio.entidades.Evento;
 import es.fdi.eventsoft.negocio.entidades.EventoServicio;
-import es.fdi.eventsoft.negocio.entidades.Mensaje;
 import es.fdi.eventsoft.negocio.entidades.Servicio;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
@@ -68,7 +67,7 @@ public class SAEventosImp implements SAEventos {
     }
 
     @Override
-    public EventosNegocio añadirServiciosAEvento(Long idEvento, List<Long> servicios){
+    public EventosNegocio añadirServiciosAEvento(Long idEvento, List<Long> idsServiciosNuevos){
         FachadaIntegracion integra;
         SAServicios saServicios;
         Servicio serv;
@@ -90,14 +89,15 @@ public class SAEventosImp implements SAEventos {
                 todoOk &= false;
 
             }else{
-                if(servicios.isEmpty()){
+                if(idsServiciosNuevos.isEmpty()){
                     integra.commit();
                     result = LISTA_SERVICIOS_VACIA;
                     todoOk &= false;
                 }else {
                     saServicios = FactoriaSA.getInstance().crearSAServicios();
                     listaES = new ArrayList<>();
-                    for (Long id : servicios) {
+
+                    for (Long id : idsServiciosNuevos) {
 
                         serv = saServicios.buscarServicio(id);
 
@@ -105,30 +105,38 @@ public class SAEventosImp implements SAEventos {
                             todoOk &= false;
                             result = NO_SE_PUDO_AÑADIR_ALGUN_EVENTO;
 
-                        } else {//correcto todo
-                            EventoServicio eventServ = new EventoServicio(evento, serv);
-                            if(!evento.getEventoServicios().contains(eventServ))
-                                listaES.add(eventServ);
-                            todoOk &= true;
+                        } else {//Todo correcto
 
+                            int num = integra.ejecutarNamedQuery("Evento.EventosDeServicioConFechaFinMayorA", Arrays.asList(new Pair<>("servicio", serv ), new Pair<>("fechaFin", evento.getFechaFin()))).size();
+                            if(num>0){
+                                todoOk &= false;
+                                result = EventosNegocio.SERVICIO_CON_FECHAS_OCUPADAS;
+                            }else {
+                                EventoServicio eventServ = new EventoServicio(evento, serv);
+                                if (!evento.getEventoServicios().contains(eventServ))
+                                    listaES.add(eventServ);
+                                todoOk &= true;
+                            }
                         }
                     }
 
-                    evento.addEventoServicios(listaES);
-                    if(integra.modifica(evento)){
-                        integra.commit();
-                        todoOk &= true;
-                    }else{
-                        todoOk &= false;
-                        result = EventosNegocio.ERROR_AÑADIR_SERVICIOS_A_EVENTO;
-                    }
+                    if(todoOk) {
+                        evento.addEventoServicios(listaES);
+                        if (integra.modifica(evento)) {
+                            integra.commit();
+                            todoOk &= true;
+                        } else {
+                            todoOk &= false;
+                            result = EventosNegocio.ERROR_AÑADIR_SERVICIOS_A_EVENTO;
+                        }
 
+                    }
                 }
             }
         }
 
 
-        return (todoOk)? AÑADIR_SERVICIOS_A_EVENTO: result;
+        return (todoOk)? ANADIR_SERVICIOS_A_EVENTO : result;
     }
 
     @Override

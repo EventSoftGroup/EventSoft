@@ -141,11 +141,37 @@ $(function() {
             beforeSend: function(xhr) {
                 xhr.setRequestHeader(header, token);
             },
-            success: function () {
-                window.location.href = window.location.href;
+            success: function (response) {
+
+                console.log("Todo correcto tras añadir servicio a evento");
+                console.log(response.evento);
+                console.log(response.responseJSON);
+                console.log(response.responseText);
+                console.log(response);
+
+                $("#mensaje").text(response.responseText);
+
+                //window.location.href = window.location.href;
             },
-            error: function () {
-                window.location.href = window.location.href;
+            error: function (response) {
+
+                console.log("Error tras añadir servicio a evetno");
+                console.log(response.evento);
+                console.log(response.responseJSON);
+                console.log(response.responseText);
+                console.log(response);
+
+                if(response.responseText === "Servicios añadidos correctamente"){
+                    $("#mensajeError").text("");
+                    $("#mensaje").text(response.responseText);
+                }else {
+                    $("#mensaje").text("");
+                    $("#mensajeError").text(response.responseText);
+                }
+                //window.location.href = window.location.href;
+
+                //$("#mensajeError").text(response.responseJSON);
+
             }
         });
 

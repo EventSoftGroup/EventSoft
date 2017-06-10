@@ -106,6 +106,7 @@ public class ServicioIntegracionImp<T> implements FachadaIntegracion<T> {
             q.setParameter(e.getKey(), e.getValue());
         }
         */
+
         for (int i=0; i < params.size(); i++) {
             q.setParameter(params.get(i).getKey(), params.get(i).getValue());
         }
