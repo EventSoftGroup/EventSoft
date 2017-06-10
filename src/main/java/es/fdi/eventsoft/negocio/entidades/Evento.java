@@ -2,13 +2,11 @@ package es.fdi.eventsoft.negocio.entidades;
 
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
-import es.fdi.eventsoft.negocio.entidades.validadores.FechaEventos;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;

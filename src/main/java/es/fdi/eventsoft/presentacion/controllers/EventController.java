@@ -52,7 +52,7 @@ public class EventController {
     }
 
     @RequestMapping("/calendario")
-    public String eventoCalendario(Model model) {
+public String eventoCalendario(Model model) {
         model.addAttribute("title", "EventSoft - Calendario");
         model.addAttribute("pagina", "calendario");
         return "calendario";

@@ -1,10 +1,6 @@
 package es.fdi.eventsoft.negocio.entidades.validadores;
 
 import es.fdi.eventsoft.negocio.entidades.Evento;
-import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
-import es.fdi.eventsoft.negocio.servicios.eventos.SAEventos;
-import es.fdi.eventsoft.negocio.servicios.usuarios.imp.SAUsuarioImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
