@@ -181,7 +181,6 @@ public class MensajesController {
             contexto = FactoriaComandos.getInstance().crearComando(BUSCAR_MENSAJES_BY_USER).execute(idUsuario);
 
             if (contexto.getEvento() == BUSCAR_MENSAJES_BY_USER) {
-                log.info("Se han encontrado mensajes");
                 return new ResponseEntity<Mensaje>((HttpStatus) contexto.getDatos());
             } else {
                 return new ResponseEntity<Mensaje>(HttpStatus.INTERNAL_SERVER_ERROR);

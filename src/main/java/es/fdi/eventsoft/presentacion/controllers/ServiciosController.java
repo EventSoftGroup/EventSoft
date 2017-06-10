@@ -112,18 +112,7 @@ public class ServiciosController {
             }
         }
         else return "error-500";
-            /*
-            if (contex.getEvento() == ELIMINAR_SERVICIO) {
-                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.OK);
-            } else if(contex.getEvento() == ERROR_ELIMINAR_SERVICIO){
-                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.NOT_FOUND);
-            }
-            else if(contex.getEvento() == ERROR_SERVICIO_ASOCIADO_A_EVENTO){
-                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.CONFLICT);
-            }
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        */
+
         return "redirect:/index";
     }
 
@@ -176,7 +165,6 @@ public class ServiciosController {
 
         try {
             if (Arrays.asList(Servicio.TiposServicio.values()).contains(Servicio.TiposServicio.valueOf(tipoServicio.toUpperCase()))) {
-                System.out.println(tipoServicio + " existe en el sistema.");
 
                 Contexto contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_TIPO_SERVICIO).execute(Servicio.TiposServicio.valueOf(tipoServicio));
 
@@ -187,7 +175,7 @@ public class ServiciosController {
                 }
 
             } else {
-                System.out.println(tipoServicio + " no existe en el sistema.");
+                //System.out.println(tipoServicio + " no existe en el sistema.");
             }
         }catch (IllegalArgumentException e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
