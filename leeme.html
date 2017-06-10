@@ -18,64 +18,105 @@
 <h3>Vistas de la plataforma</h3>
 <ul>
     <li>
-        <em>Login / Formulario registro:</em>
+        <em><u></u>Login / Formulario registro:</u></em>
         <p>
-            pantalla inicial donde <em>los usuarios</em> acceden a la plataforma o se
-            den de alta en la misma. Al darse de alta establecen que tipo de usuario son.
+            pantalla inicial donde <em>los usuarios</em> acceden a la plataforma.
         </p>
     </li>
     <li>
-        <em>Panel de proveedores: </em>
+        <em><u>Elección de Rol:</u></em>
         <p>
-            <em>los proveedores</em> indican desde aquí los detalles de sus servicios,
-            los días desde los que están disponibles, si desean participar o no
-            en los eventos en los que han sido solicitados y serán notificados
-            si estos han sido cancelados.
+            <em>los usuarios</em> que desean registrarse establecen que tipo de usuarios son.
         </p>
     </li>
     <li>
-        <em>Nuevo evento: </em>
+        <em><u>Formulario registro:</u></em>
         <p>
-            vista desde donde <em>los organizadores</em> crean los eventos. A la hora de
-            crear un evento, el organizador elige la fecha del evento y el tipo
-            de proveedores necesarios. Y después, por cada tipo de proveedor
-            elegido se visualiza una lista de proveedores disponibles esa fecha,
-            de los cuales el organizador elige los que más le guste
-            (según sus valoraciones).
+            <em>los usuarios</em> rellenan sus datos y se dan de alta en la apicación.
         </p>
     </li>
     <li>
-        <em>Panel seguimiento eventos: </em>
+        <em><u>Mis servicios: </u></em>
         <p>
-            <em>todos los usuarios</em> ven desde aquí el seguimiento de los eventos
-            en los que participan junto con todos sus detalles. Además, existe
-            un buzón desde el cual <em>el organizador y los proveedores</em> pueden
-            aclarar detalles concretos del evento. Y al finalizar el mismo,
-            podrán valorar el trabajo del resto.
+            <em>los proveedores</em> pueden ver aqui los detalles de sus servicios
+            y eliminarlos si desean.
         </p>
     </li>
     <li>
-        <em>Panel administración: </em>
+        <em><u>Nuevo evento: </u></em>
         <p>
-            donde <em>los administradores</em> pueden hacer las modificaciones que
-            consideren necesarias en la plataforma, como eliminar proveedores
-            que tengan muchos comentarios negativos por parte de los usuarios.
+            vista desde donde <em>los organizadores</em> crean los eventos.
         </p>
     </li>
     <li>
-        <em>Perfil público de usuario: </em>
+        <em><u>Mis eventos: </u></em>
         <p>
-            <em>los usuarios</em> pueden modificar sus datos de contacto. Además,
-            pueden acceder a los perfiles de otros usuarios y observar sus
-            valoraciones para orientarse en sus decisiones.
+            <em>todos los usuarios</em> ven los datos de los eventos
+            en los que participan junto con todos sus detalles. Además,
+            <em>los organizadores</em> pueden:
+        <ul>
+            <li>Añadir servicios a eventos</li>
+            <li>Ver que servicios tiene un evento</li>
+            <li>Modificar un evento</li>
+            <li>Eliminar un evento</li>
+        </ul>
         </p>
     </li>
     <li>
-        <em>Buzón: </em>
+        <em><u>Panel administración: </u></em>
+        <p>
+            donde <em>los administradores</em> pueden ver y eliminar cualquier cosa de la aplicacion que
+            consideren necesarias, como ver los proveedores dados de alta o eliminar un determinado evento.
+        </p>
+    </li>
+    <li>
+        <em><u>Perfil público de usuario: </u></em>
+        <p>
+            <em>los usuarios</em> pueden modificar sus datos de contacto. En el caso de que el usuario sea un proveedor, podrá tambien
+            añadir nuevos servicios.
+        </p>
+    </li>
+    <li>
+        <em><u>Calendario: </u></em>
+        <p>
+            <em>los usuarios</em> pueden ver graficamente la representacion de los eventos en los que participan en el calendario.
+        </p>
+    </li>
+    <li>
+        <em><u>Buzón: </u></em>
         <p>
             <em>los usuarios</em> se pueden poner en contacto a través de mensajes de
-            texto para aclarar detalles de los eventos.
+            texto para aclarar detalles de los eventos. Cada usuario tendra una bandeja de mensajes recibidos
+            y otra de mensajes enviados. Ademas, desde ella tambien son capaces de ver su contenido o eliminarlos.
         </p>
+    </li>
+</ul>
+
+<h2>Credenciales de los usuarios ya dados de alta</h2>
+<ul>
+    <li><em>Clientes</em>
+        <ul>
+            <li>Email: cliente1@gmail.com   Contraseña:1234</li>
+            <li>Email: cliente2@gmail.com   Contraseña:1234</li>
+        </ul>
+    </li>
+
+    <li><em>Organizadores</em>
+        <ul>
+            <li>Email: organizador1@gmail.com   Contraseña:1234</li>
+            <li>Email: organizador2@gmail.com   Contraseña:1234</li>
+        </ul>
+    </li>
+    <li><em>Proveedores</em>
+        <ul>
+            <li>Email: proveedor1@gmail.com   Contraseña:1234</li>
+            <li>Email: proveedor2@gmail.com   Contraseña:1234</li>
+        </ul>
+    </li>
+    <li><em>Administrador</em>
+        <ul>
+            <li>Email: adminIW@gmail.com   Contraseña:1234</li>
+        </ul>
     </li>
 </ul>
 
@@ -86,22 +127,9 @@
     <li>Sergio Pino</li>
     <li>Tomás Muñoz</li>
 </ul>
-<h2>Vistas</h2>
+<h2>Login de la aplicación</h2>
 <ul>
-    <li><a href="http://localhost:8080/administracion/">Administración</a></li>
-    <li><a href="http://localhost:8080/buzon">Buzón</a></li>
-    <li><a href="http://localhost:8080/calendario">Calendario</a></li>
-    <li><a href="http://localhost:8080/index">Index</a></li>
-    <li><a href="http://localhost:8080/leer-mensajes">Leer mensajes</a></li>
-    <li><a href="http://localhost:8080/leer-notificacion">Leer notificación</a></li>
     <li><a href="http://localhost:8080/login">Login</a></li>
-    <li><a href="http://localhost:8080/notificaciones">Notificaciones</a></li>
-    <li><a href="http://localhost:8080/nuevo-evento">Nuevo evento</a></li>
-    <li><a href="http://localhost:8080/nuevo-mensaje">Nuevo mensaje</a></li>
-    <li><a href="http://localhost:8080/perfil-usuario">Perfil usuario</a></li>
-    <li><a href="http://localhost:8080/proveedores">Proveedores</a></li>
-    <li><a href="http://localhost:8080/register">Registrar</a></li>
-    <li><a href="http://localhost:8080/timeline">Timeline</a></li>
 </ul>
 <h2>Ficheros externos</h2>
 <p>Hemos decidido utilizar una plantilla para nuestro proyecto que incluye
