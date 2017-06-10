@@ -66,12 +66,13 @@ public class SAServiciosImp implements SAServicios{
         Iterator<EventoServicio> it = listaEvenServ.iterator();
         Evento act;
         Date fechaAct = new Date();
+        Date fechaMod = new Date(fechaAct.getYear(), fechaAct.getMonth(),fechaAct.getDay());
         int cont = 0;
         while (it.hasNext()) {
             //Obtenemos el evento actual
             act = it.next().getEvento();
             //Si la fecha de fin es anterior a la fecha actual
-            if (act.getFechaFin().before(fechaAct)) {
+            if (act.getFechaFin().before(fechaMod)) {
                 cont++;
             }
         }

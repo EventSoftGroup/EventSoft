@@ -121,6 +121,7 @@ public class EventController {
         model.addAttribute("tipoUsuario", "organizador");
         model.addAttribute("CategoriasEvento", Arrays.asList(Evento.CategoriasEvento.values()));
         if(contex.getEvento() == CREAR_EVENTO){
+            model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
             return "timeline";
         }else{
             model.addAttribute("emailCliente", email);

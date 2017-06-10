@@ -61,7 +61,7 @@
                                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                                 <springForm:errors path="lugar" cssClass="alert-error" />
                             </div>
-                            <!-- DESCRPCION-->
+                            <!-- DESCRIPCION-->
                             <div class="form-group">
                                 <springForm:label path="descripcion">Descripción</springForm:label>
                                 <springForm:textarea path="descripcion" cssClass="form-control"  placeholder="Una breve descripción del evento..." type="text" />

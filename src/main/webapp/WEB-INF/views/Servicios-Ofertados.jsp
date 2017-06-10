@@ -102,6 +102,10 @@
                             <!-- /.mail-box-messages -->
                         </div>
                     </div>
+                    <div>
+                        <c:catch var="exception"><h3 style="color: green;"><c:out value="${mensaje}"></c:out></h3></c:catch>
+                        <c:catch var="exception"><h3 style="color: red;"><c:out value="${mensajeError}"></c:out></h3></c:catch>
+                    </div>
                     <!-- /. box -->
                 </div>
                 <!-- /.col -->

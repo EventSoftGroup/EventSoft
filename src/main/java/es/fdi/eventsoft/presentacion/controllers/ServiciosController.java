@@ -42,7 +42,13 @@ public class ServiciosController {
             HttpSession session,
             Model model
     ) {
+        if(nombre.equalsIgnoreCase("") || descripcion.equalsIgnoreCase("")){
+            //Actualizamos el modelo
+            model.addAttribute("usuarioAModificar", session.getAttribute("usuario"));
+            model.addAttribute("listaTiposServicio", Servicio.TiposServicio.values());
 
+            return "perfil-usuario";
+        }
         Contexto contexto;
         //Creamos la fecha de registro
         Date fechaRegistro = new Date();
@@ -89,16 +95,20 @@ public class ServiciosController {
             Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(idServ);
 
             if (contex.getEvento() == ELIMINAR_SERVICIO) {
-                contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(idProv);
+                model.addAttribute("mensaje", contex.getDatos());
+            }
+            else if(contex.getEvento() == ERROR_ELIMINAR_SERVICIO){
+                model.addAttribute("mensajeError", contex.getDatos());
+            }
+            else if(contex.getEvento() == ERROR_SERVICIO_ASOCIADO_A_EVENTO){
+                model.addAttribute("mensajeError", contex.getDatos());
+            }
+            contex = FactoriaComandos.getInstance().crearComando(BUSCAR_SERVICIOS_BY_PROVEEDOR).execute(idProv);
 
-                if (contex.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
-                    model.addAttribute("listaServicios", contex.getDatos());
-                    model.addAttribute("pagina", "Servicios-Ofertados");
-                    return "Servicios-Ofertados";
-                }
-
-            } else {
-                return "error-500";
+            if (contex.getEvento() == BUSCAR_SERVICIOS_BY_PROVEEDOR) {
+                model.addAttribute("listaServicios", contex.getDatos());
+                model.addAttribute("pagina", "Servicios-Ofertados");
+                return "Servicios-Ofertados";
             }
         }
         else return "error-500";
