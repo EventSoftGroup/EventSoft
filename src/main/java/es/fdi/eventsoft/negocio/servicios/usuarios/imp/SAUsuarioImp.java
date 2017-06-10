@@ -58,8 +58,15 @@ public class SAUsuarioImp implements SAUsuario {
 
         try {
 
+            System.out.println(usuarioEliminar.getEmail());
+            Usuario aborrar = new Usuario();
             //Se elimina solo si existe el correo
-            Usuario aborrar = buscarUsuarioByEmail(usuarioEliminar.getEmail());
+            if (usuarioEliminar.getEmail() != null){
+                aborrar = buscarUsuarioByEmail(usuarioEliminar.getEmail());
+            } else {
+                aborrar = buscarUsuarioByID(usuarioEliminar.getId());
+            }
+
             if (aborrar != null) {
                 integra = FachadaIntegracion.newInstance(Usuario.class);
 

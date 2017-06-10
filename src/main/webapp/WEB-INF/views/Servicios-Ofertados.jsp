@@ -38,10 +38,15 @@
         <section class="content">
             <div class="row">
                 <!-- /.col -->
-                <div class="col-md-12" id="bandeja_recibidos">
+                <div style="margin-top:2%;" class="col-md-12" id="bandeja_recibidos">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Servicios Ofertados</h3>
+                            <c:if test="${empty listaServicios}">
+                                <h3>No tienes servicios registrados</h3>
+                            </c:if>
+                            <c:if test="${not empty listaServicios}">
+                                <h3 class="box-title">Servicios Ofertados</h3>
+                            </c:if>
 
                             <div class="box-tools pull-right">
 
@@ -49,14 +54,12 @@
                             <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
+                        <c:if test="${not empty listaServicios}">
                         <div class="box-body no-padding">
-                            <c:if test="${not empty listaServicios}">
-                            </c:if>
                             <div class="table-responsive mailbox-messages">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     <tr>
-                                        <th class="text-center">      </th>
                                         <th class="text-center">Nº</th>
                                         <th class="text-center">Tipo servicio</th>
                                         <th class="text-center">Nombre</th>
@@ -73,12 +76,7 @@
                                         <c:set var="count" value="1" scope="page" />
                                         <c:forEach var="servicio" items="${listaServicios}">
                                             <tr>
-                                                <!--<td><input type="checkbox"></td>-->
-                                                <td>
-                                                    <a href="/servicios/buscar/${servicio.id}" type="button"
-                                                       class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
 
-                                                </td>
                                                 <td class="mailbox-subject text-center"><c:out value="${count}"></c:out><c:set var="count" value="${count + 1}" scope="page"/></td>
 
                                                 <!-- <p style="display:none;"><c:catch var="exception"><c:out value="${servicio.nombre}"></c:out></c:catch></p>-->
@@ -101,6 +99,7 @@
                             </div>
                             <!-- /.mail-box-messages -->
                         </div>
+                        </c:if>
                     </div>
                     <div>
                         <c:catch var="exception"><h3 style="color: green;"><c:out value="${mensaje}"></c:out></h3></c:catch>
@@ -133,7 +132,6 @@ immediately after the control sidebar -->
 
 <!-- ./wrapper -->
 <%@ include file="../fragments/plugins.jspf" %>
-<script src="<c:url value="/resources/dist/js/servicios.js" />"></script>
 <!-- iCheck -->
 <!-- Page Script -->
 <script>

@@ -124,11 +124,15 @@ public class MensajesController {
 
             Contexto contex = FactoriaComandos.getInstance().crearComando(CREAR_MENSAJE).execute(mensaje);
 
+
+
             if (contex.getEvento() == CREAR_MENSAJE) {
                 model.addAttribute("usuario");
+                model.addAttribute("mensaje", "Mensaje enviado al destinatario: " + email);
                 return "redirect:buzon";
 
             } else if (contex.getEvento() == ERROR_CREAR_MENSAJE) {
+                model.addAttribute("mensajeError", "Error al enviar mensaje. Introduce datos correctos");
                 return "nuevo-mensaje";
             }
             return "redirect:buzon";

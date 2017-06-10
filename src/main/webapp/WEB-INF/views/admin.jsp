@@ -25,7 +25,7 @@
         <section class="content-header">
             <h1>
                 Administración
-                <small>Proveedores</small>
+                <small>Selecciona una de las opciones para mostrar su información</small>
             </h1>
             <ol class="breadcrumb">
                 <li class="active"><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -132,7 +132,6 @@
                                     <table class="table table-hover table-striped">
                                         <thead>
                                         <tr>
-                                            <th class="text-center">      </th>
                                             <th class="text-center">Email</th>
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Provincia</th>
@@ -148,17 +147,15 @@
                                             <c:forEach var="cli" items="${listaClinetes}">
                                                 <tr>
                                                     <!--<td><input type="checkbox"></td>-->
-                                                    <td><a href="/servicios/buscar/${cli.id}" type="button"
-                                                           class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
-                                                    </td>
 
                                                     <td class="mailbox-subject text-center"><c:out value="${cli.email}"></c:out></td>
                                                     <td class="mailbox-subject text-center"><b><c:out value="${cli.nombre}"></c:out></b></td>
-                                                    <td class="mailbox-subject text-center"><b><c:out value="${cli.provincia}"></c:out></b></td>
-                                                    <td class="mailbox-subject text-center"><b><c:out value="${cli.telefono}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${cli.provincia}"></c:out></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${cli.telefono}"></c:out></td>
 
                                                     <td class="mailbox-subject">
-                                                        <a type="button" class="btn btn-default text-center botonEliminarServicio" id="cliente-${cli.id}" data-id="${cli.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
+                                                        <a type="button" href="./eliminar-usuario/${cli.id}" class="btn btn-default text-center botonEliminarServicio" id="cliente-${cli.id}" data-id="${cli.id}"><i class="fa fa-trash-o"></i>Eliminar</a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
 
@@ -179,7 +176,6 @@
                                     <table class="table table-hover table-striped">
                                         <thead>
                                         <tr>
-                                            <th class="text-center">      </th>
                                             <th class="text-center">Email</th>
                                             <th class="text-center">Empresa</th>
                                             <th class="text-center">Provincia</th>
@@ -194,17 +190,16 @@
 
                                             <c:forEach var="prov" items="${listaProveedores}">
                                                 <tr>
-                                                    <!--<td><input type="checkbox"></td>-->
-                                                    <td><a href="/servicios/buscar/${prov.id}" type="button"
-                                                           class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
-                                                    </td>
+
 
                                                     <td class="mailbox-subject text-center"><c:out value="${prov.email}"></c:out></td>
                                                     <td class="mailbox-subject text-center"><b><c:out value="${prov.empresa}"></c:out></b></td>
-                                                    <td class="mailbox-subject text-center"><b><c:out value="${prov.provincia}"></c:out></b></td>
-                                                    <td class="mailbox-subject text-center"><b><c:out value="${prov.telefono}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${prov.provincia}"></c:out></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${prov.telefono}"></c:out></td>
 
-                                                    <td class="mailbox-subject"><a type="button" class="btn btn-default text-center botonEliminarServicio" id="proveedor-${prov.id}" data-id="${prov.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
+                                                    <td class="mailbox-subject">
+                                                        <a href="./eliminar-usuario/${prov.id}" type="button" class="btn btn-default text-center botonEliminarServicio" id="proveedor-${prov.id}" data-id="${prov.id}"><i class="fa fa-trash-o"></i>Eliminar</a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
 
@@ -224,7 +219,6 @@
                                     <table class="table table-hover table-striped">
                                         <thead>
                                         <tr>
-                                            <th class="text-center">      </th>
                                             <th class="text-center">Email</th>
                                             <th class="text-center">Empresa</th>
                                             <th class="text-center">Provincia</th>
@@ -239,18 +233,15 @@
 
                                             <c:forEach var="orga" items="${listaOrganizadores}">
                                                 <tr>
-                                                    <!--<td><input type="checkbox"></td>-->
-                                                    <td><a href="/servicios/buscar/${orga.id}" type="button"
-                                                           class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
-                                                    </td>
 
                                                     <td class="mailbox-subject text-center"><c:out value="${orga.email}"></c:out></td>
                                                     <td class="mailbox-subject text-center"><b><c:out value="${orga.empresa}"></c:out></b></td>
-                                                    <td class="mailbox-subject text-center"><b><c:out value="${orga.provincia}"></c:out></b></td>
-                                                    <td class="mailbox-subject text-center"><b><c:out value="${orga.telefono}"></c:out></b></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${orga.provincia}"></c:out></td>
+                                                    <td class="mailbox-subject text-center"><c:out value="${orga.telefono}"></c:out></td>
 
                                                     <td class="mailbox-subject">
-                                                        <a type="button" class="btn btn-default text-center botonEliminarServicio" id="organizador-${prov.id}" data-id="${prov.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
+                                                        <a href="./eliminar-usuario/${orga.id}" type="button" class="btn btn-default text-center botonEliminarServicio" id="organizador-${prov.id}" data-id="${prov.id}"><i class="fa fa-trash-o"></i>Eliminar</a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
 
@@ -280,11 +271,10 @@
                             <li><a href="#Eventos" data-toggle="tab">Eventos</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class=" tab-pane" id="Servicios">
+                            <div class=" tab-pane table-responsive" id="Servicios">
                                 <table class="table table-hover table-striped">
                                     <thead>
                                     <tr>
-                                        <th class="text-center col-md-1">      </th>
                                         <th class="text-center col-md-1">Tipo servicio</th>
                                         <th class="text-center col-md-1">Nombre</th>
                                         <th class="text-center col-md-1">Descripción</th>
@@ -301,11 +291,6 @@
                                         <c:forEach var="servicio" items="${listaServicios}">
                                             <tr>
                                                 <!--<td><input type="checkbox"></td>-->
-                                                <td class="col-md-1">
-                                                    <a href="/servicios/buscar/${servicio.id}" type="button"
-                                                       class="btn btn-default text-center "><i class="fa fa-search"></i> Ver</a>
-
-                                                </td>
                                                 <!-- <p style="display:none;"><c:catch var="exception"><c:out value="${servicio.nombre}"></c:out></c:catch></p>-->
                                                 <td class="mailbox-subject text-center col-md-1"><c:out value="${servicio.tipo}"></c:out></td>
                                                 <td class="mailbox-subject text-center col-md-1"><b><c:out value="${servicio.nombre}"></c:out></b></td>
@@ -313,7 +298,9 @@
                                                 <td class="mailbox-date text- col-md-1">
                                                     <fmt:formatDate type = "date" value = "${servicio.fechaRegistro}" />
                                                 </td>
-                                                <td class="mailbox-subject col-md-1"><a type="button" class="btn btn-default text-center botonEliminarServicio" id="servicio-${servicio.id}" data-id="${servicio.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
+                                                <td class="mailbox-subject col-md-1">
+                                                    <a href="./eliminar-servicio/${servicio.id}" type="button" class="btn btn-default text-center botonEliminarServicio" id="servicio-${servicio.id}" data-id="${servicio.id}"><i class="fa fa-trash-o"></i>Eliminar</a>
+                                                </td>
                                             </tr>
                                         </c:forEach>
 
@@ -321,15 +308,12 @@
 
                                     </tbody>
                                 </table>
-
-
                             </div>
                             <div class="tab-pane" id="Eventos">
                                 <div class="table-responsive mailbox-messages">
                                     <table class="table table-hover table-striped">
                                         <thead>
                                         <tr>
-                                            <th class="text-center">      </th>
                                             <th class="text-center">Tipo evento</th>
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Descripción</th>
@@ -346,11 +330,6 @@
                                             <c:forEach var="evento" items="${listaEventos}">
                                                 <tr>
                                                     <!--<td><input type="checkbox"></td>-->
-                                                    <td>
-                                                        <a href="/servicios/buscar/${evento.id}" type="button"
-                                                           class="btn btn-default text-center"><i class="fa fa-search"></i> Ver</a>
-
-                                                    </td>
                                                     <td class="mailbox-subject text-center"><c:out value="${evento.categoria}"></c:out></td>
                                                     <!-- <p style="display:none;"><c:catch var="exception"><c:out value="${evento.nombre}"></c:out></c:catch></p>-->
 
@@ -362,7 +341,9 @@
                                                     <td class="mailbox-date text-center">
                                                         <fmt:formatDate type = "date" value = "${evento.fechaFin}" />
                                                     </td>
-                                                    <td class="mailbox-subject"><a type="button" class="btn btn-default text-center botonEliminarServicio" id="evento-${evento.id}" data-id="${evento.id}"><i class="fa fa-trash-o"></i>Eliminar</a></td>
+                                                    <td class="mailbox-subject">
+                                                        <a href="./eliminar-evento/${evento.id}" type="button" class="btn btn-default text-center botonEliminarServicio" id="evento-${evento.id}" data-id="${evento.id}"><i class="fa fa-trash-o"></i>Eliminar</a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
 

@@ -32,7 +32,7 @@ public class _tests {
     public static void main(String[] args) throws ParseException {
 
 
-        EventosNegocio evnt = FactoriaSA.getInstance().crearSAEventos().añadirServiciosAEvento(6L, Arrays.asList(18L));
+        EventosNegocio evnt = FactoriaSA.getInstance().crearSAEventos().añadirServiciosAEvento(19L, Arrays.asList(38L));
 
         System.out.println(evnt);
 

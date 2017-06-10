@@ -33,13 +33,7 @@
                 <!-- /.messages-menu -->
 
                 <!-- Notifications Menu -->
-                <li class="dropdown notifications-menu">
-                    <!-- Menu toggle button -->
-                    <a href="/servicios/buscar/eventos-por-proveedor/${(usuario.id)}" class="dropdown-toggle">
-                        <i class="fa fa-bell-o"></i>
-                        <!--<span class="label label-warning">10</span>-->
-                    </a>
-                </li>
+
 
 
                 <!-- User Account Menu -->

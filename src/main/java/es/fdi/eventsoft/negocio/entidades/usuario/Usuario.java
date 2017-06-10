@@ -82,6 +82,8 @@ public class Usuario implements Serializable {
 
     public Usuario() { }
 
+    public Usuario(Long id) { this.id = id; }
+
     public Usuario(String email, String password, String direccion, String localidad, String provincia, String telefono, String codigoPostal, EstadosUsuario estado) {
         this.email = email;
         this.password = password;

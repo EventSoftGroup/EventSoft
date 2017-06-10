@@ -7,11 +7,14 @@ import es.fdi.eventsoft.negocio.comandos.factoria.FactoriaComandos;
 import es.fdi.eventsoft.negocio.entidades.usuario.Cliente;
 import es.fdi.eventsoft.negocio.entidades.usuario.Organizador;
 import es.fdi.eventsoft.negocio.entidades.usuario.Proveedor;
+import es.fdi.eventsoft.negocio.entidades.usuario.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.concurrent.ExecutorService;
@@ -80,5 +83,64 @@ public class AdminController {
             return "login";
         }
         return "login";
+    }
+
+    @RequestMapping(value = "/eliminar-usuario/{id}", method = RequestMethod.GET)
+    public String eliminarUsuario(@PathVariable("id") Long id, Model model) {
+        if(id > 0) {
+
+            Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_USUARIO).execute(new Usuario(id));
+
+            if (contex.getEvento() == ELIMINAR_SERVICIO) {
+                model.addAttribute("pagina", "Servicios-Ofertados");
+                return "redirect:/administracion/admin";
+            }
+        }
+        else return "error-500";
+        return "redirect:/administracion/admin";
+    }
+
+    @RequestMapping(value = "/eliminar-servicio/{id}", method = RequestMethod.GET)
+    public String eliminarServicio(@PathVariable("id") Long idServ, Model model) {
+
+        if(idServ > 0) {
+
+            Contexto contex = FactoriaComandos.getInstance().crearComando(ELIMINAR_SERVICIO).execute(idServ);
+
+            if (contex.getEvento() == ELIMINAR_SERVICIO) {
+                return "redirect:/administracion/admin";
+            } else {
+                return "error-500";
+            }
+
+        }
+        else return "error-500";
+            /*
+            if (contex.getEvento() == ELIMINAR_SERVICIO) {
+                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.OK);
+            } else if(contex.getEvento() == ERROR_ELIMINAR_SERVICIO){
+                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.NOT_FOUND);
+            }
+            else if(contex.getEvento() == ERROR_SERVICIO_ASOCIADO_A_EVENTO){
+                return new ResponseEntity<>((String) contex.getDatos(), HttpStatus.CONFLICT);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        */
+    }
+
+    @RequestMapping(value = "/eliminar-evento/{id}", method = RequestMethod.GET)
+    public String eliminarEvento(@PathVariable("id") Long id, Model model) {
+        if (id > 0) {
+            Contexto contexto = FactoriaComandos.getInstance().crearComando(ELIMINAR_EVENTO).execute(id);
+
+            if (contexto.getEvento() == ELIMINAR_EVENTO) {
+                return "redirect:/administracion/admin";
+            } else {
+                return "error-500";
+            }
+        }
+        return "redirect:/administracion/admin";
+
     }
 }

@@ -25,6 +25,7 @@
                 <h1>
                     Buzón
                     <!--<small>13 mensajes nuevos</small>-->
+                    <c:catch var="exception"><span id="mensajeError" class="alert-error"><c:out value="${mensajeError}" ></c:out></span></c:catch>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>

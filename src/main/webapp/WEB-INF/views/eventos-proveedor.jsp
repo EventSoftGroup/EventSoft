@@ -38,6 +38,19 @@
         <section class="content">
 
             <!-- Comienzo bucle por servicios. -->
+            <c:if test="${empty listaServicios}">
+            <div style="margin-top:2%;" class="row">
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">No hay eventos asociados a ninguno de sus servicios</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </c:if>
             <c:forEach var="servicio" items="${listaServicios}">
 
             <div class="row">
@@ -45,7 +58,7 @@
                 <div class="col-md-12" id="bandeja_recibidos">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Eventos asociados al servicio - <c:out value="${servicio.nombre}"></c:out> -</h3>
+                                <h3 class="box-title">Eventos asociados al servicio - <c:out value="${servicio.nombre}"></c:out> -</h3>
 
                         </div>
                         <div class="box-body no-padding">
@@ -127,7 +140,7 @@ immediately after the control sidebar -->
 
 <!-- ./wrapper -->
 <%@ include file="../fragments/plugins.jspf" %>
-<script src="<c:url value="/resources/dist/js/servicios.js" />"></script>
+
 <!-- iCheck -->
 <!-- Page Script -->
 <script>

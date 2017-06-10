@@ -57,7 +57,9 @@
               <select id="eventos" class="form-control select2" style="width: 100%;">
 
               </select>
-              <button id="aniadirServicio" class="btn btn-primary">Añadir un servicio</button>
+              <c:if test="${rol eq 'Organizador'}">
+                <button id="aniadirServicio" class="btn btn-primary">Añadir un servicio</button>
+              </c:if>
               <button id="mostrarEventosTodos" class="btn btn-primary">Mostrar todos los eventos</button>
               <button id="ocultarEventos" class="btn btn-primary">Ocultar los eventos</button>
             </div>
@@ -202,7 +204,6 @@
                 <table class="table table-hover table-striped" id="tabla_eventos">
                   <thead>
                   <tr>
-                    <th class="text-center">      </th>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">Categoria</th>
                     <th class="text-center">Descripcion</th>

@@ -107,7 +107,7 @@ public class SAEventosImp implements SAEventos {
 
                         } else {//Todo correcto
 
-                            int num = integra.ejecutarNamedQuery("Evento.EventosDeServicioConFechaFinMayorA", Arrays.asList(new Pair<>("servicio", serv ), new Pair<>("fechaFin", evento.getFechaFin()))).size();
+                            int num = integra.ejecutarNamedQuery("Evento.EventosDeServicioConFechaFinMayorA", Arrays.asList(new Pair<>("servicio", serv ), new Pair<>("fechaInicio", evento.getFechaInicio()))).size();
                             if(num>0){
                                 todoOk &= false;
                                 result = EventosNegocio.SERVICIO_CON_FECHAS_OCUPADAS;

@@ -107,6 +107,9 @@ $(function() {
     $('#cambiar_evento').on('click', function(e){
         e.preventDefault();
 
+        $('#mensajeError').text("");
+        $('#alert-success').text("");
+
         div_sel_eventos.fadeOut(function(){
             div_categoria.fadeOut(function(){
                 div_evento.fadeIn();
@@ -116,6 +119,10 @@ $(function() {
 
     $('#cambiar_categoria').on('click', function(e){
         e.preventDefault();
+
+        $('#mensajeError').text("");
+        $('#alert-success').text("");
+
         div_sel_eventos.fadeOut(function(){
             div_categoria.fadeIn();
         });
@@ -191,6 +198,7 @@ $(function() {
         buscarTodosLosEventos(false);
 
     });
+
     var buscarEvento = function(idEvento) {
         boton_mostrarEventos.show();
         boton_ocultarEventos.hide();
@@ -258,7 +266,6 @@ $(function() {
                         dfin = new Date(e.fechaFin);
 
                         $("#tabla_eventos tbody").append("<tr></tr>");
-                        $("#tabla_eventos tbody tr:last-child").append("<td><a href='/eventos/buscarEvento/' type='button' class='btn btn-default text-center'><i class='fa fa-search'></i> Ver</a></td>");
                         $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.nombre+"</td>");
                         $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.categoria+"</td>");
                         $("#tabla_eventos tbody tr:last-child").append("<td class='mailbox-subject text-center'>"+e.descripcion.substring(1,70)+"</td>");

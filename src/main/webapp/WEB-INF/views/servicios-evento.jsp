@@ -47,7 +47,7 @@
                             <div class="table-responsive mailbox-messages">
                                 <c:set var="cantidad" scope="page" value="${listaServicios.size()}" />
                                 <c:if test="${cantidad > 0}">
-                                <table class="table table-hover table-striped">
+                                <table style="margin-top:2%;" class="table table-hover table-striped">
                                     <thead>
                                     <tr>
                                         <th class="text-center">Nombre</th>

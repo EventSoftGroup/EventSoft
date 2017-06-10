@@ -147,7 +147,7 @@
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li><a class="active" href="#settings" data-toggle="tab">Modificar Datos</a></li>
+                            <li class="active"><a href="#settings" data-toggle="tab">Modificar Datos</a></li>
                             <c:if test="${rol eq 'Proveedor'}">
                                 <li><a href="#añadirServicio" data-toggle="tab">Añadir Servicio</a></li>
                             </c:if>
